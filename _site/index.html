@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="在这里探索iOS的一切。">
+    <meta name="keywords"  content="北城以北,北城的博客, beicheng,north city, northcity,陈希, 个人博客, 个人网站, 技术博客, iOS, Cocoa, Apple, WWDC, iPone, develop, 移动开发, APP, 设计模式, 最佳实践">
+    <meta name="theme-color" content="#000000">
+    
+    <title>北城的博客|NorthCity’s Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">NorthCity’s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/portfolio/">Portfolio</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Page Header -->
+<header class="intro-header" style="background-image: url('/img/common/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading">
+                    <h1>NorthCity’s Blog</h1>
+                    <!--<hr class="small">-->
+                    <span class="subheading">希望，世界和平，我在北城等你回来。</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- PostList Container -->
+    		<div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                postlist-container
+            ">
+    			
+<div class="post-preview">
+    <a href="/2016/05/25/iOS%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84-%E6%89%93%E8%A1%A5%E4%B8%81-%E6%96%B9%E6%B3%95/">
+        <h2 class="post-title">
+            iOS项目中常用的“打补丁”技巧
+        </h2>
+        
+        <h3 class="post-subtitle">
+            只要补丁打得好，需求变更都不是事儿！
+        </h3>
+        
+        <div class="post-content-preview">
+            iOS项目中常用的“打补丁”技巧
+
+嗯。。怎么开篇呢
+
+。
+
+。
+
+(一个小时。。搓脚毛苦思中。。)
+
+。
+
+呵呵，你以为博主真的不知道怎么开篇么，这里花了一个小时的时间其实是另有深意的好么，我的套路就是这么湿！！，其实博主是为了阐述一个问题！就是如果只想了一个标题，内容却不知道怎么组织就会是这样的慢性尴尬症。就像我们做项目的时候经常脑袋一热，二话不说上来就撸代码。然后就发现框架不行，不够灵...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by DavidDay on May 25, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/12/23/Swift%E4%B8%AD%E7%9A%84Weak-Strong-Dance/">
+        <h2 class="post-title">
+            Swift中的Weak Strong Dance
+        </h2>
+        
+        <h3 class="post-subtitle">
+            
+        </h3>
+        
+        <div class="post-content-preview">
+            Swift中的Weak/Strong Dance
+
+马上又要过年了，诶，再也不能像当初那样无耻地逗利是了(我们广东的方言讨红包的意思)
+
+图1
+
+
+
+图2
+
+
+
+看来今年没利了
+
+谁让哥已经工作了呢。
+
+公司今年的开发任务算是完结了，苹果又极不负(hǎo)责(yàng)任(de)地放圣诞不审核了，所以这半个月就该清闲下来了。
+
+博主掐指一算，Swift已经养到2.1了，并且也开源了，这样看来...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by DavidDay on December 23, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/11/17/iOS%E5%BA%94%E7%94%A8%E5%8F%91%E5%B8%83%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82/">
+        <h2 class="post-title">
+            iOS应用发布中的一些细节
+        </h2>
+        
+        <h3 class="post-subtitle">
+            玩转iOS应用发布
+        </h3>
+        
+        <div class="post-content-preview">
+            iOS应用发布中的一些细节
+
+前言
+
+这几天最大的新闻我想就是巴黎恐怖袭击了，诶，博主每年跨年都那么虔诚地许下“希望世界和平”的愿望，想不到每年都无法实现，维护世界和平这么难，博主真是有心无力啊，其实芸芸众生的我们能做的大概就是不要闯红灯、不抢小妹妹的甜筒、拉完屎记得冲水、打饭不逃票、不在澡堂小便、不挖人家墙角……其实就是维护世界和平了。
+
+然而黑客组织Anonymous向ISIS宣战了！
+...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by DavidDay on November 17, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/11/11/%E5%8D%8A%E5%B9%B4%E7%9A%84iOS%E4%BB%A3%E7%A0%81%E7%94%9F%E6%B4%BB/">
+        <h2 class="post-title">
+            半年的iOS代码生活
+        </h2>
+        
+        <h3 class="post-subtitle">
+            加班的领悟
+        </h3>
+        
+        <div class="post-content-preview">
+            半年的iOS代码生活
+
+在高考大军中拼杀过，也在大学校园中荒芜过，曾经低迷消沉，也常满怀壮志…… 但是最多的还是被称为小伙子以及自称为iOS工程师！博主就是这种喜闻乐见的这类人，实习一年后在2015年的毕业季顺利拿到了自己向往的一家创业公司的offer，也许相比很多毕业季的同学职场上顺利许多，但当深夜来临，显示器熄灭后望着荧幕出神的时候，毕业季我错过了很多也许一辈子都不会再相见的同学们的合影...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by DavidDay on November 11, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/04/13/iOS%E5%90%84%E7%A7%8D%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7/">
+        <h2 class="post-title">
+            iOS各种调试技巧
+        </h2>
+        
+        <h3 class="post-subtitle">
+            已加入豪华套餐系列
+        </h3>
+        
+        <div class="post-content-preview">
+            iOS各种调试技巧
+
+前言
+
+最近博主临近毕业季，为了完美的写一篇毕业论文，真是：“锄禾日当午，汗滴禾下土”&lt;—— 这句诗跟毕业我写毕业论文没任何一毛钱关系，我就是突然想吟湿了。不过博主作为网络工程专业的好青年，曾经的愿望和理想就是在下水道干出一番轰轰烈烈的大事业，没错是就是下水道，我们的征途在下水道！！不过大家别误会，我不是忍者龟的脑残粉！听我继续说！我想的是等我在各大排水系统各大下...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by DavidDay on April 13, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/03/15/%E5%B0%81%E8%A3%85%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E7%9A%84%E6%9C%8B%E5%8F%8B%E5%9C%88/">
+        <h2 class="post-title">
+            封装一个简单实用的朋友圈
+        </h2>
+        
+        <h3 class="post-subtitle">
+            教你写能被舒服舒服又舒服地调用的iOS库
+        </h3>
+        
+        <div class="post-content-preview">
+            封装一个简单实用的朋友圈
+
+前言
+
+2014年过的那么快，过年又那么块，2015年又是飞快地节奏，真尼玛感觉上帝是不是无聊使用了变速外挂开启了加速模式~到现在博主都无法接受已经上班的事实……在地铁脸被挤在玻璃上的时候只能用眼神写满傻X射这个世界一脸！！原谅博主那么鸡粪~因为哥最近生病了，不嗨心~，我想来去想不明白，博主每周健身4天，胸肌压女友、拳头比沙煲、吃喝健又康、体硬似野马，怎么会生病呢...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by DavidDay on March 15, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/01/29/%E6%97%A0%E6%AF%94%E8%BF%85%E9%80%9F%E6%95%8F%E6%8D%B7%E5%9C%B0%E5%BC%80%E5%8F%91iOS%E8%B6%85%E7%B2%BE%E7%BE%8E%E6%8E%A7%E4%BB%B6/">
+        <h2 class="post-title">
+            无比迅速敏捷地开发iOS超精美控件
+        </h2>
+        
+        <h3 class="post-subtitle">
+            没骗你，真的很迅速！
+        </h3>
+        
+        <div class="post-content-preview">
+            无比迅速敏捷地开发iOS超精美控件
+
+前言
+
+自从人生第一篇博客《iOS中的预编译指令的初步探究》问世以来 浏览量竟然达到了360多，（路过的大神勿笑！）这些浏览量使我兴奋异常但又令我黯然神伤，为何我会眼里常含泪水？因为国人伸手党达90%！！！区区只有可怜的三个评论，可怜的三个评论~ 没有鼓励~ 没有鲜花~ 也没有谩骂~ 但是我不哭 因为贱人会笑！我深信：
+
+
+  一日伸手党，bug终身随！...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by DavidDay on January 29, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/01/20/iOS%E4%B8%AD%E7%9A%84%E9%A2%84%E7%BC%96%E8%AF%91%E6%8C%87%E4%BB%A4%E7%9A%84%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%A9%B6/">
+        <h2 class="post-title">
+            iOS中的预编译指令
+        </h2>
+        
+        <h3 class="post-subtitle">
+            只是初步探究哦
+        </h3>
+        
+        <div class="post-content-preview">
+            iOS中的预编译指令的初步探究
+
+开篇
+
+我们人类创造东西的时候有个词叫做”仿生学“！人类创造什么东西都会模仿自己来创造，所以上帝没有长成树的样子而和人长得一样，科幻片里面外星人也像人一样有眼睛有鼻子……但是人类自己创造的东西如果太像自己，自己又会吓尿(恐怖谷效应)，人类真是奇葩；奇葩的我们在20世纪创造了改变世界的东西——计算机(电脑)，不用怀疑，这货当然也是仿生学！这货哪里长得像人了？？...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by DavidDay on January 20, 2015
+    </p>
+</div>
+<hr>
+
+
+<!-- Pager -->
+
+
+    		</div>
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                            
+                                <a href="/tags/#基础整理" title="基础整理" rel="4">
+                                    基础整理
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Short About -->
+                <section class="visible-md visible-lg">
+                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
+                    <div class="short-about">
+                        
+                            <img src="/img/avatar-cx.jpg" />
+                        
+                        
+                            <p>正在努力探索iOS开发的最佳实践。</p>
+                        
+                        <!-- SNS Link -->
+                        <ul class="list-inline">
+                            
+                            
+                            <li>
+                                <a href="https://twitter.com/northcity">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://www.zhihu.com/people/chen-xi-18-69-64/activities">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa  fa-stack-1x fa-inverse">知</i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://weibo.com/p/1005055227295178/home?from=page_100505&mod=TAB#place">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://github.com/northcity">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                        </ul>
+                    </div>
+                </section>
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://mida.re/">乱序</a></li>
+                    
+                        <li><a href="http://qianduan.guru/">前端外刊评论</a></li>
+                    
+                        <li><a href="http://lingyu.wang/">天镶的博客</a></li>
+                    
+                        <li><a href="http://hmqk1995.github.io">Luke 的自留地</a></li>
+                    
+                        <li><a href="http://ebnbin.com/">Ebn's Blog</a></li>
+                    
+                        <li><a href="http://blog.smdcn.net">SmdCn's Blog</a></li>
+                    
+                        <li><a href="http://xieminis.me/">解旻的博客</a></li>
+                    
+                        <li><a href="http://dhong.co">DHong Say</a></li>
+                    
+                        <li><a href="http://ingf.github.io/">尹峰以为</a></li>
+                    
+                        <li><a href="http://wepiaofei.github.io/blog/">前端神盾局</a></li>
+                    
+                </ul>
+                
+    		</div>
+        
+	</div>
+</div>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/northcity">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/chen-xi-18-69-64/activities">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://weibo.com/p/1005055227295178/home?from=page_100505&mod=TAB#place">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/northcity">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; NorthCity’s Blog 2017
+                    <br>
+                    Theme by <a href="www.northcity.top">Hux</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'northcity.top';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="在这里探索iOS的一切。">
+    <meta name="keywords"  content="北城以北,北城的博客, beicheng,north city, northcity,陈希, 个人博客, 个人网站, 技术博客, iOS, Cocoa, Apple, WWDC, iPone, develop, 移动开发, APP, 设计模式, 最佳实践">
+    <meta name="theme-color" content="#000000">
+    
+    <title>iOS应用发布中的一些细节 - 北城的博客|NorthCity’s Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2015/11/17/iOS%E5%BA%94%E7%94%A8%E5%8F%91%E5%B8%83%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">NorthCity’s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/portfolio/">Portfolio</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post/2015-11-17-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post/2015-11-17-bg.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#拾遗集" title="拾遗集">拾遗集</a>
+                        
+                    </div>
+                    <h1>iOS应用发布中的一些细节</h1>
+                    
+                    
+                    <h2 class="subheading">玩转iOS应用发布</h2>
+                    
+                    <span class="meta">Posted by DavidDay on November 17, 2015</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h1 id="ios应用发布中的一些细节">iOS应用发布中的一些细节</h1>
+
+<h2 id="前言">前言</h2>
+
+<p>这几天最大的新闻我想就是<code class="highlighter-rouge">巴黎恐怖袭击</code>了，诶，博主每年跨年都那么虔诚地许下“希望世界和平”的愿望，想不到每年都无法实现，维护世界和平这么难，博主真是有心无力啊，其实芸芸众生的我们能做的大概就是不要闯红灯、不抢小妹妹的甜筒、拉完屎记得冲水、打饭不逃票、不在澡堂小便、不挖人家墙角……其实就是维护世界和平了。</p>
+
+<p>然而黑客组织<strong>Anonymous</strong>向ISIS宣战了！</p>
+
+<p>图0</p>
+
+<p><img src="https://daiweilai.github.io/img/post/2015-11-17-pic0.png" alt="" /></p>
+
+<p>威武！</p>
+
+<p>好吧回归这次文章主题，就列举一些iOS应用发布中个人觉得还蛮容易忽略的一些细节。</p>
+
+<h2 id="bundle-identifier">Bundle identifier</h2>
+
+<p>Xcode中 <code class="highlighter-rouge">Target -&gt; General</code>中的<code class="highlighter-rouge">bundle identifier</code> ;</p>
+
+<p><code class="highlighter-rouge">info.plist</code>中的<code class="highlighter-rouge">Bundle identifier</code>;</p>
+
+<p><a href="https://developer.apple.com/account/ios/certificate/certificateList.action" target="_blank">证书中心</a> 的<code class="highlighter-rouge">Identifiers</code>中<code class="highlighter-rouge">App IDs</code>新建App时的<code class="highlighter-rouge">Explicit App ID</code>;</p>
+
+<p>以及<code class="highlighter-rouge">iTunes Connect</code>中App信息的<code class="highlighter-rouge">套装ID</code> 必须保持一致！！</p>
+
+<p>在info.plist或者Xcode里的各种设置中，有很多<code class="highlighter-rouge">$(XXX)</code>这样的像脚本一样的东西，所以补充一点Xcode中的<a href="https://developer.apple.com/library/mac/documentation/DeveloperTools/Reference/XcodeBuildSettingRef/1-Build_Setting_Reference/build_setting_ref.html" target="_blank">环境变量</a></p>
+
+<h2 id="certificates证书">Certificates证书</h2>
+
+<p>苹果的证书体系一直都是iOS初学者无尽的梦魇，什么开发证书、发布证书、推送证书，什么ad hoc、内测分发、真机调试……我想每一个iOS初学刚开始接触Apple的证书体系的时候内心是绝壁崩溃并且被心中的草泥马践踏的体无完肤的……。</p>
+
+<p>其实苹果的证书其实没那么玄乎，很多朋友弄不懂或者过了一段时间又不知道怎么弄了，本质的原因是因为对<a href="https://zh.wikipedia.org/zh-cn/%E5%85%AC%E5%BC%80%E5%AF%86%E9%92%A5%E5%8A%A0%E5%AF%86" target="_blank">非对称加密(公开密钥加密)</a>的不理解<del>导致的</del>，所以为了完全的驾驭苹果的证书，这些基础的知识就是坑你的坎，必须跨过去的。</p>
+
+<p>网上有各种解释证书中心里面每一种证书作用是什么、怎么创建、怎么使用的，但是这也只能授人以鱼，所以博主不会介绍每一种证书是干嘛的，因为你看前年多了一个<code class="highlighter-rouge">Pass Type ID Certificate</code> ，去年又有了<code class="highlighter-rouge">WatchKit Services Certificate</code> ，今年又来一个<code class="highlighter-rouge">Apple Pay Certificate</code>……根本就解释这些证书不完嘛~，所以理解这些证书的统一规律才是王道！所谓</p>
+
+<blockquote>
+  <p>万变不离其宗</p>
+</blockquote>
+
+<p>很多资料都把证书分成两种，分为开发证书(development)、以及发布证书(distribution)。但是博主认为这样分类不是很不科学的，博主的理解的分类是这样的</p>
+
+<p>图1</p>
+
+<p><img src="https://daiweilai.github.io/img/post/2015-11-17-pic1.png" alt="" /></p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">根证书</code>是与开发者或者企业对应的，只要是被<code class="highlighter-rouge">根证书</code>签名的App都可以理解为是这个证书对应的开发者开发的。所以一个<code class="highlighter-rouge">根证书</code>可以签名多个App。</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">其他证书</code>呢是与具体的App对应的，一个App的推送证书是无法给另一个App使用的，所以一个<code class="highlighter-rouge">其他证书</code>只能为一个App签名，更确切的说是这个App需要使用某一项Apple的服务而去产生这个<code class="highlighter-rouge">其他证书</code>。</p>
+  </li>
+</ul>
+
+<p>所以其实苹果每年都添加的证书属于<code class="highlighter-rouge">其他证书</code>，这些其他证书并不是非必须的，而是使用了苹果的某一项服务时才需要提供的凭证。而<code class="highlighter-rouge">根证书</code>是必须的，它签名的APP是属于这个证书的所有者的。</p>
+
+<p>图2</p>
+
+<p><img src="https://daiweilai.github.io/img/post/2015-11-17-pic2.png" alt="" /></p>
+
+<p>图中我的这个账号默认会有两个不同用途的<code class="highlighter-rouge">根证书</code>，有两个App，分别为App1、APP2，以及它们对应的两种用途的推送证书(属于<code class="highlighter-rouge">其他证书</code>)。</p>
+
+<p>假如我现在需要真机调试App1的推送，那么我只要下载<code class="highlighter-rouge">开发根证书</code>以及<code class="highlighter-rouge">App1的开发推送证书</code>然后双击打开导入钥匙串，然后创建相应profile即可真机调试了；</p>
+
+<p>假如现在我要发布APP2，那么我只要下载<code class="highlighter-rouge">发布根证书</code>以及<code class="highlighter-rouge">APP2的发布推送证书</code>，然后创建相应地profile即可打包上传App Strore了。(这里因为发布的特殊性，所以发布的电脑必须是创建这个<code class="highlighter-rouge">发布根证书</code>的电脑)。</p>
+
+<p>profile(描述文件)下文还有篇幅介绍。</p>
+
+<p>我TM都绕晕了，确实有点麻烦有点复杂，果然iOS开发门槛就是高啊，但是哥就喜欢。</p>
+
+<h2 id="app-ids">App IDs</h2>
+
+<p>在相应地App的edit中可以添加多套APNs推送证书(其他的证书也类似的)</p>
+
+<p>图3</p>
+
+<p><img src="https://daiweilai.github.io/img/post/2015-11-17-pic3.png" alt="" /></p>
+
+<p>在这里声明一下，<code class="highlighter-rouge">其他证书</code>其他证书生成的时候，使用的<code class="highlighter-rouge">certSigningRequest</code>文件可以和产生<code class="highlighter-rouge">根证书</code>的<code class="highlighter-rouge">certSigningRequest</code>的不一致，也就是说产生<code class="highlighter-rouge">其他证书</code>时不一定需要产生<code class="highlighter-rouge">根证书</code>的电脑，所以这里也坑了无数的人调试推送，这个在下文<a href="#推送的一切">推送的那些事</a>详细填坑。</p>
+
+<h2 id="provisioning-profiles描述文件">Provisioning Profiles描述文件</h2>
+
+<p>图4</p>
+
+<p><img src="https://daiweilai.github.io/img/post/2015-11-17-pic4.png" alt="" /></p>
+
+<p>我想这个界面一弹出来的时候，蛋蛋忧伤迎面扑来。然后怒点 <code class="highlighter-rouge">Fix issue</code>，然后你们团队负责管理证书的基友突然发现证书中心多了好多好乱的证书以及描述文件，然后他爆了一句：what the huck！删掉了带有<code class="highlighter-rouge">Xcode *</code>的证书以及描述文件，然后自己又暴力的点了一发<code class="highlighter-rouge">Fix issue</code>，然后你突然调试不了了，再暴击<code class="highlighter-rouge">Fix issue</code>键，最后整个团队都只有通过<code class="highlighter-rouge">Fix issue</code>来真机调试了……。</p>
+
+<p>所以慎点<code class="highlighter-rouge">Fix issue</code>，如果点击这个选项，聪明的(<del>蠢哭的</del>)Xcode就会自己管理描述文件，然后各种莫名其妙的带有<code class="highlighter-rouge">Xcode *</code>的证书以及描述文件……</p>
+
+<p>其实只要坚信一点，证书、设备ID、AppID、描述文件都弄对了就绝逼不会出问题的！</p>
+
+<p>描述文件工作原理</p>
+
+<p>图5</p>
+
+<p><img src="https://daiweilai.github.io/img/post/2015-11-17-pic5.png" alt="" /></p>
+
+<ul>
+  <li>其实描述文件工作的原理就是在APP打包或者真机调试的时候，让Xcode去检查描述文件里面的BundleID与这个APP的BundleID是否对应。</li>
+  <li>对应的话就会去<code class="highlighter-rouge">keyChain</code>查找有没有相应地证书(所以证书要下载好，并且导入<code class="highlighter-rouge">keyChain</code>)</li>
+  <li>如果有证书存在的话就会检查证书的类型，如果是开发证书，则会检查调试的设备是否加入了描述文件里面的信任设备ID列表，如果设备没有在描述文件的列表中，则无法调试；如果证书类型是发布证书则不会检查设备ID列表。</li>
+</ul>
+
+<p>额外地，如果公司新增了测试机，并且在证书中心的<code class="highlighter-rouge">Devices</code>中添加了新测试机的ID，这样描述文件也要相应地更新，然后重新下载，下载完之后可以先删除旧的描述文件(博主直接覆盖的方式貌似描述文件没有更新啊)，你们可以自己做实验咯，描述文件的路劲<code class="highlighter-rouge">/Users/XXX/Library/MobileDevice/Provisioning\ Profiles</code></p>
+
+<p><code class="highlighter-rouge">XXX</code>你的用户名。</p>
+
+<p>不要覆盖！记得先删除，可以免除很多问题。</p>
+
+<h2 id="推送的那些事">推送的那些事</h2>
+
+<p>如果说亿万级用户的微信推送服务并不是企鹅自己定制的而都是由苹果APNs推送的话，那苹果的推送就真的牛逼了，但是有时候测试推送，经常APNs要死不活的，推了半天才到，有一次在APNs沙箱环境怒推1000多条，然后这条队列持续了半个月才推完~~。所以微信、扣扣肯定是定制的推送，有钱就是讨厌，那么任性。</p>
+
+<p>但是苹果推送的开发是比较简单地，如果没有高级推送需求基本就不用写代码了，只要配置好证书一切OK。</p>
+
+<p>现在常用的后台server中，一般将推送证书以及推送证书的私钥导出p12交给后台人员即可。</p>
+
+<p>PHP有点调皮，还需要转换成pem</p>
+
+<p>生成PHP需要的Pem证书</p>
+
+<p>准备：</p>
+
+<ol>
+  <li>苹果服务器证书端设置正确！打包证书、描述文件正确！！</li>
+  <li>下载推送证书(cer格式)，导入keyChain，保证私钥存在，不存在去找创建这个证书的电脑要一份过来。</li>
+  <li>从钥匙库导出的<del>根证书</del>(推送证书)私钥(p12格式)</li>
+</ol>
+
+<p>第三步根证书的私钥这里是一个坑！因为一个App的推送证书的创建可以和根证书创建的电脑不同，也就是keyChain产生的<code class="highlighter-rouge">certSigningRequest</code>不一样，所以私钥也是不一样的，在这里生成Pem时，注意要使用推送证书的私钥！</p>
+
+<p>操作过程：</p>
+
+<ol>
+  <li>
+    <p>把推送证书(.cer)转换为.pem文件，执行命令：</p>
+
+    <div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">openssl</span> <span class="n">x509</span> <span class="o">-</span><span class="n">in</span> <span class="err">推送证书</span><span class="p">.</span><span class="n">cer</span> <span class="o">-</span><span class="n">inform</span> <span class="n">der</span> <span class="o">-</span><span class="n">out</span> <span class="err">推送证书</span><span class="p">.</span><span class="n">pem</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>把推送证书导出的私钥(.p12)文件转化为.pem文件：</p>
+
+    <div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">openssl</span> <span class="n">pkcs12</span> <span class="o">-</span><span class="n">nocerts</span> <span class="o">-</span><span class="n">out</span> <span class="err">推送证书私钥</span><span class="p">.</span><span class="n">pem</span> <span class="o">-</span><span class="n">in</span> <span class="err">推送证书私钥</span><span class="p">.</span><span class="n">p12</span>	
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>对生成的这两个pem文件再生成一个pem文件，来把证书和私钥整合到一个文件里：</p>
+
+    <div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">cat</span> <span class="err">推送证书</span><span class="p">.</span><span class="n">pem</span> <span class="err">推送证书私钥</span><span class="p">.</span><span class="n">pem</span> <span class="o">&gt;</span><span class="n">PHPPush</span><span class="p">.</span><span class="n">pem</span>
+</code></pre>
+    </div>
+  </li>
+</ol>
+
+<p>然后把这个PHPPush.pem给后台基友们，就可以下班啦。</p>
+
+<p>当然测试推送也比较麻烦，需要模拟真实的推送环境，一般需要后台提供帮助，但是遇到一些后台同事，他们有强烈地信仰着鄙视链的话，很鄙视iOS，心里早就称呼你“死前段”多年了，还那么多事……</p>
+
+<p>所以关于调试推送，博主教你自己推自己！不麻烦别人。</p>
+
+<p>只要拷贝这段代码</p>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="o">&lt;?</span><span class="n">php</span>
+<span class="c1">// devicetoken
+</span> <span class="err">$</span><span class="n">deviceToken</span> <span class="o">=</span> <span class="err">'你的</span><span class="n">deviceToken</span><span class="err">'</span><span class="p">;</span>
+<span class="c1">// 私钥密码，生成pem的时候输入的
+</span><span class="err">$</span><span class="n">passphrase</span> <span class="o">=</span> <span class="err">'</span><span class="mi">123456</span><span class="err">'</span><span class="p">;</span>
+<span class="c1">// 定制推送内容，有一点的格式要求，详情Apple文档
+</span><span class="err">$</span><span class="n">message</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span>
+	<span class="err">'</span><span class="n">body</span><span class="err">'</span><span class="o">=&gt;</span><span class="err">'你收到一个新订单'</span>
+<span class="p">);</span>
+<span class="err">$</span><span class="n">body</span><span class="p">[</span><span class="err">'</span><span class="n">aps</span><span class="err">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span>
+	<span class="err">'</span><span class="n">alert</span><span class="err">'</span> <span class="o">=&gt;</span> <span class="err">$</span><span class="n">message</span><span class="p">,</span>
+	<span class="err">'</span><span class="n">sound</span><span class="err">'</span> <span class="o">=&gt;</span> <span class="err">'</span><span class="k">default</span><span class="err">'</span><span class="p">,</span>
+	<span class="err">'</span><span class="n">badge</span><span class="err">'</span> <span class="o">=&gt;</span> <span class="mi">100</span><span class="p">,</span>
+	<span class="p">);</span>
+<span class="err">$</span><span class="n">body</span><span class="p">[</span><span class="err">'</span><span class="n">type</span><span class="err">'</span><span class="p">]</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span>
+<span class="err">$</span><span class="n">body</span><span class="p">[</span><span class="err">'</span><span class="n">msg_type</span><span class="err">'</span><span class="p">]</span><span class="o">=</span><span class="mi">4</span><span class="p">;</span>
+<span class="err">$</span><span class="n">body</span><span class="p">[</span><span class="err">'</span><span class="n">title</span><span class="err">'</span><span class="p">]</span><span class="o">=</span><span class="err">'新订单提醒'</span><span class="p">;</span>
+<span class="err">$</span><span class="n">body</span><span class="p">[</span><span class="err">'</span><span class="n">msg</span><span class="err">'</span><span class="p">]</span><span class="o">=</span><span class="err">'你收到一个新消息'</span><span class="p">;</span>
+
+<span class="err">$</span><span class="n">ctx</span> <span class="o">=</span> <span class="n">stream_context_create</span><span class="p">();</span>
+<span class="n">stream_context_set_option</span><span class="p">(</span><span class="err">$</span><span class="n">ctx</span><span class="p">,</span> <span class="err">'</span><span class="n">ssl</span><span class="err">'</span><span class="p">,</span> <span class="err">'</span><span class="n">local_cert</span><span class="err">'</span><span class="p">,</span> <span class="err">'</span><span class="n">push</span><span class="p">.</span><span class="n">pem</span><span class="err">'</span><span class="p">);</span><span class="c1">//记得把生成的push.pem放在和这个php文件同一个目录
+</span><span class="n">stream_context_set_option</span><span class="p">(</span><span class="err">$</span><span class="n">ctx</span><span class="p">,</span> <span class="err">'</span><span class="n">ssl</span><span class="err">'</span><span class="p">,</span> <span class="err">'</span><span class="n">passphrase</span><span class="err">'</span><span class="p">,</span> <span class="err">$</span><span class="n">passphrase</span><span class="p">);</span>
+<span class="err">$</span><span class="n">fp</span> <span class="o">=</span> <span class="n">stream_socket_client</span><span class="p">(</span>
+	<span class="c1">//这里需要特别注意，一个是开发推送的沙箱环境，一个是发布推送的正式环境，deviceToken是不通用的
+</span>	<span class="err">'</span><span class="n">ssl</span><span class="o">:</span><span class="c1">//gateway.sandbox.push.apple.com:2195', $err,
+</span>	<span class="c1">//'ssl://gateway.push.apple.com:2195', $err,
+</span>	<span class="err">$</span><span class="n">errstr</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="n">STREAM_CLIENT_CONNECT</span><span class="o">|</span><span class="n">STREAM_CLIENT_PERSISTENT</span><span class="p">,</span> <span class="err">$</span><span class="n">ctx</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="err">$</span><span class="n">fp</span><span class="p">)</span>
+	<span class="n">exit</span><span class="p">(</span><span class="s">"Failed to connect: $err $errstr"</span> <span class="p">.</span> <span class="n">PHP_EOL</span><span class="p">);</span>
+<span class="n">echo</span> <span class="err">'</span><span class="n">Connected</span> <span class="n">to</span> <span class="n">APNS</span><span class="err">'</span> <span class="p">.</span> <span class="n">PHP_EOL</span><span class="p">;</span>
+<span class="err">$</span><span class="n">payload</span> <span class="o">=</span> <span class="n">json_encode</span><span class="p">(</span><span class="err">$</span><span class="n">body</span><span class="p">);</span>
+<span class="err">$</span><span class="n">msg</span> <span class="o">=</span> <span class="n">chr</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">.</span> <span class="n">pack</span><span class="p">(</span><span class="sc">'n'</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span> <span class="p">.</span> <span class="n">pack</span><span class="p">(</span><span class="err">'</span><span class="n">H</span><span class="o">*</span><span class="err">'</span><span class="p">,</span> <span class="err">$</span><span class="n">deviceToken</span><span class="p">)</span> <span class="p">.</span> <span class="n">pack</span><span class="p">(</span><span class="sc">'n'</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="err">$</span><span class="n">payload</span><span class="p">))</span> <span class="p">.</span> <span class="err">$</span><span class="n">payload</span><span class="p">;</span>
+<span class="err">$</span><span class="n">result</span> <span class="o">=</span> <span class="n">fwrite</span><span class="p">(</span><span class="err">$</span><span class="n">fp</span><span class="p">,</span> <span class="err">$</span><span class="n">msg</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="err">$</span><span class="n">msg</span><span class="p">));</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="err">$</span><span class="n">result</span><span class="p">)</span>
+	<span class="n">echo</span> <span class="err">'</span><span class="n">Message</span> <span class="n">not</span> <span class="n">delivered</span><span class="err">'</span> <span class="p">.</span> <span class="n">PHP_EOL</span><span class="p">;</span>
+<span class="k">else</span>
+	<span class="n">echo</span> <span class="err">'</span><span class="n">Message</span> <span class="n">successfully</span> <span class="n">delivered</span><span class="err">'</span> <span class="p">.</span> <span class="n">PHP_EOL</span><span class="p">;</span>
+<span class="n">fclose</span><span class="p">(</span><span class="err">$</span><span class="n">fp</span><span class="p">);</span>
+<span class="o">?&gt;</span>
+</code></pre>
+</div>
+
+<p>将上面的代码复制，保存成push.php</p>
+
+<p>然后根据上面“生成PHP需要的Pem证书”的步骤生成push.pem</p>
+
+<p>两个文件放在同一目录</p>
+
+<p>执行下面的命令</p>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">DavidDay</span><span class="err">$</span> <span class="n">php</span> <span class="n">push</span><span class="p">.</span><span class="n">php</span> 
+</code></pre>
+</div>
+
+<p>结果为</p>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">Connected</span> <span class="n">to</span> <span class="n">APNS</span>
+<span class="n">Message</span> <span class="n">successfully</span> <span class="n">delivered</span>
+</code></pre>
+</div>
+
+<p>是不是就推送成功了呢？呵呵哒</p>
+
+<h2 id="打包分发及内测">打包、分发及内测</h2>
+
+<p>关于打包是有很多姿势的，每个人都有各自的喜好，大部分规矩的做法都是使用Xcode的一条龙服务的：</p>
+
+<ul>
+  <li>
+    <p>选择相应地描述文件、证书</p>
+  </li>
+  <li>
+    <p>选择ARM架构机型(模拟器是Intel架构的，真机是ARM架构的，不能通用)</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">product -&gt; archive</code></p>
+  </li>
+  <li>
+    <p>然后就可以选择导出ipa在第三方平台分发测试或者上传App Stroe审核了</p>
+
+    <p>​
+这样的做法比较保险，因为<code class="highlighter-rouge">archive</code> 只会编译出真机的二进制码，所以不用担心导出的ipa真机装不起。</p>
+  </li>
+</ul>
+
+<p>另一种姿势是使用<code class="highlighter-rouge">xcodebuild</code> 工具，纯Shell编译，比较不好处理错误，但是逼格满满啊，想详细了解这种姿势的可以看看<a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html" target="_blank">官方文档</a> ，或者参考这位同学的<a href="http://www.cnblogs.com/brycezhang/p/4097487.html" target="_blank">分享</a></p>
+
+<p>当然嘛，博主作为拖拖派的忠实拥趸，博主打包ipa的时候是这样的：</p>
+
+<p>图6</p>
+
+<p><img src="https://daiweilai.github.io/img/post/2015-11-17-pic6.gif" alt="" /></p>
+
+<p>随时build随时转ipa。</p>
+
+<p>分发内测一般都会使用第三方的平台，<a href="fir.im" target="_blank">fir</a>、<a href="http://www.pgyer.com/" target="_blank">蒲公英</a> 都很好呀~</p>
+
+<p>关于提交审核这里，一般archive过去了，证书正确都没问题的，当然还是要检查项目是否调用了私有API，之前用<a href="http://revealapp.com/" target="_blank">reveal </a> ，提交应用的时候忘了移除，千不该万不该的还是用了Xcode的upload工具，也不报错，在iTunesConnect中构建版本也出现了，只是状态“正在处理”，一般这个状态持续10分钟~2个小时就会通过了，然后博主自信关机下班，想不到第二天构建版本还是“正在处理”，然后猜想是不是iTunes出问题了又怒传了N个包，依然是“正在处理”，后来准备发邮件，打开邮箱，尼玛！</p>
+
+<p>图7</p>
+
+<p>原来调用了私有接口，忘记移除reveal了~，回顾起来这里有三个大坑，</p>
+
+<ol>
+  <li>Xcode的上传工具很辣鸡！！很多错误都无法扫描出来，所以切记 使用 <code class="highlighter-rouge">Application Loader</code> ，速度快，错误报告也精准。</li>
+  <li>iTunesConnect的错误状态几乎没有，一般只有两个状态 “正在处理”、“成功”，所以如果超过两个小时仍然是“正在处理”，那么极有可能包出问题了！</li>
+  <li>记住关注邮件！</li>
+</ol>
+
+<p>打包项目证书选择必须正确 (Xcode7以下 选择项目编译target为Iphone Device 不要连接手机 否则会 ，Xcode7中不需要拔出真机，因为多了一个<code class="highlighter-rouge">build only device</code> 的选项）</p>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code> <span class="err">编译</span><span class="n">target</span><span class="err">选错了</span> <span class="err">报错</span>
+
+ <span class="n">ITMS</span><span class="o">-</span><span class="mi">90530</span> <span class="s">"Invalid MinimumOSVersion. Apps that only support 64-bit devices must specify a deplyment target of 8.0 or later"</span>
+
+<span class="n">IMTS</span><span class="o">-</span><span class="mi">90208</span> <span class="s">"Invalid Bundle. The bundle xxx.app does not support the minimum OS version specified in the Info.plist"</span>
+
+<span class="n">IMTS</span><span class="o">-</span><span class="mi">90502</span> <span class="s">"Invalid Bundle. Apps that only contain the arm64 slice must also have'arm64' in the list of UIRequiredDeviceCapabilities in Info.plist "</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<h2 id="总结">总结</h2>
+
+<p>突然想起我哥说的一句话</p>
+
+<blockquote>
+  <p>有时候有些女人就像饭堂饭菜，虽然难吃，但是去晚了也会没有的！</p>
+</blockquote>
+
+<p>珍惜身边的人。</p>
+
+<p>感觉这个总结什么鬼？有点伤感，嗯，iOS应用的发布，每个从业者都应该能够熟练的对发布进行操作和意外处理的。</p>
+
+<p>没钱结婚。</p>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2015/11/11/%E5%8D%8A%E5%B9%B4%E7%9A%84iOS%E4%BB%A3%E7%A0%81%E7%94%9F%E6%B4%BB/" data-toggle="tooltip" data-placement="top" title="半年的iOS代码生活">
+                        Previous<br>
+                        <span>半年的iOS代码生活</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2015/12/23/Swift%E4%B8%AD%E7%9A%84Weak-Strong-Dance/" data-toggle="tooltip" data-placement="top" title="Swift中的Weak Strong Dance">
+                        Next<br>
+                        <span>Swift中的Weak Strong Dance</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#基础整理" title="基础整理" rel="4">
+                                    基础整理
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://mida.re/">乱序</a></li>
+                    
+                        <li><a href="http://qianduan.guru/">前端外刊评论</a></li>
+                    
+                        <li><a href="http://lingyu.wang/">天镶的博客</a></li>
+                    
+                        <li><a href="http://hmqk1995.github.io">Luke 的自留地</a></li>
+                    
+                        <li><a href="http://ebnbin.com/">Ebn's Blog</a></li>
+                    
+                        <li><a href="http://blog.smdcn.net">SmdCn's Blog</a></li>
+                    
+                        <li><a href="http://xieminis.me/">解旻的博客</a></li>
+                    
+                        <li><a href="http://dhong.co">DHong Say</a></li>
+                    
+                        <li><a href="http://ingf.github.io/">尹峰以为</a></li>
+                    
+                        <li><a href="http://wepiaofei.github.io/blog/">前端神盾局</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "northcity";
+    var disqus_identifier = "/2015/11/17/iOS应用发布中的一些细节";
+    var disqus_url = "http://localhost:4000/2015/11/17/iOS%E5%BA%94%E7%94%A8%E5%8F%91%E5%B8%83%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/northcity">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/chen-xi-18-69-64/activities">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://weibo.com/p/1005055227295178/home?from=page_100505&mod=TAB#place">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/northcity">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; NorthCity’s Blog 2017
+                    <br>
+                    Theme by <a href="www.northcity.top">Hux</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'northcity.top';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

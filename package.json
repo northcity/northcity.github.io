@@ -1,0 +1,28 @@
+{
+  "author" : "northcitytime@sina.com",
+  "bugs" : "https://github.com/northcity/northcity.github.io/issues",
+  "devDependencies" : {
+    "grunt" : "~0.4.5",
+    "grunt-banner" : "~0.2.3",
+    "grunt-contrib-less" : "~0.11.4",
+    "grunt-contrib-uglify" : "~0.5.1",
+    "grunt-contrib-watch" : "~0.6.1"
+  },
+  "homepage" : "http://northcity.github.io",
+  "name" : "northcity-blog",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/northcity/northcity.github.io"
+  },
+  "scripts" : {
+    "boil" : "git push boilerplate boilerplate:master",
+    "cafe" : "git co gitcafe-pages; git merge master; git push gitcafe gitcafe-pages:gitcafe-pages --tag; git co master;",
+    "preview" : "cd _site; python -m SimpleHTTPServer 8020",
+    "push" : "git push origin master --tag",
+    "py3view" : "cd _site; python3 -m http.server 8020",
+    "py3wa" : "grunt watch & npm run py3view & jekyll serve -w",
+    "watch" : "grunt watch & npm run preview & jekyll serve -w"
+  },
+  "title" : "NorthCity's Blog",
+  "version" : "1.7.0"
+}
