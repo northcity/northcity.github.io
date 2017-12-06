@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "ARKit 从入门到放弃（二）"
+title:      "ARKit 从入门到放弃（二）-ARKit工作原理及流程介绍"
 subtitle:   "欢迎来到苹果的AR世界"
 date:       2017-12-02 12:00:00
 author:     "NorthCity"
@@ -13,237 +13,105 @@ tags:
 
 
 
-# ARKit 从入门到放弃（一）
+# ARKit 从入门到放弃（一）— ARKit工作原理及流程介绍
 
-    现在吃鸡很火，虽然现在还是在电脑上吃鸡，但是相信不久的将来，我们就可以穿越到游戏中吃鸡鸡鸡。。。。。。。
-    那肯定要依赖AR啦。。。。。
 
-*不过到游戏中吃鸡应该还要等很久，虽然我已经快等不及了。。。。。*
 
+- 1.1-写在前面的话
+- 1.2-ARKit与SceneKit的关系
+- 1.3-ARKit工作原理
+- 1.3.1-ARSCNView与ARSession
+- 1.3.2-ARWorldTrackingSessionConfiguration与ARFrame
+- 1.4-ARKit工作完整流程
 
+## 
 
+## 1.1-写在前面的话
 
+- 初次接触`ARKit`,很多人会为其复杂的架构关系而感到畏惧。这里笔者将以最基础简介的方式带领一下一睹苹果原生AR（虚拟增强现实）的风采
+- ARKit并不是一个独立就能够运行的框架，而是必须要SceneKit一起用才可以，换一句话说，如果只有`<ARKit>`,而没有`<SceneKit>`，那么ARKit和一般的相机没有任何区别
+- `由于笔者从事多年的iOS应用开发，并没有从事过3D游戏的开发（只是业余爱好写了一个3D打飞机的游戏），所以在本篇介绍`ARKit`的过程中，我们将以最小的篇幅来介绍`SceneKit`,毕竟如果没有丰富的3D游戏开发经验，那么光是相机捕捉到的2D界面如果转化为3D世界的矩阵都非常难以理解`
+  - 关于3D系统X/Y/Z，与4x4矩阵等之间的转换及关系，不会过多深入，笔者将保证每一个不懂3D游戏开发的人都可以学习如何使用ARKit
+  - 笔者认为：ARKit最难的部分在于3D坐标的矩阵转换
+- 笔者介绍ARKit的流程大概如下
+  - 1.介绍ARKit的工作原理及流程（本篇）
+  - 2.通过对ARKit的原理及流程的了解，我们自定义实现ARKit
+  - 3.介绍ARKit框架中的所有API，PS：是翻译官方整个ARKit框架中所有的API………………~
+  - 4.介绍ARKit框架中几个重量级的类`ARScnView`,`ARSession`,`ARCamera`
+  - 5.ARKit实现捕捉现实世界中的平地，并将虚拟物体添加到平地中
+  - 6.ARKit实现让虚拟物体跟随相机移动
+    - 笔者没有单独的3D模型，这里主要以苹果官方给出的参考3D模型（飞机）来实现
+  - 7.ARKit实现让虚拟物体围绕摄像机（拿着iPhone的人）旋转
 
-## 1.1-AR技术简介##
+## 
 
+## 1.2-ARKit与SceneKit的关系
 
+- 1.在上一小节中介绍过，AR技术叫做虚拟增强现实，也就是在相机捕捉到的现实世界的图像中显示一个虚拟的3D模型。这一过程可以分为两个步骤：
+  - 一：相机捕捉现实世界图像
+    - 由`ARKit`来实现
+  - 二：在图像中显示虚拟3D模型
+    - 由`SceneKit`来实现
+- 2.下图是一个`<ARKit>`与`<SceneKit>`框架关系图，通过下图可以看出
+  - 继承：子类拥有父类所有的属性及方法
+  - 1.`<ARKit>`框架中中显示3D虚拟增强现实的视图`ARSCNView`继承于`<SceneKit>`框架中的`SCNView`,而`SCNView`又继承于`<UIKit>`框架中的`UIView`
+    - UIView的作用是将视图显示在iOS设备的window中，SCNView的作用是显示一个3D场景，ARScnView的作用也是显示一个3D场景，只不过这个3D场景是由摄像头捕捉到的现实世界图像构成的
+  - 2.`ARSCNView`只是一个视图容器，它的作用是管理一个`ARSession`,笔者称之为AR会话。ARSession的作用及原理将在本篇下一小节介绍
+  - 3.在一个完整的虚拟增强现实体验中，`<ARKit>`框架只负责将真实世界画面转变为一个3D场景，这一个转变的过程主要分为两个环节：由`ARCamera`负责捕捉摄像头画面，由`ARSession`负责搭建3D场景。
+  - 4.在一个完整的虚拟增强现实体验中，将虚拟物体现实在3D场景中是由`<SceneKit>`框架来完成中：每一个虚拟的物体都是一个节点`SCNNode`,每一个节点构成了一个场景`SCNScene`,无数个场景构成了3D世界
+  - 5.综上所述，ARKit捕捉3D现实世界使用的是自身的功能，这个功能是在iOS11新增的。而ARKit在3D现实场景中添加虚拟物体使用的是父类`SCNView`的功能，这个功能早在iOS8时就已经添加（SceneKit是iOS8新增）今后在介绍使用`ARSCNView`时将不再累述这一关系，可以简单的理解为：`ARSCNView`所有跟场景和虚拟物体相关的属性及方法都是自己父类`SCNView`的
 
-- 桌子上的绿萝太孤独了，给它来一个郁金香陪伴一下吧~
 
-![6271687-82509f74951766c1](https://northcity.github.io/img/postNew/20171206/6271687-82509f74951766c1.gif)
 
 
 
-- 在椅子上摆瓶花吧~这椅子真low
+## 
 
+## 1.3-ARKit工作原理
 
+### 
 
-![6271687-e2782e61b7a732c6](https://northcity.github.io/img/postNew/20171206/6271687-e2782e61b7a732c6.gif)
+### 1.3.1-ARSCNView与ARSession
 
+- 1.ARKit提供两种虚拟增强现实视图，他们分别是3D效果的`ARSCNView`和2D效果的`ARSKView`（关于3D效果和2D效果区别以及在上一小节介绍），无论是使用哪一个视图都是用了相机图像作为背景视图（这里可以参考iOS自定义相机中的预览图层），而这一个相机的图像就是由`<ARKit>`框架中的相机类`ARCamera`来捕捉的。
+- 2.`ARSCNView`与`ARCamera`两者之间并没有直接的关系，它们之间是通过AR会话，也就是ARKit框架中非常重量级的一个类`ARSession`来搭建沟通桥梁的
+  - 在iOS框架中，凡是带session或者context后缀的，这种类一般自己不干活，作用一般都是两个：1.管理其他类，帮助他们搭建沟通桥梁，好处就是解耦 2.负责帮助我们管理复杂环境下的内存context与session不同之处是：一般与硬件打交道，例如摄像头捕捉ARSession，网卡的调用NSURLSession等使用的都是session后缀。没有硬件参与，一般用context，如绘图上下文，自定义转场上下文等
+- 3.要想运行一个`ARSession`会话，你必须要指定一个称之为`会话追踪配置`的对象:`ARSessionConfiguration`,`ARSessionConfiguration`的主要目的就是负责追踪相机在3D世界中的位置以及一些特征场景的捕捉（例如平面捕捉），这个类本身比较简单却作用巨大
+  - `ARSessionConfiguration`是一个父类，为了更好的看到增强现实的效果，苹果官方建议我们使用它的子类`ARWorldTrackingSessionConfiguration`，该类只支持`A9`芯片之后的机型，也就是iPhone6s之后的机型
 
+0302.png
 
-- 飞机跟着摄像头移动
+### 
 
-![6271687-8d41dbc497e920c3](https://northcity.github.io/img/postNew/20171206/6271687-8d41dbc497e920c3.gif)
+### 1.3.2-ARWorldTrackingSessionConfiguration与ARFrame
 
+- 1.ARSession搭建沟通桥梁的参与者主要有两个`ARWorldTrackingSessionConfiguration`与`ARFrame`
+- 2.`ARWorldTrackingSessionConfiguration`（会话追踪配置）的作用是跟踪设备的方向和位置,以及检测设备摄像头看到的现实世界的表面。它的内部实现了一系列非常庞大的算法计算以及调用了你的iPhone必要的传感器来检测手机的移动及旋转甚至是翻滚
+  - 我们无需关心内部实现，`ARKit`框架帮助我们封装的非常完美，只需调用一两个属性即可
+- 3.当`ARWorldTrackingSessionConfiguration`计算出相机在3D世界中的位置时，它本身并不持有这个位置数据，而是将其计算出的位置数据交给`ARSession`去管理（与前面说的session管理内存相呼应），而相机的位置数据对应的类就是`ARFrame`
+  - ARSession类一个属性叫做currentFrame，维护的就是`ARFrame`这个对象
+- 4.`ARCamera`只负责捕捉图像，不参与数据的处理。它属于3D场景中的一个环节，每一个3D Scene都会有一个Camera，它觉得了我们看物体的视野
+- 它们三者之间的关系看起来如下图：
 
+0303.png
 
-- 台灯围绕着摄像机旋转
+- ARCamera在3D世界的位置看起来是这样的
 
-![6271687-ef478690c616f741](https://northcity.github.io/img/postNew/20171206/6271687-ef478690c616f741.gif)
+0304.png
 
+## 
 
+## 1.4-ARKit工作完整流程
 
-增强现实技术（Augmented Reality，简称 AR），是一种实时地计算摄影机影像的位置及角度并加上相应图像、视频、3D模型的技术，这种技术的目标是在屏幕上把虚拟世界套在现实世界并进行互动。
+- ARKit框架工作流程可以参考下图:
+  - 1.ARSCNView加载场景SCNScene
+  - 2.SCNScene启动相机ARCamera开始捕捉场景
+  - 3.捕捉场景后ARSCNView开始将场景数据交给Session
+  - 4.Session通过管理ARSessionConfiguration实现场景的追踪并且返回一个ARFrame
+  - 5.给ARSCNView的scene添加一个子节点（3D物体模型）
+    - ARSessionConfiguration捕捉相机3D位置的意义就在于能够在添加3D物体模型的时候计算出3D物体模型相对于相机的真实的矩阵位置在3D坐标系统中，有一个世界坐标系和一个本地坐标系。类似于UIView的Frame和Bounds的区别，这种坐标之间的转换可以说是ARKit中最难的部分
 
-     一个最简单地AR场景实现所需要的技术以及步骤包含如下
-1. 多媒体捕捉现实图像：如摄像头
-2. 三维建模:3D立体模型
-3. 传感器追踪:主要追踪现实世界动态物体的六轴变化，这六轴分别是X、Y、Z轴位移及旋转。其中位移三轴决定物体的方位和大小，旋转三周决定物体显示的区域。
-4. 坐标识别及转换：3D模型显示在现实图像中不是单纯的frame坐标点，而是一个三维的矩阵坐标。这基本上也是学习AR最难的部分，好在ARKit帮助我们大大简化了这一过程。
-5. 除此之外，AR还可以与虚拟物体进行一些交互。
-
-![20170607185337841](https://northcity.github.io/img/postNew/20171206/20170607185337841.png)
-
-## 1.2-ARKit概述及特点介绍##
-
-
-
-1. ARKit是2017年6月6日，苹果发布iOS11系统所新增框架,它能够帮助我们以最简单快捷的方式实现AR技术功能。
-2. ARKit框架提供了两种AR技术，一种是基于3D场景(SceneKit)实现的增强现实，一种是基于2D场景(SpriktKit)实现的增强现实
-
-一般主流都是基于3D实现AR技术，ARKit不仅支持3D游戏引擎SceneKit还支持2D游戏引擎SpriktKit，这一点出乎笔者意料之外
-
-3. 要想显示AR效果，必须要依赖于苹果的游戏引擎框架（3D引擎SceneKit，2D引擎SpriktKit），主要原因是游戏引擎才可以加载物体模型。
-
-虽然ARKit框架中视图对象继承于UIView，但是由于目前ARKit框架本身只包含相机追踪，不能直接加载物体模型，所以只能依赖于游戏引擎加载ARKit
-
-4. 误区解读：ARKit虽然是iOS11新出的框架，但并不是所有的iOS11系统都可以使用，而是必须要是处理器A9及以上才能够使用，苹果从iPhone6s开始使用A9处理器，也就是iPhone6及以前的机型无法使用ARKit
-
-5. 开发环境介绍
-
-   - Xcode版本：Xcode9及以上
-   - iOS系统:iOS11及以上
-   - iOS设备：处理器A9及以上（6S机型及以上）
-   - MacOS系统：10.12.4及以上（安装Xcode9对Mac系统版本有要求）
-
-   目前只有Bete版本，链接地址:https://developer.apple.com/download/
-
-
-
-## 1.3-ARKit初体验之3D效果##
-
-
-
-1. 打开Xcode9bete版本，新建一个工程，选择Augmented Reality APP(Xcode9新增),点击nex
-
-![20170607185726536](https://northcity.github.io/img/postNew/20171206/20170607185726536.png)
-
-2. 在包含技术选项中选择SceneKit
-
-![20170607185912599](https://northcity.github.io/img/postNew/20171206/20170607185912599.png)
-
-3. 此时,Xcode会自动为我们生成一段极其简洁的AR代码 
-
-本小节主要体验一下系统的AR效果，代码的具体含义以及ARKit框架的架构及具体使用将会在后期介绍
-
-![20170607185958959](https://northcity.github.io/img/postNew/20171206/20170607185958959.png)
-
-效果演示 
-3D效果AR特点：1.飞机能够随着摄像头位置的变化而看到不同的部位（六轴） 2.飞机能够随着摄像头的远近进行缩放
-
-```objective-c
-
-#import "ViewController.h"
-
-@interface ViewController () <ARSCNViewDelegate>
-
-//ARKit框架中用于3D显示的预览视图
-@property (nonatomic, strong) IBOutlet ARSCNView *sceneView;
-
-@end
-
-
-@implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    // Set the view's delegate
-    //设置代理
-    self.sceneView.delegate = self;
-
-    // Show statistics such as fps and timing information
-    //ARKit统计信息
-    self.sceneView.showsStatistics = YES;
-
-    // Create a new scene
-    //使用模型创建节点（scn格式文件是一个基于3D建模的文件，使用3DMax软件可以创建，这里系统有一个默认的3D飞机）
-    SCNScene *scene = [SCNScene sceneNamed:@"art.scnassets/ship.scn"];
-
-    // Set the scene to the view
-    //设置ARKit的场景为SceneKit的当前场景（SCNScene是Scenekit中的场景，类似于UIView）
-    self.sceneView.scene = scene;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-
-    // Create a session configuration
-    //创建一个追踪设备配置（ARWorldTrackingSessionConfiguration主要负责传感器追踪手机的移动和旋转）
-    ARWorldTrackingSessionConfiguration *configuration = [ARWorldTrackingSessionConfiguration new];
-
-    // Run the view's session
-    // 开始启动ARSession会话（启动AR）
-    [self.sceneView.session runWithConfiguration:configuration];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-
-    // Pause the view's session
-    // 暂停ARSession会话
-    [self.sceneView.session pause];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren't in use.
-}
-```
-
-
-
-![](https://northcity.github.io/img/postNew/20171206/20170607190115086.png)
-
-
-
-## 1.2-ARKit初体验之2D效果##
-
-
-
-示例效果是点击屏幕，在中心点生成一个2D AR图像
-
-2D效果的AR与3D效果有一点的区别
-
-1. 使用步骤与3D基本类似，在创建Xcode的时候选择SpriteKit引擎
-
-![](https://northcity.github.io/img/postNew/20171206/20170607192810537.png)
-
-
-
-2. 此时Xcode会为我们生成简洁的2D地图加载场景
-
-完整代码
-
-![](https://northcity.github.io/img/postNew/20171206/20170607193101237.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+0305.png
 
 
 
