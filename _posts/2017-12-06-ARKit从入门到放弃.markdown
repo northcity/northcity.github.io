@@ -24,7 +24,7 @@ tags:
 桌子上的绿萝太孤独了，给它来一个郁金香陪伴一下吧~
 ```
 
-![6271687-82509f74951766c1](/Users/chenxi/Desktop/NorthCity/northcity.github.io/img/postNew/20171206/6271687-82509f74951766c1.gif)
+![6271687-82509f74951766c1](https://northcity.github.io/img/postNew/20171206/6271687-82509f74951766c1.gif)
 
 
 
@@ -32,19 +32,19 @@ tags:
 
 
 
-![6271687-e2782e61b7a732c6](/Users/chenxi/Desktop/NorthCity/northcity.github.io/img/postNew/20171206/6271687-e2782e61b7a732c6.gif)
+![6271687-e2782e61b7a732c6](https://northcity.github.io/img/postNew/20171206/6271687-e2782e61b7a732c6.gif)
 
 
 
 **飞机跟着摄像头移动**
 
-![6271687-8d41dbc497e920c3](/Users/chenxi/Desktop/NorthCity/northcity.github.io/img/postNew/20171206/6271687-8d41dbc497e920c3.gif)
+![6271687-8d41dbc497e920c3](https://northcity.github.io/img/postNew/20171206/6271687-8d41dbc497e920c3.gif)
 
 
 
 **台灯围绕着摄像机旋转**
 
-![6271687-ef478690c616f741](/Users/chenxi/Desktop/NorthCity/northcity.github.io/img/postNew/20171206/6271687-ef478690c616f741.gif)
+![6271687-ef478690c616f741](https://northcity.github.io/img/postNew/20171206/6271687-ef478690c616f741.gif)
 
 
 
@@ -57,7 +57,7 @@ tags:
 3.传感器追踪:主要追踪现实世界动态物体的六轴变化，这六轴分别是X、Y、Z轴位移及旋转。其中位移三轴决定物体的方位和大小，旋转三周决定物体显示的区域。
 4.坐标识别及转换：3D模型显示在现实图像中不是单纯的frame坐标点，而是一个三维的矩阵坐标。这基本上也是学习AR最难的部分，好在ARKit帮助我们大大简化了这一过程。
 4.除此之外，AR还可以与虚拟物体进行一些交互。
-![20170607185337841](/Users/chenxi/Desktop/NorthCity/northcity.github.io/img/postNew/20171206/20170607185337841.png)
+![20170607185337841](https://northcity.github.io/img/postNew/20171206/20170607185337841.png)
 
     1.2-ARKit概述及特点介绍
 1.ARKit是2017年6月6日，苹果发布iOS11系统所新增框架,它能够帮助我们以最简单快捷的方式实现AR技术功能。
@@ -83,17 +83,17 @@ tags:
 
 1.打开Xcode9bete版本，新建一个工程，选择Augmented Reality APP(Xcode9新增),点击nex
 
-![20170607185726536](/Users/chenxi/Desktop/NorthCity/northcity.github.io/img/postNew/20171206/20170607185726536.png)
+![20170607185726536](https://northcity.github.io/img/postNew/20171206/20170607185726536.png)
 
 2.在包含技术选项中选择SceneKit
 
-![20170607185912599](/Users/chenxi/Desktop/NorthCity/northcity.github.io/img/postNew/20171206/20170607185912599.png)
+![20170607185912599](https://northcity.github.io/img/postNew/20171206/20170607185912599.png)
 
 3.此时,Xcode会自动为我们生成一段极其简洁的AR代码 
 
 本小节主要体验一下系统的AR效果，代码的具体含义以及ARKit框架的架构及具体使用将会在后期介绍
 
-![20170607185958959](/Users/chenxi/Desktop/NorthCity/northcity.github.io/img/postNew/20171206/20170607185958959.png)
+![20170607185958959](https://northcity.github.io/img/postNew/20171206/20170607185958959.png)
 
 效果演示 
 3D效果AR特点：1.飞机能够随着摄像头位置的变化而看到不同的部位（六轴） 2.飞机能够随着摄像头的远近进行缩放
@@ -160,7 +160,7 @@ tags:
 
 
 
-![20170607190115086](/Users/chenxi/Desktop/NorthCity/northcity.github.io/img/postNew/20171206/20170607190115086.png)
+![](https://northcity.github.io/img/postNew/20171206/20170607190115086.png)
 
 
 
@@ -172,13 +172,19 @@ tags:
 
 1.使用步骤与3D基本类似，在创建Xcode的时候选择SpriteKit引擎
 
-"img/postNew/20171206/20170607192810537.png"
+![](https://northcity.github.io/img/postNew/20171206/20170607192810537.png)
+
+
 
 2.此时Xcode会为我们生成简洁的2D地图加载场景
 
 完整代码
 
-![](img/postNew/20171206/20170607193101237.png)
+![](https://northcity.github.io/img/postNew/20171206/20170607193101237.png)
+
+
+
+
 
 
 
