@@ -2,7 +2,7 @@
 layout:     post
 title:      "Rainbow Timer Privacy Policy"
 subtitle:   "彩虹倒计时隐私政策"
-date:        2018-10-16 13:00:00
+date:        2018-10-16 1:00:00
 author:     "北城"
 header-img: "img/postNew/20181016/caihongdaojishi.png"
 tags:

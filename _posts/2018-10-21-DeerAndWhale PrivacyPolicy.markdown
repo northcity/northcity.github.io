@@ -2,8 +2,8 @@
 layout:     post
 title:      "Deer And Whale Privacy Policy"
 subtitle:   "林深时见鹿隐私政策"
-date:        2018-10-21 10:00:00
-author:     ""
+date:        2018-10-21 4:00:00
+author:     "北城"
 header-img: "img/postNew/20181016/linshenshijianlu.png"
 tags:
 ---
