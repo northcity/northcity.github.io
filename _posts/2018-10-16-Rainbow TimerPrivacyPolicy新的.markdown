@@ -1,11 +1,14 @@
 ---
 layout:     post
-title:      "Rainbow Timer Privacy Policy"
-subtitle:   "彩虹倒计时隐私政策"
-date:        2018-10-16 13:00:00
-author:     "北城"
-header-img: "img/postNew/20181016/caihongdaojishi.png"
+title:      "ARKit 从入门到放弃（三）— ARkit 官网文档翻译"
+subtitle:   "欢迎来到苹果的AR世界"
+date:       2018-6-20 12:00:00
+author:     "NorthCity"
+header-img: "img/postNew/20171206/timg.jpeg"
 tags:
+- 新技术
+- 千万不要研究
+- 忘了自己是谁
 ---
 
 
