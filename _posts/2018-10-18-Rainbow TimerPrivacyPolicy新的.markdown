@@ -2,7 +2,7 @@
 layout:     post
 title:      "ARKit 从入门到放弃（三）— ARkit 官网文档翻译"
 subtitle:   "欢迎来到苹果的AR世界"
-date:       2018-10-19 3:00:00
+date:       2018-10-18 3:00:00
 author:     "NorthCity"
 header-img: "img/postNew/20171206/timg.jpeg"
 tags:

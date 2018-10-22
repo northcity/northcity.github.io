@@ -2,7 +2,7 @@
 layout:     post
 title:      "Time Pills Privacy Policy"
 subtitle:   "时间胶囊隐私政策"
-date:        2018-10-16 2:00:00
+date:        2018-10-17 2:00:00
 author:     "北城"
 header-img: "img/postNew/20181016/shijianjiaonang.png"
 tags:
