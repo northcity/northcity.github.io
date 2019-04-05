@@ -1,20 +1,20 @@
 ---
 layout:     post
 title:      "ShiJianGuiHuaJu Privacy Policy"
-subtitle:   "流浪地球隐私政策"
+subtitle:   "流浪诗人隐私政策"
 date:        2018-11-30 12:00:00
 author:     "北城"
-header-img: "img/postNew/20181016/liulangdiqiu.png"
+header-img: "img/postNew/20181016/liulangshiren.png"
 tags:
 ---
 
 
 
-# Jiu Gong Ge Qie Tu Privacy Policy
+# Liu Lang Shi Ren Privacy Policy
 
 隐私政策
 生效日期：2018年10月21日
-流浪地球（“我们”，“我们”或“我们的”）是一款简单的计时应用程序（“服务”）。
+流浪诗人（“我们”，“我们”或“我们的”）是一款简单的计时应用程序（“服务”）。
 
 当您使用我们的服务以及您与该数据相关的选择时，本页面会告知您有关个人数据的收集，使用和披露的政策。
 
