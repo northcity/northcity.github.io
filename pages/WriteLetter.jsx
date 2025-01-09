@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../styles/WriteLetter.css';
 
 const WriteLetter = () => {
   const [letter, setLetter] = useState({
