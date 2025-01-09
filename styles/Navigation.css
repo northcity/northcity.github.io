@@ -2,6 +2,9 @@
   padding: 1rem 0;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .main-navigation ul {
@@ -11,16 +14,26 @@
   display: flex;
   justify-content: center;
   gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.main-navigation li {
+  padding: 0.5rem 0;
 }
 
 .main-navigation .nav-link {
   text-decoration: none;
   color: #333;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1rem;
-  transition: color 0.3s;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
 }
 
 .main-navigation .nav-link:hover {
   color: #007bff;
+  background-color: rgba(0,123,255,0.1);
+  border-radius: 4px;
 } 
