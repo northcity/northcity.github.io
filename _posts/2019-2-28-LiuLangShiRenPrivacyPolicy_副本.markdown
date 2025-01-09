@@ -1,20 +1,20 @@
 ---
 layout:     post
-title:      "闪念-AI语音笔记 隐私政策"
-subtitle:   "IdeaSnap: AI Voice Notes & Tasks"
-date:        2025-01-09 12:00:00
+title:      "ShiJianGuiHuaJu Privacy Policy"
+subtitle:   "流浪诗人隐私政策"
+date:        2018-11-30 12:00:00
 author:     "北城"
-header-img: "img/postNew/20250109/5721733190258_.pic.jpg"
+header-img: "img/postNew/20181016/liulangshiren.png"
 tags:
 ---
 
 
 
-# 闪念-AI语音笔记 隐私政策
+# Liu Lang Shi Ren Privacy Policy
 
 隐私政策
-生效日期：2018年10月21日
-闪念（“我们”，“我们”或“我们的”）是一款简单的效率记事应用程序（“服务”）。
+生效日期：2025年1月7日
+流浪诗人（“我们”，“我们”或“我们的”）是一款简单的计时应用程序（“服务”）。
 
 当您使用我们的服务以及您与该数据相关的选择时，本页面会告知您有关个人数据的收集，使用和披露的政策。
 
@@ -30,7 +30,7 @@ tags:
 当您通过移动设备访问时，此使用数据可能包含您使用的移动设备类型，移动操作系统和其他诊断数据等信息。
 
 使用数据
-闪念将收集的数据用于各种目的：
+时间规划局将收集的数据用于各种目的：
 
 提供分析信息，以便我们改进服务
 监控服务的使用情况
