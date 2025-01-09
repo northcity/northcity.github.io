@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "闪念-AI语音笔记 隐私政策"
-subtitle:   "IdeaSnap: AI Voice Notes & Tasks"
+title:      ""
+subtitle:   ""
 date:        2025-01-09 12:00:00
 author:     "北城"
 header-img: "img/postNew/20250109/5721733190258.png"
