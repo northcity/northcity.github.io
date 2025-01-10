@@ -35,3 +35,13 @@ description: "Send your letter."
         }
     });
 </script>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentTime = urlParams.get('time');
+    document.addEventListener('DOMContentLoaded', () => {
+        const timeDisplay = document.createElement('p');
+        timeDisplay.textContent = `The current local time is: ${currentTime}`;
+        document.body.appendChild(timeDisplay);
+    });
+</script>

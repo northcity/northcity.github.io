@@ -12,6 +12,7 @@ description: "Write your letters here."
     <button id="sendButton" style="margin-top: 10px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;" onclick="window.location.href='send.html';">
         Send
     </button>
+    <a id="sendLink" href="" style="margin-top: 10px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; display: none;">发送</a>
 </div>
 
 <script>
@@ -24,4 +25,9 @@ description: "Write your letters here."
             alert('Please type a message before sending.');
         }
     });
+
+    const sendLink = document.getElementById('sendLink');
+    const currentTime = new Date().toISOString();
+    sendLink.href = `send.html?time=${currentTime}`;
+    sendLink.style.display = 'inline-block';
 </script>
