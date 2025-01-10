@@ -1,0 +1,27 @@
+---
+layout: page
+title: Write
+description: "Write your letters here."
+---
+
+<h1>Write Your Letter</h1>
+<p>Compose your message below:</p>
+
+<div style="max-width: 600px; margin: auto;">
+    <textarea id="message" rows="10" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;" placeholder="Type your message here..."></textarea>
+    <button id="sendButton" style="margin-top: 10px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;" onclick="window.location.href='send.html';">
+        Send
+    </button>
+</div>
+
+<script>
+    document.getElementById('sendButton').addEventListener('click', function() {
+        const message = document.getElementById('message').value;
+        if (message) {
+            alert('Your message has been sent!');
+            document.getElementById('message').value = ''; // Clear the textarea
+        } else {
+            alert('Please type a message before sending.');
+        }
+    });
+</script>
