@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="在这里探索iOS的一切。">
-    <meta name="keywords"  content="北城以北,北城的博客, beicheng,north city, northcity,陈希, 个人博客, 个人网站, 技术博客, iOS, Cocoa, Apple, WWDC, iPone, develop, 移动开发, APP, 设计模式, 最佳实践">
-    <meta name="theme-color" content="#000000">
+    <meta name="description" content="我用产品、代码和文字，记录真实的独立开发之路。">
+    <meta name="keywords"  content="北城, 独立开发者, indie developer, iOS开发, App开发, 闪念, 呼吸泡泡, Anpa, 数字遗产, 时间胶囊, 产品创作者, 独立开发, Swift, SwiftUI">
+    <meta name="theme-color" content="#1a1a1a">
     
-    <title>iOS应用发布中的一些细节 - 北城的博客|NorthCity</title>
+    <title>iOS应用发布中的一些细节 - 北城 · 独立开发者 | NorthCity</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -31,9 +31,11 @@
     <link rel="stylesheet" href="/css/syntax.css">
 
     <!-- Custom Fonts -->
-    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Font Awesome 6 for modern icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- Custom Icons (X, 小红书, etc.) -->
+    <link rel="stylesheet" href="/css/icons.css">
 
 
     <!-- Hux Delete, sad but pending in China
@@ -69,7 +71,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">NorthCity</a>
+            <a class="navbar-brand" href="/">北城</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -81,7 +83,15 @@
                     </li>
                     
                     <li>
-                        <a href="/about/">About</a>
+                        <a href="/about/">关于</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/connect/">联系</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/essays/">文章</a>
                     </li>
                     
                     <li>
@@ -89,7 +99,35 @@
                     </li>
                     
                     <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/logs/">开发日志</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/products/">作品</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/send/">Send Letter</a>
+                    </li>
+                    
+                    <li>
                         <a href="/tags/">Tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/write/">Write</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page2/">首页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page3/">首页</a>
                     </li>
                     
                 </ul>
@@ -204,7 +242,7 @@
 
 <h2 id="前言">前言</h2>
 
-<p>这几天最大的新闻我想就是<code class="highlighter-rouge">巴黎恐怖袭击</code>了，诶，博主每年跨年都那么虔诚地许下“希望世界和平”的愿望，想不到每年都无法实现，维护世界和平这么难，博主真是有心无力啊，其实芸芸众生的我们能做的大概就是不要闯红灯、不抢小妹妹的甜筒、拉完屎记得冲水、打饭不逃票、不在澡堂小便、不挖人家墙角……其实就是维护世界和平了。</p>
+<p>这几天最大的新闻我想就是<code class="language-plaintext highlighter-rouge">巴黎恐怖袭击</code>了，诶，博主每年跨年都那么虔诚地许下“希望世界和平”的愿望，想不到每年都无法实现，维护世界和平这么难，博主真是有心无力啊，其实芸芸众生的我们能做的大概就是不要闯红灯、不抢小妹妹的甜筒、拉完屎记得冲水、打饭不逃票、不在澡堂小便、不挖人家墙角……其实就是维护世界和平了。</p>
 
 <p>然而黑客组织<strong>Anonymous</strong>向ISIS宣战了！</p>
 
@@ -218,15 +256,15 @@
 
 <h2 id="bundle-identifier">Bundle identifier</h2>
 
-<p>Xcode中 <code class="highlighter-rouge">Target -&gt; General</code>中的<code class="highlighter-rouge">bundle identifier</code> ;</p>
+<p>Xcode中 <code class="language-plaintext highlighter-rouge">Target -&gt; General</code>中的<code class="language-plaintext highlighter-rouge">bundle identifier</code> ;</p>
 
-<p><code class="highlighter-rouge">info.plist</code>中的<code class="highlighter-rouge">Bundle identifier</code>;</p>
+<p><code class="language-plaintext highlighter-rouge">info.plist</code>中的<code class="language-plaintext highlighter-rouge">Bundle identifier</code>;</p>
 
-<p><a href="https://developer.apple.com/account/ios/certificate/certificateList.action" target="_blank">证书中心</a> 的<code class="highlighter-rouge">Identifiers</code>中<code class="highlighter-rouge">App IDs</code>新建App时的<code class="highlighter-rouge">Explicit App ID</code>;</p>
+<p><a href="https://developer.apple.com/account/ios/certificate/certificateList.action" target="_blank">证书中心</a> 的<code class="language-plaintext highlighter-rouge">Identifiers</code>中<code class="language-plaintext highlighter-rouge">App IDs</code>新建App时的<code class="language-plaintext highlighter-rouge">Explicit App ID</code>;</p>
 
-<p>以及<code class="highlighter-rouge">iTunes Connect</code>中App信息的<code class="highlighter-rouge">套装ID</code> 必须保持一致！！</p>
+<p>以及<code class="language-plaintext highlighter-rouge">iTunes Connect</code>中App信息的<code class="language-plaintext highlighter-rouge">套装ID</code> 必须保持一致！！</p>
 
-<p>在info.plist或者Xcode里的各种设置中，有很多<code class="highlighter-rouge">$(XXX)</code>这样的像脚本一样的东西，所以补充一点Xcode中的<a href="https://developer.apple.com/library/mac/documentation/DeveloperTools/Reference/XcodeBuildSettingRef/1-Build_Setting_Reference/build_setting_ref.html" target="_blank">环境变量</a></p>
+<p>在info.plist或者Xcode里的各种设置中，有很多<code class="language-plaintext highlighter-rouge">$(XXX)</code>这样的像脚本一样的东西，所以补充一点Xcode中的<a href="https://developer.apple.com/library/mac/documentation/DeveloperTools/Reference/XcodeBuildSettingRef/1-Build_Setting_Reference/build_setting_ref.html" target="_blank">环境变量</a></p>
 
 <h2 id="certificates证书">Certificates证书</h2>
 
@@ -234,7 +272,7 @@
 
 <p>其实苹果的证书其实没那么玄乎，很多朋友弄不懂或者过了一段时间又不知道怎么弄了，本质的原因是因为对<a href="https://zh.wikipedia.org/zh-cn/%E5%85%AC%E5%BC%80%E5%AF%86%E9%92%A5%E5%8A%A0%E5%AF%86" target="_blank">非对称加密(公开密钥加密)</a>的不理解<del>导致的</del>，所以为了完全的驾驭苹果的证书，这些基础的知识就是坑你的坎，必须跨过去的。</p>
 
-<p>网上有各种解释证书中心里面每一种证书作用是什么、怎么创建、怎么使用的，但是这也只能授人以鱼，所以博主不会介绍每一种证书是干嘛的，因为你看前年多了一个<code class="highlighter-rouge">Pass Type ID Certificate</code> ，去年又有了<code class="highlighter-rouge">WatchKit Services Certificate</code> ，今年又来一个<code class="highlighter-rouge">Apple Pay Certificate</code>……根本就解释这些证书不完嘛~，所以理解这些证书的统一规律才是王道！所谓</p>
+<p>网上有各种解释证书中心里面每一种证书作用是什么、怎么创建、怎么使用的，但是这也只能授人以鱼，所以博主不会介绍每一种证书是干嘛的，因为你看前年多了一个<code class="language-plaintext highlighter-rouge">Pass Type ID Certificate</code> ，去年又有了<code class="language-plaintext highlighter-rouge">WatchKit Services Certificate</code> ，今年又来一个<code class="language-plaintext highlighter-rouge">Apple Pay Certificate</code>……根本就解释这些证书不完嘛~，所以理解这些证书的统一规律才是王道！所谓</p>
 
 <blockquote>
   <p>万变不离其宗</p>
@@ -248,24 +286,24 @@
 
 <ul>
   <li>
-    <p><code class="highlighter-rouge">根证书</code>是与开发者或者企业对应的，只要是被<code class="highlighter-rouge">根证书</code>签名的App都可以理解为是这个证书对应的开发者开发的。所以一个<code class="highlighter-rouge">根证书</code>可以签名多个App。</p>
+    <p><code class="language-plaintext highlighter-rouge">根证书</code>是与开发者或者企业对应的，只要是被<code class="language-plaintext highlighter-rouge">根证书</code>签名的App都可以理解为是这个证书对应的开发者开发的。所以一个<code class="language-plaintext highlighter-rouge">根证书</code>可以签名多个App。</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">其他证书</code>呢是与具体的App对应的，一个App的推送证书是无法给另一个App使用的，所以一个<code class="highlighter-rouge">其他证书</code>只能为一个App签名，更确切的说是这个App需要使用某一项Apple的服务而去产生这个<code class="highlighter-rouge">其他证书</code>。</p>
+    <p><code class="language-plaintext highlighter-rouge">其他证书</code>呢是与具体的App对应的，一个App的推送证书是无法给另一个App使用的，所以一个<code class="language-plaintext highlighter-rouge">其他证书</code>只能为一个App签名，更确切的说是这个App需要使用某一项Apple的服务而去产生这个<code class="language-plaintext highlighter-rouge">其他证书</code>。</p>
   </li>
 </ul>
 
-<p>所以其实苹果每年都添加的证书属于<code class="highlighter-rouge">其他证书</code>，这些其他证书并不是非必须的，而是使用了苹果的某一项服务时才需要提供的凭证。而<code class="highlighter-rouge">根证书</code>是必须的，它签名的APP是属于这个证书的所有者的。</p>
+<p>所以其实苹果每年都添加的证书属于<code class="language-plaintext highlighter-rouge">其他证书</code>，这些其他证书并不是非必须的，而是使用了苹果的某一项服务时才需要提供的凭证。而<code class="language-plaintext highlighter-rouge">根证书</code>是必须的，它签名的APP是属于这个证书的所有者的。</p>
 
 <p>图2</p>
 
 <p><img src="https://daiweilai.github.io/img/post/2015-11-17-pic2.png" alt="" /></p>
 
-<p>图中我的这个账号默认会有两个不同用途的<code class="highlighter-rouge">根证书</code>，有两个App，分别为App1、APP2，以及它们对应的两种用途的推送证书(属于<code class="highlighter-rouge">其他证书</code>)。</p>
+<p>图中我的这个账号默认会有两个不同用途的<code class="language-plaintext highlighter-rouge">根证书</code>，有两个App，分别为App1、APP2，以及它们对应的两种用途的推送证书(属于<code class="language-plaintext highlighter-rouge">其他证书</code>)。</p>
 
-<p>假如我现在需要真机调试App1的推送，那么我只要下载<code class="highlighter-rouge">开发根证书</code>以及<code class="highlighter-rouge">App1的开发推送证书</code>然后双击打开导入钥匙串，然后创建相应profile即可真机调试了；</p>
+<p>假如我现在需要真机调试App1的推送，那么我只要下载<code class="language-plaintext highlighter-rouge">开发根证书</code>以及<code class="language-plaintext highlighter-rouge">App1的开发推送证书</code>然后双击打开导入钥匙串，然后创建相应profile即可真机调试了；</p>
 
-<p>假如现在我要发布APP2，那么我只要下载<code class="highlighter-rouge">发布根证书</code>以及<code class="highlighter-rouge">APP2的发布推送证书</code>，然后创建相应地profile即可打包上传App Strore了。(这里因为发布的特殊性，所以发布的电脑必须是创建这个<code class="highlighter-rouge">发布根证书</code>的电脑)。</p>
+<p>假如现在我要发布APP2，那么我只要下载<code class="language-plaintext highlighter-rouge">发布根证书</code>以及<code class="language-plaintext highlighter-rouge">APP2的发布推送证书</code>，然后创建相应地profile即可打包上传App Strore了。(这里因为发布的特殊性，所以发布的电脑必须是创建这个<code class="language-plaintext highlighter-rouge">发布根证书</code>的电脑)。</p>
 
 <p>profile(描述文件)下文还有篇幅介绍。</p>
 
@@ -279,7 +317,7 @@
 
 <p><img src="https://daiweilai.github.io/img/post/2015-11-17-pic3.png" alt="" /></p>
 
-<p>在这里声明一下，<code class="highlighter-rouge">其他证书</code>其他证书生成的时候，使用的<code class="highlighter-rouge">certSigningRequest</code>文件可以和产生<code class="highlighter-rouge">根证书</code>的<code class="highlighter-rouge">certSigningRequest</code>的不一致，也就是说产生<code class="highlighter-rouge">其他证书</code>时不一定需要产生<code class="highlighter-rouge">根证书</code>的电脑，所以这里也坑了无数的人调试推送，这个在下文<a href="#推送的一切">推送的那些事</a>详细填坑。</p>
+<p>在这里声明一下，<code class="language-plaintext highlighter-rouge">其他证书</code>其他证书生成的时候，使用的<code class="language-plaintext highlighter-rouge">certSigningRequest</code>文件可以和产生<code class="language-plaintext highlighter-rouge">根证书</code>的<code class="language-plaintext highlighter-rouge">certSigningRequest</code>的不一致，也就是说产生<code class="language-plaintext highlighter-rouge">其他证书</code>时不一定需要产生<code class="language-plaintext highlighter-rouge">根证书</code>的电脑，所以这里也坑了无数的人调试推送，这个在下文<a href="#推送的一切">推送的那些事</a>详细填坑。</p>
 
 <h2 id="provisioning-profiles描述文件">Provisioning Profiles描述文件</h2>
 
@@ -287,9 +325,9 @@
 
 <p><img src="https://daiweilai.github.io/img/post/2015-11-17-pic4.png" alt="" /></p>
 
-<p>我想这个界面一弹出来的时候，蛋蛋忧伤迎面扑来。然后怒点 <code class="highlighter-rouge">Fix issue</code>，然后你们团队负责管理证书的基友突然发现证书中心多了好多好乱的证书以及描述文件，然后他爆了一句：what the huck！删掉了带有<code class="highlighter-rouge">Xcode *</code>的证书以及描述文件，然后自己又暴力的点了一发<code class="highlighter-rouge">Fix issue</code>，然后你突然调试不了了，再暴击<code class="highlighter-rouge">Fix issue</code>键，最后整个团队都只有通过<code class="highlighter-rouge">Fix issue</code>来真机调试了……。</p>
+<p>我想这个界面一弹出来的时候，蛋蛋忧伤迎面扑来。然后怒点 <code class="language-plaintext highlighter-rouge">Fix issue</code>，然后你们团队负责管理证书的基友突然发现证书中心多了好多好乱的证书以及描述文件，然后他爆了一句：what the huck！删掉了带有<code class="language-plaintext highlighter-rouge">Xcode *</code>的证书以及描述文件，然后自己又暴力的点了一发<code class="language-plaintext highlighter-rouge">Fix issue</code>，然后你突然调试不了了，再暴击<code class="language-plaintext highlighter-rouge">Fix issue</code>键，最后整个团队都只有通过<code class="language-plaintext highlighter-rouge">Fix issue</code>来真机调试了……。</p>
 
-<p>所以慎点<code class="highlighter-rouge">Fix issue</code>，如果点击这个选项，聪明的(<del>蠢哭的</del>)Xcode就会自己管理描述文件，然后各种莫名其妙的带有<code class="highlighter-rouge">Xcode *</code>的证书以及描述文件……</p>
+<p>所以慎点<code class="language-plaintext highlighter-rouge">Fix issue</code>，如果点击这个选项，聪明的(<del>蠢哭的</del>)Xcode就会自己管理描述文件，然后各种莫名其妙的带有<code class="language-plaintext highlighter-rouge">Xcode *</code>的证书以及描述文件……</p>
 
 <p>其实只要坚信一点，证书、设备ID、AppID、描述文件都弄对了就绝逼不会出问题的！</p>
 
@@ -301,13 +339,13 @@
 
 <ul>
   <li>其实描述文件工作的原理就是在APP打包或者真机调试的时候，让Xcode去检查描述文件里面的BundleID与这个APP的BundleID是否对应。</li>
-  <li>对应的话就会去<code class="highlighter-rouge">keyChain</code>查找有没有相应地证书(所以证书要下载好，并且导入<code class="highlighter-rouge">keyChain</code>)</li>
+  <li>对应的话就会去<code class="language-plaintext highlighter-rouge">keyChain</code>查找有没有相应地证书(所以证书要下载好，并且导入<code class="language-plaintext highlighter-rouge">keyChain</code>)</li>
   <li>如果有证书存在的话就会检查证书的类型，如果是开发证书，则会检查调试的设备是否加入了描述文件里面的信任设备ID列表，如果设备没有在描述文件的列表中，则无法调试；如果证书类型是发布证书则不会检查设备ID列表。</li>
 </ul>
 
-<p>额外地，如果公司新增了测试机，并且在证书中心的<code class="highlighter-rouge">Devices</code>中添加了新测试机的ID，这样描述文件也要相应地更新，然后重新下载，下载完之后可以先删除旧的描述文件(博主直接覆盖的方式貌似描述文件没有更新啊)，你们可以自己做实验咯，描述文件的路劲<code class="highlighter-rouge">/Users/XXX/Library/MobileDevice/Provisioning\ Profiles</code></p>
+<p>额外地，如果公司新增了测试机，并且在证书中心的<code class="language-plaintext highlighter-rouge">Devices</code>中添加了新测试机的ID，这样描述文件也要相应地更新，然后重新下载，下载完之后可以先删除旧的描述文件(博主直接覆盖的方式貌似描述文件没有更新啊)，你们可以自己做实验咯，描述文件的路劲<code class="language-plaintext highlighter-rouge">/Users/XXX/Library/MobileDevice/Provisioning\ Profiles</code></p>
 
-<p><code class="highlighter-rouge">XXX</code>你的用户名。</p>
+<p><code class="language-plaintext highlighter-rouge">XXX</code>你的用户名。</p>
 
 <p>不要覆盖！记得先删除，可以免除很多问题。</p>
 
@@ -331,7 +369,7 @@
   <li>从钥匙库导出的<del>根证书</del>(推送证书)私钥(p12格式)</li>
 </ol>
 
-<p>第三步根证书的私钥这里是一个坑！因为一个App的推送证书的创建可以和根证书创建的电脑不同，也就是keyChain产生的<code class="highlighter-rouge">certSigningRequest</code>不一样，所以私钥也是不一样的，在这里生成Pem时，注意要使用推送证书的私钥！</p>
+<p>第三步根证书的私钥这里是一个坑！因为一个App的推送证书的创建可以和根证书创建的电脑不同，也就是keyChain产生的<code class="language-plaintext highlighter-rouge">certSigningRequest</code>不一样，所以私钥也是不一样的，在这里生成Pem时，注意要使用推送证书的私钥！</p>
 
 <p>操作过程：</p>
 
@@ -339,23 +377,20 @@
   <li>
     <p>把推送证书(.cer)转换为.pem文件，执行命令：</p>
 
-    <div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">openssl</span> <span class="n">x509</span> <span class="o">-</span><span class="n">in</span> <span class="err">推送证书</span><span class="p">.</span><span class="n">cer</span> <span class="o">-</span><span class="n">inform</span> <span class="n">der</span> <span class="o">-</span><span class="n">out</span> <span class="err">推送证书</span><span class="p">.</span><span class="n">pem</span>
-</code></pre>
-    </div>
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">openssl</span> <span class="n">x509</span> <span class="o">-</span><span class="n">in</span> <span class="err">推送证书</span><span class="p">.</span><span class="n">cer</span> <span class="o">-</span><span class="n">inform</span> <span class="n">der</span> <span class="o">-</span><span class="n">out</span> <span class="err">推送证书</span><span class="p">.</span><span class="n">pem</span>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>把推送证书导出的私钥(.p12)文件转化为.pem文件：</p>
 
-    <div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">openssl</span> <span class="n">pkcs12</span> <span class="o">-</span><span class="n">nocerts</span> <span class="o">-</span><span class="n">out</span> <span class="err">推送证书私钥</span><span class="p">.</span><span class="n">pem</span> <span class="o">-</span><span class="n">in</span> <span class="err">推送证书私钥</span><span class="p">.</span><span class="n">p12</span>	
-</code></pre>
-    </div>
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">openssl</span> <span class="n">pkcs12</span> <span class="o">-</span><span class="n">nocerts</span> <span class="o">-</span><span class="n">out</span> <span class="err">推送证书私钥</span><span class="p">.</span><span class="n">pem</span> <span class="o">-</span><span class="n">in</span> <span class="err">推送证书私钥</span><span class="p">.</span><span class="n">p12</span>	
+</code></pre></div>    </div>
   </li>
   <li>
     <p>对生成的这两个pem文件再生成一个pem文件，来把证书和私钥整合到一个文件里：</p>
 
-    <div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">cat</span> <span class="err">推送证书</span><span class="p">.</span><span class="n">pem</span> <span class="err">推送证书私钥</span><span class="p">.</span><span class="n">pem</span> <span class="o">&gt;</span><span class="n">PHPPush</span><span class="p">.</span><span class="n">pem</span>
-</code></pre>
-    </div>
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cat</span> <span class="err">推送证书</span><span class="p">.</span><span class="n">pem</span> <span class="err">推送证书私钥</span><span class="p">.</span><span class="n">pem</span> <span class="o">&gt;</span><span class="n">PHPPush</span><span class="p">.</span><span class="n">pem</span>
+</code></pre></div>    </div>
   </li>
 </ol>
 
@@ -367,13 +402,13 @@
 
 <p>只要拷贝这段代码</p>
 
-<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="o">&lt;?</span><span class="n">php</span>
-<span class="c1">// devicetoken
-</span> <span class="err">$</span><span class="n">deviceToken</span> <span class="o">=</span> <span class="err">'你的</span><span class="n">deviceToken</span><span class="err">'</span><span class="p">;</span>
-<span class="c1">// 私钥密码，生成pem的时候输入的
-</span><span class="err">$</span><span class="n">passphrase</span> <span class="o">=</span> <span class="err">'</span><span class="mi">123456</span><span class="err">'</span><span class="p">;</span>
-<span class="c1">// 定制推送内容，有一点的格式要求，详情Apple文档
-</span><span class="err">$</span><span class="n">message</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;?</span><span class="n">php</span>
+<span class="c1">// devicetoken</span>
+ <span class="err">$</span><span class="n">deviceToken</span> <span class="o">=</span> <span class="err">'你的</span><span class="n">deviceToken</span><span class="err">'</span><span class="p">;</span>
+<span class="c1">// 私钥密码，生成pem的时候输入的</span>
+<span class="err">$</span><span class="n">passphrase</span> <span class="o">=</span> <span class="err">'</span><span class="mi">123456</span><span class="err">'</span><span class="p">;</span>
+<span class="c1">// 定制推送内容，有一点的格式要求，详情Apple文档</span>
+<span class="err">$</span><span class="n">message</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span>
 	<span class="err">'</span><span class="n">body</span><span class="err">'</span><span class="o">=&gt;</span><span class="err">'你收到一个新订单'</span>
 <span class="p">);</span>
 <span class="err">$</span><span class="n">body</span><span class="p">[</span><span class="err">'</span><span class="n">aps</span><span class="err">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span>
@@ -387,13 +422,13 @@
 <span class="err">$</span><span class="n">body</span><span class="p">[</span><span class="err">'</span><span class="n">msg</span><span class="err">'</span><span class="p">]</span><span class="o">=</span><span class="err">'你收到一个新消息'</span><span class="p">;</span>
 
 <span class="err">$</span><span class="n">ctx</span> <span class="o">=</span> <span class="n">stream_context_create</span><span class="p">();</span>
-<span class="n">stream_context_set_option</span><span class="p">(</span><span class="err">$</span><span class="n">ctx</span><span class="p">,</span> <span class="err">'</span><span class="n">ssl</span><span class="err">'</span><span class="p">,</span> <span class="err">'</span><span class="n">local_cert</span><span class="err">'</span><span class="p">,</span> <span class="err">'</span><span class="n">push</span><span class="p">.</span><span class="n">pem</span><span class="err">'</span><span class="p">);</span><span class="c1">//记得把生成的push.pem放在和这个php文件同一个目录
-</span><span class="n">stream_context_set_option</span><span class="p">(</span><span class="err">$</span><span class="n">ctx</span><span class="p">,</span> <span class="err">'</span><span class="n">ssl</span><span class="err">'</span><span class="p">,</span> <span class="err">'</span><span class="n">passphrase</span><span class="err">'</span><span class="p">,</span> <span class="err">$</span><span class="n">passphrase</span><span class="p">);</span>
+<span class="n">stream_context_set_option</span><span class="p">(</span><span class="err">$</span><span class="n">ctx</span><span class="p">,</span> <span class="err">'</span><span class="n">ssl</span><span class="err">'</span><span class="p">,</span> <span class="err">'</span><span class="n">local_cert</span><span class="err">'</span><span class="p">,</span> <span class="err">'</span><span class="n">push</span><span class="p">.</span><span class="n">pem</span><span class="err">'</span><span class="p">);</span><span class="c1">//记得把生成的push.pem放在和这个php文件同一个目录</span>
+<span class="n">stream_context_set_option</span><span class="p">(</span><span class="err">$</span><span class="n">ctx</span><span class="p">,</span> <span class="err">'</span><span class="n">ssl</span><span class="err">'</span><span class="p">,</span> <span class="err">'</span><span class="n">passphrase</span><span class="err">'</span><span class="p">,</span> <span class="err">$</span><span class="n">passphrase</span><span class="p">);</span>
 <span class="err">$</span><span class="n">fp</span> <span class="o">=</span> <span class="n">stream_socket_client</span><span class="p">(</span>
-	<span class="c1">//这里需要特别注意，一个是开发推送的沙箱环境，一个是发布推送的正式环境，deviceToken是不通用的
-</span>	<span class="err">'</span><span class="n">ssl</span><span class="o">:</span><span class="c1">//gateway.sandbox.push.apple.com:2195', $err,
-</span>	<span class="c1">//'ssl://gateway.push.apple.com:2195', $err,
-</span>	<span class="err">$</span><span class="n">errstr</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="n">STREAM_CLIENT_CONNECT</span><span class="o">|</span><span class="n">STREAM_CLIENT_PERSISTENT</span><span class="p">,</span> <span class="err">$</span><span class="n">ctx</span><span class="p">);</span>
+	<span class="c1">//这里需要特别注意，一个是开发推送的沙箱环境，一个是发布推送的正式环境，deviceToken是不通用的</span>
+	<span class="err">'</span><span class="n">ssl</span><span class="o">:</span><span class="c1">//gateway.sandbox.push.apple.com:2195', $err,</span>
+	<span class="c1">//'ssl://gateway.push.apple.com:2195', $err,</span>
+	<span class="err">$</span><span class="n">errstr</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="n">STREAM_CLIENT_CONNECT</span><span class="o">|</span><span class="n">STREAM_CLIENT_PERSISTENT</span><span class="p">,</span> <span class="err">$</span><span class="n">ctx</span><span class="p">);</span>
 <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="err">$</span><span class="n">fp</span><span class="p">)</span>
 	<span class="n">exit</span><span class="p">(</span><span class="s">"Failed to connect: $err $errstr"</span> <span class="p">.</span> <span class="n">PHP_EOL</span><span class="p">);</span>
 <span class="n">echo</span> <span class="err">'</span><span class="n">Connected</span> <span class="n">to</span> <span class="n">APNS</span><span class="err">'</span> <span class="p">.</span> <span class="n">PHP_EOL</span><span class="p">;</span>
@@ -406,8 +441,7 @@
 	<span class="n">echo</span> <span class="err">'</span><span class="n">Message</span> <span class="n">successfully</span> <span class="n">delivered</span><span class="err">'</span> <span class="p">.</span> <span class="n">PHP_EOL</span><span class="p">;</span>
 <span class="n">fclose</span><span class="p">(</span><span class="err">$</span><span class="n">fp</span><span class="p">);</span>
 <span class="o">?&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>将上面的代码复制，保存成push.php</p>
 
@@ -417,16 +451,14 @@
 
 <p>执行下面的命令</p>
 
-<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">DavidDay</span><span class="err">$</span> <span class="n">php</span> <span class="n">push</span><span class="p">.</span><span class="n">php</span> 
-</code></pre>
-</div>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">DavidDay</span><span class="err">$</span> <span class="n">php</span> <span class="n">push</span><span class="p">.</span><span class="n">php</span> 
+</code></pre></div></div>
 
 <p>结果为</p>
 
-<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">Connected</span> <span class="n">to</span> <span class="n">APNS</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Connected</span> <span class="n">to</span> <span class="n">APNS</span>
 <span class="n">Message</span> <span class="n">successfully</span> <span class="n">delivered</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>是不是就推送成功了呢？呵呵哒</p>
 
@@ -442,17 +474,17 @@
     <p>选择ARM架构机型(模拟器是Intel架构的，真机是ARM架构的，不能通用)</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">product -&gt; archive</code></p>
+    <p><code class="language-plaintext highlighter-rouge">product -&gt; archive</code></p>
   </li>
   <li>
     <p>然后就可以选择导出ipa在第三方平台分发测试或者上传App Stroe审核了</p>
 
     <p>​
-这样的做法比较保险，因为<code class="highlighter-rouge">archive</code> 只会编译出真机的二进制码，所以不用担心导出的ipa真机装不起。</p>
+这样的做法比较保险，因为<code class="language-plaintext highlighter-rouge">archive</code> 只会编译出真机的二进制码，所以不用担心导出的ipa真机装不起。</p>
   </li>
 </ul>
 
-<p>另一种姿势是使用<code class="highlighter-rouge">xcodebuild</code> 工具，纯Shell编译，比较不好处理错误，但是逼格满满啊，想详细了解这种姿势的可以看看<a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html" target="_blank">官方文档</a> ，或者参考这位同学的<a href="http://www.cnblogs.com/brycezhang/p/4097487.html" target="_blank">分享</a></p>
+<p>另一种姿势是使用<code class="language-plaintext highlighter-rouge">xcodebuild</code> 工具，纯Shell编译，比较不好处理错误，但是逼格满满啊，想详细了解这种姿势的可以看看<a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html" target="_blank">官方文档</a> ，或者参考这位同学的<a href="http://www.cnblogs.com/brycezhang/p/4097487.html" target="_blank">分享</a></p>
 
 <p>当然嘛，博主作为拖拖派的忠实拥趸，博主打包ipa的时候是这样的：</p>
 
@@ -471,22 +503,21 @@
 <p>原来调用了私有接口，忘记移除reveal了~，回顾起来这里有三个大坑，</p>
 
 <ol>
-  <li>Xcode的上传工具很辣鸡！！很多错误都无法扫描出来，所以切记 使用 <code class="highlighter-rouge">Application Loader</code> ，速度快，错误报告也精准。</li>
+  <li>Xcode的上传工具很辣鸡！！很多错误都无法扫描出来，所以切记 使用 <code class="language-plaintext highlighter-rouge">Application Loader</code> ，速度快，错误报告也精准。</li>
   <li>iTunesConnect的错误状态几乎没有，一般只有两个状态 “正在处理”、“成功”，所以如果超过两个小时仍然是“正在处理”，那么极有可能包出问题了！</li>
   <li>记住关注邮件！</li>
 </ol>
 
-<p>打包项目证书选择必须正确 (Xcode7以下 选择项目编译target为Iphone Device 不要连接手机 否则会 ，Xcode7中不需要拔出真机，因为多了一个<code class="highlighter-rouge">build only device</code> 的选项）</p>
+<p>打包项目证书选择必须正确 (Xcode7以下 选择项目编译target为Iphone Device 不要连接手机 否则会 ，Xcode7中不需要拔出真机，因为多了一个<code class="language-plaintext highlighter-rouge">build only device</code> 的选项）</p>
 
-<div class="language-c highlighter-rouge"><pre class="highlight"><code> <span class="err">编译</span><span class="n">target</span><span class="err">选错了</span> <span class="err">报错</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="err">编译</span><span class="n">target</span><span class="err">选错了</span> <span class="err">报错</span>
 
  <span class="n">ITMS</span><span class="o">-</span><span class="mi">90530</span> <span class="s">"Invalid MinimumOSVersion. Apps that only support 64-bit devices must specify a deplyment target of 8.0 or later"</span>
 
 <span class="n">IMTS</span><span class="o">-</span><span class="mi">90208</span> <span class="s">"Invalid Bundle. The bundle xxx.app does not support the minimum OS version specified in the Info.plist"</span>
 
 <span class="n">IMTS</span><span class="o">-</span><span class="mi">90502</span> <span class="s">"Invalid Bundle. Apps that only contain the arm64 slice must also have'arm64' in the list of UIRequiredDeviceCapabilities in Info.plist "</span><span class="p">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="总结">总结</h2>
 
@@ -586,6 +617,82 @@
         				
                             
         				
+                            
+                				<a href="/tags/#新技术" title="新技术" rel="3">
+                                    新技术
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#千万不要研究" title="千万不要研究" rel="3">
+                                    千万不要研究
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#忘了自己是谁" title="忘了自己是谁" rel="3">
+                                    忘了自己是谁
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#用户体验" title="用户体验" rel="2">
+                                    用户体验
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#独立开发" title="独立开发" rel="5">
+                                    独立开发
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#iOS开发" title="iOS开发" rel="2">
+                                    iOS开发
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#技术" title="技术" rel="2">
+                                    技术
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#App Store" title="App Store" rel="2">
+                                    App Store
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
         			</div>
                 </section>
                 
@@ -595,26 +702,6 @@
                 <hr>
                 <h5>FRIENDS</h5>
                 <ul class="list-inline">
-                    
-                        <li><a href="http://mida.re/">乱序</a></li>
-                    
-                        <li><a href="http://qianduan.guru/">前端外刊评论</a></li>
-                    
-                        <li><a href="http://lingyu.wang/">天镶的博客</a></li>
-                    
-                        <li><a href="http://hmqk1995.github.io">Luke 的自留地</a></li>
-                    
-                        <li><a href="http://ebnbin.com/">Ebn's Blog</a></li>
-                    
-                        <li><a href="http://blog.smdcn.net">SmdCn's Blog</a></li>
-                    
-                        <li><a href="http://xieminis.me/">解旻的博客</a></li>
-                    
-                        <li><a href="http://dhong.co">DHong Say</a></li>
-                    
-                        <li><a href="http://ingf.github.io/">尹峰以为</a></li>
-                    
-                        <li><a href="http://wepiaofei.github.io/blog/">前端神盾局</a></li>
                     
                 </ul>
                 
@@ -689,20 +776,11 @@
                 <ul class="list-inline text-center">
                     
                     
-                    <li>
-                        <a href="https://twitter.com/northcity">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
 
                     <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
                     
                     <li>
-                        <a target="_blank" href="https://www.zhihu.com/people/chen-xi-18-69-64/activities">
+                        <a target="_blank" href="https://www.zhihu.com/people/北城">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa  fa-stack-1x fa-inverse">知</i>
@@ -712,7 +790,7 @@
                     
                     
                     <li>
-                        <a target="_blank" href="https://weibo.com/p/1005055227295178/home?from=page_100505&mod=TAB#place">
+                        <a target="_blank" href="http://weibo.com/陈年小城">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
@@ -736,15 +814,17 @@
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; NorthCity 2017
+                    Copyright &copy; 北城 2026
                     <br>
-                    Theme by <a href="www.northcity.top">Hux</a> |
+                    Theme by <a href="https://github.com/northcity">NorthCity</a> |
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                        src="https://ghbtns.com/github-btn.html?user=northcity&repo=northcity.github.io&type=star&count=true" >
                     </iframe>
+                    <a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备17036027号-1</a>
                 </p>
+                
             </div>
         </div>
     </div>

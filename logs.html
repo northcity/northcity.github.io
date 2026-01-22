@@ -1,0 +1,67 @@
+---
+layout: home
+title: 开发日志
+description: "独立开发的真实记录 - 不是教程，不是干货，是真实的挣扎与思考"
+---
+
+<div class="page-header">
+    <div class="page-header-content">
+        <h1 class="page-title">开发日志</h1>
+        <p class="page-description">
+            这里不是教程，不是干货输出，而是独立开发的真实记录。
+            产品卡住的时候在想什么、用户增长停滞的心理状态、对钱、自由、焦虑的思考...
+        </p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container-narrow">
+        <div class="logs-timeline">
+            {% assign logs = site.logs | sort: 'date' | reverse %}
+            {% for log in logs %}
+            <div class="log-item">
+                <div class="log-date">{{ log.date | date: "%Y年%m月%d日" }}</div>
+                <h3 class="log-title">
+                    <a href="{{ log.url }}">{{ log.title }}</a>
+                </h3>
+                <p class="log-excerpt">{{ log.excerpt | strip_html | truncate: 200 }}</p>
+            </div>
+            {% endfor %}
+            
+            {% if logs.size == 0 %}
+            <!-- Sample logs for preview -->
+            <div class="log-item">
+                <div class="log-date">2026年1月20日</div>
+                <h3 class="log-title">
+                    <a href="#">重构闪念的数据架构</a>
+                </h3>
+                <p class="log-excerpt">终于下定决心把闪念的数据层从 Core Data 迁移到 SwiftData + CloudKit。这个决定纠结了很久，因为现有用户的数据迁移是个大问题...</p>
+            </div>
+            
+            <div class="log-item">
+                <div class="log-date">2026年1月15日</div>
+                <h3 class="log-title">
+                    <a href="#">用户增长停滞时的心理状态</a>
+                </h3>
+                <p class="log-excerpt">呼吸泡泡上线三个月了，DAU 一直在 50 左右徘徊。说实话，这个数字让我很焦虑。但今天我想明白了一件事...</p>
+            </div>
+            
+            <div class="log-item">
+                <div class="log-date">2026年1月10日</div>
+                <h3 class="log-title">
+                    <a href="#">为什么我还在做独立开发</a>
+                </h3>
+                <p class="log-excerpt">有人问我，独立开发赚钱吗？说实话，目前还不够。但这个问题本身让我思考了很多...</p>
+            </div>
+            {% endif %}
+        </div>
+        
+        {% if logs.size == 0 %}
+        <div class="empty-state" style="border-top: 1px solid var(--color-border-light); margin-top: var(--space-2xl); padding-top: var(--space-2xl);">
+            <p style="font-style: italic; color: var(--color-text-muted);">
+                以上是示例内容。开始在 <code>_logs</code> 文件夹中添加你的日志吧。
+            </p>
+        </div>
+        {% endif %}
+    </div>
+</section>

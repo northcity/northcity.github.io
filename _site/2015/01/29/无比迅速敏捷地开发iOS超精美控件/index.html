@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="在这里探索iOS的一切。">
-    <meta name="keywords"  content="北城以北,北城的博客, beicheng,north city, northcity,陈希, 个人博客, 个人网站, 技术博客, iOS, Cocoa, Apple, WWDC, iPone, develop, 移动开发, APP, 设计模式, 最佳实践">
-    <meta name="theme-color" content="#000000">
+    <meta name="description" content="我用产品、代码和文字，记录真实的独立开发之路。">
+    <meta name="keywords"  content="北城, 独立开发者, indie developer, iOS开发, App开发, 闪念, 呼吸泡泡, Anpa, 数字遗产, 时间胶囊, 产品创作者, 独立开发, Swift, SwiftUI">
+    <meta name="theme-color" content="#1a1a1a">
     
-    <title>无比迅速敏捷地开发iOS超精美控件 - 北城的博客|NorthCity</title>
+    <title>无比迅速敏捷地开发iOS超精美控件 - 北城 · 独立开发者 | NorthCity</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -31,9 +31,11 @@
     <link rel="stylesheet" href="/css/syntax.css">
 
     <!-- Custom Fonts -->
-    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Font Awesome 6 for modern icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- Custom Icons (X, 小红书, etc.) -->
+    <link rel="stylesheet" href="/css/icons.css">
 
 
     <!-- Hux Delete, sad but pending in China
@@ -69,7 +71,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">NorthCity</a>
+            <a class="navbar-brand" href="/">北城</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -81,7 +83,15 @@
                     </li>
                     
                     <li>
-                        <a href="/about/">About</a>
+                        <a href="/about/">关于</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/connect/">联系</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/essays/">文章</a>
                     </li>
                     
                     <li>
@@ -89,7 +99,35 @@
                     </li>
                     
                     <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/logs/">开发日志</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/products/">作品</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/send/">Send Letter</a>
+                    </li>
+                    
+                    <li>
                         <a href="/tags/">Tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/write/">Write</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page2/">首页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page3/">首页</a>
                     </li>
                     
                 </ul>
@@ -233,7 +271,7 @@
 <p>前面说到一点，DDClock创建后需要自动与当前系统对时同步；所以</p>
 
 <ol>
-  <li>我们不妨让DDClock继承UIView，然后重载<code class="highlighter-rouge">-(void)drawRect:(CGRect)rect</code>方法，在这个方法中帅气的画出那个时钟所有细节！我们的决心是坚决不使用人民的一张图片！；</li>
+  <li>我们不妨让DDClock继承UIView，然后重载<code class="language-plaintext highlighter-rouge">-(void)drawRect:(CGRect)rect</code>方法，在这个方法中帅气的画出那个时钟所有细节！我们的决心是坚决不使用人民的一张图片！；</li>
   <li>然后分析整个DDClock只有指针（时分秒针）和指示上下午的AM、PM会动！所以我们要把这些个东西射成变量！关于指针的运动，我们可以使用定时器，每秒都和系统对时；</li>
   <li>我们还要支持主题的切换，那就给DDClock定义一个枚举咯；</li>
   <li>然后就这样…</li>
@@ -256,594 +294,594 @@
 
 <p>好！我们要开始写代码咯</p>
 
-<pre><code class="language-objectivec">//
-//  DDClock.h
-//  Created by David on 15/1/26.
-//  博客：https://daiweilai.github.io
-//  github：https://github.com/daiweilai/
-//  Copyright (c) 2015年 DavidDay. All rights reserved.
-// 
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">//  DDClock.h</span>
+<span class="c1">//  Created by David on 15/1/26.</span>
+<span class="c1">//  博客：https://daiweilai.github.io</span>
+<span class="c1">//  github：https://github.com/daiweilai/</span>
+<span class="c1">//  Copyright (c) 2015年 DavidDay. All rights reserved.</span>
+<span class="c1">// </span>
 
-#import &lt;UIKit/UIKit.h&gt;
+<span class="cp">#import &lt;UIKit/UIKit.h&gt;
 #define DDClockSize 200 //默认时钟的长宽都为200
 #if ! __has_feature(objc_arc)
 #error "需要开启ARC"
 #endif
-
-@protocol DDLockDelegate 
-@optional
--(UIColor*)rimColor;
--(UIColor*)markColor;
--(UIColor*)faceColor;
--(UIColor*)fontColor;
--(UIColor*)secondHandColor;
--(UIColor*)hourAndMinuteHandColor;
-@end
-
-
-@interface DDClock : UIView
-@property (weak, nonatomic) id delegate;
-typedef NS_ENUM(NSUInteger, DDClockTheme) { //弄一个枚举类型用来更改主题
-    DDClockThemeDefault = 0,
-    DDClockThemeDark,
-    DDClockThemeModerm
-};
-//DDClock的构造方法 delegate:代理
--(instancetype)initWithDelegate:(id)delegate frame:(CGRect)frame;
-///DDClock的构造方法 theme:主题 
--(instancetype)initWithTheme:(DDClockTheme)theme frame:(CGRect)frame;
-@end
-
-</code></pre>
-
-<pre><code class="language-objectivec">//
-//  DDClock.m
-//  Created by David on 15/1/26.
-//  博客：https://daiweilai.github.io
-//  github：https://github.com/daiweilai/
-//  Copyright (c) 2015年 DavidDay. All rights reserved.
-//
-
-#import "DDClock.h"
-
-@interface DDClock(){
-    //// 声明颜色
-    UIColor* rimColor;
-    UIColor* faceColor;
-    UIColor* markColor;
-    UIColor* secondHandColor;
-    UIColor* fontColor;
-    UIColor* hourAndMinuteHandColor;
-    DDClockTheme _theme;
-    float _scale;
-    CGPoint _centerPoint;
-}
-@end
+</span>
+<span class="k">@protocol</span> <span class="nc">DDLockDelegate</span> 
+<span class="k">@optional</span>
+<span class="k">-</span><span class="p">(</span><span class="n">UIColor</span><span class="o">*</span><span class="p">)</span><span class="n">rimColor</span><span class="p">;</span>
+<span class="k">-</span><span class="p">(</span><span class="n">UIColor</span><span class="o">*</span><span class="p">)</span><span class="n">markColor</span><span class="p">;</span>
+<span class="k">-</span><span class="p">(</span><span class="n">UIColor</span><span class="o">*</span><span class="p">)</span><span class="n">faceColor</span><span class="p">;</span>
+<span class="k">-</span><span class="p">(</span><span class="n">UIColor</span><span class="o">*</span><span class="p">)</span><span class="n">fontColor</span><span class="p">;</span>
+<span class="k">-</span><span class="p">(</span><span class="n">UIColor</span><span class="o">*</span><span class="p">)</span><span class="n">secondHandColor</span><span class="p">;</span>
+<span class="k">-</span><span class="p">(</span><span class="n">UIColor</span><span class="o">*</span><span class="p">)</span><span class="n">hourAndMinuteHandColor</span><span class="p">;</span>
+<span class="k">@end</span>
 
 
-@implementation DDClock
+<span class="k">@interface</span> <span class="nc">DDClock</span> <span class="p">:</span> <span class="nc">UIView</span>
+<span class="k">@property</span> <span class="p">(</span><span class="n">weak</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">id</span> <span class="n">delegate</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="nf">NS_ENUM</span><span class="p">(</span><span class="n">NSUInteger</span><span class="p">,</span> <span class="n">DDClockTheme</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//弄一个枚举类型用来更改主题</span>
+    <span class="n">DDClockThemeDefault</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">DDClockThemeDark</span><span class="p">,</span>
+    <span class="n">DDClockThemeModerm</span>
+<span class="p">};</span>
+<span class="c1">//DDClock的构造方法 delegate:代理</span>
+<span class="k">-</span><span class="p">(</span><span class="n">instancetype</span><span class="p">)</span><span class="nf">initWithDelegate</span><span class="p">:(</span><span class="n">id</span><span class="p">)</span><span class="nv">delegate</span> <span class="nf">frame</span><span class="p">:(</span><span class="n">CGRect</span><span class="p">)</span><span class="nv">frame</span><span class="p">;</span>
+<span class="c1">///DDClock的构造方法 theme:主题 </span>
+<span class="k">-</span><span class="p">(</span><span class="n">instancetype</span><span class="p">)</span><span class="nf">initWithTheme</span><span class="p">:(</span><span class="n">DDClockTheme</span><span class="p">)</span><span class="nv">theme</span> <span class="nf">frame</span><span class="p">:(</span><span class="n">CGRect</span><span class="p">)</span><span class="nv">frame</span><span class="p">;</span>
+<span class="k">@end</span>
+
+</code></pre></div></div>
+
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">//  DDClock.m</span>
+<span class="c1">//  Created by David on 15/1/26.</span>
+<span class="c1">//  博客：https://daiweilai.github.io</span>
+<span class="c1">//  github：https://github.com/daiweilai/</span>
+<span class="c1">//  Copyright (c) 2015年 DavidDay. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import "DDClock.h"
+</span>
+<span class="k">@interface</span> <span class="nc">DDClock</span><span class="p">(){</span>
+    <span class="c1">//// 声明颜色</span>
+    <span class="n">UIColor</span><span class="o">*</span> <span class="n">rimColor</span><span class="p">;</span>
+    <span class="n">UIColor</span><span class="o">*</span> <span class="n">faceColor</span><span class="p">;</span>
+    <span class="n">UIColor</span><span class="o">*</span> <span class="n">markColor</span><span class="p">;</span>
+    <span class="n">UIColor</span><span class="o">*</span> <span class="n">secondHandColor</span><span class="p">;</span>
+    <span class="n">UIColor</span><span class="o">*</span> <span class="n">fontColor</span><span class="p">;</span>
+    <span class="n">UIColor</span><span class="o">*</span> <span class="n">hourAndMinuteHandColor</span><span class="p">;</span>
+    <span class="n">DDClockTheme</span> <span class="n">_theme</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">_scale</span><span class="p">;</span>
+    <span class="n">CGPoint</span> <span class="n">_centerPoint</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">@end</span>
 
 
--(instancetype)initWithDelegate:(id)delegate frame:(CGRect)frame{
-    //防止用户在构建的时候传入的height和widt不一样 因为时钟是圆的所以强制把他们变成长宽一样
-    CGFloat size = frame.size.height&gt;frame.size.width?frame.size.height:frame.size.width;
-    CGRect realRect = CGRectMake(frame.origin.x, frame.origin.y, size, size);
-    self = [self initWithFrame:realRect];
-    if (self) {
-        _scale = realRect.size.height / DDClockSize; //放大缩小的比例系数
-        _centerPoint = CGPointMake(size/2, size/2); //中心点
-        //先使用默认的颜色初始化 防止用户没有调用delegate方法
-        rimColor = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
-        faceColor = [UIColor colorWithRed: 1 green: 1 blue: 1 alpha: 1];
-        markColor = [UIColor colorWithRed:  160.0/255.0 green: 160.0/255.0 blue: 160.0/255.0 alpha: 1];
-        secondHandColor = [UIColor colorWithRed: 86.0/255.0 green: 232.0/255.0 blue: 157.0/255.0 alpha: 1];
-        fontColor = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
-        hourAndMinuteHandColor = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
+<span class="k">@implementation</span> <span class="nc">DDClock</span>
 
-		//判断用户是否使用了delegate的方法
-        if ([delegate respondsToSelector:NSSelectorFromString(@"rimColor")]) {
-            rimColor = [delegate rimColor];
-        }
-        if ([delegate respondsToSelector:NSSelectorFromString(@"faceColor")]) {
-            faceColor = [delegate faceColor];
-        }
-        if ([delegate respondsToSelector:NSSelectorFromString(@"markColor")]) {
-            markColor = [delegate markColor];
-        }
-        if ([delegate respondsToSelector:NSSelectorFromString(@"fontColor")]) {
-            fontColor = [delegate fontColor];
-        }
-        if ([delegate respondsToSelector:NSSelectorFromString(@"hourAndMinuteHandColor")]) {
-            hourAndMinuteHandColor = [delegate hourAndMinuteHandColor];
-        }
-        if ([delegate respondsToSelector:NSSelectorFromString(@"secondHandColor")]) {
-            secondHandColor = [delegate secondHandColor];
-        }
+
+<span class="k">-</span><span class="p">(</span><span class="n">instancetype</span><span class="p">)</span><span class="nf">initWithDelegate</span><span class="p">:(</span><span class="n">id</span><span class="p">)</span><span class="nv">delegate</span> <span class="nf">frame</span><span class="p">:(</span><span class="n">CGRect</span><span class="p">)</span><span class="nv">frame</span><span class="p">{</span>
+    <span class="c1">//防止用户在构建的时候传入的height和widt不一样 因为时钟是圆的所以强制把他们变成长宽一样</span>
+    <span class="n">CGFloat</span> <span class="n">size</span> <span class="o">=</span> <span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="o">&gt;</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">?</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">:</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">;</span>
+    <span class="n">CGRect</span> <span class="n">realRect</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="n">frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+    <span class="n">self</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="nf">initWithFrame</span><span class="p">:</span><span class="n">realRect</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">_scale</span> <span class="o">=</span> <span class="n">realRect</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span> <span class="o">/</span> <span class="n">DDClockSize</span><span class="p">;</span> <span class="c1">//放大缩小的比例系数</span>
+        <span class="n">_centerPoint</span> <span class="o">=</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="n">size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span> <span class="c1">//中心点</span>
+        <span class="c1">//先使用默认的颜色初始化 防止用户没有调用delegate方法</span>
+        <span class="n">rimColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+        <span class="n">faceColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">1</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">1</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">1</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+        <span class="n">markColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span>  <span class="mi">160</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">160</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">160</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+        <span class="n">secondHandColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">86</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">232</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">157</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+        <span class="n">fontColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+        <span class="n">hourAndMinuteHandColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+
+		<span class="c1">//判断用户是否使用了delegate的方法</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">delegate</span> <span class="nf">respondsToSelector</span><span class="p">:</span><span class="n">NSSelectorFromString</span><span class="p">(</span><span class="s">@"rimColor"</span><span class="p">)])</span> <span class="p">{</span>
+            <span class="n">rimColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">delegate</span> <span class="nf">rimColor</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">delegate</span> <span class="nf">respondsToSelector</span><span class="p">:</span><span class="n">NSSelectorFromString</span><span class="p">(</span><span class="s">@"faceColor"</span><span class="p">)])</span> <span class="p">{</span>
+            <span class="n">faceColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">delegate</span> <span class="nf">faceColor</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">delegate</span> <span class="nf">respondsToSelector</span><span class="p">:</span><span class="n">NSSelectorFromString</span><span class="p">(</span><span class="s">@"markColor"</span><span class="p">)])</span> <span class="p">{</span>
+            <span class="n">markColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">delegate</span> <span class="nf">markColor</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">delegate</span> <span class="nf">respondsToSelector</span><span class="p">:</span><span class="n">NSSelectorFromString</span><span class="p">(</span><span class="s">@"fontColor"</span><span class="p">)])</span> <span class="p">{</span>
+            <span class="n">fontColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">delegate</span> <span class="nf">fontColor</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">delegate</span> <span class="nf">respondsToSelector</span><span class="p">:</span><span class="n">NSSelectorFromString</span><span class="p">(</span><span class="s">@"hourAndMinuteHandColor"</span><span class="p">)])</span> <span class="p">{</span>
+            <span class="n">hourAndMinuteHandColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">delegate</span> <span class="nf">hourAndMinuteHandColor</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">delegate</span> <span class="nf">respondsToSelector</span><span class="p">:</span><span class="n">NSSelectorFromString</span><span class="p">(</span><span class="s">@"secondHandColor"</span><span class="p">)])</span> <span class="p">{</span>
+            <span class="n">secondHandColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">delegate</span> <span class="nf">secondHandColor</span><span class="p">];</span>
+        <span class="p">}</span>
 		
-		//秒针使用图片画出来
-        UIImage *img = [self drawSecondHandWithColor:secondHandColor scale:_scale frameSize:CGSizeMake(size, size) currentAngle:[self secondAngleFromDate:[NSDate new]]];
-        UIImageView *imgV = [[UIImageView alloc] initWithImage:img];
-        imgV.frame = CGRectMake(0 , 0, size, size);
-        [self addSubview:imgV];
-
-        //1.创建动画并指定动画属性
-        CABasicAnimation *basicAnimation=[CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-
-        //2.设置动画属性初始值、结束值
-        //    basicAnimation.fromValue=[NSNumber numberWithInt:M_PI_2];//
-        basicAnimation.toValue=[NSNumber numberWithFloat:2*M_PI];
-
-        //设置其他动画属性
-        basicAnimation.duration=60.0;//60秒转一圈
-        basicAnimation.autoreverses=false;//旋转后再旋转到原来的位置
-        basicAnimation.repeatCount = CGFLOAT_MAX;//无限循环的执行动画
-
-        imgV.layer.anchorPoint = CGPointMake(0.5, 0.5);//设置秒针的旋转中心 就是这个view的中心！
-
-
-        //4.添加动画到图层，注意key相当于给动画进行命名，以后获得该动画时可以使用此名称获取
-        [imgV.layer addAnimation:basicAnimation forKey:@"Rotation"];
-
-
-
-        //当这个DDClock被创建出来的时候，就新建一个定时器，1分钟执行一次“onTimer”方法 其实这里做是不够好的 因为这样不能确保秒针走到12的时候更新 时针和分针 要想解决也很容易 最近生病 难受 不想解决了~~
-        [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
-    }
-    self.backgroundColor = [UIColor clearColor];
-    return self;
-
-}
-
-
-///构造方法 使用默认主题
--(instancetype)initWithTheme:(DDClockTheme)theme frame:(CGRect)frame{
-    //防止用户在构建的时候传入的height和widt不一样 因为时钟是圆的所以强制把他们变成一样
-    CGFloat size = frame.size.height&gt;frame.size.width?frame.size.height:frame.size.width;
-    CGRect realRect = CGRectMake(frame.origin.x, frame.origin.y, size, size);
-    self = [self initWithFrame:realRect];
-    if (self) {
-        _theme = theme;
-        _scale = realRect.size.height / DDClockSize;
-        _centerPoint = CGPointMake(size/2, size/2);
-
-        switch (theme) { //根据主题绘制不同的颜色
-            case DDClockThemeDefault:
-                rimColor = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
-                faceColor = [UIColor colorWithRed: 1 green: 1 blue: 1 alpha: 1];
-                markColor = [UIColor colorWithRed:  160.0/255.0 green: 160.0/255.0 blue: 160.0/255.0 alpha: 1];
-                secondHandColor = [UIColor colorWithRed: 86.0/255.0 green: 232.0/255.0 blue: 157.0/255.0 alpha: 1];
-                fontColor = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
-                hourAndMinuteHandColor = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
-                break;
-
-            case DDClockThemeDark:
-                rimColor = [UIColor colorWithRed: 66.0/255 green: 66.0/255 blue: 66.0/255 alpha: 1];
-                faceColor = [UIColor colorWithRed: 66.0/255 green: 66.0/255 blue: 66.0/255 alpha: 1];
-                markColor = [UIColor colorWithRed:  1 green: 1 blue: 1 alpha: 1];
-                secondHandColor = [UIColor colorWithRed: 32.0/255.0 green: 250.0/255.0 blue: 200.0/255.0 alpha: 1];
-                fontColor = [UIColor colorWithRed: 1 green: 1 blue: 1 alpha: 1];
-                hourAndMinuteHandColor = [UIColor colorWithRed: 1 green: 1 blue: 1 alpha: 1];
-                break;
-
-            case DDClockThemeModerm:
-                rimColor = [UIColor colorWithRed: 60.0/255 green: 90.0/255 blue: 110.0/255 alpha: 1];
-                faceColor = [UIColor colorWithRed: 1 green: 1 blue: 1 alpha: 1];
-                markColor = [UIColor colorWithRed:  160.0/255.0 green: 160.0/255.0 blue: 160.0/255.0 alpha: 1];
-                secondHandColor = [UIColor colorWithRed: 210.0/255.0 green: 0 blue: 10.0/255.0 alpha: 1];
-                fontColor = [UIColor colorWithRed: 210.0/255.0 green: 0 blue: 10.0/255.0 alpha: 1];
-                hourAndMinuteHandColor = [UIColor colorWithRed: 60.0/255 green: 90.0/255 blue: 110.0/255 alpha: 1];
-                break;
-            default:
-                rimColor = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
-                faceColor = [UIColor colorWithRed: 1 green: 1 blue: 1 alpha: 1];
-                markColor = [UIColor colorWithRed:  160.0/255.0 green: 160.0/255.0 blue: 160.0/255.0 alpha: 1];
-                secondHandColor = [UIColor colorWithRed: 86.0/255.0 green: 232.0/255.0 blue: 157.0/255.0 alpha: 1];
-                fontColor = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
-                hourAndMinuteHandColor = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
-                break;
-        }
-
-        if ([_delegate rimColor]) {
-            rimColor = [_delegate rimColor];
-        }
-        if ([_delegate faceColor]) {
-           faceColor = [_delegate faceColor];
-        }
-        if ([_delegate markColor]) {
-            markColor = [_delegate markColor];
-        }
-        if ([_delegate fontColor]) {
-            fontColor = [_delegate fontColor];
-        }
-        if ([_delegate faceColor]) {
-            faceColor = [_delegate faceColor];
-        }
-        if ([_delegate hourAndMinuteHandColor]) {
-            hourAndMinuteHandColor = [_delegate hourAndMinuteHandColor];
-        }
-        if ([_delegate secondHandColor]) {
-            secondHandColor = [_delegate secondHandColor];
-        }
-
-
-
-        UIImage *img = [self drawSecondHandWithColor:secondHandColor scale:_scale frameSize:CGSizeMake(size, size) currentAngle:[self secondAngleFromDate:[NSDate new]]];
-        UIImageView *imgV = [[UIImageView alloc] initWithImage:img];
-        imgV.frame = CGRectMake(0 , 0, size, size);
-        [self addSubview:imgV];
-
-        //1.创建动画并指定动画属性
-        CABasicAnimation *basicAnimation=[CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-
-        //2.设置动画属性初始值、结束值
-        //    basicAnimation.fromValue=[NSNumber numberWithInt:M_PI_2];
-        basicAnimation.toValue=[NSNumber numberWithFloat:2*M_PI];
-
-        //设置其他动画属性
-        basicAnimation.duration=60.0;
-        basicAnimation.autoreverses=false;//旋转后再旋转到原来的位置
-        basicAnimation.repeatCount = CGFLOAT_MAX;
-
-        imgV.layer.anchorPoint = CGPointMake(0.5, 0.5);
-
-
-        //4.添加动画到图层，注意key相当于给动画进行命名，以后获得该动画时可以使用此名称获取
-        [imgV.layer addAnimation:basicAnimation forKey:@"Rotation"];
-
-
-
-        //当这个View被创建出来的时候，就新建一个定时器，1分钟执行一次“onTimer”方法
-        [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
-    }
-    self.backgroundColor = [UIColor clearColor];
-    return self;
-}
-
-//每秒钟刷新视图一次
--(void)onTimer{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self setNeedsDisplay];//这个方法调用后就会刷新这个View
-    });
-}
-
-//View刷新这个方法就被调用，就会重新画出这个View
--(void)drawRect:(CGRect)rect{
-    [super drawRect:rect];
-    //获取当前的时间进行View的绘制
-    [self drawDDClockWithScale:_scale centerPoint:_centerPoint currentDate:[NSDate new]];
-
-
-}
-
-////画出秒针
--(UIImage*)drawSecondHandWithColor:(UIColor*)color scale:(CGFloat)scale frameSize:(CGSize)size currentAngle:(float)currentAngle{
-    UIGraphicsBeginImageContext(size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    //// secondHand Drawing
-    CGContextSaveGState(context);
-    CGContextTranslateCTM(context, size.height/2, size.height/2);
-    CGContextRotateCTM(context, (currentAngle - 90) * M_PI / 180);
-    CGContextScaleCTM(context, scale, scale);
-
-    UIBezierPath* secondHandPath = UIBezierPath.bezierPath;
-    [secondHandPath moveToPoint: CGPointMake(4.96, -4.87)];
-    [secondHandPath addCurveToPoint: CGPointMake(6.93, -0.92) controlPoint1: CGPointMake(6.07, -3.76) controlPoint2: CGPointMake(6.73, -2.37)];
-    [secondHandPath addLineToPoint: CGPointMake(66.01, -0.92)];
-    [secondHandPath addLineToPoint: CGPointMake(66.01, 0.08)];
-    [secondHandPath addLineToPoint: CGPointMake(7.01, 0.08)];
-    [secondHandPath addCurveToPoint: CGPointMake(4.96, 5.03) controlPoint1: CGPointMake(7.01, 1.87) controlPoint2: CGPointMake(6.32, 3.66)];
-    [secondHandPath addCurveToPoint: CGPointMake(-4.94, 5.03) controlPoint1: CGPointMake(2.22, 7.76) controlPoint2: CGPointMake(-2.21, 7.76)];
-    [secondHandPath addCurveToPoint: CGPointMake(-4.94, -4.87) controlPoint1: CGPointMake(-7.68, 2.29) controlPoint2: CGPointMake(-7.68, -2.14)];
-    [secondHandPath addCurveToPoint: CGPointMake(4.96, -4.87) controlPoint1: CGPointMake(-2.21, -7.61) controlPoint2: CGPointMake(2.22, -7.61)];
-    [secondHandPath closePath];
-    [color setFill];
-    [secondHandPath fill];
-    CGContextRestoreGState(context);
-    UIImage *img = [UIImage new];
-    img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return img;
-}
-
-
-///把当前的时间转换为时针、分针、角度
--(NSArray*)HourAndMinuteAngleFromDate:(NSDate*)date{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"HH"];//强制24小时格式
-    float hourf = [[formatter stringFromDate:date] floatValue];
-    [formatter setDateFormat:@"mm"];
-    float minutef = [[formatter stringFromDate:date] floatValue];
-    if (hourf &gt; 12) {//大于24小时我们就减去12小时嘛 比较好算角度呀
-        hourf = (hourf - 12)*30 + 30*(minutef/60); //一小时30°
-    }else{
-        hourf = hourf*30 + 30*(minutef/60);
-    }
-    minutef = minutef*6;//一分钟6°
-    NSNumber *hour =  [[NSNumber alloc] initWithInt:hourf];
-    NSNumber *minute = [[NSNumber alloc] initWithInt:minutef];
-    NSArray *arr = [[NSArray alloc] initWithObjects:hour,minute, nil];
-    return arr;
-}
+		<span class="c1">//秒针使用图片画出来</span>
+        <span class="n">UIImage</span> <span class="o">*</span><span class="n">img</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="nf">drawSecondHandWithColor</span><span class="p">:</span><span class="n">secondHandColor</span> <span class="nf">scale</span><span class="p">:</span><span class="n">_scale</span> <span class="n">frameSize</span><span class="o">:</span><span class="n">CGSizeMake</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="n">currentAngle</span><span class="o">:</span><span class="p">[</span><span class="n">self</span> <span class="nf">secondAngleFromDate</span><span class="p">:[</span><span class="n">NSDate</span> <span class="nf">new</span><span class="p">]]];</span>
+        <span class="n">UIImageView</span> <span class="o">*</span><span class="n">imgV</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIImageView</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithImage</span><span class="p">:</span><span class="n">img</span><span class="p">];</span>
+        <span class="n">imgV</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+        <span class="p">[</span><span class="n">self</span> <span class="nf">addSubview</span><span class="p">:</span><span class="n">imgV</span><span class="p">];</span>
+
+        <span class="c1">//1.创建动画并指定动画属性</span>
+        <span class="n">CABasicAnimation</span> <span class="o">*</span><span class="n">basicAnimation</span><span class="o">=</span><span class="p">[</span><span class="n">CABasicAnimation</span> <span class="nf">animationWithKeyPath</span><span class="p">:</span><span class="s">@"transform.rotation.z"</span><span class="p">];</span>
+
+        <span class="c1">//2.设置动画属性初始值、结束值</span>
+        <span class="c1">//    basicAnimation.fromValue=[NSNumber numberWithInt:M_PI_2];//</span>
+        <span class="n">basicAnimation</span><span class="p">.</span><span class="n">toValue</span><span class="o">=</span><span class="p">[</span><span class="n">NSNumber</span> <span class="nf">numberWithFloat</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="n">M_PI</span><span class="p">];</span>
+
+        <span class="c1">//设置其他动画属性</span>
+        <span class="n">basicAnimation</span><span class="p">.</span><span class="n">duration</span><span class="o">=</span><span class="mi">60</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span><span class="c1">//60秒转一圈</span>
+        <span class="n">basicAnimation</span><span class="p">.</span><span class="n">autoreverses</span><span class="o">=</span><span class="nb">false</span><span class="p">;</span><span class="c1">//旋转后再旋转到原来的位置</span>
+        <span class="n">basicAnimation</span><span class="p">.</span><span class="n">repeatCount</span> <span class="o">=</span> <span class="n">CGFLOAT_MAX</span><span class="p">;</span><span class="c1">//无限循环的执行动画</span>
+
+        <span class="n">imgV</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">anchorPoint</span> <span class="o">=</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">);</span><span class="c1">//设置秒针的旋转中心 就是这个view的中心！</span>
+
+
+        <span class="c1">//4.添加动画到图层，注意key相当于给动画进行命名，以后获得该动画时可以使用此名称获取</span>
+        <span class="p">[</span><span class="n">imgV</span><span class="p">.</span><span class="n">layer</span> <span class="nf">addAnimation</span><span class="p">:</span><span class="n">basicAnimation</span> <span class="nf">forKey</span><span class="p">:</span><span class="s">@"Rotation"</span><span class="p">];</span>
+
+
+
+        <span class="c1">//当这个DDClock被创建出来的时候，就新建一个定时器，1分钟执行一次“onTimer”方法 其实这里做是不够好的 因为这样不能确保秒针走到12的时候更新 时针和分针 要想解决也很容易 最近生病 难受 不想解决了~~</span>
+        <span class="p">[</span><span class="n">NSTimer</span> <span class="nf">scheduledTimerWithTimeInterval</span><span class="p">:</span><span class="mi">60</span><span class="p">.</span><span class="mi">0</span> <span class="nf">target</span><span class="p">:</span><span class="n">self</span> <span class="n">selector</span><span class="o">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">onTimer</span><span class="p">)</span> <span class="n">userInfo</span><span class="o">:</span><span class="nb">nil</span> <span class="n">repeats</span><span class="o">:</span><span class="nb">YES</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">clearColor</span><span class="p">];</span>
+    <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+
+<span class="c1">///构造方法 使用默认主题</span>
+<span class="k">-</span><span class="p">(</span><span class="n">instancetype</span><span class="p">)</span><span class="nf">initWithTheme</span><span class="p">:(</span><span class="n">DDClockTheme</span><span class="p">)</span><span class="nv">theme</span> <span class="nf">frame</span><span class="p">:(</span><span class="n">CGRect</span><span class="p">)</span><span class="nv">frame</span><span class="p">{</span>
+    <span class="c1">//防止用户在构建的时候传入的height和widt不一样 因为时钟是圆的所以强制把他们变成一样</span>
+    <span class="n">CGFloat</span> <span class="n">size</span> <span class="o">=</span> <span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="o">&gt;</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">?</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">:</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">;</span>
+    <span class="n">CGRect</span> <span class="n">realRect</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="n">frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+    <span class="n">self</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="nf">initWithFrame</span><span class="p">:</span><span class="n">realRect</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">_theme</span> <span class="o">=</span> <span class="n">theme</span><span class="p">;</span>
+        <span class="n">_scale</span> <span class="o">=</span> <span class="n">realRect</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span> <span class="o">/</span> <span class="n">DDClockSize</span><span class="p">;</span>
+        <span class="n">_centerPoint</span> <span class="o">=</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="n">size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+
+        <span class="k">switch</span> <span class="p">(</span><span class="n">theme</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//根据主题绘制不同的颜色</span>
+            <span class="k">case</span> <span class="n">DDClockThemeDefault</span><span class="p">:</span>
+                <span class="n">rimColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">faceColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">1</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">1</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">1</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">markColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span>  <span class="mi">160</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">160</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">160</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">secondHandColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">86</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">232</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">157</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">fontColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">hourAndMinuteHandColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="k">break</span><span class="p">;</span>
+
+            <span class="k">case</span> <span class="n">DDClockThemeDark</span><span class="p">:</span>
+                <span class="n">rimColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">66</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">66</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">66</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">faceColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">66</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">66</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">66</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">markColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span>  <span class="mi">1</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">1</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">1</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">secondHandColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">32</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">250</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">200</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">fontColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">1</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">1</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">1</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">hourAndMinuteHandColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">1</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">1</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">1</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="k">break</span><span class="p">;</span>
+
+            <span class="k">case</span> <span class="n">DDClockThemeModerm</span><span class="p">:</span>
+                <span class="n">rimColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">60</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">90</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">110</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">faceColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">1</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">1</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">1</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">markColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span>  <span class="mi">160</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">160</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">160</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">secondHandColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">210</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">fontColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">210</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">hourAndMinuteHandColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">60</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">90</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">110</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="nl">default:</span>
+                <span class="n">rimColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">faceColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">1</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">1</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">1</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">markColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span>  <span class="mi">160</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">160</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">160</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">secondHandColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">86</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">232</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">157</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">.</span><span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">fontColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="n">hourAndMinuteHandColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">colorWithRed</span><span class="p">:</span> <span class="mi">0</span> <span class="nf">green</span><span class="p">:</span> <span class="mi">0</span> <span class="n">blue</span><span class="o">:</span> <span class="mi">0</span> <span class="n">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">];</span>
+                <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">([</span><span class="n">_delegate</span> <span class="nf">rimColor</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">rimColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">_delegate</span> <span class="nf">rimColor</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">_delegate</span> <span class="nf">faceColor</span><span class="p">])</span> <span class="p">{</span>
+           <span class="n">faceColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">_delegate</span> <span class="nf">faceColor</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">_delegate</span> <span class="nf">markColor</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">markColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">_delegate</span> <span class="nf">markColor</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">_delegate</span> <span class="nf">fontColor</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">fontColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">_delegate</span> <span class="nf">fontColor</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">_delegate</span> <span class="nf">faceColor</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">faceColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">_delegate</span> <span class="nf">faceColor</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">_delegate</span> <span class="nf">hourAndMinuteHandColor</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">hourAndMinuteHandColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">_delegate</span> <span class="nf">hourAndMinuteHandColor</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">_delegate</span> <span class="nf">secondHandColor</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">secondHandColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">_delegate</span> <span class="nf">secondHandColor</span><span class="p">];</span>
+        <span class="p">}</span>
+
+
+
+        <span class="n">UIImage</span> <span class="o">*</span><span class="n">img</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="nf">drawSecondHandWithColor</span><span class="p">:</span><span class="n">secondHandColor</span> <span class="nf">scale</span><span class="p">:</span><span class="n">_scale</span> <span class="n">frameSize</span><span class="o">:</span><span class="n">CGSizeMake</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="n">currentAngle</span><span class="o">:</span><span class="p">[</span><span class="n">self</span> <span class="nf">secondAngleFromDate</span><span class="p">:[</span><span class="n">NSDate</span> <span class="nf">new</span><span class="p">]]];</span>
+        <span class="n">UIImageView</span> <span class="o">*</span><span class="n">imgV</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIImageView</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithImage</span><span class="p">:</span><span class="n">img</span><span class="p">];</span>
+        <span class="n">imgV</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+        <span class="p">[</span><span class="n">self</span> <span class="nf">addSubview</span><span class="p">:</span><span class="n">imgV</span><span class="p">];</span>
+
+        <span class="c1">//1.创建动画并指定动画属性</span>
+        <span class="n">CABasicAnimation</span> <span class="o">*</span><span class="n">basicAnimation</span><span class="o">=</span><span class="p">[</span><span class="n">CABasicAnimation</span> <span class="nf">animationWithKeyPath</span><span class="p">:</span><span class="s">@"transform.rotation.z"</span><span class="p">];</span>
+
+        <span class="c1">//2.设置动画属性初始值、结束值</span>
+        <span class="c1">//    basicAnimation.fromValue=[NSNumber numberWithInt:M_PI_2];</span>
+        <span class="n">basicAnimation</span><span class="p">.</span><span class="n">toValue</span><span class="o">=</span><span class="p">[</span><span class="n">NSNumber</span> <span class="nf">numberWithFloat</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="n">M_PI</span><span class="p">];</span>
+
+        <span class="c1">//设置其他动画属性</span>
+        <span class="n">basicAnimation</span><span class="p">.</span><span class="n">duration</span><span class="o">=</span><span class="mi">60</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+        <span class="n">basicAnimation</span><span class="p">.</span><span class="n">autoreverses</span><span class="o">=</span><span class="nb">false</span><span class="p">;</span><span class="c1">//旋转后再旋转到原来的位置</span>
+        <span class="n">basicAnimation</span><span class="p">.</span><span class="n">repeatCount</span> <span class="o">=</span> <span class="n">CGFLOAT_MAX</span><span class="p">;</span>
+
+        <span class="n">imgV</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">anchorPoint</span> <span class="o">=</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">);</span>
+
+
+        <span class="c1">//4.添加动画到图层，注意key相当于给动画进行命名，以后获得该动画时可以使用此名称获取</span>
+        <span class="p">[</span><span class="n">imgV</span><span class="p">.</span><span class="n">layer</span> <span class="nf">addAnimation</span><span class="p">:</span><span class="n">basicAnimation</span> <span class="nf">forKey</span><span class="p">:</span><span class="s">@"Rotation"</span><span class="p">];</span>
+
+
+
+        <span class="c1">//当这个View被创建出来的时候，就新建一个定时器，1分钟执行一次“onTimer”方法</span>
+        <span class="p">[</span><span class="n">NSTimer</span> <span class="nf">scheduledTimerWithTimeInterval</span><span class="p">:</span><span class="mi">60</span><span class="p">.</span><span class="mi">0</span> <span class="nf">target</span><span class="p">:</span><span class="n">self</span> <span class="n">selector</span><span class="o">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">onTimer</span><span class="p">)</span> <span class="n">userInfo</span><span class="o">:</span><span class="nb">nil</span> <span class="n">repeats</span><span class="o">:</span><span class="nb">YES</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">clearColor</span><span class="p">];</span>
+    <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//每秒钟刷新视图一次</span>
+<span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">onTimer</span><span class="p">{</span>
+    <span class="n">dispatch_async</span><span class="p">(</span><span class="n">dispatch_get_main_queue</span><span class="p">(),</span> <span class="o">^</span><span class="p">{</span>
+        <span class="p">[</span><span class="n">self</span> <span class="nf">setNeedsDisplay</span><span class="p">];</span><span class="c1">//这个方法调用后就会刷新这个View</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">//View刷新这个方法就被调用，就会重新画出这个View</span>
+<span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">drawRect</span><span class="p">:(</span><span class="n">CGRect</span><span class="p">)</span><span class="nv">rect</span><span class="p">{</span>
+    <span class="p">[</span><span class="n">super</span> <span class="nf">drawRect</span><span class="p">:</span><span class="n">rect</span><span class="p">];</span>
+    <span class="c1">//获取当前的时间进行View的绘制</span>
+    <span class="p">[</span><span class="n">self</span> <span class="nf">drawDDClockWithScale</span><span class="p">:</span><span class="n">_scale</span> <span class="nf">centerPoint</span><span class="p">:</span><span class="n">_centerPoint</span> <span class="n">currentDate</span><span class="o">:</span><span class="p">[</span><span class="n">NSDate</span> <span class="nf">new</span><span class="p">]];</span>
+
+
+<span class="p">}</span>
+
+<span class="c1">////画出秒针</span>
+<span class="k">-</span><span class="p">(</span><span class="n">UIImage</span><span class="o">*</span><span class="p">)</span><span class="nf">drawSecondHandWithColor</span><span class="p">:(</span><span class="n">UIColor</span><span class="o">*</span><span class="p">)</span><span class="nv">color</span> <span class="nf">scale</span><span class="p">:(</span><span class="n">CGFloat</span><span class="p">)</span><span class="nv">scale</span> <span class="nf">frameSize</span><span class="p">:(</span><span class="n">CGSize</span><span class="p">)</span><span class="nv">size</span> <span class="nf">currentAngle</span><span class="p">:(</span><span class="kt">float</span><span class="p">)</span><span class="nv">currentAngle</span><span class="p">{</span>
+    <span class="n">UIGraphicsBeginImageContext</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+    <span class="n">CGContextRef</span> <span class="n">context</span> <span class="o">=</span> <span class="n">UIGraphicsGetCurrentContext</span><span class="p">();</span>
+    <span class="c1">//// secondHand Drawing</span>
+    <span class="n">CGContextSaveGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+    <span class="n">CGContextTranslateCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">CGContextRotateCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="p">(</span><span class="n">currentAngle</span> <span class="o">-</span> <span class="mi">90</span><span class="p">)</span> <span class="o">*</span> <span class="n">M_PI</span> <span class="o">/</span> <span class="mi">180</span><span class="p">);</span>
+    <span class="n">CGContextScaleCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
+
+    <span class="n">UIBezierPath</span><span class="o">*</span> <span class="n">secondHandPath</span> <span class="o">=</span> <span class="n">UIBezierPath</span><span class="p">.</span><span class="n">bezierPath</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">secondHandPath</span> <span class="nf">moveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">4</span><span class="p">.</span><span class="mi">96</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">87</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">secondHandPath</span> <span class="nf">addCurveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">6</span><span class="p">.</span><span class="mi">93</span><span class="p">,</span> <span class="o">-</span><span class="mi">0</span><span class="p">.</span><span class="mi">92</span><span class="p">)</span> <span class="nf">controlPoint1</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">6</span><span class="p">.</span><span class="mo">07</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">76</span><span class="p">)</span> <span class="n">controlPoint2</span><span class="o">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">6</span><span class="p">.</span><span class="mi">73</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">37</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">secondHandPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">66</span><span class="p">.</span><span class="mo">01</span><span class="p">,</span> <span class="o">-</span><span class="mi">0</span><span class="p">.</span><span class="mi">92</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">secondHandPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">66</span><span class="p">.</span><span class="mo">01</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">08</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">secondHandPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">7</span><span class="p">.</span><span class="mo">01</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">08</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">secondHandPath</span> <span class="nf">addCurveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">4</span><span class="p">.</span><span class="mi">96</span><span class="p">,</span> <span class="mi">5</span><span class="p">.</span><span class="mo">03</span><span class="p">)</span> <span class="nf">controlPoint1</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">7</span><span class="p">.</span><span class="mo">01</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">87</span><span class="p">)</span> <span class="n">controlPoint2</span><span class="o">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">6</span><span class="p">.</span><span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">.</span><span class="mi">66</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">secondHandPath</span> <span class="nf">addCurveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">94</span><span class="p">,</span> <span class="mi">5</span><span class="p">.</span><span class="mo">03</span><span class="p">)</span> <span class="nf">controlPoint1</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">2</span><span class="p">.</span><span class="mi">22</span><span class="p">,</span> <span class="mi">7</span><span class="p">.</span><span class="mi">76</span><span class="p">)</span> <span class="n">controlPoint2</span><span class="o">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">21</span><span class="p">,</span> <span class="mi">7</span><span class="p">.</span><span class="mi">76</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">secondHandPath</span> <span class="nf">addCurveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">94</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">87</span><span class="p">)</span> <span class="nf">controlPoint1</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="mi">68</span><span class="p">,</span> <span class="mi">2</span><span class="p">.</span><span class="mi">29</span><span class="p">)</span> <span class="n">controlPoint2</span><span class="o">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="mi">68</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">14</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">secondHandPath</span> <span class="nf">addCurveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">4</span><span class="p">.</span><span class="mi">96</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">87</span><span class="p">)</span> <span class="nf">controlPoint1</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">21</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="mi">61</span><span class="p">)</span> <span class="n">controlPoint2</span><span class="o">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">2</span><span class="p">.</span><span class="mi">22</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="mi">61</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">secondHandPath</span> <span class="nf">closePath</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">color</span> <span class="nf">setFill</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">secondHandPath</span> <span class="nf">fill</span><span class="p">];</span>
+    <span class="n">CGContextRestoreGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+    <span class="n">UIImage</span> <span class="o">*</span><span class="n">img</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIImage</span> <span class="nf">new</span><span class="p">];</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">UIGraphicsGetImageFromCurrentImageContext</span><span class="p">();</span>
+    <span class="n">UIGraphicsEndImageContext</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">img</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="c1">///把当前的时间转换为时针、分针、角度</span>
+<span class="k">-</span><span class="p">(</span><span class="n">NSArray</span><span class="o">*</span><span class="p">)</span><span class="nf">HourAndMinuteAngleFromDate</span><span class="p">:(</span><span class="n">NSDate</span><span class="o">*</span><span class="p">)</span><span class="nv">date</span><span class="p">{</span>
+    <span class="n">NSDateFormatter</span> <span class="o">*</span><span class="n">formatter</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSDateFormatter</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">init</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">formatter</span> <span class="nf">setDateFormat</span><span class="p">:</span><span class="s">@"HH"</span><span class="p">];</span><span class="c1">//强制24小时格式</span>
+    <span class="kt">float</span> <span class="n">hourf</span> <span class="o">=</span> <span class="p">[[</span><span class="n">formatter</span> <span class="nf">stringFromDate</span><span class="p">:</span><span class="n">date</span><span class="p">]</span> <span class="nf">floatValue</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">formatter</span> <span class="nf">setDateFormat</span><span class="p">:</span><span class="s">@"mm"</span><span class="p">];</span>
+    <span class="kt">float</span> <span class="n">minutef</span> <span class="o">=</span> <span class="p">[[</span><span class="n">formatter</span> <span class="nf">stringFromDate</span><span class="p">:</span><span class="n">date</span><span class="p">]</span> <span class="nf">floatValue</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">hourf</span> <span class="o">&gt;</span> <span class="mi">12</span><span class="p">)</span> <span class="p">{</span><span class="c1">//大于24小时我们就减去12小时嘛 比较好算角度呀</span>
+        <span class="n">hourf</span> <span class="o">=</span> <span class="p">(</span><span class="n">hourf</span> <span class="o">-</span> <span class="mi">12</span><span class="p">)</span><span class="o">*</span><span class="mi">30</span> <span class="o">+</span> <span class="mi">30</span><span class="o">*</span><span class="p">(</span><span class="n">minutef</span><span class="o">/</span><span class="mi">60</span><span class="p">);</span> <span class="c1">//一小时30°</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="n">hourf</span> <span class="o">=</span> <span class="n">hourf</span><span class="o">*</span><span class="mi">30</span> <span class="o">+</span> <span class="mi">30</span><span class="o">*</span><span class="p">(</span><span class="n">minutef</span><span class="o">/</span><span class="mi">60</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">minutef</span> <span class="o">=</span> <span class="n">minutef</span><span class="o">*</span><span class="mi">6</span><span class="p">;</span><span class="c1">//一分钟6°</span>
+    <span class="n">NSNumber</span> <span class="o">*</span><span class="n">hour</span> <span class="o">=</span>  <span class="p">[[</span><span class="n">NSNumber</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithInt</span><span class="p">:</span><span class="n">hourf</span><span class="p">];</span>
+    <span class="n">NSNumber</span> <span class="o">*</span><span class="n">minute</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSNumber</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithInt</span><span class="p">:</span><span class="n">minutef</span><span class="p">];</span>
+    <span class="n">NSArray</span> <span class="o">*</span><span class="n">arr</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSArray</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithObjects</span><span class="p">:</span><span class="n">hour</span><span class="p">,</span><span class="n">minute</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+    <span class="k">return</span> <span class="n">arr</span><span class="p">;</span>
+<span class="p">}</span>
 
-//因为秒针的实时性 所以单独算出当前秒针的角度
--(float)secondAngleFromDate:(NSDate*)date{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"ss"];
-    float secondf = [[formatter stringFromDate:date] floatValue];
-    secondf = secondf*6;//一分钟6°
-    return secondf;
-}
-
-//绘制图形的主要方法
-- (void)drawDDClockWithScale: (CGFloat)scale centerPoint:(CGPoint)centerPoint currentDate:(NSDate*)currentDate;
-{
-    NSArray *arr = [self HourAndMinuteAngleFromDate:currentDate];
-    NSNumber *hourAngle = (NSNumber*)[arr objectAtIndex:0];
-    NSNumber *minuteAngle = (NSNumber*)[arr objectAtIndex:1];
-
-
-
-    //获取绘图上下文
-    CGContextRef context = UIGraphicsGetCurrentContext();
-
-    //// 画出边框
-    CGContextSaveGState(context);
-    CGContextTranslateCTM(context, centerPoint.x, centerPoint.y);
-    CGContextScaleCTM(context, scale, scale);
-
-    UIBezierPath* rimPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(-100, -100, 200, 200)];
-    [rimColor setFill];
-    [rimPath fill];
-
-    CGContextRestoreGState(context);
-
-
-    //// 画出钟表盘
-    CGContextSaveGState(context);
-    CGContextTranslateCTM(context, centerPoint.x, centerPoint.y);
-    CGContextScaleCTM(context, scale, scale);
-
-    UIBezierPath* facePath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(-92.99, -92.92, 186, 186)];
-    [faceColor setFill];
-    [facePath fill];
-
-    CGContextRestoreGState(context);
-
-
-    //// 上午下午时间的判断
-    CGContextSaveGState(context);
-    CGContextTranslateCTM(context, centerPoint.x, centerPoint.y);
-    CGContextScaleCTM(context, scale, scale);
-
-    CGRect aMPMRect = CGRectMake(-15.99, -42.92, 32, 18);
-    NSMutableParagraphStyle* aMPMStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
-    aMPMStyle.alignment = NSTextAlignmentCenter;
-
-    NSDictionary* aMPMFontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"Helvetica-Bold" size: 15], NSForegroundColorAttributeName: fontColor, NSParagraphStyleAttributeName: aMPMStyle};
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"HH"];//强制24小时格式
-    float hourf = [[formatter stringFromDate:currentDate] floatValue];//为了节省系统资源 延迟一分钟才会更新 因为这个方法是一分钟 调用一次的
-    NSString *str = hourf&lt;12?@"AM":@"PM";
-    [str drawInRect: aMPMRect withAttributes: aMPMFontAttributes];
+<span class="c1">//因为秒针的实时性 所以单独算出当前秒针的角度</span>
+<span class="k">-</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="nf">secondAngleFromDate</span><span class="p">:(</span><span class="n">NSDate</span><span class="o">*</span><span class="p">)</span><span class="nv">date</span><span class="p">{</span>
+    <span class="n">NSDateFormatter</span> <span class="o">*</span><span class="n">formatter</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSDateFormatter</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">init</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">formatter</span> <span class="nf">setDateFormat</span><span class="p">:</span><span class="s">@"ss"</span><span class="p">];</span>
+    <span class="kt">float</span> <span class="n">secondf</span> <span class="o">=</span> <span class="p">[[</span><span class="n">formatter</span> <span class="nf">stringFromDate</span><span class="p">:</span><span class="n">date</span><span class="p">]</span> <span class="nf">floatValue</span><span class="p">];</span>
+    <span class="n">secondf</span> <span class="o">=</span> <span class="n">secondf</span><span class="o">*</span><span class="mi">6</span><span class="p">;</span><span class="c1">//一分钟6°</span>
+    <span class="k">return</span> <span class="n">secondf</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//绘制图形的主要方法</span>
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">drawDDClockWithScale</span><span class="p">:</span> <span class="p">(</span><span class="n">CGFloat</span><span class="p">)</span><span class="nv">scale</span> <span class="nf">centerPoint</span><span class="p">:(</span><span class="n">CGPoint</span><span class="p">)</span><span class="nv">centerPoint</span> <span class="nf">currentDate</span><span class="p">:(</span><span class="n">NSDate</span><span class="o">*</span><span class="p">)</span><span class="nv">currentDate</span><span class="p">;</span>
+<span class="p">{</span>
+    <span class="n">NSArray</span> <span class="o">*</span><span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="nf">HourAndMinuteAngleFromDate</span><span class="p">:</span><span class="n">currentDate</span><span class="p">];</span>
+    <span class="n">NSNumber</span> <span class="o">*</span><span class="n">hourAngle</span> <span class="o">=</span> <span class="p">(</span><span class="n">NSNumber</span><span class="o">*</span><span class="p">)[</span><span class="n">arr</span> <span class="nf">objectAtIndex</span><span class="p">:</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">NSNumber</span> <span class="o">*</span><span class="n">minuteAngle</span> <span class="o">=</span> <span class="p">(</span><span class="n">NSNumber</span><span class="o">*</span><span class="p">)[</span><span class="n">arr</span> <span class="nf">objectAtIndex</span><span class="p">:</span><span class="mi">1</span><span class="p">];</span>
+
+
+
+    <span class="c1">//获取绘图上下文</span>
+    <span class="n">CGContextRef</span> <span class="n">context</span> <span class="o">=</span> <span class="n">UIGraphicsGetCurrentContext</span><span class="p">();</span>
+
+    <span class="c1">//// 画出边框</span>
+    <span class="n">CGContextSaveGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+    <span class="n">CGContextTranslateCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">CGContextScaleCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
+
+    <span class="n">UIBezierPath</span><span class="o">*</span> <span class="n">rimPath</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIBezierPath</span> <span class="nf">bezierPathWithOvalInRect</span><span class="p">:</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">rimColor</span> <span class="nf">setFill</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">rimPath</span> <span class="nf">fill</span><span class="p">];</span>
+
+    <span class="n">CGContextRestoreGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+
+
+    <span class="c1">//// 画出钟表盘</span>
+    <span class="n">CGContextSaveGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+    <span class="n">CGContextTranslateCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">CGContextScaleCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
+
+    <span class="n">UIBezierPath</span><span class="o">*</span> <span class="n">facePath</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIBezierPath</span> <span class="nf">bezierPathWithOvalInRect</span><span class="p">:</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="o">-</span><span class="mi">92</span><span class="p">.</span><span class="mi">99</span><span class="p">,</span> <span class="o">-</span><span class="mi">92</span><span class="p">.</span><span class="mi">92</span><span class="p">,</span> <span class="mi">186</span><span class="p">,</span> <span class="mi">186</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">faceColor</span> <span class="nf">setFill</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">facePath</span> <span class="nf">fill</span><span class="p">];</span>
+
+    <span class="n">CGContextRestoreGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+
+
+    <span class="c1">//// 上午下午时间的判断</span>
+    <span class="n">CGContextSaveGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+    <span class="n">CGContextTranslateCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">CGContextScaleCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
+
+    <span class="n">CGRect</span> <span class="n">aMPMRect</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">.</span><span class="mi">99</span><span class="p">,</span> <span class="o">-</span><span class="mi">42</span><span class="p">.</span><span class="mi">92</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">18</span><span class="p">);</span>
+    <span class="n">NSMutableParagraphStyle</span><span class="o">*</span> <span class="n">aMPMStyle</span> <span class="o">=</span> <span class="n">NSMutableParagraphStyle</span><span class="p">.</span><span class="n">defaultParagraphStyle</span><span class="p">.</span><span class="n">mutableCopy</span><span class="p">;</span>
+    <span class="n">aMPMStyle</span><span class="p">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="n">NSTextAlignmentCenter</span><span class="p">;</span>
+
+    <span class="n">NSDictionary</span><span class="o">*</span> <span class="n">aMPMFontAttributes</span> <span class="o">=</span> <span class="p">@{</span><span class="n">NSFontAttributeName</span><span class="o">:</span> <span class="p">[</span><span class="n">UIFont</span> <span class="nf">fontWithName</span><span class="p">:</span> <span class="s">@"Helvetica-Bold"</span> <span class="nf">size</span><span class="p">:</span> <span class="mi">15</span><span class="p">],</span> <span class="n">NSForegroundColorAttributeName</span><span class="o">:</span> <span class="n">fontColor</span><span class="p">,</span> <span class="n">NSParagraphStyleAttributeName</span><span class="o">:</span> <span class="n">aMPMStyle</span><span class="p">};</span>
+    <span class="n">NSDateFormatter</span> <span class="o">*</span><span class="n">formatter</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSDateFormatter</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">init</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">formatter</span> <span class="nf">setDateFormat</span><span class="p">:</span><span class="s">@"HH"</span><span class="p">];</span><span class="c1">//强制24小时格式</span>
+    <span class="kt">float</span> <span class="n">hourf</span> <span class="o">=</span> <span class="p">[[</span><span class="n">formatter</span> <span class="nf">stringFromDate</span><span class="p">:</span><span class="n">currentDate</span><span class="p">]</span> <span class="nf">floatValue</span><span class="p">];</span><span class="c1">//为了节省系统资源 延迟一分钟才会更新 因为这个方法是一分钟 调用一次的</span>
+    <span class="n">NSString</span> <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="n">hourf</span><span class="o">&lt;</span><span class="mi">12</span><span class="p">?</span><span class="s">@"AM"</span><span class="p">:</span><span class="s">@"PM"</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">str</span> <span class="nf">drawInRect</span><span class="p">:</span> <span class="n">aMPMRect</span> <span class="nf">withAttributes</span><span class="p">:</span> <span class="n">aMPMFontAttributes</span><span class="p">];</span>
 
-    CGContextRestoreGState(context);
+    <span class="n">CGContextRestoreGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
 
 
-    //// 画出时针
-    CGContextSaveGState(context);
-    CGContextTranslateCTM(context, centerPoint.x, centerPoint.y);
-    CGContextRotateCTM(context, [hourAngle floatValue] * M_PI / 180);
-    CGContextScaleCTM(context, scale, scale);
+    <span class="c1">//// 画出时针</span>
+    <span class="n">CGContextSaveGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+    <span class="n">CGContextTranslateCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">CGContextRotateCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="p">[</span><span class="n">hourAngle</span> <span class="nf">floatValue</span><span class="p">]</span> <span class="o">*</span> <span class="n">M_PI</span> <span class="o">/</span> <span class="mi">180</span><span class="p">);</span>
+    <span class="n">CGContextScaleCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
 
-    UIBezierPath* hourHandPath = [UIBezierPath bezierPathWithRect: CGRectMake(-4.99, -52.46, 10, 43.54)];
-    [hourAndMinuteHandColor setFill];
-    [hourHandPath fill];
+    <span class="n">UIBezierPath</span><span class="o">*</span> <span class="n">hourHandPath</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIBezierPath</span> <span class="nf">bezierPathWithRect</span><span class="p">:</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">99</span><span class="p">,</span> <span class="o">-</span><span class="mi">52</span><span class="p">.</span><span class="mi">46</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">43</span><span class="p">.</span><span class="mi">54</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">hourAndMinuteHandColor</span> <span class="nf">setFill</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">hourHandPath</span> <span class="nf">fill</span><span class="p">];</span>
 
-    CGContextRestoreGState(context);
+    <span class="n">CGContextRestoreGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
 
 
-    //// 画出分针
-    CGContextSaveGState(context);
-    CGContextTranslateCTM(context, centerPoint.x, centerPoint.y);
-    CGContextRotateCTM(context, ([minuteAngle floatValue]) * M_PI / 180);
-    CGContextScaleCTM(context, scale, scale);
+    <span class="c1">//// 画出分针</span>
+    <span class="n">CGContextSaveGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+    <span class="n">CGContextTranslateCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">CGContextRotateCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="p">([</span><span class="n">minuteAngle</span> <span class="nf">floatValue</span><span class="p">])</span> <span class="o">*</span> <span class="n">M_PI</span> <span class="o">/</span> <span class="mi">180</span><span class="p">);</span>
+    <span class="n">CGContextScaleCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
 
-    UIBezierPath* minuteHandPath = [UIBezierPath bezierPathWithRect: CGRectMake(-2.99, -64.92, 6, 55.92)];
-    [hourAndMinuteHandColor setFill];
-    [minuteHandPath fill];
+    <span class="n">UIBezierPath</span><span class="o">*</span> <span class="n">minuteHandPath</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIBezierPath</span> <span class="nf">bezierPathWithRect</span><span class="p">:</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">99</span><span class="p">,</span> <span class="o">-</span><span class="mi">64</span><span class="p">.</span><span class="mi">92</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">55</span><span class="p">.</span><span class="mi">92</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">hourAndMinuteHandColor</span> <span class="nf">setFill</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">minuteHandPath</span> <span class="nf">fill</span><span class="p">];</span>
 
-    CGContextRestoreGState(context);
+    <span class="n">CGContextRestoreGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
 
 
 
 
 
-    //// 画出中间的圆圈
-    CGContextSaveGState(context);
-    CGContextTranslateCTM(context, centerPoint.x, centerPoint.y);
-    CGContextScaleCTM(context, scale, scale);
+    <span class="c1">//// 画出中间的圆圈</span>
+    <span class="n">CGContextSaveGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+    <span class="n">CGContextTranslateCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">CGContextScaleCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
 
-    UIBezierPath* centreEmptyOvalPath = UIBezierPath.bezierPath;
-    [centreEmptyOvalPath moveToPoint: CGPointMake(-4.42, -4.35)];
-    [centreEmptyOvalPath addCurveToPoint: CGPointMake(-4.42, 4.33) controlPoint1: CGPointMake(-6.82, -1.95) controlPoint2: CGPointMake(-6.82, 1.93)];
-    [centreEmptyOvalPath addCurveToPoint: CGPointMake(4.26, 4.33) controlPoint1: CGPointMake(-2.02, 6.73) controlPoint2: CGPointMake(1.86, 6.73)];
-    [centreEmptyOvalPath addCurveToPoint: CGPointMake(4.26, -4.35) controlPoint1: CGPointMake(6.66, 1.93) controlPoint2: CGPointMake(6.66, -1.95)];
-    [centreEmptyOvalPath addCurveToPoint: CGPointMake(-4.42, -4.35) controlPoint1: CGPointMake(1.86, -6.75) controlPoint2: CGPointMake(-2.02, -6.75)];
-    [centreEmptyOvalPath closePath];
-    [centreEmptyOvalPath moveToPoint: CGPointMake(7.78, -7.7)];
-    [centreEmptyOvalPath addCurveToPoint: CGPointMake(7.78, 7.85) controlPoint1: CGPointMake(12.08, -3.41) controlPoint2: CGPointMake(12.08, 3.56)];
-    [centreEmptyOvalPath addCurveToPoint: CGPointMake(-7.77, 7.85) controlPoint1: CGPointMake(3.49, 12.15) controlPoint2: CGPointMake(-3.48, 12.15)];
-    [centreEmptyOvalPath addCurveToPoint: CGPointMake(-7.77, -7.7) controlPoint1: CGPointMake(-12.07, 3.56) controlPoint2: CGPointMake(-12.07, -3.41)];
-    [centreEmptyOvalPath addCurveToPoint: CGPointMake(7.78, -7.7) controlPoint1: CGPointMake(-3.48, -12) controlPoint2: CGPointMake(3.49, -12)];
-    [centreEmptyOvalPath closePath];
-    [hourAndMinuteHandColor setFill];
-    [centreEmptyOvalPath fill];
-
-    CGContextRestoreGState(context);
-
-
-    //// 画出“12”
-    CGContextSaveGState(context);
-    CGContextTranslateCTM(context, centerPoint.x, centerPoint.y);
-    CGContextScaleCTM(context, scale, scale);
-
-    CGRect text12Rect = CGRectMake(-10, -82, 21, 17);
-    {
-        NSString* textContent = @"12";
-        NSMutableParagraphStyle* text12Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
-        text12Style.alignment = NSTextAlignmentCenter;
-
-        NSDictionary* text12FontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"Helvetica-Bold" size: 18], NSForegroundColorAttributeName: fontColor, NSParagraphStyleAttributeName: text12Style};
-
-        [textContent drawInRect: CGRectOffset(text12Rect, 0, (CGRectGetHeight(text12Rect) - [textContent boundingRectWithSize: text12Rect.size options: NSStringDrawingUsesLineFragmentOrigin attributes: text12FontAttributes context: nil].size.height) / 2) withAttributes: text12FontAttributes];
-    }
-
-    CGContextRestoreGState(context);
-
-
-    //// 画出“3”
-    CGContextSaveGState(context);
-    CGContextTranslateCTM(context, centerPoint.x, centerPoint.y);
-    CGContextScaleCTM(context, scale, scale);
-
-    CGRect text3Rect = CGRectMake(72, -9, 12, 17);
-    {
-        NSString* textContent = @"3";
-        NSMutableParagraphStyle* text3Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
-        text3Style.alignment = NSTextAlignmentCenter;
-
-        NSDictionary* text3FontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"Helvetica-Bold" size: 18], NSForegroundColorAttributeName: fontColor, NSParagraphStyleAttributeName: text3Style};
-
-        [textContent drawInRect: CGRectOffset(text3Rect, 0, (CGRectGetHeight(text3Rect) - [textContent boundingRectWithSize: text3Rect.size options: NSStringDrawingUsesLineFragmentOrigin attributes: text3FontAttributes context: nil].size.height) / 2) withAttributes: text3FontAttributes];
-    }
-
-    CGContextRestoreGState(context);
-
-
-    //// 画出“6”
-    CGContextSaveGState(context);
-    CGContextTranslateCTM(context, centerPoint.x, centerPoint.y);
-    CGContextScaleCTM(context, scale, scale);
-
-    CGRect text6Rect = CGRectMake(-4, 65, 12, 17);
-    {
-        NSString* textContent = @"6";
-        NSMutableParagraphStyle* text6Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
-        text6Style.alignment = NSTextAlignmentCenter;
-
-        NSDictionary* text6FontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"Helvetica-Bold" size: 18], NSForegroundColorAttributeName: fontColor, NSParagraphStyleAttributeName: text6Style};
-
-        [textContent drawInRect: CGRectOffset(text6Rect, 0, (CGRectGetHeight(text6Rect) - [textContent boundingRectWithSize: text6Rect.size options: NSStringDrawingUsesLineFragmentOrigin attributes: text6FontAttributes context: nil].size.height) / 2) withAttributes: text6FontAttributes];
-    }
-
-    CGContextRestoreGState(context);
-
-
-    //// 画出“9”
-    CGContextSaveGState(context);
-    CGContextTranslateCTM(context, centerPoint.x, centerPoint.y);
-    CGContextScaleCTM(context, scale, scale);
-
-    CGRect text9Rect = CGRectMake(-82, -8, 12, 17);
-    {
-        NSString* textContent = @"9";
-        NSMutableParagraphStyle* text9Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
-        text9Style.alignment = NSTextAlignmentCenter;
-
-        NSDictionary* text9FontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"Helvetica-Bold" size: 18], NSForegroundColorAttributeName: fontColor, NSParagraphStyleAttributeName: text9Style};
-
-        [textContent drawInRect: CGRectOffset(text9Rect, 0, (CGRectGetHeight(text9Rect) - [textContent boundingRectWithSize: text9Rect.size options: NSStringDrawingUsesLineFragmentOrigin attributes: text9FontAttributes context: nil].size.height) / 2) withAttributes: text9FontAttributes];
-    }
-
-    CGContextRestoreGState(context);
-
-
-    //// 画出表盘刻度
-    CGContextSaveGState(context);
-    CGContextTranslateCTM(context, centerPoint.x, centerPoint.y);
-    CGContextScaleCTM(context, scale, scale);
-
-    UIBezierPath* markPath = UIBezierPath.bezierPath;
-    [markPath moveToPoint: CGPointMake(-2, -85)];
-    [markPath addLineToPoint: CGPointMake(2, -85)];
-    [markPath addLineToPoint: CGPointMake(2, -93)];
-    [markPath addLineToPoint: CGPointMake(-2, -93)];
-    [markPath addLineToPoint: CGPointMake(-2, -85)];
-    [markPath closePath];
-    [markPath moveToPoint: CGPointMake(-1, 93)];
-    [markPath addLineToPoint: CGPointMake(3, 93)];
-    [markPath addLineToPoint: CGPointMake(3, 85)];
-    [markPath addLineToPoint: CGPointMake(-1, 85)];
-    [markPath addLineToPoint: CGPointMake(-1, 93)];
-    [markPath closePath];
-    [markPath moveToPoint: CGPointMake(-45, -72.15)];
-    [markPath addLineToPoint: CGPointMake(-41.54, -74.15)];
-    [markPath addLineToPoint: CGPointMake(-45.54, -81.08)];
-    [markPath addLineToPoint: CGPointMake(-49, -79.08)];
-    [markPath addLineToPoint: CGPointMake(-45, -72.15)];
-    [markPath closePath];
-    [markPath moveToPoint: CGPointMake(44.87, 81.5)];
-    [markPath addLineToPoint: CGPointMake(48.33, 79.5)];
-    [markPath addLineToPoint: CGPointMake(44.33, 72.57)];
-    [markPath addLineToPoint: CGPointMake(40.87, 74.57)];
-    [markPath addLineToPoint: CGPointMake(44.87, 81.5)];
-    [markPath closePath];
-    [markPath moveToPoint: CGPointMake(-75.07, -40)];
-    [markPath addLineToPoint: CGPointMake(-73.07, -43.46)];
-    [markPath addLineToPoint: CGPointMake(-80, -47.46)];
-    [markPath addLineToPoint: CGPointMake(-82, -44)];
-    [markPath addLineToPoint: CGPointMake(-75.07, -40)];
-    [markPath closePath];
-    [markPath moveToPoint: CGPointMake(79.58, 48.13)];
-    [markPath addLineToPoint: CGPointMake(81.58, 44.67)];
-    [markPath addLineToPoint: CGPointMake(74.65, 40.67)];
-    [markPath addLineToPoint: CGPointMake(72.65, 44.13)];
-    [markPath addLineToPoint: CGPointMake(79.58, 48.13)];
-    [markPath closePath];
-    [markPath moveToPoint: CGPointMake(-85, 2)];
-    [markPath addLineToPoint: CGPointMake(-85, -2)];
-    [markPath addLineToPoint: CGPointMake(-93, -2)];
-    [markPath addLineToPoint: CGPointMake(-93, 2)];
-    [markPath addLineToPoint: CGPointMake(-85, 2)];
-    [markPath closePath];
-    [markPath moveToPoint: CGPointMake(93, 1)];
-    [markPath addLineToPoint: CGPointMake(93, -3)];
-    [markPath addLineToPoint: CGPointMake(85, -3)];
-    [markPath addLineToPoint: CGPointMake(85, 1)];
-    [markPath addLineToPoint: CGPointMake(93, 1)];
-    [markPath closePath];
-    [markPath moveToPoint: CGPointMake(-72.57, 44)];
-    [markPath addLineToPoint: CGPointMake(-74.57, 40.54)];
-    [markPath addLineToPoint: CGPointMake(-81.5, 44.54)];
-    [markPath addLineToPoint: CGPointMake(-79.5, 48)];
-    [markPath addLineToPoint: CGPointMake(-72.57, 44)];
-    [markPath closePath];
-    [markPath moveToPoint: CGPointMake(81.08, -45.87)];
-    [markPath addLineToPoint: CGPointMake(79.08, -49.33)];
-    [markPath addLineToPoint: CGPointMake(72.15, -45.33)];
-    [markPath addLineToPoint: CGPointMake(74.15, -41.87)];
-    [markPath addLineToPoint: CGPointMake(81.08, -45.87)];
-    [markPath closePath];
-    [markPath moveToPoint: CGPointMake(-39.67, 75.07)];
-    [markPath addLineToPoint: CGPointMake(-43.13, 73.07)];
-    [markPath addLineToPoint: CGPointMake(-47.13, 80)];
-    [markPath addLineToPoint: CGPointMake(-43.67, 82)];
-    [markPath addLineToPoint: CGPointMake(-39.67, 75.07)];
-    [markPath closePath];
-    [markPath moveToPoint: CGPointMake(48.46, -79.58)];
-    [markPath addLineToPoint: CGPointMake(45, -81.58)];
-    [markPath addLineToPoint: CGPointMake(41, -74.65)];
-    [markPath addLineToPoint: CGPointMake(44.46, -72.65)];
-    [markPath addLineToPoint: CGPointMake(48.46, -79.58)];
-    [markPath closePath];
-    [markColor setFill];
-    [markPath fill];
-
-    CGContextRestoreGState(context);
-}
-
-@end
-</code></pre>
+    <span class="n">UIBezierPath</span><span class="o">*</span> <span class="n">centreEmptyOvalPath</span> <span class="o">=</span> <span class="n">UIBezierPath</span><span class="p">.</span><span class="n">bezierPath</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">centreEmptyOvalPath</span> <span class="nf">moveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">42</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">35</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">centreEmptyOvalPath</span> <span class="nf">addCurveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">42</span><span class="p">,</span> <span class="mi">4</span><span class="p">.</span><span class="mi">33</span><span class="p">)</span> <span class="nf">controlPoint1</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">82</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">95</span><span class="p">)</span> <span class="n">controlPoint2</span><span class="o">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">82</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">93</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">centreEmptyOvalPath</span> <span class="nf">addCurveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">4</span><span class="p">.</span><span class="mi">26</span><span class="p">,</span> <span class="mi">4</span><span class="p">.</span><span class="mi">33</span><span class="p">)</span> <span class="nf">controlPoint1</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mo">02</span><span class="p">,</span> <span class="mi">6</span><span class="p">.</span><span class="mi">73</span><span class="p">)</span> <span class="n">controlPoint2</span><span class="o">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="mi">86</span><span class="p">,</span> <span class="mi">6</span><span class="p">.</span><span class="mi">73</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">centreEmptyOvalPath</span> <span class="nf">addCurveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">4</span><span class="p">.</span><span class="mi">26</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">35</span><span class="p">)</span> <span class="nf">controlPoint1</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">6</span><span class="p">.</span><span class="mi">66</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">93</span><span class="p">)</span> <span class="n">controlPoint2</span><span class="o">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">6</span><span class="p">.</span><span class="mi">66</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">95</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">centreEmptyOvalPath</span> <span class="nf">addCurveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">42</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">35</span><span class="p">)</span> <span class="nf">controlPoint1</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="mi">86</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">75</span><span class="p">)</span> <span class="n">controlPoint2</span><span class="o">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mo">02</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">.</span><span class="mi">75</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">centreEmptyOvalPath</span> <span class="nf">closePath</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">centreEmptyOvalPath</span> <span class="nf">moveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">7</span><span class="p">.</span><span class="mi">78</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="mi">7</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">centreEmptyOvalPath</span> <span class="nf">addCurveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">7</span><span class="p">.</span><span class="mi">78</span><span class="p">,</span> <span class="mi">7</span><span class="p">.</span><span class="mi">85</span><span class="p">)</span> <span class="nf">controlPoint1</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">12</span><span class="p">.</span><span class="mi">08</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">41</span><span class="p">)</span> <span class="n">controlPoint2</span><span class="o">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">12</span><span class="p">.</span><span class="mi">08</span><span class="p">,</span> <span class="mi">3</span><span class="p">.</span><span class="mi">56</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">centreEmptyOvalPath</span> <span class="nf">addCurveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="mi">77</span><span class="p">,</span> <span class="mi">7</span><span class="p">.</span><span class="mi">85</span><span class="p">)</span> <span class="nf">controlPoint1</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">3</span><span class="p">.</span><span class="mi">49</span><span class="p">,</span> <span class="mi">12</span><span class="p">.</span><span class="mi">15</span><span class="p">)</span> <span class="n">controlPoint2</span><span class="o">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">48</span><span class="p">,</span> <span class="mi">12</span><span class="p">.</span><span class="mi">15</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">centreEmptyOvalPath</span> <span class="nf">addCurveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="mi">77</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="mi">7</span><span class="p">)</span> <span class="nf">controlPoint1</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">.</span><span class="mo">07</span><span class="p">,</span> <span class="mi">3</span><span class="p">.</span><span class="mi">56</span><span class="p">)</span> <span class="n">controlPoint2</span><span class="o">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">.</span><span class="mo">07</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">41</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">centreEmptyOvalPath</span> <span class="nf">addCurveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">7</span><span class="p">.</span><span class="mi">78</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="mi">7</span><span class="p">)</span> <span class="nf">controlPoint1</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">48</span><span class="p">,</span> <span class="o">-</span><span class="mi">12</span><span class="p">)</span> <span class="n">controlPoint2</span><span class="o">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">3</span><span class="p">.</span><span class="mi">49</span><span class="p">,</span> <span class="o">-</span><span class="mi">12</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">centreEmptyOvalPath</span> <span class="nf">closePath</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">hourAndMinuteHandColor</span> <span class="nf">setFill</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">centreEmptyOvalPath</span> <span class="nf">fill</span><span class="p">];</span>
+
+    <span class="n">CGContextRestoreGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+
+
+    <span class="c1">//// 画出“12”</span>
+    <span class="n">CGContextSaveGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+    <span class="n">CGContextTranslateCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">CGContextScaleCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
+
+    <span class="n">CGRect</span> <span class="n">text12Rect</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">82</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">17</span><span class="p">);</span>
+    <span class="p">{</span>
+        <span class="n">NSString</span><span class="o">*</span> <span class="n">textContent</span> <span class="o">=</span> <span class="s">@"12"</span><span class="p">;</span>
+        <span class="n">NSMutableParagraphStyle</span><span class="o">*</span> <span class="n">text12Style</span> <span class="o">=</span> <span class="n">NSMutableParagraphStyle</span><span class="p">.</span><span class="n">defaultParagraphStyle</span><span class="p">.</span><span class="n">mutableCopy</span><span class="p">;</span>
+        <span class="n">text12Style</span><span class="p">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="n">NSTextAlignmentCenter</span><span class="p">;</span>
+
+        <span class="n">NSDictionary</span><span class="o">*</span> <span class="n">text12FontAttributes</span> <span class="o">=</span> <span class="p">@{</span><span class="n">NSFontAttributeName</span><span class="o">:</span> <span class="p">[</span><span class="n">UIFont</span> <span class="nf">fontWithName</span><span class="p">:</span> <span class="s">@"Helvetica-Bold"</span> <span class="nf">size</span><span class="p">:</span> <span class="mi">18</span><span class="p">],</span> <span class="n">NSForegroundColorAttributeName</span><span class="o">:</span> <span class="n">fontColor</span><span class="p">,</span> <span class="n">NSParagraphStyleAttributeName</span><span class="o">:</span> <span class="n">text12Style</span><span class="p">};</span>
+
+        <span class="p">[</span><span class="n">textContent</span> <span class="nf">drawInRect</span><span class="p">:</span> <span class="n">CGRectOffset</span><span class="p">(</span><span class="n">text12Rect</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">CGRectGetHeight</span><span class="p">(</span><span class="n">text12Rect</span><span class="p">)</span> <span class="o">-</span> <span class="p">[</span><span class="n">textContent</span> <span class="nf">boundingRectWithSize</span><span class="p">:</span> <span class="n">text12Rect</span><span class="p">.</span><span class="n">size</span> <span class="nf">options</span><span class="p">:</span> <span class="n">NSStringDrawingUsesLineFragmentOrigin</span> <span class="nf">attributes</span><span class="p">:</span> <span class="n">text12FontAttributes</span> <span class="n">context</span><span class="o">:</span> <span class="nb">nil</span><span class="p">].</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="n">withAttributes</span><span class="o">:</span> <span class="n">text12FontAttributes</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="n">CGContextRestoreGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+
+
+    <span class="c1">//// 画出“3”</span>
+    <span class="n">CGContextSaveGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+    <span class="n">CGContextTranslateCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">CGContextScaleCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
+
+    <span class="n">CGRect</span> <span class="n">text3Rect</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">72</span><span class="p">,</span> <span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">17</span><span class="p">);</span>
+    <span class="p">{</span>
+        <span class="n">NSString</span><span class="o">*</span> <span class="n">textContent</span> <span class="o">=</span> <span class="s">@"3"</span><span class="p">;</span>
+        <span class="n">NSMutableParagraphStyle</span><span class="o">*</span> <span class="n">text3Style</span> <span class="o">=</span> <span class="n">NSMutableParagraphStyle</span><span class="p">.</span><span class="n">defaultParagraphStyle</span><span class="p">.</span><span class="n">mutableCopy</span><span class="p">;</span>
+        <span class="n">text3Style</span><span class="p">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="n">NSTextAlignmentCenter</span><span class="p">;</span>
+
+        <span class="n">NSDictionary</span><span class="o">*</span> <span class="n">text3FontAttributes</span> <span class="o">=</span> <span class="p">@{</span><span class="n">NSFontAttributeName</span><span class="o">:</span> <span class="p">[</span><span class="n">UIFont</span> <span class="nf">fontWithName</span><span class="p">:</span> <span class="s">@"Helvetica-Bold"</span> <span class="nf">size</span><span class="p">:</span> <span class="mi">18</span><span class="p">],</span> <span class="n">NSForegroundColorAttributeName</span><span class="o">:</span> <span class="n">fontColor</span><span class="p">,</span> <span class="n">NSParagraphStyleAttributeName</span><span class="o">:</span> <span class="n">text3Style</span><span class="p">};</span>
+
+        <span class="p">[</span><span class="n">textContent</span> <span class="nf">drawInRect</span><span class="p">:</span> <span class="n">CGRectOffset</span><span class="p">(</span><span class="n">text3Rect</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">CGRectGetHeight</span><span class="p">(</span><span class="n">text3Rect</span><span class="p">)</span> <span class="o">-</span> <span class="p">[</span><span class="n">textContent</span> <span class="nf">boundingRectWithSize</span><span class="p">:</span> <span class="n">text3Rect</span><span class="p">.</span><span class="n">size</span> <span class="nf">options</span><span class="p">:</span> <span class="n">NSStringDrawingUsesLineFragmentOrigin</span> <span class="nf">attributes</span><span class="p">:</span> <span class="n">text3FontAttributes</span> <span class="n">context</span><span class="o">:</span> <span class="nb">nil</span><span class="p">].</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="n">withAttributes</span><span class="o">:</span> <span class="n">text3FontAttributes</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="n">CGContextRestoreGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+
+
+    <span class="c1">//// 画出“6”</span>
+    <span class="n">CGContextSaveGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+    <span class="n">CGContextTranslateCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">CGContextScaleCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
+
+    <span class="n">CGRect</span> <span class="n">text6Rect</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">17</span><span class="p">);</span>
+    <span class="p">{</span>
+        <span class="n">NSString</span><span class="o">*</span> <span class="n">textContent</span> <span class="o">=</span> <span class="s">@"6"</span><span class="p">;</span>
+        <span class="n">NSMutableParagraphStyle</span><span class="o">*</span> <span class="n">text6Style</span> <span class="o">=</span> <span class="n">NSMutableParagraphStyle</span><span class="p">.</span><span class="n">defaultParagraphStyle</span><span class="p">.</span><span class="n">mutableCopy</span><span class="p">;</span>
+        <span class="n">text6Style</span><span class="p">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="n">NSTextAlignmentCenter</span><span class="p">;</span>
+
+        <span class="n">NSDictionary</span><span class="o">*</span> <span class="n">text6FontAttributes</span> <span class="o">=</span> <span class="p">@{</span><span class="n">NSFontAttributeName</span><span class="o">:</span> <span class="p">[</span><span class="n">UIFont</span> <span class="nf">fontWithName</span><span class="p">:</span> <span class="s">@"Helvetica-Bold"</span> <span class="nf">size</span><span class="p">:</span> <span class="mi">18</span><span class="p">],</span> <span class="n">NSForegroundColorAttributeName</span><span class="o">:</span> <span class="n">fontColor</span><span class="p">,</span> <span class="n">NSParagraphStyleAttributeName</span><span class="o">:</span> <span class="n">text6Style</span><span class="p">};</span>
+
+        <span class="p">[</span><span class="n">textContent</span> <span class="nf">drawInRect</span><span class="p">:</span> <span class="n">CGRectOffset</span><span class="p">(</span><span class="n">text6Rect</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">CGRectGetHeight</span><span class="p">(</span><span class="n">text6Rect</span><span class="p">)</span> <span class="o">-</span> <span class="p">[</span><span class="n">textContent</span> <span class="nf">boundingRectWithSize</span><span class="p">:</span> <span class="n">text6Rect</span><span class="p">.</span><span class="n">size</span> <span class="nf">options</span><span class="p">:</span> <span class="n">NSStringDrawingUsesLineFragmentOrigin</span> <span class="nf">attributes</span><span class="p">:</span> <span class="n">text6FontAttributes</span> <span class="n">context</span><span class="o">:</span> <span class="nb">nil</span><span class="p">].</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="n">withAttributes</span><span class="o">:</span> <span class="n">text6FontAttributes</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="n">CGContextRestoreGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+
+
+    <span class="c1">//// 画出“9”</span>
+    <span class="n">CGContextSaveGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+    <span class="n">CGContextTranslateCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">CGContextScaleCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
+
+    <span class="n">CGRect</span> <span class="n">text9Rect</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="o">-</span><span class="mi">82</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">17</span><span class="p">);</span>
+    <span class="p">{</span>
+        <span class="n">NSString</span><span class="o">*</span> <span class="n">textContent</span> <span class="o">=</span> <span class="s">@"9"</span><span class="p">;</span>
+        <span class="n">NSMutableParagraphStyle</span><span class="o">*</span> <span class="n">text9Style</span> <span class="o">=</span> <span class="n">NSMutableParagraphStyle</span><span class="p">.</span><span class="n">defaultParagraphStyle</span><span class="p">.</span><span class="n">mutableCopy</span><span class="p">;</span>
+        <span class="n">text9Style</span><span class="p">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="n">NSTextAlignmentCenter</span><span class="p">;</span>
+
+        <span class="n">NSDictionary</span><span class="o">*</span> <span class="n">text9FontAttributes</span> <span class="o">=</span> <span class="p">@{</span><span class="n">NSFontAttributeName</span><span class="o">:</span> <span class="p">[</span><span class="n">UIFont</span> <span class="nf">fontWithName</span><span class="p">:</span> <span class="s">@"Helvetica-Bold"</span> <span class="nf">size</span><span class="p">:</span> <span class="mi">18</span><span class="p">],</span> <span class="n">NSForegroundColorAttributeName</span><span class="o">:</span> <span class="n">fontColor</span><span class="p">,</span> <span class="n">NSParagraphStyleAttributeName</span><span class="o">:</span> <span class="n">text9Style</span><span class="p">};</span>
+
+        <span class="p">[</span><span class="n">textContent</span> <span class="nf">drawInRect</span><span class="p">:</span> <span class="n">CGRectOffset</span><span class="p">(</span><span class="n">text9Rect</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">CGRectGetHeight</span><span class="p">(</span><span class="n">text9Rect</span><span class="p">)</span> <span class="o">-</span> <span class="p">[</span><span class="n">textContent</span> <span class="nf">boundingRectWithSize</span><span class="p">:</span> <span class="n">text9Rect</span><span class="p">.</span><span class="n">size</span> <span class="nf">options</span><span class="p">:</span> <span class="n">NSStringDrawingUsesLineFragmentOrigin</span> <span class="nf">attributes</span><span class="p">:</span> <span class="n">text9FontAttributes</span> <span class="n">context</span><span class="o">:</span> <span class="nb">nil</span><span class="p">].</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="n">withAttributes</span><span class="o">:</span> <span class="n">text9FontAttributes</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="n">CGContextRestoreGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+
+
+    <span class="c1">//// 画出表盘刻度</span>
+    <span class="n">CGContextSaveGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+    <span class="n">CGContextTranslateCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">CGContextScaleCTM</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
+
+    <span class="n">UIBezierPath</span><span class="o">*</span> <span class="n">markPath</span> <span class="o">=</span> <span class="n">UIBezierPath</span><span class="p">.</span><span class="n">bezierPath</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">moveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">85</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">85</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">93</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">93</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">85</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">closePath</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">moveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">93</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">93</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">85</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">85</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">93</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">closePath</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">moveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">45</span><span class="p">,</span> <span class="o">-</span><span class="mi">72</span><span class="p">.</span><span class="mi">15</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">41</span><span class="p">.</span><span class="mi">54</span><span class="p">,</span> <span class="o">-</span><span class="mi">74</span><span class="p">.</span><span class="mi">15</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">45</span><span class="p">.</span><span class="mi">54</span><span class="p">,</span> <span class="o">-</span><span class="mi">81</span><span class="p">.</span><span class="mi">08</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">49</span><span class="p">,</span> <span class="o">-</span><span class="mi">79</span><span class="p">.</span><span class="mi">08</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">45</span><span class="p">,</span> <span class="o">-</span><span class="mi">72</span><span class="p">.</span><span class="mi">15</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">closePath</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">moveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">44</span><span class="p">.</span><span class="mi">87</span><span class="p">,</span> <span class="mi">81</span><span class="p">.</span><span class="mi">5</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">48</span><span class="p">.</span><span class="mi">33</span><span class="p">,</span> <span class="mi">79</span><span class="p">.</span><span class="mi">5</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">44</span><span class="p">.</span><span class="mi">33</span><span class="p">,</span> <span class="mi">72</span><span class="p">.</span><span class="mi">57</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">40</span><span class="p">.</span><span class="mi">87</span><span class="p">,</span> <span class="mi">74</span><span class="p">.</span><span class="mi">57</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">44</span><span class="p">.</span><span class="mi">87</span><span class="p">,</span> <span class="mi">81</span><span class="p">.</span><span class="mi">5</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">closePath</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">moveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">75</span><span class="p">.</span><span class="mo">07</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">73</span><span class="p">.</span><span class="mo">07</span><span class="p">,</span> <span class="o">-</span><span class="mi">43</span><span class="p">.</span><span class="mi">46</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">80</span><span class="p">,</span> <span class="o">-</span><span class="mi">47</span><span class="p">.</span><span class="mi">46</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">82</span><span class="p">,</span> <span class="o">-</span><span class="mi">44</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">75</span><span class="p">.</span><span class="mo">07</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">closePath</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">moveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">79</span><span class="p">.</span><span class="mi">58</span><span class="p">,</span> <span class="mi">48</span><span class="p">.</span><span class="mi">13</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">81</span><span class="p">.</span><span class="mi">58</span><span class="p">,</span> <span class="mi">44</span><span class="p">.</span><span class="mi">67</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">74</span><span class="p">.</span><span class="mi">65</span><span class="p">,</span> <span class="mi">40</span><span class="p">.</span><span class="mi">67</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">72</span><span class="p">.</span><span class="mi">65</span><span class="p">,</span> <span class="mi">44</span><span class="p">.</span><span class="mi">13</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">79</span><span class="p">.</span><span class="mi">58</span><span class="p">,</span> <span class="mi">48</span><span class="p">.</span><span class="mi">13</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">closePath</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">moveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">85</span><span class="p">,</span> <span class="mi">2</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">85</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">93</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">93</span><span class="p">,</span> <span class="mi">2</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">85</span><span class="p">,</span> <span class="mi">2</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">closePath</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">moveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">93</span><span class="p">,</span> <span class="mi">1</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">93</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">85</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">85</span><span class="p">,</span> <span class="mi">1</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">93</span><span class="p">,</span> <span class="mi">1</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">closePath</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">moveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">72</span><span class="p">.</span><span class="mi">57</span><span class="p">,</span> <span class="mi">44</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">74</span><span class="p">.</span><span class="mi">57</span><span class="p">,</span> <span class="mi">40</span><span class="p">.</span><span class="mi">54</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">81</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">44</span><span class="p">.</span><span class="mi">54</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">79</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">48</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">72</span><span class="p">.</span><span class="mi">57</span><span class="p">,</span> <span class="mi">44</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">closePath</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">moveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">81</span><span class="p">.</span><span class="mi">08</span><span class="p">,</span> <span class="o">-</span><span class="mi">45</span><span class="p">.</span><span class="mi">87</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">79</span><span class="p">.</span><span class="mi">08</span><span class="p">,</span> <span class="o">-</span><span class="mi">49</span><span class="p">.</span><span class="mi">33</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">72</span><span class="p">.</span><span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mi">45</span><span class="p">.</span><span class="mi">33</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">74</span><span class="p">.</span><span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mi">41</span><span class="p">.</span><span class="mi">87</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">81</span><span class="p">.</span><span class="mi">08</span><span class="p">,</span> <span class="o">-</span><span class="mi">45</span><span class="p">.</span><span class="mi">87</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">closePath</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">moveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">39</span><span class="p">.</span><span class="mi">67</span><span class="p">,</span> <span class="mi">75</span><span class="p">.</span><span class="mo">07</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">43</span><span class="p">.</span><span class="mi">13</span><span class="p">,</span> <span class="mi">73</span><span class="p">.</span><span class="mo">07</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">47</span><span class="p">.</span><span class="mi">13</span><span class="p">,</span> <span class="mi">80</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">43</span><span class="p">.</span><span class="mi">67</span><span class="p">,</span> <span class="mi">82</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="o">-</span><span class="mi">39</span><span class="p">.</span><span class="mi">67</span><span class="p">,</span> <span class="mi">75</span><span class="p">.</span><span class="mo">07</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">closePath</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">moveToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">48</span><span class="p">.</span><span class="mi">46</span><span class="p">,</span> <span class="o">-</span><span class="mi">79</span><span class="p">.</span><span class="mi">58</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">45</span><span class="p">,</span> <span class="o">-</span><span class="mi">81</span><span class="p">.</span><span class="mi">58</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">41</span><span class="p">,</span> <span class="o">-</span><span class="mi">74</span><span class="p">.</span><span class="mi">65</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">44</span><span class="p">.</span><span class="mi">46</span><span class="p">,</span> <span class="o">-</span><span class="mi">72</span><span class="p">.</span><span class="mi">65</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">addLineToPoint</span><span class="p">:</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">48</span><span class="p">.</span><span class="mi">46</span><span class="p">,</span> <span class="o">-</span><span class="mi">79</span><span class="p">.</span><span class="mi">58</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">closePath</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">markColor</span> <span class="nf">setFill</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">markPath</span> <span class="nf">fill</span><span class="p">];</span>
+
+    <span class="n">CGContextRestoreGState</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+</code></pre></div></div>
 
 <p>xcode6.1 SDK8.1测试没问题！</p>
 
@@ -855,7 +893,7 @@ typedef NS_ENUM(NSUInteger, DDClockTheme) { //弄一个枚举类型用来更改�
 
 <h2 id="paintcode">PaintCode</h2>
 
-<p>代码是写出来了， 但是在<code class="highlighter-rouge">-(void)drawRect:(CGRect)rect</code>方法中一笔一笔的勾画出来，确实是累人~</p>
+<p>代码是写出来了， 但是在<code class="language-plaintext highlighter-rouge">-(void)drawRect:(CGRect)rect</code>方法中一笔一笔的勾画出来，确实是累人~</p>
 
 <p>所以我要祭出这次文章的纯24K真大杀器——PaintCode</p>
 
@@ -1075,6 +1113,82 @@ typedef NS_ENUM(NSUInteger, DDClockTheme) { //弄一个枚举类型用来更改�
         				
                             
         				
+                            
+                				<a href="/tags/#新技术" title="新技术" rel="3">
+                                    新技术
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#千万不要研究" title="千万不要研究" rel="3">
+                                    千万不要研究
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#忘了自己是谁" title="忘了自己是谁" rel="3">
+                                    忘了自己是谁
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#用户体验" title="用户体验" rel="2">
+                                    用户体验
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#独立开发" title="独立开发" rel="5">
+                                    独立开发
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#iOS开发" title="iOS开发" rel="2">
+                                    iOS开发
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#技术" title="技术" rel="2">
+                                    技术
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#App Store" title="App Store" rel="2">
+                                    App Store
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
         			</div>
                 </section>
                 
@@ -1084,26 +1198,6 @@ typedef NS_ENUM(NSUInteger, DDClockTheme) { //弄一个枚举类型用来更改�
                 <hr>
                 <h5>FRIENDS</h5>
                 <ul class="list-inline">
-                    
-                        <li><a href="http://mida.re/">乱序</a></li>
-                    
-                        <li><a href="http://qianduan.guru/">前端外刊评论</a></li>
-                    
-                        <li><a href="http://lingyu.wang/">天镶的博客</a></li>
-                    
-                        <li><a href="http://hmqk1995.github.io">Luke 的自留地</a></li>
-                    
-                        <li><a href="http://ebnbin.com/">Ebn's Blog</a></li>
-                    
-                        <li><a href="http://blog.smdcn.net">SmdCn's Blog</a></li>
-                    
-                        <li><a href="http://xieminis.me/">解旻的博客</a></li>
-                    
-                        <li><a href="http://dhong.co">DHong Say</a></li>
-                    
-                        <li><a href="http://ingf.github.io/">尹峰以为</a></li>
-                    
-                        <li><a href="http://wepiaofei.github.io/blog/">前端神盾局</a></li>
                     
                 </ul>
                 
@@ -1178,20 +1272,11 @@ typedef NS_ENUM(NSUInteger, DDClockTheme) { //弄一个枚举类型用来更改�
                 <ul class="list-inline text-center">
                     
                     
-                    <li>
-                        <a href="https://twitter.com/northcity">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
 
                     <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
                     
                     <li>
-                        <a target="_blank" href="https://www.zhihu.com/people/chen-xi-18-69-64/activities">
+                        <a target="_blank" href="https://www.zhihu.com/people/北城">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa  fa-stack-1x fa-inverse">知</i>
@@ -1201,7 +1286,7 @@ typedef NS_ENUM(NSUInteger, DDClockTheme) { //弄一个枚举类型用来更改�
                     
                     
                     <li>
-                        <a target="_blank" href="https://weibo.com/p/1005055227295178/home?from=page_100505&mod=TAB#place">
+                        <a target="_blank" href="http://weibo.com/陈年小城">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
@@ -1225,15 +1310,17 @@ typedef NS_ENUM(NSUInteger, DDClockTheme) { //弄一个枚举类型用来更改�
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; NorthCity 2017
+                    Copyright &copy; 北城 2026
                     <br>
-                    Theme by <a href="www.northcity.top">Hux</a> |
+                    Theme by <a href="https://github.com/northcity">NorthCity</a> |
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                        src="https://ghbtns.com/github-btn.html?user=northcity&repo=northcity.github.io&type=star&count=true" >
                     </iframe>
+                    <a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备17036027号-1</a>
                 </p>
+                
             </div>
         </div>
     </div>

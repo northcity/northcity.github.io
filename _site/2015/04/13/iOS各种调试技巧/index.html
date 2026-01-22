@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="在这里探索iOS的一切。">
-    <meta name="keywords"  content="北城以北,北城的博客, beicheng,north city, northcity,陈希, 个人博客, 个人网站, 技术博客, iOS, Cocoa, Apple, WWDC, iPone, develop, 移动开发, APP, 设计模式, 最佳实践">
-    <meta name="theme-color" content="#000000">
+    <meta name="description" content="我用产品、代码和文字，记录真实的独立开发之路。">
+    <meta name="keywords"  content="北城, 独立开发者, indie developer, iOS开发, App开发, 闪念, 呼吸泡泡, Anpa, 数字遗产, 时间胶囊, 产品创作者, 独立开发, Swift, SwiftUI">
+    <meta name="theme-color" content="#1a1a1a">
     
-    <title>iOS各种调试技巧 - 北城的博客|NorthCity</title>
+    <title>iOS各种调试技巧 - 北城 · 独立开发者 | NorthCity</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -31,9 +31,11 @@
     <link rel="stylesheet" href="/css/syntax.css">
 
     <!-- Custom Fonts -->
-    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Font Awesome 6 for modern icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- Custom Icons (X, 小红书, etc.) -->
+    <link rel="stylesheet" href="/css/icons.css">
 
 
     <!-- Hux Delete, sad but pending in China
@@ -69,7 +71,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">NorthCity</a>
+            <a class="navbar-brand" href="/">北城</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -81,7 +83,15 @@
                     </li>
                     
                     <li>
-                        <a href="/about/">About</a>
+                        <a href="/about/">关于</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/connect/">联系</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/essays/">文章</a>
                     </li>
                     
                     <li>
@@ -89,7 +99,35 @@
                     </li>
                     
                     <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/logs/">开发日志</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/products/">作品</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/send/">Send Letter</a>
+                    </li>
+                    
+                    <li>
                         <a href="/tags/">Tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/write/">Write</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page2/">首页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page3/">首页</a>
                     </li>
                     
                 </ul>
@@ -313,7 +351,7 @@
 
 <p>有时候在程序出错的时候不能能准确定位到奔溃的那一行代码,而是直接跑到main循环或者Appdelegate里面， 或者会给你这样的提示：</p>
 
-<p><code class="highlighter-rouge">EXEC_BAD_ACCESS：</code></p>
+<p><code class="language-plaintext highlighter-rouge">EXEC_BAD_ACCESS：</code></p>
 
 <p>是不是有种想哭的冲动？尼玛~至少给我一些堆栈信息也好呀~……这个时候你千万不要砸鼠标和键盘哦，一切都是主机在运行，你砸鼠标和键盘有什么用呢？应该是踢主机呀~~，现在有了全局断点，娘亲再也不担心你砸鼠标了，你只需要这样：</p>
 
@@ -361,7 +399,7 @@
 
 <p><img src="https://daiweilai.github.io/img/post/2015-4-13-pic11.png" alt="" /></p>
 
-<p>其实刚刚博主撒谎了，博主最喜欢的Action并不是Log Message，而是Sound，顾名思义嘛，断点射在Bug上，这样遇到断点就会发出声音，听到我自己设置的声音，我就知道是什么Bug了，听声识Bug，呵呵，<code class="highlighter-rouge">EXEC_BAD_ACCESS</code>的错误我设置成了波多野老师的声音，<code class="highlighter-rouge">unrecognized selector send to instancd</code>的错误我设置成了苍老师的…… 不要问我系统怎么没有吉泽明步的声音，我根本就不知道谁是吉泽明步。</p>
+<p>其实刚刚博主撒谎了，博主最喜欢的Action并不是Log Message，而是Sound，顾名思义嘛，断点射在Bug上，这样遇到断点就会发出声音，听到我自己设置的声音，我就知道是什么Bug了，听声识Bug，呵呵，<code class="language-plaintext highlighter-rouge">EXEC_BAD_ACCESS</code>的错误我设置成了波多野老师的声音，<code class="language-plaintext highlighter-rouge">unrecognized selector send to instancd</code>的错误我设置成了苍老师的…… 不要问我系统怎么没有吉泽明步的声音，我根本就不知道谁是吉泽明步。</p>
 
 <p>当然还有更加强大的条件断点就是这货啦</p>
 
@@ -369,7 +407,7 @@
 
 <p><img src="https://daiweilai.github.io/img/post/2015-4-13-pic12.jpg" alt="" /></p>
 
-<p>添加之后在 Symbol 一栏输入<code class="highlighter-rouge"> viewDidLoad</code>。</p>
+<p>添加之后在 Symbol 一栏输入<code class="language-plaintext highlighter-rouge"> viewDidLoad</code>。</p>
 
 <p>这样一来，在程序中所有的 viewDidLoad 方法被调用时都会触发断点。</p>
 
@@ -377,9 +415,9 @@
 
 <p><img src="https://daiweilai.github.io/img/post/2015-4-13-pic13.jpg" alt="" /></p>
 
-<p>当然，我们也可以仅仅为特定的某个类的方法添加断点。在 Symbol 一栏输入 <code class="highlighter-rouge">[ClassName viewDidLoad] (Objective-C) </code>或 <code class="highlighter-rouge">ClassName.viewDidLoad</code> (Swift) 即可。</p>
+<p>当然，我们也可以仅仅为特定的某个类的方法添加断点。在 Symbol 一栏输入 <code class="language-plaintext highlighter-rouge">[ClassName viewDidLoad] (Objective-C) </code>或 <code class="language-plaintext highlighter-rouge">ClassName.viewDidLoad</code> (Swift) 即可。</p>
 
-<p>比如：<code class="highlighter-rouge">unrecognized selector sent to instance 0xaxxxx</code> 这种错误，这个instance可以这样快速定位</p>
+<p>比如：<code class="language-plaintext highlighter-rouge">unrecognized selector sent to instance 0xaxxxx</code> 这种错误，这个instance可以这样快速定位</p>
 
 <p>图14</p>
 
@@ -395,23 +433,23 @@
 
 <p>可以用下面的这段宏</p>
 
-<pre><code class="language-objectivec">//A better version of NSLog
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//A better version of NSLog</span>
 
-define NSLog(format, ...) do { \
+<span class="n">define</span> <span class="nf">NSLog</span><span class="p">(</span><span class="n">format</span><span class="p">,</span> <span class="p">...)</span> <span class="k">do</span> <span class="p">{</span> \
 
-fprintf(stderr, "&lt;%s : %d&gt; %s\n", \
+<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"&lt;%s : %d&gt; %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> \
 
-[[[NSString stringWithUTF8String:FILE] lastPathComponent] UTF8String], \
+<span class="p">[[[</span><span class="n">NSString</span> <span class="nf">stringWithUTF8String</span><span class="p">:</span><span class="kt">FILE</span><span class="p">]</span> <span class="nf">lastPathComponent</span><span class="p">]</span> <span class="nf">UTF8String</span><span class="p">],</span> \
 
-LINE, func); \
+<span class="n">LINE</span><span class="p">,</span> <span class="n">func</span><span class="p">);</span> \
 
-(NSLog)((format), ##VA_ARGS); \
+<span class="p">(</span><span class="n">NSLog</span><span class="p">)((</span><span class="n">format</span><span class="p">),</span> <span class="err">##</span><span class="n">VA_ARGS</span><span class="p">);</span> \
 
-fprintf(stderr, "-------\n"); \
+<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"-------</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> \
 
-} while (0)
+<span class="err">}</span> <span class="k">while</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-</code></pre>
+</code></pre></div></div>
 
 <p>关于宏的威力 大家可以乱入我的博文<a href="https://daiweilai.github.io/2015/01/20/iOS%E4%B8%AD%E7%9A%84%E9%A2%84%E7%BC%96%E8%AF%91%E6%8C%87%E4%BB%A4%E7%9A%84%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%A9%B6/" target="_blank">《 iOS中的预编译指令的初步探究》</a></p>
 
@@ -559,9 +597,9 @@ fprintf(stderr, "-------\n"); \
 
 <p><img src="https://daiweilai.github.io/img/post/2015-4-13-pic24.png" alt="" /></p>
 
-<p>很快会注意到用户界面中存在问题-表视图中没有展示任何数据。在工程导航面板中打开<code class="highlighter-rouge">FirstViewController.swift</code>并找到以下代码：</p>
+<p>很快会注意到用户界面中存在问题-表视图中没有展示任何数据。在工程导航面板中打开<code class="language-plaintext highlighter-rouge">FirstViewController.swift</code>并找到以下代码：</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">var</span> <span class="nv">mockNotesDataSource</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Do some laundry"</span><span class="p">,</span> <span class="s">"Finish homework"</span><span class="p">,</span> <span class="s">"Walk the dog"</span><span class="p">,</span> <span class="s">"Learn about view debugging"</span><span class="p">]</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="nv">mockNotesDataSource</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Do some laundry"</span><span class="p">,</span> <span class="s">"Finish homework"</span><span class="p">,</span> <span class="s">"Walk the dog"</span><span class="p">,</span> <span class="s">"Learn about view debugging"</span><span class="p">]</span>
 
 <span class="p">{</span>
 
@@ -575,10 +613,9 @@ fprintf(stderr, "-------\n"); \
 
 <span class="p">}</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<p>可以看到<code class="highlighter-rouge">mockNotesDataSource</code>变量是表视图的数据源。使用Swift的属性观察者功能，在数据源发生改变时，表视图会自动重新加载。通过查看以上代码片段，你会发现应该应用中应该有4个项目需要展示，但现在不展示数据就说明某些地方出现了差错。</p>
+<p>可以看到<code class="language-plaintext highlighter-rouge">mockNotesDataSource</code>变量是表视图的数据源。使用Swift的属性观察者功能，在数据源发生改变时，表视图会自动重新加载。通过查看以上代码片段，你会发现应该应用中应该有4个项目需要展示，但现在不展示数据就说明某些地方出现了差错。</p>
 
 <p>启用视图调试</p>
 
@@ -823,6 +860,82 @@ fprintf(stderr, "-------\n"); \
         				
                             
         				
+                            
+                				<a href="/tags/#新技术" title="新技术" rel="3">
+                                    新技术
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#千万不要研究" title="千万不要研究" rel="3">
+                                    千万不要研究
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#忘了自己是谁" title="忘了自己是谁" rel="3">
+                                    忘了自己是谁
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#用户体验" title="用户体验" rel="2">
+                                    用户体验
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#独立开发" title="独立开发" rel="5">
+                                    独立开发
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#iOS开发" title="iOS开发" rel="2">
+                                    iOS开发
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#技术" title="技术" rel="2">
+                                    技术
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#App Store" title="App Store" rel="2">
+                                    App Store
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
         			</div>
                 </section>
                 
@@ -832,26 +945,6 @@ fprintf(stderr, "-------\n"); \
                 <hr>
                 <h5>FRIENDS</h5>
                 <ul class="list-inline">
-                    
-                        <li><a href="http://mida.re/">乱序</a></li>
-                    
-                        <li><a href="http://qianduan.guru/">前端外刊评论</a></li>
-                    
-                        <li><a href="http://lingyu.wang/">天镶的博客</a></li>
-                    
-                        <li><a href="http://hmqk1995.github.io">Luke 的自留地</a></li>
-                    
-                        <li><a href="http://ebnbin.com/">Ebn's Blog</a></li>
-                    
-                        <li><a href="http://blog.smdcn.net">SmdCn's Blog</a></li>
-                    
-                        <li><a href="http://xieminis.me/">解旻的博客</a></li>
-                    
-                        <li><a href="http://dhong.co">DHong Say</a></li>
-                    
-                        <li><a href="http://ingf.github.io/">尹峰以为</a></li>
-                    
-                        <li><a href="http://wepiaofei.github.io/blog/">前端神盾局</a></li>
                     
                 </ul>
                 
@@ -926,20 +1019,11 @@ fprintf(stderr, "-------\n"); \
                 <ul class="list-inline text-center">
                     
                     
-                    <li>
-                        <a href="https://twitter.com/northcity">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
 
                     <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
                     
                     <li>
-                        <a target="_blank" href="https://www.zhihu.com/people/chen-xi-18-69-64/activities">
+                        <a target="_blank" href="https://www.zhihu.com/people/北城">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa  fa-stack-1x fa-inverse">知</i>
@@ -949,7 +1033,7 @@ fprintf(stderr, "-------\n"); \
                     
                     
                     <li>
-                        <a target="_blank" href="https://weibo.com/p/1005055227295178/home?from=page_100505&mod=TAB#place">
+                        <a target="_blank" href="http://weibo.com/陈年小城">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
@@ -973,15 +1057,17 @@ fprintf(stderr, "-------\n"); \
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; NorthCity 2017
+                    Copyright &copy; 北城 2026
                     <br>
-                    Theme by <a href="www.northcity.top">Hux</a> |
+                    Theme by <a href="https://github.com/northcity">NorthCity</a> |
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                        src="https://ghbtns.com/github-btn.html?user=northcity&repo=northcity.github.io&type=star&count=true" >
                     </iframe>
+                    <a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备17036027号-1</a>
                 </p>
+                
             </div>
         </div>
     </div>

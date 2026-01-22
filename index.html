@@ -1,42 +1,187 @@
 ---
-layout: page
-description: "希望，世界和平，我在北城等你回来。"
+layout: home
+title: 首页
+description: "北城 · 独立开发者 | 我用产品、代码和文字，记录真实的独立开发之路。"
 ---
 
-{% for post in paginator.posts %}
-<div class="post-preview">
-    <a href="{{ post.url | prepend: site.baseurl }}">
-        <h2 class="post-title">
-            {{ post.title }}
-        </h2>
-        {% if post.subtitle %}
-        <h3 class="post-subtitle">
-            {{ post.subtitle }}
-        </h3>
-        {% endif %}
-        <div class="post-content-preview">
-            {{ post.content | strip_html | truncate:200 }}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <span class="hero-label">
+            <span data-lang-show="zh">{{ site.tagline }}</span>
+            <span data-lang-show="en">{{ site.tagline_en }}</span>
+        </span>
+        <h1 class="hero-title">
+            <span data-lang-show="zh">{{ site.author }}</span>
+            <span data-lang-show="en">{{ site.author_en }}</span>
+        </h1>
+        <p class="hero-description">
+            <span data-lang-show="zh">{{ site.intro }}</span>
+            <span data-lang-show="en">{{ site.intro_en }}</span>
+        </p>
+        <div class="hero-buttons">
+            <a href="{{ site.baseurl }}/products/" class="btn btn-primary">
+                <span data-i18n="hero_cta_products" data-zh="查看我的作品" data-en="View My Work">查看我的作品</span> <span class="arrow">→</span>
+            </a>
+            <a href="{{ site.baseurl }}/logs/" class="btn btn-secondary">
+                <span data-i18n="hero_cta_logs" data-zh="我的开发日志" data-en="Dev Logs">我的开发日志</span>
+            </a>
+            <a href="{{ site.baseurl }}/about/" class="btn btn-ghost">
+                <span data-i18n="hero_cta_about" data-zh="关于我" data-en="About Me">关于我</span> <span class="arrow">→</span>
+            </a>
         </div>
-    </a>
-    <p class="post-meta">
-        Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
-    </p>
-</div>
-<hr>
-{% endfor %}
+    </div>
+</section>
 
-<!-- Pager -->
-{% if paginator.total_pages > 1 %}
-<ul class="pager">
-    {% if paginator.previous_page %}
-    <li class="previous">
-        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
-    </li>
-    {% endif %}
-    {% if paginator.next_page %}
-    <li class="next">
-        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
-    </li>
-    {% endif %}
-</ul>
-{% endif %}
+<!-- Featured Products Section -->
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title" data-i18n="section_featured" data-zh="做过的东西" data-en="Things I Made">做过的东西</h2>
+            <p class="section-subtitle" data-i18n="section_featured_sub" data-zh="挑了几个还不错的" data-en="A few I'm proud of">挑了几个还不错的</p>
+        </div>
+        
+        <div class="products-grid">
+            {% for product in site.my_products %}
+            {% if product.featured %}
+            <a href="{{ product.app_store }}" target="_blank" rel="noopener" class="product-card">
+                <div class="product-icon">
+                    {% if product.icon and product.icon != '' %}
+                    <img src="{{ product.icon }}" alt="{{ product.name }}">
+                    {% else %}
+                    <span style="font-size: 2.5rem;">📱</span>
+                    {% endif %}
+                </div>
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p class="product-tagline">{{ product.tagline }}</p>
+                <div class="product-meta">
+                    {% for platform in product.platforms %}
+                    <span class="product-badge">{{ platform }}</span>
+                    {% endfor %}
+                    {% if product.rating %}
+                    <span class="product-badge" style="background: #fef3c7; color: #92400e;">
+                        ★ {{ product.rating }}
+                    </span>
+                    {% endif %}
+                </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-2">
+            <a href="{{ site.baseurl }}/products/" class="btn btn-ghost">
+                <span data-i18n="view_all_products" data-zh="查看全部作品" data-en="View All Products">查看全部作品</span> <span class="arrow">→</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Current Work Section -->
+<section class="section">
+    <div class="container">
+        <div class="current-work">
+            <h3 class="current-work-title" data-i18n="section_current" data-zh="最近在做" data-en="Currently Working On">最近在做</h3>
+            <ul class="current-work-list">
+                {% for work in site.current_work %}
+                <li>{{ work }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Values Section -->
+<section class="values-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title" data-i18n="section_values" data-zh="我更关心" data-en="What I Care About">我更关心</h2>
+        </div>
+        
+        <div class="values-grid">
+            <div class="value-item">
+                <h4 data-i18n="value1_title" data-zh="有人用比下载量重要" data-en="Usage > Downloads">有人用比下载量重要</h4>
+                <p data-i18n="value1_desc" data-zh="做东西是想被用的，不是被下载完就删的。" data-en="I make things to be used, not just downloaded and forgotten.">做东西是想被用的，不是被下载完就删的。</p>
+            </div>
+            <div class="value-item">
+                <h4 data-i18n="value2_title" data-zh="上线才是开始" data-en="Launch is Just the Start">上线才是开始</h4>
+                <p data-i18n="value2_desc" data-zh="发布不是终点，后面还有一堆 bug 等着修。" data-en="Shipping is not the end. There's always bugs to fix.">发布不是终点，后面还有一堆 bug 等着修。</p>
+            </div>
+            <div class="value-item">
+                <h4 data-i18n="value3_title" data-zh="别把自己累死" data-en="Don't Burn Out">别把自己累死</h4>
+                <p data-i18n="value3_desc" data-zh="能赚点钱最好，赚不到也别太拼，身体要紧。" data-en="Making money is nice. Not burning out is nicer.">能赚点钱最好，赚不到也别太拼，身体要紧。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Recent Logs Section -->
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title" data-i18n="section_logs" data-zh="开发日志" data-en="Dev Logs">开发日志</h2>
+            <p class="section-subtitle" data-i18n="section_logs_sub" data-zh="碎碎念，也算是记录" data-en="Random notes and updates">碎碎念，也算是记录</p>
+        </div>
+        
+        <div class="posts-list">
+            {% assign logs = site.logs | sort: 'date' | reverse %}
+            {% for log in logs limit:5 %}
+            <a href="{{ log.url }}" class="post-item">
+                <span class="post-title">{{ log.title }}</span>
+                <span class="post-date">{{ log.date | date: "%Y.%m.%d" }}</span>
+            </a>
+            {% endfor %}
+            
+            {% if logs.size == 0 %}
+            <div class="empty-state">
+                <p data-i18n="logs_coming" data-zh="日志正在路上..." data-en="Logs coming soon...">日志正在路上...</p>
+            </div>
+            {% endif %}
+        </div>
+        
+        {% if logs.size > 0 %}
+        <div class="text-center mt-2">
+            <a href="{{ site.baseurl }}/logs/" class="btn btn-ghost">
+                <span data-i18n="view_all_logs" data-zh="查看全部日志" data-en="View All Logs">查看全部日志</span> <span class="arrow">→</span>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Connect Section -->
+<section class="section">
+    <div class="container">
+        <div class="current-work" style="text-align: center;">
+            <h3 style="margin-bottom: var(--space-md); font-size: 1.25rem;">
+                👋 <span data-i18n="contact_me" data-zh="联系我" data-en="Contact Me">联系我</span>
+            </h3>
+            <p style="color: var(--color-text-secondary); margin-bottom: var(--space-lg);">
+                <span data-i18n="contact_desc" data-zh="有事说事，没事也可以聊" data-en="Got something? Or just want to chat">有事说事，没事也可以聊</span>
+            </p>
+            <div style="display: flex; justify-content: center; gap: var(--space-lg); flex-wrap: wrap; align-items: center;">
+                {% if site.x_url %}
+                <a href="{{ site.x_url }}" target="_blank" style="color: var(--color-text-secondary); text-decoration: none; display: flex; align-items: center; gap: var(--space-sm);">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> X
+                </a>
+                {% endif %}
+                {% if site.xiaohongshu_url %}
+                <a href="{{ site.xiaohongshu_url }}" target="_blank" style="color: var(--color-text-secondary); text-decoration: none; display: flex; align-items: center; gap: var(--space-sm);">
+                    <img src="/img/chanpinicon/redbook.png" alt="小红书" style="width: 18px; height: 18px; border-radius: 4px;">
+                    <span data-lang-show="zh">小红书</span><span data-lang-show="en">RED</span>
+                </a>
+                {% endif %}
+                {% if site.wechat_id %}
+                <span style="color: var(--color-text-secondary); display: flex; align-items: center; gap: var(--space-sm);">
+                    <i class="fab fa-weixin"></i> {{ site.wechat_id }}
+                </span>
+                {% endif %}
+            </div>
+            <div class="mt-2">
+                <a href="{{ site.baseurl }}/connect/" class="btn btn-ghost">
+                    <span data-i18n="view_all_contact" data-zh="查看所有联系方式" data-en="View All Contact Info">查看所有联系方式</span> <span class="arrow">→</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

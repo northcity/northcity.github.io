@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="在这里探索iOS的一切。">
-    <meta name="keywords"  content="北城以北,北城的博客, beicheng,north city, northcity,陈希, 个人博客, 个人网站, 技术博客, iOS, Cocoa, Apple, WWDC, iPone, develop, 移动开发, APP, 设计模式, 最佳实践">
-    <meta name="theme-color" content="#000000">
+    <meta name="description" content="我用产品、代码和文字，记录真实的独立开发之路。">
+    <meta name="keywords"  content="北城, 独立开发者, indie developer, iOS开发, App开发, 闪念, 呼吸泡泡, Anpa, 数字遗产, 时间胶囊, 产品创作者, 独立开发, Swift, SwiftUI">
+    <meta name="theme-color" content="#1a1a1a">
     
-    <title>Swift中的Weak Strong Dance - 北城的博客|NorthCity</title>
+    <title>Swift中的Weak Strong Dance - 北城 · 独立开发者 | NorthCity</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -31,9 +31,11 @@
     <link rel="stylesheet" href="/css/syntax.css">
 
     <!-- Custom Fonts -->
-    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Font Awesome 6 for modern icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- Custom Icons (X, 小红书, etc.) -->
+    <link rel="stylesheet" href="/css/icons.css">
 
 
     <!-- Hux Delete, sad but pending in China
@@ -69,7 +71,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">NorthCity</a>
+            <a class="navbar-brand" href="/">北城</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -81,7 +83,15 @@
                     </li>
                     
                     <li>
-                        <a href="/about/">About</a>
+                        <a href="/about/">关于</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/connect/">联系</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/essays/">文章</a>
                     </li>
                     
                     <li>
@@ -89,7 +99,35 @@
                     </li>
                     
                     <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/logs/">开发日志</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/products/">作品</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/send/">Send Letter</a>
+                    </li>
+                    
+                    <li>
                         <a href="/tags/">Tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/write/">Write</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page2/">首页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page3/">首页</a>
                     </li>
                     
                 </ul>
@@ -234,37 +272,37 @@
 
 <p>在block中解决循环引用要追寻的<a href="https://developer.apple.com/videos/play/wwdc2011-322/" target="_blank">2011 WWDC Session #322</a> 当时惊艳的代码是这样的：</p>
 
-<pre><code class="language-objectivec">- (void)dealloc
-{
-  [[NSNotificationCenter defaultCenter] removeObserver:_observer];
-}
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">dealloc</span>
+<span class="p">{</span>
+  <span class="p">[[</span><span class="n">NSNotificationCenter</span> <span class="nf">defaultCenter</span><span class="p">]</span> <span class="nf">removeObserver</span><span class="p">:</span><span class="n">_observer</span><span class="p">];</span>
+<span class="p">}</span>
 
-- (void)loadView
-{
-  [super loadView];
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">loadView</span>
+<span class="p">{</span>
+  <span class="p">[</span><span class="n">super</span> <span class="nf">loadView</span><span class="p">];</span>
 
-  __weak TestViewController *wself = self;
-  _observer = [[NSNotificationCenter defaultCenter] addObserverForName:@"testKey"
-                                                                object:nil
-                                                                 queue:nil
-                                                            usingBlock:^(NSNotification *note) {
-      TestViewController *sself = wself;
-      [sself dismissModalViewControllerAnimated:YES];
-  }];
-}
-</code></pre>
+  <span class="n">__weak</span> <span class="n">TestViewController</span> <span class="o">*</span><span class="n">wself</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+  <span class="n">_observer</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSNotificationCenter</span> <span class="nf">defaultCenter</span><span class="p">]</span> <span class="nf">addObserverForName</span><span class="p">:</span><span class="s">@"testKey"</span>
+                                                                <span class="nl">object:</span><span class="nb">nil</span>
+                                                                 <span class="nl">queue:</span><span class="nb">nil</span>
+                                                            <span class="nl">usingBlock:</span><span class="o">^</span><span class="p">(</span><span class="n">NSNotification</span> <span class="o">*</span><span class="n">note</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">TestViewController</span> <span class="o">*</span><span class="n">sself</span> <span class="o">=</span> <span class="n">wself</span><span class="p">;</span>
+      <span class="p">[</span><span class="n">sself</span> <span class="nf">dismissModalViewControllerAnimated</span><span class="p">:</span><span class="nb">YES</span><span class="p">];</span>
+  <span class="p">}];</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>或者可以看看<a href="https://github.com/AFNetworking" target="_blank">AFNetWorking</a> 是这样用block的:</p>
 
-<pre><code class="language-objectivec">__weak __typeof(self)weakSelf = self;
-AFNetworkReachabilityStatusBlock callback = ^(AFNetworkReachabilityStatus status) {
-__strong __typeof(weakSelf)strongSelf = weakSelf;
-strongSelf.networkReachabilityStatus = status;
-if (strongSelf.networkReachabilityStatusBlock) {
-strongSelf.networkReachabilityStatusBlock(status);
-}
-};
-</code></pre>
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">__weak</span> <span class="n">__typeof</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="n">weakSelf</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+<span class="n">AFNetworkReachabilityStatusBlock</span> <span class="n">callback</span> <span class="o">=</span> <span class="o">^</span><span class="p">(</span><span class="n">AFNetworkReachabilityStatus</span> <span class="n">status</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">__strong</span> <span class="n">__typeof</span><span class="p">(</span><span class="n">weakSelf</span><span class="p">)</span><span class="n">strongSelf</span> <span class="o">=</span> <span class="n">weakSelf</span><span class="p">;</span>
+<span class="n">strongSelf</span><span class="p">.</span><span class="n">networkReachabilityStatus</span> <span class="o">=</span> <span class="n">status</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">strongSelf</span><span class="p">.</span><span class="n">networkReachabilityStatusBlock</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">strongSelf</span><span class="p">.</span><span class="n">networkReachabilityStatusBlock</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
 
 <p>我们都很熟悉Objective-C中的“weak/strong dance”，但是寂寞无聊的我突然就很想知道Swift语言中该怎么做呢？是否存在传说中的最佳实践呢？</p>
 
@@ -274,7 +312,7 @@ strongSelf.networkReachabilityStatusBlock(status);
 
 <p>首先，我们祭出一个在闭包中没有使用weak的引用导致的循环引用的例子</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">C</span> <span class="p">{</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">C</span> <span class="p">{</span>
     <span class="k">let</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span>
     <span class="k">var</span> <span class="nv">block</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span>
 
@@ -292,25 +330,23 @@ strongSelf.networkReachabilityStatusBlock(status);
 <span class="nf">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 <span class="n">c</span> <span class="o">=</span> <span class="kt">C</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"two"</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>输出</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="n">one</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">one</span>
 <span class="n">two</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>这是一个巨基础又明显的循环引用的例子，self -&gt; block -&gt;self</p>
 
-<p>所以，<code class="highlighter-rouge">deinit</code> 方法是绝逼不会被执行的，即使你把 <code class="highlighter-rouge">c</code> 重新指向<code class="highlighter-rouge">nil</code>或者其他的实例，<code class="highlighter-rouge">c</code>也不会被销毁，这就是顽固又调皮的循环引用了，尤其是当你把<code class="highlighter-rouge">c</code>指向<code class="highlighter-rouge">nil</code>之后，这个对象你就再也引用不了了，它就静静的躺在堆内存里面，遗世而独立，然后你就堆内存泄露了，然后你就淡淡的忧伤从下体传来 ~ ~没有然后了</p>
+<p>所以，<code class="language-plaintext highlighter-rouge">deinit</code> 方法是绝逼不会被执行的，即使你把 <code class="language-plaintext highlighter-rouge">c</code> 重新指向<code class="language-plaintext highlighter-rouge">nil</code>或者其他的实例，<code class="language-plaintext highlighter-rouge">c</code>也不会被销毁，这就是顽固又调皮的循环引用了，尤其是当你把<code class="language-plaintext highlighter-rouge">c</code>指向<code class="language-plaintext highlighter-rouge">nil</code>之后，这个对象你就再也引用不了了，它就静静的躺在堆内存里面，遗世而独立，然后你就堆内存泄露了，然后你就淡淡的忧伤从下体传来 ~ ~没有然后了</p>
 
-<p>其实Swift中闭包的参数列表(<a href="http://www.russbishop.net/swift-capture-lists" target="_blank">Capture List</a>) 已经能够很好的让你获取一个<code class="highlighter-rouge">weak self</code>来避免循环引用了，但这还达不到我们的要求，只有<code class="highlighter-rouge">weak</code>是构不成“weak/strong dance”滴。</p>
+<p>其实Swift中闭包的参数列表(<a href="http://www.russbishop.net/swift-capture-lists" target="_blank">Capture List</a>) 已经能够很好的让你获取一个<code class="language-plaintext highlighter-rouge">weak self</code>来避免循环引用了，但这还达不到我们的要求，只有<code class="language-plaintext highlighter-rouge">weak</code>是构不成“weak/strong dance”滴。</p>
 
 <h2 id="使用闭包参数列表">使用闭包参数列表</h2>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">C</span> <span class="p">{</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">C</span> <span class="p">{</span>
     <span class="k">let</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span>
     <span class="k">var</span> <span class="nv">block</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span>
 
@@ -328,30 +364,28 @@ strongSelf.networkReachabilityStatusBlock(status);
 <span class="nf">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 <span class="n">c</span> <span class="o">=</span> <span class="kt">C</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"two"</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>输出</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="n">one</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">one</span>
 <span class="kt">Destroying</span> <span class="n">one</span>
 <span class="n">two</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>这样就没有循环引用啦~</p>
 
-<h2 id="在闭包中使用self">在闭包中使用<code class="highlighter-rouge">self</code></h2>
+<h2 id="在闭包中使用self">在闭包中使用<code class="language-plaintext highlighter-rouge">self</code></h2>
 
-<p>使用 <code class="highlighter-rouge">[weak self]</code>有一个细节，就是<code class="highlighter-rouge">self</code>在闭包中会变成<code class="highlighter-rouge">Optional</code> 从上面的代码中<code class="highlighter-rouge">self?.doSomething()</code> 就可以看出来了。</p>
+<p>使用 <code class="language-plaintext highlighter-rouge">[weak self]</code>有一个细节，就是<code class="language-plaintext highlighter-rouge">self</code>在闭包中会变成<code class="language-plaintext highlighter-rouge">Optional</code> 从上面的代码中<code class="language-plaintext highlighter-rouge">self?.doSomething()</code> 就可以看出来了。</p>
 
-<p>但是如果你在这个闭包中狂轰乱炸的使用<code class="highlighter-rouge">self？</code> （多次使用<code class="highlighter-rouge">self？</code>），问题就来了，因为这个<code class="highlighter-rouge">self？</code>是一个弱引用的，那么你没法确定在这个闭包中所有的<code class="highlighter-rouge">self？</code>操作都能执行完毕，毕竟若引用的<code class="highlighter-rouge">self</code>可能随时都挂掉，然后怒举一个栗子：</p>
+<p>但是如果你在这个闭包中狂轰乱炸的使用<code class="language-plaintext highlighter-rouge">self？</code> （多次使用<code class="language-plaintext highlighter-rouge">self？</code>），问题就来了，因为这个<code class="language-plaintext highlighter-rouge">self？</code>是一个弱引用的，那么你没法确定在这个闭包中所有的<code class="language-plaintext highlighter-rouge">self？</code>操作都能执行完毕，毕竟若引用的<code class="language-plaintext highlighter-rouge">self</code>可能随时都挂掉，然后怒举一个栗子：</p>
 
 <p>图4</p>
 
 <p><img src="https://daiweilai.github.io/img/post/2015-12-23-pic4.jpg" alt="" /></p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">C</span> <span class="p">{</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">C</span> <span class="p">{</span>
     <span class="kd">deinit</span> <span class="p">{</span> <span class="nf">println</span><span class="p">(</span><span class="s">"Destroying C"</span><span class="p">)</span> <span class="p">}</span>
     <span class="kd">func</span> <span class="nf">log</span><span class="p">(</span><span class="nv">msg</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span> <span class="nf">println</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="p">}</span>
     <span class="kd">func</span> <span class="nf">doClosure</span><span class="p">()</span> <span class="p">{</span>
@@ -372,31 +406,29 @@ strongSelf.networkReachabilityStatusBlock(status);
 <span class="p">}</span>
 
 <span class="nf">dispatch_main</span><span class="p">()</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>输出</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="n">before</span> <span class="n">sleep</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">before</span> <span class="n">sleep</span>
 <span class="kt">Destroying</span> <span class="kt">C</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
-  <p>小提示：当然一般来说在<code class="highlighter-rouge">dispatch_async()</code>中你不必担心会有循环引用，因为self并不会持有<code class="highlighter-rouge">dispatch_async()</code>的block，所以上述的代码中并不会真的导致循环引用，如果你的闭包并不是很注重结果的，那么<code class="highlighter-rouge">self</code>为<code class="highlighter-rouge">nil</code>闭包就不会再执行，这个还是挺有用的。</p>
+  <p>小提示：当然一般来说在<code class="language-plaintext highlighter-rouge">dispatch_async()</code>中你不必担心会有循环引用，因为self并不会持有<code class="language-plaintext highlighter-rouge">dispatch_async()</code>的block，所以上述的代码中并不会真的导致循环引用，如果你的闭包并不是很注重结果的，那么<code class="language-plaintext highlighter-rouge">self</code>为<code class="language-plaintext highlighter-rouge">nil</code>闭包就不会再执行，这个还是挺有用的。</p>
 </blockquote>
 
-<p>上述的代码中不会打印<code class="highlighter-rouge">after sleep</code>，因为<code class="highlighter-rouge">self？</code>在打印这句话之前已经挂掉了。</p>
+<p>上述的代码中不会打印<code class="language-plaintext highlighter-rouge">after sleep</code>，因为<code class="language-plaintext highlighter-rouge">self？</code>在打印这句话之前已经挂掉了。</p>
 
-<p>通常这种无根之源的bug可以把你整的半死。所以通常遇到这种闭包中多次试用<code class="highlighter-rouge">self？</code>的操作的时候，一般会把<code class="highlighter-rouge">self？</code>变为又粗又壮的<code class="highlighter-rouge">strong self</code>，（博主也是又粗又壮的，捂脸~~）这就是传说中的“weak/strong dance”，这个舞蹈，额，什么鬼，为什么把这个技术叫做dance啊，我觉得叫做<code class="highlighter-rouge">美队解禁奥义技</code>还不错，妇联里面的美国队长也是由<code class="highlighter-rouge">weak</code>变成<code class="highlighter-rouge">strong</code>的嘛~，好吧，扯太远，菊花都扯疼了，我们这是在技术翻译呢！要严肃！要尊重原作者！我们还是叫dance吧，有了这个dance之后呢，我们就能确保一旦闭包被执行，<code class="highlighter-rouge">self</code>就不会为<code class="highlighter-rouge">nil</code>。</p>
+<p>通常这种无根之源的bug可以把你整的半死。所以通常遇到这种闭包中多次试用<code class="language-plaintext highlighter-rouge">self？</code>的操作的时候，一般会把<code class="language-plaintext highlighter-rouge">self？</code>变为又粗又壮的<code class="language-plaintext highlighter-rouge">strong self</code>，（博主也是又粗又壮的，捂脸~~）这就是传说中的“weak/strong dance”，这个舞蹈，额，什么鬼，为什么把这个技术叫做dance啊，我觉得叫做<code class="language-plaintext highlighter-rouge">美队解禁奥义技</code>还不错，妇联里面的美国队长也是由<code class="language-plaintext highlighter-rouge">weak</code>变成<code class="language-plaintext highlighter-rouge">strong</code>的嘛~，好吧，扯太远，菊花都扯疼了，我们这是在技术翻译呢！要严肃！要尊重原作者！我们还是叫dance吧，有了这个dance之后呢，我们就能确保一旦闭包被执行，<code class="language-plaintext highlighter-rouge">self</code>就不会为<code class="language-plaintext highlighter-rouge">nil</code>。</p>
 
-<p>但是，就像文章开头说的，对于在<code class="highlighter-rouge">Swift</code>的“weak/strong dance”中变回strong的这部分的最佳实践是什么我也不是很确定的。。。</p>
+<p>但是，就像文章开头说的，对于在<code class="language-plaintext highlighter-rouge">Swift</code>的“weak/strong dance”中变回strong的这部分的最佳实践是什么我也不是很确定的。。。</p>
 
 <h2 id="获取强引用的一些想法">获取强引用的一些想法</h2>
 
-<h3 id="使用可选绑定if-let">使用可选绑定<code class="highlighter-rouge">if let</code></h3>
+<h3 id="使用可选绑定if-let">使用可选绑定<code class="language-plaintext highlighter-rouge">if let</code></h3>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">doClosure</span><span class="p">()</span> <span class="p">{</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">doClosure</span><span class="p">()</span> <span class="p">{</span>
     <span class="nf">dispatch_async</span><span class="p">(</span><span class="nf">dispatch_get_global_queue</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span> <span class="p">[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="k">in</span>
         <span class="k">if</span> <span class="k">let</span> <span class="nv">strongSelf</span> <span class="o">=</span> <span class="k">self</span> <span class="p">{</span>  <span class="c1">// &lt;-- 这里就是精髓了</span>
             <span class="n">strongSelf</span><span class="o">.</span><span class="nf">log</span><span class="p">(</span><span class="s">"before sleep"</span><span class="p">)</span>
@@ -413,16 +445,14 @@ strongSelf.networkReachabilityStatusBlock(status);
     <span class="nf">usleep</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
     <span class="n">strongSelf</span><span class="o">.</span><span class="nf">log</span><span class="p">(</span><span class="s">"after sleep"</span><span class="p">)</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>输出</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="n">before</span> <span class="n">sleep</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">before</span> <span class="n">sleep</span>
 <span class="n">after</span> <span class="n">sleep</span>
 <span class="kt">Destroying</span> <span class="kt">C</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>优点：</p>
 
@@ -434,23 +464,22 @@ strongSelf.networkReachabilityStatusBlock(status);
 <p>缺点：</p>
 
 <ul>
-  <li>很不幸的是我们不能<code class="highlighter-rouge">if let self = self</code>，因为<code class="highlighter-rouge">self</code>是常量，不可变，这样的话我们就只能<code class="highlighter-rouge">if let strongSelf = self</code> 在闭包的作用域中都要使用丑陋的<code class="highlighter-rouge">strongSelf</code>了。</li>
-  <li>在swift的闭包中，如果你没有试用<code class="highlighter-rouge">strongSelf</code>而是使用了<code class="highlighter-rouge">self</code>，这样编译器会警告！因为这个时候<code class="highlighter-rouge">self</code>是可选的嘛，相比较OC中，就不会警告了。(这句话哥读了21遍，为什么觉得这个不是缺点呢)</li>
+  <li>很不幸的是我们不能<code class="language-plaintext highlighter-rouge">if let self = self</code>，因为<code class="language-plaintext highlighter-rouge">self</code>是常量，不可变，这样的话我们就只能<code class="language-plaintext highlighter-rouge">if let strongSelf = self</code> 在闭包的作用域中都要使用丑陋的<code class="language-plaintext highlighter-rouge">strongSelf</code>了。</li>
+  <li>在swift的闭包中，如果你没有试用<code class="language-plaintext highlighter-rouge">strongSelf</code>而是使用了<code class="language-plaintext highlighter-rouge">self</code>，这样编译器会警告！因为这个时候<code class="language-plaintext highlighter-rouge">self</code>是可选的嘛，相比较OC中，就不会警告了。(这句话哥读了21遍，为什么觉得这个不是缺点呢)</li>
 </ul>
 
-<h3 id="使用withextendedlifetime">使用<code class="highlighter-rouge">withExtendedLifetime</code></h3>
+<h3 id="使用withextendedlifetime">使用<code class="language-plaintext highlighter-rouge">withExtendedLifetime</code></h3>
 
-<p>在Swift的标准库中有一个函数：<code class="highlighter-rouge">withExtendedLifetime()</code>，感觉就像Apple这个金鱼佬故意诱导我们使用这个函数来实现“weak/strong dance”。</p>
+<p>在Swift的标准库中有一个函数：<code class="language-plaintext highlighter-rouge">withExtendedLifetime()</code>，感觉就像Apple这个金鱼佬故意诱导我们使用这个函数来实现“weak/strong dance”。</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="c1">/// Evaluate `f()` and return its result, ensuring that `x` is not</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// Evaluate `f()` and return its result, ensuring that `x` is not</span>
 <span class="c1">/// destroyed before f returns.</span>
 <span class="kd">func</span> <span class="n">withExtendedLifetime</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">,</span> <span class="kt">Result</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="kd">@noescape</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>那就试试</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">doClosure</span><span class="p">()</span> <span class="p">{</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">doClosure</span><span class="p">()</span> <span class="p">{</span>
     <span class="nf">dispatch_async</span><span class="p">(</span><span class="nf">dispatch_get_global_queue</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span> <span class="p">[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="k">in</span>
         <span class="nf">withExtendedLifetime</span><span class="p">(</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">self</span><span class="o">!.</span><span class="nf">log</span><span class="p">(</span><span class="s">"before sleep"</span><span class="p">)</span>
@@ -460,26 +489,25 @@ strongSelf.networkReachabilityStatusBlock(status);
     <span class="p">}</span>
 <span class="p">}</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>优点：</p>
 
 <ul>
-  <li>闭包中不再需要使用丑陋的<code class="highlighter-rouge">strongSelf</code>了</li>
+  <li>闭包中不再需要使用丑陋的<code class="language-plaintext highlighter-rouge">strongSelf</code>了</li>
 </ul>
 
 <p>缺点：</p>
 
 <ul>
-  <li><code class="highlighter-rouge">self</code>还是他妈可选的，调用方法什么的还是要！？，还是要解包，博主突然想起自己的一个技能：单手解，呵呵</li>
+  <li><code class="language-plaintext highlighter-rouge">self</code>还是他妈可选的，调用方法什么的还是要！？，还是要解包，博主突然想起自己的一个技能：单手解，呵呵</li>
 </ul>
 
-<h3 id="自定义一个withextendedlifetime">自定义一个<code class="highlighter-rouge">withExtendedLifetime()</code></h3>
+<h3 id="自定义一个withextendedlifetime">自定义一个<code class="language-plaintext highlighter-rouge">withExtendedLifetime()</code></h3>
 
 <p>这个方法是 <a href="https://twitter.com/jtbandes" target="_blank">@jtbandes</a> 这哥们想的，大概会是这样：</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code> <span class="kd">extension</span> <span class="kt">Optional</span> <span class="p">{</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">extension</span> <span class="kt">Optional</span> <span class="p">{</span>
     <span class="kd">func</span> <span class="nf">withExtendedLifetime</span><span class="p">(</span><span class="nv">body</span><span class="p">:</span> <span class="kt">Wrapped</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="k">let</span> <span class="nv">strongSelf</span> <span class="o">=</span> <span class="k">self</span> <span class="p">{</span>
             <span class="nf">body</span><span class="p">(</span><span class="n">strongSelf</span><span class="p">)</span>
@@ -498,8 +526,7 @@ strongSelf.networkReachabilityStatusBlock(status);
         <span class="k">return</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>优点：</p>
 
@@ -510,8 +537,8 @@ strongSelf.networkReachabilityStatusBlock(status);
 <p>缺点：</p>
 
 <ul>
-  <li><code class="highlighter-rouge">strongSelf</code>变成了使用<code class="highlighter-rouge">$0</code> ，博主认为哦，还是很丑陋，并且可读性更差了</li>
-  <li>In this case, I had to add some extra type info to the <code class="highlighter-rouge">dispatch_async()</code> closure. I’m not totally sure why. 不知道他说什么鬼~</li>
+  <li><code class="language-plaintext highlighter-rouge">strongSelf</code>变成了使用<code class="language-plaintext highlighter-rouge">$0</code> ，博主认为哦，还是很丑陋，并且可读性更差了</li>
+  <li>In this case, I had to add some extra type info to the <code class="language-plaintext highlighter-rouge">dispatch_async()</code> closure. I’m not totally sure why. 不知道他说什么鬼~</li>
 </ul>
 
 <p>翻译至此结束了</p>
@@ -608,6 +635,82 @@ strongSelf.networkReachabilityStatusBlock(status);
         				
                             
         				
+                            
+                				<a href="/tags/#新技术" title="新技术" rel="3">
+                                    新技术
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#千万不要研究" title="千万不要研究" rel="3">
+                                    千万不要研究
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#忘了自己是谁" title="忘了自己是谁" rel="3">
+                                    忘了自己是谁
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#用户体验" title="用户体验" rel="2">
+                                    用户体验
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#独立开发" title="独立开发" rel="5">
+                                    独立开发
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#iOS开发" title="iOS开发" rel="2">
+                                    iOS开发
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#技术" title="技术" rel="2">
+                                    技术
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#App Store" title="App Store" rel="2">
+                                    App Store
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
         			</div>
                 </section>
                 
@@ -617,26 +720,6 @@ strongSelf.networkReachabilityStatusBlock(status);
                 <hr>
                 <h5>FRIENDS</h5>
                 <ul class="list-inline">
-                    
-                        <li><a href="http://mida.re/">乱序</a></li>
-                    
-                        <li><a href="http://qianduan.guru/">前端外刊评论</a></li>
-                    
-                        <li><a href="http://lingyu.wang/">天镶的博客</a></li>
-                    
-                        <li><a href="http://hmqk1995.github.io">Luke 的自留地</a></li>
-                    
-                        <li><a href="http://ebnbin.com/">Ebn's Blog</a></li>
-                    
-                        <li><a href="http://blog.smdcn.net">SmdCn's Blog</a></li>
-                    
-                        <li><a href="http://xieminis.me/">解旻的博客</a></li>
-                    
-                        <li><a href="http://dhong.co">DHong Say</a></li>
-                    
-                        <li><a href="http://ingf.github.io/">尹峰以为</a></li>
-                    
-                        <li><a href="http://wepiaofei.github.io/blog/">前端神盾局</a></li>
                     
                 </ul>
                 
@@ -711,20 +794,11 @@ strongSelf.networkReachabilityStatusBlock(status);
                 <ul class="list-inline text-center">
                     
                     
-                    <li>
-                        <a href="https://twitter.com/northcity">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
 
                     <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
                     
                     <li>
-                        <a target="_blank" href="https://www.zhihu.com/people/chen-xi-18-69-64/activities">
+                        <a target="_blank" href="https://www.zhihu.com/people/北城">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa  fa-stack-1x fa-inverse">知</i>
@@ -734,7 +808,7 @@ strongSelf.networkReachabilityStatusBlock(status);
                     
                     
                     <li>
-                        <a target="_blank" href="https://weibo.com/p/1005055227295178/home?from=page_100505&mod=TAB#place">
+                        <a target="_blank" href="http://weibo.com/陈年小城">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
@@ -758,15 +832,17 @@ strongSelf.networkReachabilityStatusBlock(status);
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; NorthCity 2017
+                    Copyright &copy; 北城 2026
                     <br>
-                    Theme by <a href="www.northcity.top">Hux</a> |
+                    Theme by <a href="https://github.com/northcity">NorthCity</a> |
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                        src="https://ghbtns.com/github-btn.html?user=northcity&repo=northcity.github.io&type=star&count=true" >
                     </iframe>
+                    <a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备17036027号-1</a>
                 </p>
+                
             </div>
         </div>
     </div>

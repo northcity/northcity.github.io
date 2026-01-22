@@ -1,0 +1,28 @@
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-text">
+            © {{ site.time | date: '%Y' }} {{ site.author }} · 用产品和文字记录真实的独立开发之路
+        </div>
+        <div class="footer-links">
+            {% if site.github_username %}
+            <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            {% endif %}
+            {% if site.twitter_username %}
+            <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank" rel="noopener">
+                <i class="fab fa-twitter"></i> Twitter
+            </a>
+            {% endif %}
+            {% if site.weibo_username %}
+            <a href="https://weibo.com/{{ site.weibo_username }}" target="_blank" rel="noopener">
+                <i class="fab fa-weibo"></i> 微博
+            </a>
+            {% endif %}
+            <a href="{{ site.baseurl }}/feed.xml">
+                <i class="fas fa-rss"></i> RSS
+            </a>
+        </div>
+    </div>
+</footer>

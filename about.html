@@ -1,90 +1,107 @@
 ---
-layout: page
-title: "About"
-description: "Hey, this is NorthCity."
-header-img: "img/about-bg.jpg"
+layout: home
+title: 关于
+description: "关于北城 - 不是简历，是一个在现实中挣扎的个体"
 ---
 
-<!-- Language Selector -->
-<select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
-    <option value="0" selected> 中文 Chinese </option>
-    <option value="1"> 英文 English </option>
-</select>
-
-<!-- Chinese Version -->
-<div class="zh post-container">
-    {% capture about_zh %}{% include about/zh.md %}{% endcapture %}
-    {{ about_zh | markdownify }}
-</div>
-
-<!-- English Version -->
-<div class="en post-container">
-    {% capture about_en %}{% include about/en.md %}{% endcapture %}
-    {{ about_en | markdownify }}
-</div>
-
-<!-- Handle Language Change -->
-<script type="text/javascript">
-    // get nodes
-    var $zh = document.querySelector(".zh");
-    var $en = document.querySelector(".en");
-    var $select = document.querySelector("select");
-
-    // bind hashchange event
-    window.addEventListener('hashchange', _render);
-
-    // handle render
-    function _render(){
-        var _hash = window.location.hash;
-        // en
-        if(_hash == "#en"){
-            $select.selectedIndex = 1;
-            $en.style.display = "block";
-            $zh.style.display = "none";
-        // zh by default
-        }else{
-            // not trigger onChange, otherwise cause a loop call.
-            $select.selectedIndex = 0;
-            $zh.style.display = "block";
-            $en.style.display = "none";
-        }
-    }
-
-    // handle select change
-    function onLanChange(index){
-        if(index == 0){
-            window.location.hash = "#zh"
-        }else{
-            window.location.hash = "#en"
-        }
-    }
-
-    // init
-    _render();
-</script>
-
-
-{% if site.disqus_username %}
-<!-- disqus 评论框 start -->
-<div class="comment">
-    <div id="disqus_thread" class="disqus-thread">
-
+<div class="page-header">
+    <div class="page-header-content">
+        <h1 class="page-title">关于我</h1>
+        <p class="page-description">
+            这不是简历，这是一个在现实中挣扎的个体的自述。
+        </p>
     </div>
 </div>
-<!-- disqus 评论框 end -->
 
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "{{site.disqus_username}}";
-    var disqus_identifier = "{{site.disqus_username}}/{{page.url}}";
-    var disqus_url = "{{site.url}}{{page.url}}";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus 公共JS代码 end -->
-{% endif %}
+<div class="about-content">
+    <h2>我是谁</h2>
+    <p>
+        你好，我是北城，一个独立开发者。
+    </p>
+    <p>
+        我不是「全栈工程师」，也不是某个大厂的前员工。我只是一个想要用自己的方式做产品的人。
+        iOS 开发是我的主要技能，但我更关心的是：如何做出真正有人用的东西。
+    </p>
+    <p>
+        独立开发对我来说，不只是一份工作，而是一种选择——选择自己掌控时间，选择做自己相信的事，
+        选择承担不确定性带来的焦虑与自由。
+    </p>
+    
+    <h2>我在意什么</h2>
+    <ul>
+        <li><strong>长期主义</strong> —— 不追求爆款，追求能持续维护、持续改进的产品</li>
+        <li><strong>真实用户</strong> —— 10个真正在用的用户，比10000个下载了就删的用户更有意义</li>
+        <li><strong>心理状态</strong> —— 独立开发很容易陷入焦虑和自我怀疑，保持健康的心态是最重要的能力</li>
+        <li><strong>自我掌控感</strong> —— 能决定自己每天做什么、怎么做，这本身就是一种奢侈</li>
+    </ul>
+    
+    <h2>我的产品</h2>
+    <p>
+        目前我已经发布了 {{ site.my_products | size }} 款 App，包括：
+    </p>
+    <ul>
+        {% for product in site.my_products %}
+        {% if product.featured %}
+        <li><strong>{{ product.name }}</strong> —— {{ product.tagline }}{% if product.rating %}（{{ product.rating }}★）{% endif %}</li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    <p>
+        闪念获得了 App Store 编辑推荐，这是对独立开发者最大的认可。
+        但对我来说，最有意义的不是推荐本身，而是看到用户真的在用这些产品解决问题。
+    </p>
+    <p>
+        <a href="{{ site.baseurl }}/products/" style="color: var(--color-primary);">查看全部作品 →</a>
+    </p>
+    
+    <h2>我现在在做什么</h2>
+    <ul>
+        {% for work in site.current_work %}
+        <li>{{ work }}</li>
+        {% endfor %}
+    </ul>
+    <p>
+        坦白说，我还有很多不确定：下一个产品做什么、如何获得更多用户、如何平衡收入与热情...
+        但或许，这种不确定性本身就是独立开发的一部分。
+    </p>
+    
+    <h2>这个网站</h2>
+    <p>
+        这个网站是我所有内容与产品的「中枢」。
+    </p>
+    <p>
+        它不是为了炫技术，不是为了堆博客数量，也不是为了像公司官网。
+        它是为了记录——记录我真实走到了哪一步，而不是展示我有多厉害。
+    </p>
+    
+    <h2>联系我</h2>
+    <p>
+        如果你对我做的事情感兴趣，或者只是想聊聊独立开发，欢迎联系我：
+    </p>
+    <div style="display: flex; flex-wrap: wrap; gap: var(--space-md); margin-top: var(--space-md);">
+        {% if site.x_url %}
+        <a href="{{ site.x_url }}" target="_blank" class="btn btn-ghost" style="display: inline-flex; align-items: center; gap: var(--space-sm);">
+            <i class="fab fa-x-twitter"></i> X / Twitter
+        </a>
+        {% endif %}
+        {% if site.xiaohongshu_url %}
+        <a href="{{ site.xiaohongshu_url }}" target="_blank" class="btn btn-ghost" style="display: inline-flex; align-items: center; gap: var(--space-sm);">
+            <i class="fas fa-book-open"></i> 小红书
+        </a>
+        {% endif %}
+        {% if site.wechat_id %}
+        <span class="btn btn-ghost" style="display: inline-flex; align-items: center; gap: var(--space-sm); cursor: default;">
+            <i class="fab fa-weixin"></i> 微信: {{ site.wechat_id }}
+        </span>
+        {% endif %}
+        <a href="mailto:{{ site.email }}" class="btn btn-ghost" style="display: inline-flex; align-items: center; gap: var(--space-sm);">
+            <i class="fas fa-envelope"></i> 邮箱
+        </a>
+        <a href="https://github.com/{{ site.github_username }}" target="_blank" class="btn btn-ghost" style="display: inline-flex; align-items: center; gap: var(--space-sm);">
+            <i class="fab fa-github"></i> GitHub
+        </a>
+    </div>
+    <p style="margin-top: var(--space-lg);">
+        <a href="{{ site.baseurl }}/connect/" style="color: var(--color-primary);">查看所有联系方式 →</a>
+    </p>
+</div>

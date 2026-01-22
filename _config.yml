@@ -1,98 +1,258 @@
 # Site settings
-title: NorthCity
-SEOTitle: 北城的博客|NorthCity
+title: 北城
+SEOTitle: 北城 · 独立开发者 | NorthCity
 header-img: img/common/home-bg.jpg
-email: northcitytime@sina.com
-description: "在这里探索iOS的一切。"
-keyword: "北城以北,北城的博客, beicheng,north city, northcity,陈希, 个人博客, 个人网站, 技术博客, iOS, Cocoa, Apple, WWDC, iPone, develop, 移动开发, APP, 设计模式, 最佳实践"
-url: "https://www.northcity.top"              # your host, for absolute URL
-baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
+email: 506343891@qq.com
+description: "我用产品、代码和文字，记录真实的独立开发之路。"
+description_en: "I build real apps that people use. Documenting the struggles, failures, and small wins of indie development."
+keyword: "北城, 独立开发者, indie developer, iOS开发, App开发, 闪念, 呼吸泡泡, Anpa, 数字遗产, 时间胶囊, 产品创作者, 独立开发, Swift, SwiftUI"
+url: "https://www.northcity.top"
+baseurl: ""
 
+# Default language (zh/en)
+lang: "zh"
 
+# Author Info
+author: 北城
+author_en: NorthCity
+tagline: "写代码、做产品、偶尔写点东西"
+tagline_en: "Code · Products · Occasionally Write"
+intro: "做了几个小 App，有人在用。这里记录一些开发中的想法和踩过的坑。"
+intro_en: "Made a few apps, some people use them. Sharing thoughts and lessons learned along the way."
+
+# Translations
+i18n:
+  zh:
+    nav_home: "首页"
+    nav_products: "作品"
+    nav_logs: "日志"
+    nav_essays: "文章"
+    nav_about: "关于"
+    nav_connect: "联系"
+    hero_label: "独立开发者 / 产品创作者 / 思考者"
+    hero_cta_products: "查看我的作品"
+    hero_cta_logs: "我的开发日志"
+    hero_cta_about: "关于我"
+    section_featured: "精选作品"
+    section_featured_sub: "这些是最能代表我的产品"
+    section_more_products: "更多作品"
+    section_current: "最近在做"
+    section_values: "我更关心"
+    section_logs: "开发日志"
+    section_logs_sub: "独立开发的真实记录"
+    view_all: "查看全部"
+    app_store: "App Store"
+    web_version: "网页版"
+    ratings: "个评分"
+    contact_me: "联系我"
+    dark_mode: "暗色模式"
+    light_mode: "亮色模式"
+    language: "English"
+  en:
+    nav_home: "Home"
+    nav_products: "Products"
+    nav_logs: "Logs"
+    nav_essays: "Essays"
+    nav_about: "About"
+    nav_connect: "Connect"
+    hero_label: "Indie Developer / Product Creator / Thinker"
+    hero_cta_products: "View My Work"
+    hero_cta_logs: "Dev Logs"
+    hero_cta_about: "About Me"
+    section_featured: "Featured Products"
+    section_featured_sub: "Products that best represent my work"
+    section_more_products: "More Products"
+    section_current: "Currently Working On"
+    section_values: "What I Care About"
+    section_logs: "Dev Logs"
+    section_logs_sub: "Real stories from indie development"
+    view_all: "View All"
+    app_store: "App Store"
+    web_version: "Web Version"
+    ratings: "ratings"
+    contact_me: "Contact Me"
+    dark_mode: "Dark Mode"
+    light_mode: "Light Mode"
+    language: "中文"
 
 # SNS settings
 RSS: false
-weibo_username:     陈年小城
-zhihu_username:     北城
-github_username:    northcity
-twitter_username:   northcity
-#facebook_username:  northcity
-# linkedin_username:  firstname-lastname-idxxxx
-
-
+weibo_username: 陈年小城
+zhihu_username: 北城
+github_username: northcity
+x_url: "https://x.com/chenxi44779232?s=21"
+xiaohongshu_url: "https://xhslink.com/m/7ELB1JL5RId"
+wechat_id: "shine5211314"
 
 # Build settings
-# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
 highlighter: rouge
 permalink: pretty
-paginate: 30
+paginate: 10
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
-anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
-
-
+anchorjs: true
 
 # Gems
-# from PR#40, to support local preview for Jekyll 3.0
-gems: [jekyll-paginate]
-
-
+plugins: [jekyll-paginate]
 
 # Markdown settings
-# replace redcarpet to kramdown,
-# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
-# document: http://jekyllrb.com/docs/configuration/#kramdown
 markdown: kramdown
 kramdown:
-  input: GFM                            # use Github Flavored Markdown !important
+  input: GFM
 
-
+# Collections for Products/Logs
+collections:
+  products:
+    output: true
+    permalink: /products/:name/
+  logs:
+    output: true
+    permalink: /logs/:name/
 
 # Disqus settings
 disqus_username: northcity
 
-# Netease setttings
+# Netease settings
 netease_comment: false
 
-
-
 # Analytics settings
-# Baidu Analytics 
-# ba_track_id: [your track id]
-
-# Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
+ga_track_id: 'UA-49627206-1'
 ga_domain: northcity.top
 
-
-
 # Sidebar settings
-sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "正在努力探索iOS开发的最佳实践。"
-sidebar-avatar: /img/avatar-cx.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
-
-# sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
-
-
+sidebar: false
+sidebar-about-description: "用产品、代码和文字，记录真实的独立开发之路。"
+sidebar-avatar: /img/avatar-cx.jpg
 
 # Featured Tags
-featured-tags: true                     # whether or not using Feature-Tags
-featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
-
-
+featured-tags: true
+featured-condition-size: 1
 
 # Progressive Web Apps
-chrome-tab-theme-color: "#000000"
+chrome-tab-theme-color: "#1a1a1a"
 service-worker: true
 
+# 微信公众号
+wechat_mp:
+  - name: "时间胶囊-寄往未来的信"
+    description: "时间胶囊产品官方公众号"
+  - name: "北城的独立开发分享"
+    description: "独立开发经验与思考分享"
 
+# Products - 作品列表 (使用 my_products 避免与 collections 冲突)
+my_products:
+  - name: "闪念"
+    tagline: "AI 语音笔记，记录你一闪而过的灵感"
+    description: "开口即可记录，AI 自动整理。App Store 编辑推荐，效率工具前5名。"
+    icon: "/img/chanpinicon/闪念-AI语音笔记.png"
+    platforms: ["iOS", "iPadOS", "watchOS", "Mac"]
+    status: "持续更新"
+    featured: true
+    rating: "4.6"
+    ratings_count: "593"
+    app_store: "https://apps.apple.com/cn/app/%E9%97%AA%E5%BF%B5-ai%E8%AF%AD%E9%9F%B3%E7%AC%94%E8%AE%B0/id1397149726"
+    website: "https://ideasnap.xyz"
+    
+  - name: "Anpa"
+    tagline: "AI 自动识别并安排你的每一件事"
+    description: "全新一代智能 GTD 工具，一句话快速记录，AI 自动分类待办与日程。"
+    icon: "/img/chanpinicon/Anpa图标最终版.png"
+    platforms: ["iOS", "watchOS"]
+    status: "新品"
+    featured: true
+    rating: "5.0"
+    ratings_count: "6"
+    app_store: "https://apps.apple.com/cn/app/anpa/id6757229797"
+    
+  - name: "呼吸泡泡"
+    tagline: "让呼吸可见，让压力可控"
+    description: "HRV 压力监测、AI 健康数据分析、引导式呼吸训练，Apple Watch 专属的压力管理工具。"
+    icon: "/img/chanpinicon/呼吸泡泡icon.png"
+    platforms: ["iOS", "iPadOS", "watchOS", "Mac"]
+    status: "持续更新"
+    featured: true
+    rating: "4.5"
+    ratings_count: "49"
+    app_store: "https://apps.apple.com/cn/app/%E5%91%BC%E5%90%B8%E6%B3%A1%E6%B3%A1/id6743337849"
+    website: "https://www.breathebubbles.com/"
+    
+  - name: "数字遗产"
+    tagline: "当你没回应时，替你把重要的事交代清楚"
+    description: "生命确认与数字遗产管理工具，帮你在充满不确定的生活里把重要的事安排妥当。"
+    icon: "/img/chanpinicon/数字遗产icon.png"
+    platforms: ["iOS", "Mac"]
+    status: "新品"
+    featured: true
+    rating: "5.0"
+    ratings_count: "3"
+    app_store: "https://apps.apple.com/cn/app/%E6%95%B0%E5%AD%97%E9%81%97%E4%BA%A7-%E6%AD%A3%E7%89%88/id6757603587"
+
+  - name: "时间胶囊"
+    tagline: "寄往未来的信"
+    description: "给未来的自己或他人写一封信，在指定的日期送达。余生漫漫，未来可期。"
+    icon: "/img/chanpinicon/shijianjiaonangicon.png"
+    platforms: ["iOS", "iPadOS", "Mac", "Web"]
+    status: "持续更新"
+    featured: true
+    rating: "4.8"
+    ratings_count: "4053"
+    app_store: "https://apps.apple.com/cn/app/%E6%97%B6%E9%97%B4%E8%83%B6%E5%9B%8A-%E5%AF%84%E5%BE%80%E6%9C%AA%E6%9D%A5%E7%9A%84%E4%BF%A1/id1358237203"
+    website: "https://weiaifeijinxin.github.io"
+    
+  - name: "极简天气"
+    tagline: "不过是天气应用该有的样子"
+    description: "极致简洁，只让您关注天气。去掉多余的信息流，还您纯净的使用体验。"
+    icon: "/img/chanpinicon/jijiantianqiicon.png"
+    platforms: ["iOS", "iPadOS", "watchOS", "Mac"]
+    status: "持续更新"
+    featured: false
+    rating: "4.5"
+    ratings_count: "1403"
+    app_store: "https://apps.apple.com/cn/app/%E6%9E%81%E7%AE%80%E5%A4%A9%E6%B0%94-%E6%B8%85%E6%96%B0%E7%BA%AF%E5%87%80%E7%9A%84%E5%A4%A9%E6%B0%94%E5%BA%94%E7%94%A8/id1508729793"
+
+  - name: "往后余生"
+    tagline: "恋人清单 - 情侣必做的100件小事"
+    description: "记录恋人余生时光的App，包含恋人必做的100件浪漫小事，保持恋爱新鲜感。"
+    icon: "/img/chanpinicon/wanghouyushengicon.png"
+    platforms: ["iOS", "iPadOS", "Mac"]
+    status: "持续更新"
+    featured: false
+    rating: "4.7"
+    ratings_count: "998"
+    app_store: "https://apps.apple.com/cn/app/%E5%BE%80%E5%90%8E%E4%BD%99%E7%94%9F/id1419939043"
+
+  - name: "九宫格切图"
+    tagline: "极简操作，一键生成九张图片"
+    description: "一键制作九宫格切图、心形拼图、长拼图，无广告，极简设计。"
+    icon: "/img/chanpinicon/jiugonggeqietuicon.png"
+    platforms: ["iOS", "iPadOS", "Mac"]
+    status: "稳定"
+    featured: false
+    rating: "4.7"
+    ratings_count: "1211"
+    app_store: "https://apps.apple.com/cn/app/%E4%B9%9D%E5%AE%AB%E6%A0%BC%E5%88%87%E5%9B%BE-%E6%9E%81%E7%AE%80%E6%93%8D%E4%BD%9C/id1383797480"
+
+  - name: "舔狗日记"
+    tagline: "还原真实舔狗现场"
+    description: "好玩、有趣、无广告。收集好玩有趣的舔狗日记、摆摊日记、励志日记。"
+    icon: "/img/chanpinicon/tiangourijiicon.png"
+    platforms: ["iOS", "iPadOS", "Mac"]
+    status: "稳定"
+    featured: false
+    rating: "4.2"
+    ratings_count: "328"
+    app_store: "https://apps.apple.com/cn/app/%E8%88%94%E7%8B%97%E6%97%A5%E8%AE%B0-%E8%BF%98%E5%8E%9F%E7%9C%9F%E5%AE%9E%E8%88%94%E7%8B%97%E7%8E%B0%E5%9C%BA/id1516478419"
+
+# Currently Working On - 最近在做什么
+current_work:
+  - "持续迭代闪念 AI 语音笔记功能"
+  - "Anpa 智能 GTD 新功能开发"
+  - "记录独立开发的思考与成长"
+
+# Values - 我的价值观
+values:
+  - "一个产品是否真正被使用"
+  - "长期维护是否值得"
+  - "独立开发者如何活得更久"
 
 # Friends
-friends: [
-    {
-    #     title: "Su",
-    #     href: "http://su.gallery/"
-    # },{
-        title: "Nobody",
-        # href: "http://mida.re/"
-    }
-]
+friends: []

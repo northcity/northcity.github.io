@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="为什么想用 Flutter
+
+">
+    <meta name="keywords" content="技术, Flutter, SwiftUI, 跨平台">
+    <meta name="theme-color" content="#1a1a1a">
+    <meta name="author" content="北城">
+    
+    <title>从 SwiftUI 到 Flutter：一次失败的尝试 - 北城 · 独立开发者 | NorthCity</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="从 SwiftUI 到 Flutter：一次失败的尝试">
+    <meta property="og:description" content="为什么想用 Flutter
+
+">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://localhost:4000/logs/2025-10-08-flutter-attempt/">
+    
+    <meta property="og:image" content="http://localhost:4000/img/og-image.jpg">
+    
+
+    <!-- Article metadata -->
+    <meta property="article:published_time" content="2025-10-08T00:00:00+08:00">
+    <meta property="article:author" content="北城">
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/logs/2025-10-08-flutter-attempt/">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/northcity.css">
+    <link rel="stylesheet" href="/css/post.css">
+    
+    <!-- Font Awesome -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+<body>
+    <!-- Navigation -->
+<nav class="nav">
+    <div class="nav-container">
+        <a href="/" class="nav-brand">
+            <span data-lang-show="zh">北城</span>
+            <span data-lang-show="en">NorthCity</span>
+        </a>
+        
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <ul class="nav-links">
+            <li>
+                <a href="/" >
+                    <span data-i18n="nav_home" data-zh="首页" data-en="Home">首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/products/" >
+                    <span data-i18n="nav_products" data-zh="作品" data-en="Products">作品</span>
+                </a>
+            </li>
+            <li>
+                <a href="/logs/" class="active">
+                    <span data-i18n="nav_logs" data-zh="日志" data-en="Logs">日志</span>
+                </a>
+            </li>
+            <li>
+                <a href="/essays/" >
+                    <span data-i18n="nav_essays" data-zh="文章" data-en="Essays">文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/" >
+                    <span data-i18n="nav_about" data-zh="关于" data-en="About">关于</span>
+                </a>
+            </li>
+            <li>
+                <a href="/connect/" >
+                    <span data-i18n="nav_connect" data-zh="联系" data-en="Connect">联系</span>
+                </a>
+            </li>
+        </ul>
+        
+        <div class="site-settings">
+            <button id="lang-toggle" class="settings-btn" aria-label="Toggle language">
+                <i class="fas fa-globe"></i>
+                <span>EN</span>
+            </button>
+            <button id="theme-toggle" class="settings-btn" aria-label="Toggle theme" data-dark-text="暗色" data-light-text="亮色">
+                <i class="fas fa-moon"></i>
+                <span>暗色</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<script src="/js/site-settings.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    toggle.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.nav')) {
+            navLinks.classList.remove('active');
+        }
+    });
+});
+</script>
+
+
+    <article class="post">
+        <header class="post-header">
+            <div class="container-narrow">
+                <div class="post-meta">
+                    <time datetime="2025-10-08T00:00:00+08:00">
+                        2025年10月08日
+                    </time>
+                    
+                    <span class="post-category"></span>
+                    
+                </div>
+                <h1 class="post-title">从 SwiftUI 到 Flutter：一次失败的尝试</h1>
+                
+            </div>
+        </header>
+
+        <div class="post-content">
+            <div class="container-narrow">
+                <h2 id="为什么想用-flutter">为什么想用 Flutter</h2>
+
+<p>作为 iOS 独立开发者，我一直有一个痛点：Android 用户的请求。</p>
+
+<p>“什么时候出安卓版？”</p>
+
+<p>这个问题我收到了无数次。</p>
+
+<p>所以今年我决定尝试一下 Flutter，看看能不能同时覆盖两个平台。</p>
+
+<h2 id="学习过程">学习过程</h2>
+
+<p>花了大约 3 周时间系统学习 Flutter：</p>
+
+<ul>
+  <li>官方文档</li>
+  <li>YouTube 教程</li>
+  <li>实际动手写了几个 Demo</li>
+</ul>
+
+<p>整体体验还不错，Dart 语言上手比较快，Hot Reload 确实很爽。</p>
+
+<h2 id="尝试迁移闪念">尝试迁移闪念</h2>
+
+<p>我选择了闪念作为试验田，尝试用 Flutter 重写核心功能。</p>
+
+<h3 id="遇到的问题">遇到的问题</h3>
+
+<h4 id="1-音频处理">1. 音频处理</h4>
+
+<p>闪念的核心是语音录制。在 Flutter 里处理音频比 iOS 原生复杂很多：</p>
+<ul>
+  <li>需要写 Platform Channel</li>
+  <li>第三方库的质量参差不齐</li>
+  <li>一些 iOS 特性无法完美复现</li>
+</ul>
+
+<h4 id="2-ui-细节">2. UI 细节</h4>
+
+<p>虽然 Flutter 的 UI 能力很强，但要做到和原生 iOS 一样的质感，需要付出大量额外努力：</p>
+<ul>
+  <li>滑动的物理效果</li>
+  <li>键盘交互</li>
+  <li>系统控件的一致性</li>
+</ul>
+
+<h4 id="3-包体积">3. 包体积</h4>
+
+<p>Flutter 打包后的体积比原生大很多，这对一个”极简”定位的 App 来说不太理想。</p>
+
+<h2 id="最终决定">最终决定</h2>
+
+<p>经过 2 个月的尝试，我决定放弃 Flutter 方案。</p>
+
+<p>原因不是 Flutter 不好，而是：</p>
+
+<ol>
+  <li><strong>投入产出比</strong>：迁移成本太高，可能需要半年以上</li>
+  <li><strong>质量妥协</strong>：无法达到原生的品质标准</li>
+  <li><strong>维护成本</strong>：需要同时维护两套逻辑</li>
+</ol>
+
+<h2 id="现在的计划">现在的计划</h2>
+
+<p>暂时专注 iOS 平台，把产品做到极致。</p>
+
+<p>对于 Android 需求，考虑：</p>
+<ul>
+  <li>某些产品做纯 Web 版（如时间胶囊）</li>
+  <li>等 Swift 跨平台方案成熟</li>
+  <li>或者未来招一个 Android 开发</li>
+</ul>
+
+<h2 id="反思">反思</h2>
+
+<p>这次”失败”其实很有价值：</p>
+
+<ol>
+  <li>亲身验证了跨平台的利弊</li>
+  <li>学习了新技术，拓宽视野</li>
+  <li>更坚定了专注的决心</li>
+</ol>
+
+<p>有时候，知道什么不该做，和知道什么该做一样重要。</p>
+
+            </div>
+        </div>
+
+        <footer class="post-footer">
+            <div class="container-narrow">
+                
+                <div class="post-tags">
+                    
+                    <a href="/tags/#技术" class="tag">技术</a>
+                    
+                    <a href="/tags/#Flutter" class="tag">Flutter</a>
+                    
+                    <a href="/tags/#SwiftUI" class="tag">SwiftUI</a>
+                    
+                    <a href="/tags/#跨平台" class="tag">跨平台</a>
+                    
+                </div>
+                
+                
+                <div class="post-nav">
+                    
+                    
+                    
+                    <a href="/logs/2025-11-15-shannian-featured/" class="post-nav-next">
+                        <span class="post-nav-label">下一篇 →</span>
+                        <span class="post-nav-title">闪念获得 App Store 编辑推荐的背后</span>
+                    </a>
+                    
+                </div>
+            </div>
+        </footer>
+    </article>
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-text">
+            © 2026 北城 · 用产品和文字记录真实的独立开发之路
+        </div>
+        <div class="footer-links">
+            
+            <a href="https://github.com/northcity" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            
+            
+            
+            <a href="https://weibo.com/陈年小城" target="_blank" rel="noopener">
+                <i class="fab fa-weibo"></i> 微博
+            </a>
+            
+            <a href="/feed.xml">
+                <i class="fas fa-rss"></i> RSS
+            </a>
+        </div>
+    </div>
+</footer>
+
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

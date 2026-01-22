@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ page.excerpt | default: page.description | default: site.description | strip_html | truncate: 160 }}">
+    <meta name="keywords" content="{{ page.tags | join: ', ' | default: site.keyword }}">
+    <meta name="theme-color" content="{{ site.chrome-tab-theme-color }}">
+    <meta name="author" content="{{ page.author | default: site.author }}">
+    
+    <title>{{ page.title }} - {{ site.SEOTitle }}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ page.title }}">
+    <meta property="og:description" content="{{ page.excerpt | default: page.description | default: site.description | strip_html | truncate: 160 }}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    {% if page.header-img %}
+    <meta property="og:image" content="{{ site.url }}{{ page.header-img }}">
+    {% else %}
+    <meta property="og:image" content="{{ site.url }}/img/og-image.jpg">
+    {% endif %}
+
+    <!-- Article metadata -->
+    <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+    <meta property="article:author" content="{{ site.author }}">
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="{{ site.baseurl }}/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ site.baseurl }}/img/favicon.ico">
+    <link rel="apple-touch-icon" href="{{ site.baseurl }}/img/apple-touch-icon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/northcity.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/post.css">
+    
+    <!-- Font Awesome -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/syntax.css">
+</head>
+<body>
+    {% include nav-new.html %}
+
+    <article class="post">
+        <header class="post-header">
+            <div class="container-narrow">
+                <div class="post-meta">
+                    <time datetime="{{ page.date | date_to_xmlschema }}">
+                        {{ page.date | date: "%Y年%m月%d日" }}
+                    </time>
+                    {% if page.categories %}
+                    <span class="post-category">{{ page.categories | first }}</span>
+                    {% endif %}
+                </div>
+                <h1 class="post-title">{{ page.title }}</h1>
+                {% if page.subtitle %}
+                <p class="post-subtitle">{{ page.subtitle }}</p>
+                {% endif %}
+            </div>
+        </header>
+
+        <div class="post-content">
+            <div class="container-narrow">
+                {{ content }}
+            </div>
+        </div>
+
+        <footer class="post-footer">
+            <div class="container-narrow">
+                {% if page.tags.size > 0 %}
+                <div class="post-tags">
+                    {% for tag in page.tags %}
+                    <a href="{{ site.baseurl }}/tags/#{{ tag }}" class="tag">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <div class="post-nav">
+                    {% if page.previous %}
+                    <a href="{{ page.previous.url }}" class="post-nav-prev">
+                        <span class="post-nav-label">← 上一篇</span>
+                        <span class="post-nav-title">{{ page.previous.title }}</span>
+                    </a>
+                    {% endif %}
+                    
+                    {% if page.next %}
+                    <a href="{{ page.next.url }}" class="post-nav-next">
+                        <span class="post-nav-label">下一篇 →</span>
+                        <span class="post-nav-title">{{ page.next.title }}</span>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </footer>
+    </article>
+
+    {% include footer-new.html %}
+
+    <script src="{{ site.baseurl }}/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="概览
+
+">
+    <meta name="keywords" content="年度总结, 独立开发, 复盘">
+    <meta name="theme-color" content="#1a1a1a">
+    <meta name="author" content="北城">
+    
+    <title>2025 年度总结：独立开发第 7 年 - 北城 · 独立开发者 | NorthCity</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="2025 年度总结：独立开发第 7 年">
+    <meta property="og:description" content="概览
+
+">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://localhost:4000/logs/2025-12-31-2025-annual-review/">
+    
+    <meta property="og:image" content="http://localhost:4000/img/og-image.jpg">
+    
+
+    <!-- Article metadata -->
+    <meta property="article:published_time" content="2025-12-31T00:00:00+08:00">
+    <meta property="article:author" content="北城">
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/logs/2025-12-31-2025-annual-review/">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/northcity.css">
+    <link rel="stylesheet" href="/css/post.css">
+    
+    <!-- Font Awesome -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+<body>
+    <!-- Navigation -->
+<nav class="nav">
+    <div class="nav-container">
+        <a href="/" class="nav-brand">
+            <span data-lang-show="zh">北城</span>
+            <span data-lang-show="en">NorthCity</span>
+        </a>
+        
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <ul class="nav-links">
+            <li>
+                <a href="/" >
+                    <span data-i18n="nav_home" data-zh="首页" data-en="Home">首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/products/" >
+                    <span data-i18n="nav_products" data-zh="作品" data-en="Products">作品</span>
+                </a>
+            </li>
+            <li>
+                <a href="/logs/" class="active">
+                    <span data-i18n="nav_logs" data-zh="日志" data-en="Logs">日志</span>
+                </a>
+            </li>
+            <li>
+                <a href="/essays/" >
+                    <span data-i18n="nav_essays" data-zh="文章" data-en="Essays">文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/" >
+                    <span data-i18n="nav_about" data-zh="关于" data-en="About">关于</span>
+                </a>
+            </li>
+            <li>
+                <a href="/connect/" >
+                    <span data-i18n="nav_connect" data-zh="联系" data-en="Connect">联系</span>
+                </a>
+            </li>
+        </ul>
+        
+        <div class="site-settings">
+            <button id="lang-toggle" class="settings-btn" aria-label="Toggle language">
+                <i class="fas fa-globe"></i>
+                <span>EN</span>
+            </button>
+            <button id="theme-toggle" class="settings-btn" aria-label="Toggle theme" data-dark-text="暗色" data-light-text="亮色">
+                <i class="fas fa-moon"></i>
+                <span>暗色</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<script src="/js/site-settings.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    toggle.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.nav')) {
+            navLinks.classList.remove('active');
+        }
+    });
+});
+</script>
+
+
+    <article class="post">
+        <header class="post-header">
+            <div class="container-narrow">
+                <div class="post-meta">
+                    <time datetime="2025-12-31T00:00:00+08:00">
+                        2025年12月31日
+                    </time>
+                    
+                    <span class="post-category"></span>
+                    
+                </div>
+                <h1 class="post-title">2025 年度总结：独立开发第 7 年</h1>
+                
+            </div>
+        </header>
+
+        <div class="post-content">
+            <div class="container-narrow">
+                <h2 id="概览">概览</h2>
+
+<p>2025 年是我全职独立开发的第 7 年。</p>
+
+<p>这一年有惊喜，有失落，总体来说是向好的一年。</p>
+
+<h2 id="数据回顾">数据回顾</h2>
+
+<h3 id="收入">收入</h3>
+
+<ul>
+  <li>总收入：比去年增长 42%</li>
+  <li>主要来源：闪念 (55%)、时间胶囊 (25%)、其他 (20%)</li>
+  <li>付费用户增长：35%</li>
+</ul>
+
+<h3 id="产品">产品</h3>
+
+<ul>
+  <li>发布新产品：2 个（Anpa、数字遗产）</li>
+  <li>产品更新：47 次</li>
+  <li>修复 Bug：128 个</li>
+</ul>
+
+<h3 id="用户">用户</h3>
+
+<ul>
+  <li>累计用户：突破 100 万</li>
+  <li>月活跃用户：约 15 万</li>
+  <li>App Store 评分：平均 4.6</li>
+</ul>
+
+<h2 id="亮点时刻">亮点时刻</h2>
+
+<h3 id="-闪念获得编辑推荐">🎉 闪念获得编辑推荐</h3>
+
+<p>这是今年最大的惊喜。详细的故事我在另一篇日志里写过。</p>
+
+<h3 id="-anpa-从-0-到-1">🚀 Anpa 从 0 到 1</h3>
+
+<p>从构思到上线花了 6 个月，虽然数据还不理想，但这是我很喜欢的一个产品。</p>
+
+<h3 id="-数字遗产一个不一样的产品">💡 数字遗产：一个不一样的产品</h3>
+
+<p>这个产品的灵感来自一次对生命的思考。虽然比较小众，但每一个用户都很认真在使用。</p>
+
+<h2 id="踩过的坑">踩过的坑</h2>
+
+<h3 id="1-过度设计">1. 过度设计</h3>
+
+<p>呼吸泡泡一开始设计得太复杂了，用户反馈看不懂。后来简化了 60% 的功能，反而效果更好。</p>
+
+<p><strong>教训：先做最小可用版本。</strong></p>
+
+<h3 id="2-忽视营销">2. 忽视营销</h3>
+
+<p>作为工程师出身，我一直不太重视营销。但今年意识到，酒香也怕巷子深。</p>
+
+<p><strong>教训：产品和营销同样重要。</strong></p>
+
+<h3 id="3-健康问题">3. 健康问题</h3>
+
+<p>连续几个月高强度工作，身体出了问题。</p>
+
+<p><strong>教训：没有健康，一切都是零。</strong></p>
+
+<h2 id="2026-年计划">2026 年计划</h2>
+
+<ol>
+  <li><strong>Anpa</strong>：成为主力产品</li>
+  <li><strong>闪念</strong>：继续深化 AI 功能</li>
+  <li><strong>新产品</strong>：至少尝试 1 个新方向</li>
+  <li><strong>内容</strong>：保持每月 2 篇日志的更新</li>
+  <li><strong>健康</strong>：每周运动至少 3 次</li>
+</ol>
+
+<h2 id="写在最后">写在最后</h2>
+
+<p>独立开发不是一条轻松的路，但它让我能按自己的方式生活和工作。</p>
+
+<p>感谢每一位用户，是你们让这一切成为可能。</p>
+
+<p>2026，继续加油。</p>
+
+            </div>
+        </div>
+
+        <footer class="post-footer">
+            <div class="container-narrow">
+                
+                <div class="post-tags">
+                    
+                    <a href="/tags/#年度总结" class="tag">年度总结</a>
+                    
+                    <a href="/tags/#独立开发" class="tag">独立开发</a>
+                    
+                    <a href="/tags/#复盘" class="tag">复盘</a>
+                    
+                </div>
+                
+                
+                <div class="post-nav">
+                    
+                    <a href="/logs/2025-12-20-minimal-weather-4-0/" class="post-nav-prev">
+                        <span class="post-nav-label">← 上一篇</span>
+                        <span class="post-nav-title">极简天气 4.0：回归初心的一次重构</span>
+                    </a>
+                    
+                    
+                    
+                    <a href="/logs/2026-01-10-anpa-launch/" class="post-nav-next">
+                        <span class="post-nav-label">下一篇 →</span>
+                        <span class="post-nav-title">Anpa 正式上线：一个新的开始</span>
+                    </a>
+                    
+                </div>
+            </div>
+        </footer>
+    </article>
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-text">
+            © 2026 北城 · 用产品和文字记录真实的独立开发之路
+        </div>
+        <div class="footer-links">
+            
+            <a href="https://github.com/northcity" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            
+            
+            
+            <a href="https://weibo.com/陈年小城" target="_blank" rel="noopener">
+                <i class="fab fa-weibo"></i> 微博
+            </a>
+            
+            <a href="/feed.xml">
+                <i class="fas fa-rss"></i> RSS
+            </a>
+        </div>
+    </div>
+</footer>
+
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

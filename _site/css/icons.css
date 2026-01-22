@@ -1,0 +1,44 @@
+/* ===================================
+   Custom Social Icons (SVG)
+   =================================== */
+
+/* X (Twitter) Icon */
+.icon-x {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+/* 小红书 (RED/Xiaohongshu) Icon */
+.icon-xiaohongshu {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-13H8v6h2v-4h1v4h2v-4h1v4h2V7h-2v4h-1V7h-2v4h-1V7z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+/* Alternative: 小红书 with Chinese character style */
+.icon-red {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2em;
+  height: 1.2em;
+  background: #ff2442;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.7em;
+  font-weight: bold;
+}
+
+/* Icon in dark mode */
+[data-theme="dark"] .icon-x {
+  filter: invert(1);
+}

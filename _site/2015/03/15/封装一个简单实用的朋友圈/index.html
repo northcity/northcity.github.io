@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="在这里探索iOS的一切。">
-    <meta name="keywords"  content="北城以北,北城的博客, beicheng,north city, northcity,陈希, 个人博客, 个人网站, 技术博客, iOS, Cocoa, Apple, WWDC, iPone, develop, 移动开发, APP, 设计模式, 最佳实践">
-    <meta name="theme-color" content="#000000">
+    <meta name="description" content="我用产品、代码和文字，记录真实的独立开发之路。">
+    <meta name="keywords"  content="北城, 独立开发者, indie developer, iOS开发, App开发, 闪念, 呼吸泡泡, Anpa, 数字遗产, 时间胶囊, 产品创作者, 独立开发, Swift, SwiftUI">
+    <meta name="theme-color" content="#1a1a1a">
     
-    <title>封装一个简单实用的朋友圈 - 北城的博客|NorthCity</title>
+    <title>封装一个简单实用的朋友圈 - 北城 · 独立开发者 | NorthCity</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -31,9 +31,11 @@
     <link rel="stylesheet" href="/css/syntax.css">
 
     <!-- Custom Fonts -->
-    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Font Awesome 6 for modern icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- Custom Icons (X, 小红书, etc.) -->
+    <link rel="stylesheet" href="/css/icons.css">
 
 
     <!-- Hux Delete, sad but pending in China
@@ -69,7 +71,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">NorthCity</a>
+            <a class="navbar-brand" href="/">北城</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -81,7 +83,15 @@
                     </li>
                     
                     <li>
-                        <a href="/about/">About</a>
+                        <a href="/about/">关于</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/connect/">联系</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/essays/">文章</a>
                     </li>
                     
                     <li>
@@ -89,7 +99,35 @@
                     </li>
                     
                     <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/logs/">开发日志</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/products/">作品</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/send/">Send Letter</a>
+                    </li>
+                    
+                    <li>
                         <a href="/tags/">Tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/write/">Write</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page2/">首页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page3/">首页</a>
                     </li>
                     
                 </ul>
@@ -252,80 +290,80 @@
 
 <p>我们直接来看看怎么使用的把</p>
 
-<p>点开<code class="highlighter-rouge">WXViewController</code></p>
+<p>点开<code class="language-plaintext highlighter-rouge">WXViewController</code></p>
 
 <p>导包并且声明变量，变量在实现接下来的实现中会进行初始化</p>
 
-<pre><code class="language-objectivec">#import "WXViewController.h"
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#import "WXViewController.h"
 #import "YMTableViewCell.h"
 #import "ContantHead.h"
 #import "YMShowImageView.h"
 #import "YMTextData.h"
 #import "YMReplyInputView.h"
-
-#define dataCount 10
+</span>
+<span class="cp">#define dataCount 10
 #define kLocationToBottom 20
 #define kAdmin @"小虎-tiger"
+</span>
 
+<span class="k">@interface</span> <span class="nc">WXViewController</span> <span class="p">()</span><span class="o">&lt;</span><span class="n">UITableViewDataSource</span><span class="p">,</span><span class="n">UITableViewDelegate</span><span class="p">,</span><span class="n">cellDelegate</span><span class="p">,</span><span class="n">InputDelegate</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">_imageDataSource</span><span class="p">;</span>
 
-@interface WXViewController ()&lt;UITableViewDataSource,UITableViewDelegate,cellDelegate,InputDelegate&gt;
-{
-NSMutableArray *_imageDataSource;
+<span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">_contentDataSource</span><span class="p">;</span><span class="c1">//模拟接口给的数据</span>
 
-NSMutableArray *_contentDataSource;//模拟接口给的数据
+<span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">_tableDataSource</span><span class="p">;</span><span class="c1">//tableview数据源</span>
 
-NSMutableArray *_tableDataSource;//tableview数据源
+<span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">_shuoshuoDatasSource</span><span class="p">;</span><span class="c1">//说说数据源</span>
 
-NSMutableArray *_shuoshuoDatasSource;//说说数据源
+<span class="n">UITableView</span> <span class="o">*</span><span class="n">mainTable</span><span class="p">;</span>
 
-UITableView *mainTable;
+<span class="n">UIButton</span> <span class="o">*</span><span class="n">replyBtn</span><span class="p">;</span>
 
-UIButton *replyBtn;
-
-YMReplyInputView *replyView ;
-}
-@end  
-</code></pre>
+<span class="n">YMReplyInputView</span> <span class="o">*</span><span class="n">replyView</span> <span class="p">;</span>
+<span class="p">}</span>
+<span class="k">@end</span>  
+</code></pre></div></div>
 
 <p>这三个方法分别构建初始化了一个tableview，初始化并赋值图片数据，初始化并赋值其他数据</p>
 
-<pre><code class="language-objectivec">- (void) initTableview;
-- (void)configImageData;
-- (void)loadTextData;
-</code></pre>
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">initTableview</span><span class="p">;</span>
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">configImageData</span><span class="p">;</span>
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">loadTextData</span><span class="p">;</span>
+</code></pre></div></div>
 
-<p>在<code class="highlighter-rouge">loadTextData中</code>会将数据包装成YMTextData的数组，这样一个tableCell里面的数据就使用一个YMTextData的数据</p>
+<p>在<code class="language-plaintext highlighter-rouge">loadTextData中</code>会将数据包装成YMTextData的数组，这样一个tableCell里面的数据就使用一个YMTextData的数据</p>
 
-<p>然后在<code class="highlighter-rouge">- (void)calculateHeight:(NSMutableArray *)dataArray</code>中会计算出数据所占用view的高度 这里面也就实现了 我们需求里面可以扩展可以收缩的功能</p>
+<p>然后在<code class="language-plaintext highlighter-rouge">- (void)calculateHeight:(NSMutableArray *)dataArray</code>中会计算出数据所占用view的高度 这里面也就实现了 我们需求里面可以扩展可以收缩的功能</p>
 
 <p>计算完高度然后就重新加载tableview了 然后tableview的各种delegate方法 各种datasource方法就呼呼的运行了</p>
 
-<p>其中 以下方法中又再次使用了我们在<code class="highlighter-rouge">- (void)calculateHeight:(NSMutableArray *)dataArray</code>方法中计算出来的高度来设置tablecell的高度</p>
+<p>其中 以下方法中又再次使用了我们在<code class="language-plaintext highlighter-rouge">- (void)calculateHeight:(NSMutableArray *)dataArray</code>方法中计算出来的高度来设置tablecell的高度</p>
 
-<pre><code class="language-objectivec">- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-YMTextData *ym = [_tableDataSource objectAtIndex:indexPath.row];
-BOOL unfold = ym.foldOrNot;
-return TableHeader + kLocationToBottom + ym.replyHeight + ym.showImageHeight + kDistance + (ym.islessLimit?0:30) + (unfold?ym.shuoshuoHeight:ym.unFoldShuoHeight) + kReplyBtnDistance;
-}
-</code></pre>
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">-</span> <span class="p">(</span><span class="n">CGFloat</span><span class="p">)</span><span class="nf">tableView</span><span class="p">:(</span><span class="n">UITableView</span> <span class="o">*</span><span class="p">)</span><span class="nv">tableView</span> <span class="nf">heightForRowAtIndexPath</span><span class="p">:(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span> <span class="p">{</span>
+<span class="n">YMTextData</span> <span class="o">*</span><span class="n">ym</span> <span class="o">=</span> <span class="p">[</span><span class="n">_tableDataSource</span> <span class="nf">objectAtIndex</span><span class="p">:</span><span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">];</span>
+<span class="n">BOOL</span> <span class="n">unfold</span> <span class="o">=</span> <span class="n">ym</span><span class="p">.</span><span class="n">foldOrNot</span><span class="p">;</span>
+<span class="k">return</span> <span class="n">TableHeader</span> <span class="o">+</span> <span class="n">kLocationToBottom</span> <span class="o">+</span> <span class="n">ym</span><span class="p">.</span><span class="n">replyHeight</span> <span class="o">+</span> <span class="n">ym</span><span class="p">.</span><span class="n">showImageHeight</span> <span class="o">+</span> <span class="n">kDistance</span> <span class="o">+</span> <span class="p">(</span><span class="n">ym</span><span class="p">.</span><span class="n">islessLimit</span><span class="p">?</span><span class="mi">0</span><span class="p">:</span><span class="mi">30</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">unfold</span><span class="p">?</span><span class="n">ym</span><span class="p">.</span><span class="n">shuoshuoHeight</span><span class="p">:</span><span class="n">ym</span><span class="p">.</span><span class="n">unFoldShuoHeight</span><span class="p">)</span> <span class="o">+</span> <span class="n">kReplyBtnDistance</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>以下这个方法又把YMTextData 赋值给了YMTableViewCell</p>
 
-<pre><code class="language-objectivec">- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-static NSString *CellIdentifier = @"ILTableViewCell";
-YMTableViewCell *cell = (YMTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-if (cell == nil) {
-cell = [[YMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-}
-cell.stamp = indexPath.row;
-cell.replyBtn.tag = indexPath.row;
-cell.replyBtn.appendIndexPath = indexPath;
-[cell.replyBtn addTarget:self action:@selector(replyAction:) forControlEvents:UIControlEventTouchUpInside];
-cell.delegate = self;
-[cell setYMViewWith:[_tableDataSource objectAtIndex:indexPath.row]];
-return cell;
-}
-</code></pre>
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">-</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)</span><span class="nf">tableView</span><span class="p">:(</span><span class="n">UITableView</span> <span class="o">*</span><span class="p">)</span><span class="nv">tableView</span> <span class="nf">cellForRowAtIndexPath</span><span class="p">:(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span><span class="p">{</span>
+<span class="k">static</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">CellIdentifier</span> <span class="o">=</span> <span class="s">@"ILTableViewCell"</span><span class="p">;</span>
+<span class="n">YMTableViewCell</span> <span class="o">*</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">YMTableViewCell</span> <span class="o">*</span><span class="p">)[</span><span class="n">tableView</span> <span class="nf">dequeueReusableCellWithIdentifier</span><span class="p">:</span><span class="n">CellIdentifier</span><span class="p">];</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">cell</span> <span class="o">==</span> <span class="nb">nil</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">cell</span> <span class="o">=</span> <span class="p">[[</span><span class="n">YMTableViewCell</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithStyle</span><span class="p">:</span><span class="n">UITableViewCellStyleDefault</span> <span class="nf">reuseIdentifier</span><span class="p">:</span><span class="n">CellIdentifier</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="n">cell</span><span class="p">.</span><span class="n">stamp</span> <span class="o">=</span> <span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">;</span>
+<span class="n">cell</span><span class="p">.</span><span class="n">replyBtn</span><span class="p">.</span><span class="n">tag</span> <span class="o">=</span> <span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">;</span>
+<span class="n">cell</span><span class="p">.</span><span class="n">replyBtn</span><span class="p">.</span><span class="n">appendIndexPath</span> <span class="o">=</span> <span class="n">indexPath</span><span class="p">;</span>
+<span class="p">[</span><span class="n">cell</span><span class="p">.</span><span class="n">replyBtn</span> <span class="nf">addTarget</span><span class="p">:</span><span class="n">self</span> <span class="nf">action</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">replyAction</span><span class="o">:</span><span class="p">)</span> <span class="n">forControlEvents</span><span class="o">:</span><span class="n">UIControlEventTouchUpInside</span><span class="p">];</span>
+<span class="n">cell</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+<span class="p">[</span><span class="n">cell</span> <span class="nf">setYMViewWith</span><span class="p">:[</span><span class="n">_tableDataSource</span> <span class="nf">objectAtIndex</span><span class="p">:</span><span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">]];</span>
+<span class="k">return</span> <span class="n">cell</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>阿拉巴拉…… 呼呼</p>
 
@@ -347,26 +385,26 @@ return cell;
 
 <p>有了愿望，急着召唤神龙也没用！规则是要集齐龙珠呀！！！好我们先干起来！整容WXViewController！！！</p>
 
-<p>我们要开发一个东西就叫做 “朋友圈模板”吧 在“朋友圈模板.h”中要有一个“朋友圈模板Delegate” 然后里面要有一个方法<code class="highlighter-rouge">-(返回的数据*)每行朋友圈的数据:index;</code></p>
+<p>我们要开发一个东西就叫做 “朋友圈模板”吧 在“朋友圈模板.h”中要有一个“朋友圈模板Delegate” 然后里面要有一个方法<code class="language-plaintext highlighter-rouge">-(返回的数据*)每行朋友圈的数据:index;</code></p>
 
 <p>我们使用的时候就这样：</p>
 
-<pre><code class="language-objectivec">//真朋友圈.h
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//真朋友圈.h</span>
 
-@interface 真朋友圈 : 朋友圈模板&lt;朋友圈模板Delegate&gt; 
-@end
-真朋友圈.m
+<span class="k">@interface</span> <span class="err">真朋友圈</span> <span class="err">:</span> <span class="err">朋友圈模板&lt;朋友圈模板</span><span class="nc">Delegate</span><span class="o">&gt;</span> 
+<span class="k">@end</span>
+<span class="err">真朋友圈</span><span class="p">.</span><span class="n">m</span>
 
-@implementation 真朋友圈
-- (void)viewDidLoad {
-self.delegate = self;
-}
+<span class="k">@implementation</span> <span class="err">真朋友圈</span>
+<span class="err">-</span> <span class="err">(</span><span class="nc">void</span><span class="p">)</span><span class="n">viewDidLoad</span> <span class="p">{</span>
+<span class="n">self</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+<span class="p">}</span>
 
--(返回的数据*)每行朋友圈的数据:index{
-return [朋友圈数据数组 objectAtIndex:index];
-}
-@end
-</code></pre>
+<span class="o">-</span><span class="p">(</span><span class="err">返回的数据</span><span class="o">*</span><span class="p">)</span><span class="err">每行朋友圈的数据</span><span class="o">:</span><span class="n">index</span><span class="p">{</span>
+<span class="k">return</span> <span class="p">[</span><span class="err">朋友圈数据数组</span> <span class="nf">objectAtIndex</span><span class="p">:</span><span class="n">index</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="k">@end</span>
+</code></pre></div></div>
 
 <p>这样就好了！你就再也不用关心朋友圈怎么实现了 你只要关系你的数据部分！！就问你Nice不Nice？？？</p>
 
@@ -374,152 +412,152 @@ return [朋友圈数据数组 objectAtIndex:index];
 
 <p>博主就手把手教你怎么写这个“朋友圈模板.m”吧 嘻嘻嘻 手把手哦 呵呵呵 手 把 手哟 博主是很有爱的哦~~~~</p>
 
-<p>我们要开发一个<code class="highlighter-rouge">DDRichTextViewController</code>来代替<code class="highlighter-rouge">WXViewController</code> &lt;——这个太难用了</p>
+<p>我们要开发一个<code class="language-plaintext highlighter-rouge">DDRichTextViewController</code>来代替<code class="language-plaintext highlighter-rouge">WXViewController</code> &lt;——这个太难用了</p>
 
-<p>我们先来写写<code class="highlighter-rouge">DDRichTextViewController.h</code>嘛</p>
+<p>我们先来写写<code class="language-plaintext highlighter-rouge">DDRichTextViewController.h</code>嘛</p>
 
-<pre><code class="language-objectivec">//学学系统组件 我们也来弄一个delegate和datasource~ 其实都是delegate为了更好地区分功能，datasource主要用来设置数据有关
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//学学系统组件 我们也来弄一个delegate和datasource~ 其实都是delegate为了更好地区分功能，datasource主要用来设置数据有关</span>
 
-@protocol DDRichTextViewDelegate 
-@required
--(NSString*)senderName;//必须要实现！不然评论别人的时候没名字 最恨匿名渣渣，自己叫的名字都不敢直接说！！“有谁知道我买充气娃娃都匿名呢 呵呵，啊？为什么我心里想的会变成文字显示出来！！！纳尼！！”
-@optional
--(BOOL)hideReplyButtonForIndex:(NSInteger)index;//是否隐藏回复按钮，有时候我们不让人回复 就把回复按钮隐藏起来了
--(void)didPromulgatorPressForIndex:(NSInteger)index name:(NSString*)name;//发布者的头像或者名字被点击
--(void)didRichTextPressedFromText:(NSString*)text index:(NSInteger)index;//正文的富文本被点击的回调
--(void)didRichTextPressedFromText:(NSString*)text index:(NSInteger)index replyIndex:(NSInteger)replyIndex;//评论的富文本被点击的回调
--(void)replyForIndex:(NSInteger)index replyText:(NSString*)text;//回复文字的内容的回调
-@end
+<span class="k">@protocol</span> <span class="nc">DDRichTextViewDelegate</span> 
+<span class="err">@required</span>
+<span class="k">-</span><span class="p">(</span><span class="n">NSString</span><span class="o">*</span><span class="p">)</span><span class="n">senderName</span><span class="p">;</span><span class="c1">//必须要实现！不然评论别人的时候没名字 最恨匿名渣渣，自己叫的名字都不敢直接说！！“有谁知道我买充气娃娃都匿名呢 呵呵，啊？为什么我心里想的会变成文字显示出来！！！纳尼！！”</span>
+<span class="k">@optional</span>
+<span class="k">-</span><span class="p">(</span><span class="n">BOOL</span><span class="p">)</span><span class="nf">hideReplyButtonForIndex</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">index</span><span class="p">;</span><span class="c1">//是否隐藏回复按钮，有时候我们不让人回复 就把回复按钮隐藏起来了</span>
+<span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">didPromulgatorPressForIndex</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">index</span> <span class="nf">name</span><span class="p">:(</span><span class="n">NSString</span><span class="o">*</span><span class="p">)</span><span class="nv">name</span><span class="p">;</span><span class="c1">//发布者的头像或者名字被点击</span>
+<span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">didRichTextPressedFromText</span><span class="p">:(</span><span class="n">NSString</span><span class="o">*</span><span class="p">)</span><span class="nv">text</span> <span class="nf">index</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">index</span><span class="p">;</span><span class="c1">//正文的富文本被点击的回调</span>
+<span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">didRichTextPressedFromText</span><span class="p">:(</span><span class="n">NSString</span><span class="o">*</span><span class="p">)</span><span class="nv">text</span> <span class="nf">index</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">index</span> <span class="nf">replyIndex</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">replyIndex</span><span class="p">;</span><span class="c1">//评论的富文本被点击的回调</span>
+<span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">replyForIndex</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">index</span> <span class="nf">replyText</span><span class="p">:(</span><span class="n">NSString</span><span class="o">*</span><span class="p">)</span><span class="nv">text</span><span class="p">;</span><span class="c1">//回复文字的内容的回调</span>
+<span class="k">@end</span>
 
 
-@protocol DDRichTextViewDataSource 
-@required
--(YMTextData*)dataForRowAtIndex:(NSInteger)index;//这个就是每行需要的数据了！
--(NSInteger)numberOfRowsInDDRichText;//需要返回多少行
-@end
+<span class="k">@protocol</span> <span class="nc">DDRichTextViewDataSource</span> 
+<span class="err">@required</span>
+<span class="k">-</span><span class="p">(</span><span class="n">YMTextData</span><span class="o">*</span><span class="p">)</span><span class="nf">dataForRowAtIndex</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">index</span><span class="p">;</span><span class="c1">//这个就是每行需要的数据了！</span>
+<span class="k">-</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">numberOfRowsInDDRichText</span><span class="p">;</span><span class="c1">//需要返回多少行</span>
+<span class="k">@end</span>
 
-@interface DDRichTextViewController : UIViewController&lt;UITableViewDataSource,UITableViewDelegate,cellDelegate,InputDelegate&gt;
-@property (weak, nonatomic) id delegate;
-@property (weak, nonatomic) id dataSource;
+<span class="k">@interface</span> <span class="nc">DDRichTextViewController</span> <span class="p">:</span> <span class="nc">UIViewController</span><span class="o">&lt;</span><span class="n">UITableViewDataSource</span><span class="p">,</span><span class="n">UITableViewDelegate</span><span class="p">,</span><span class="n">cellDelegate</span><span class="p">,</span><span class="n">InputDelegate</span><span class="o">&gt;</span>
+<span class="k">@property</span> <span class="p">(</span><span class="n">weak</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">id</span> <span class="n">delegate</span><span class="p">;</span>
+<span class="k">@property</span> <span class="p">(</span><span class="n">weak</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">id</span> <span class="n">dataSource</span><span class="p">;</span>
 
-@end
-</code></pre>
+<span class="k">@end</span>
+</code></pre></div></div>
 
-<p>然后就是<code class="highlighter-rouge">DDRichTextViewController.m</code>了</p>
+<p>然后就是<code class="language-plaintext highlighter-rouge">DDRichTextViewController.m</code>了</p>
 
-<p>基本上就是对<code class="highlighter-rouge">WXViewController.m</code>的封装了！ 让其内部实现的细节都对使用者透明化</p>
+<p>基本上就是对<code class="language-plaintext highlighter-rouge">WXViewController.m</code>的封装了！ 让其内部实现的细节都对使用者透明化</p>
 
-<p>比如在<code class="highlighter-rouge">DDRichTextViewController</code>中实现了uitableView的datasource和delegate</p>
+<p>比如在<code class="language-plaintext highlighter-rouge">DDRichTextViewController</code>中实现了uitableView的datasource和delegate</p>
 
-<p>在这个方法中 tableview需要显示的行数就由继承<code class="highlighter-rouge">DDRichTextViewController</code>的子类的datasource中的</p>
+<p>在这个方法中 tableview需要显示的行数就由继承<code class="language-plaintext highlighter-rouge">DDRichTextViewController</code>的子类的datasource中的</p>
 
-<p><code class="highlighter-rouge">-(NSInteger)numberOfRowsInDDRichText;</code>这个方法返回的数据作为参数！</p>
+<p><code class="language-plaintext highlighter-rouge">-(NSInteger)numberOfRowsInDDRichText;</code>这个方法返回的数据作为参数！</p>
 
 <p>比如这样：</p>
 
-<pre><code class="language-objectivec">-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-return [[self dataSource] numberOfRowsInDDRichText];
-}
-</code></pre>
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">-</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nf">numberOfSectionsInTableView</span><span class="p">:(</span><span class="n">UITableView</span> <span class="o">*</span><span class="p">)</span><span class="nv">tableView</span><span class="p">{</span>
+<span class="k">return</span> <span class="p">[[</span><span class="n">self</span> <span class="nf">dataSource</span><span class="p">]</span> <span class="nf">numberOfRowsInDDRichText</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>所以当我们使用我们自己写的库的时候根本不在乎这个方法</p>
 
-<p><code class="highlighter-rouge">-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView；</code></p>
+<p><code class="language-plaintext highlighter-rouge">-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView；</code></p>
 
 <p>因为我们封装到了</p>
 
-<p><code class="highlighter-rouge">-(NSInteger)numberOfRowsInDDRichText;</code></p>
+<p><code class="language-plaintext highlighter-rouge">-(NSInteger)numberOfRowsInDDRichText;</code></p>
 
 <p>类似其他实现以及方法都进行了封装</p>
 
 <p>这当中处理@required很简单，用户必须已经实现了 所以直接调用就好 。 但是 @optional的方法用户不一定会去实现，所以当中最重要的就是要去判断这个方法存不存在：方法如下</p>
 
-<pre><code class="language-objectivec"> respondsToSelector:NSSelectorFromString(@“方法名:”) //这个凡是继承NSObject的类都拥有这个方法 这个是基础了，是运行时判断方法存不存在的
-</code></pre>
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nl">respondsToSelector:</span><span class="n">NSSelectorFromString</span><span class="p">(</span><span class="err">@“方法名</span><span class="o">:</span><span class="err">”</span><span class="p">)</span> <span class="c1">//这个凡是继承NSObject的类都拥有这个方法 这个是基础了，是运行时判断方法存不存在的</span>
+</code></pre></div></div>
 
 <p>详细如下</p>
 
-<pre><code class="language-objectivec">if ([self.delegate respondsToSelector:NSSelectorFromString(@"hideReplyButtonForIndex:")]) { //判断hideReplyButtonForIndex方法存不存在 存在才会执行如下的代码
-if ([[self delegate] hideReplyButtonForIndex:indexPath.section]) {
-cell.hideReply = YES;
-}
-}
-</code></pre>
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">([</span><span class="n">self</span><span class="p">.</span><span class="n">delegate</span> <span class="nf">respondsToSelector</span><span class="p">:</span><span class="n">NSSelectorFromString</span><span class="p">(</span><span class="s">@"hideReplyButtonForIndex:"</span><span class="p">)])</span> <span class="p">{</span> <span class="c1">//判断hideReplyButtonForIndex方法存不存在 存在才会执行如下的代码</span>
+<span class="k">if</span> <span class="p">([[</span><span class="n">self</span> <span class="nf">delegate</span><span class="p">]</span> <span class="nf">hideReplyButtonForIndex</span><span class="p">:</span><span class="n">indexPath</span><span class="p">.</span><span class="n">section</span><span class="p">])</span> <span class="p">{</span>
+<span class="n">cell</span><span class="p">.</span><span class="n">hideReply</span> <span class="o">=</span> <span class="nb">YES</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>下面是详细的代码</p>
 
 <p>（本来想贴详细代码的，博主一思忖！最好下载我的Demo进行研究 这样可以在方法之间跳转 更能看得懂！！地址在文后！而且你们在博主的Demo项目中star一下 我就爱死你Y的了）</p>
 
-<p>最后我们来看看怎么使用写好的<code class="highlighter-rouge">DDRichTextViewController</code></p>
+<p>最后我们来看看怎么使用写好的<code class="language-plaintext highlighter-rouge">DDRichTextViewController</code></p>
 
-<p>我们新建一个<code class="highlighter-rouge">TestViewController</code></p>
+<p>我们新建一个<code class="language-plaintext highlighter-rouge">TestViewController</code></p>
 
-<pre><code class="language-objectivec">//TestViewController.h
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//TestViewController.h</span>
 
-#import "DDRichTextViewController.h"
-@interface TestViewController : DDRichTextViewController&lt;DDRichTextViewDataSource,DDRichTextViewDelegate&gt;
-@end
-</code></pre>
+<span class="cp">#import "DDRichTextViewController.h"
+</span><span class="k">@interface</span> <span class="nc">TestViewController</span> <span class="p">:</span> <span class="nc">DDRichTextViewController</span><span class="o">&lt;</span><span class="n">DDRichTextViewDataSource</span><span class="p">,</span><span class="n">DDRichTextViewDelegate</span><span class="o">&gt;</span>
+<span class="k">@end</span>
+</code></pre></div></div>
 
-<pre><code class="language-objectivec">
-//
-// TestViewController.m
-//
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">//</span>
+<span class="c1">// TestViewController.m</span>
+<span class="c1">//</span>
 
-#import "TestViewController.h"
+<span class="cp">#import "TestViewController.h"
+</span>
+<span class="k">@implementation</span> <span class="nc">TestViewController</span>
+<span class="n">NSMutableArray</span> <span class="o">*</span> <span class="n">ymDataArray</span><span class="p">;</span>
 
-@implementation TestViewController
-NSMutableArray * ymDataArray;
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewDidLoad</span> <span class="p">{</span>
+<span class="p">[</span><span class="n">super</span> <span class="nf">viewDidLoad</span><span class="p">];</span>
+<span class="n">NSMutableArray</span> <span class="n">MyDataArr</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSMutableArray</span> <span class="nf">alloc</span><span class="p">]</span><span class="nf">init</span><span class="p">];</span><span class="c1">//!!!!这里应该自己初始化数据</span>
+<span class="n">self</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+<span class="n">self</span><span class="p">.</span><span class="n">dataSource</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+<span class="p">}</span>
 
-- (void)viewDidLoad {
-[super viewDidLoad];
-NSMutableArray MyDataArr = [[NSMutableArray alloc]init];//!!!!这里应该自己初始化数据
-self.delegate = self;
-self.dataSource = self;
-}
+<span class="c1">//下面两个是datasource方法</span>
+<span class="k">-</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">numberOfRowsInDDRichText</span><span class="p">{</span>
+<span class="k">return</span> <span class="mi">5</span><span class="p">;</span>
+<span class="p">}</span>
 
-//下面两个是datasource方法
--(NSInteger)numberOfRowsInDDRichText{
-return 5;
-}
+<span class="k">-</span><span class="p">(</span><span class="n">YMTextData</span> <span class="o">*</span><span class="p">)</span><span class="nf">dataForRowAtIndex</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">index</span><span class="p">{</span>
+<span class="k">return</span> <span class="p">[</span><span class="n">MyDataArr</span> <span class="nf">objectAtIndex</span><span class="p">:</span><span class="mi">0</span><span class="p">];</span><span class="c1">//!!!!!!!! MyDataArr 是一个YMTextData的数组！！所以你的朋友圈数据的每一项都必须是YMTextData或者继承YMTextData的子类！！</span>
+<span class="p">}</span>
 
--(YMTextData *)dataForRowAtIndex:(NSInteger)index{
-return [MyDataArr objectAtIndex:0];//!!!!!!!! MyDataArr 是一个YMTextData的数组！！所以你的朋友圈数据的每一项都必须是YMTextData或者继承YMTextData的子类！！
-}
+<span class="c1">//下面所有都是delegate的方法 朋友圈所有的特性都使用以下的delegate方法进行控制 方法有可选和必选的 可自行实现 接口调用简单</span>
+<span class="k">-</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">senderName</span><span class="p">{</span>
+<span class="k">return</span> <span class="s">@"David"</span><span class="p">;</span>
+<span class="p">}</span>
 
-//下面所有都是delegate的方法 朋友圈所有的特性都使用以下的delegate方法进行控制 方法有可选和必选的 可自行实现 接口调用简单
--(NSString *)senderName{
-return @"David";
-}
+<span class="k">-</span><span class="p">(</span><span class="n">BOOL</span><span class="p">)</span><span class="nf">hideReplyButtonForIndex</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">index</span><span class="p">{</span>
+<span class="k">return</span> <span class="nb">NO</span><span class="p">;</span>
+<span class="p">}</span>
 
--(BOOL)hideReplyButtonForIndex:(NSInteger)index{
-return NO;
-}
-
--(void)didPromulgatorNameOrHeadPicPressedForIndex:(NSInteger)index name:(NSString *)name{
-UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"发布者回调" message:[NSString stringWithFormat:@"姓名：%@\n index：%d",name,index] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-[alert show];
-}
+<span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">didPromulgatorNameOrHeadPicPressedForIndex</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">index</span> <span class="nf">name</span><span class="p">:(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">name</span><span class="p">{</span>
+<span class="n">UIAlertView</span> <span class="o">*</span><span class="n">alert</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIAlertView</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithTitle</span><span class="p">:</span><span class="s">@"发布者回调"</span> <span class="nf">message</span><span class="p">:[</span><span class="n">NSString</span> <span class="nf">stringWithFormat</span><span class="p">:</span><span class="s">@"姓名：%@</span><span class="se">\n</span><span class="s"> index：%d"</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">index</span><span class="p">]</span> <span class="n">delegate</span><span class="o">:</span><span class="nb">nil</span> <span class="n">cancelButtonTitle</span><span class="o">:</span><span class="s">@"OK"</span> <span class="n">otherButtonTitles</span><span class="o">:</span><span class="nb">nil</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+<span class="p">[</span><span class="n">alert</span> <span class="nf">show</span><span class="p">];</span>
+<span class="p">}</span>
 
 
--(void)didRichTextPressedFromText:(NSString*)text index:(NSInteger)index{
-UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"正文富文本点击回调" message:[NSString stringWithFormat:@"点击的内容：%@\n index：%d",text,index] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-[alert show];
-}
+<span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">didRichTextPressedFromText</span><span class="p">:(</span><span class="n">NSString</span><span class="o">*</span><span class="p">)</span><span class="nv">text</span> <span class="nf">index</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">index</span><span class="p">{</span>
+<span class="n">UIAlertView</span> <span class="o">*</span><span class="n">alert</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIAlertView</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithTitle</span><span class="p">:</span><span class="s">@"正文富文本点击回调"</span> <span class="nf">message</span><span class="p">:[</span><span class="n">NSString</span> <span class="nf">stringWithFormat</span><span class="p">:</span><span class="s">@"点击的内容：%@</span><span class="se">\n</span><span class="s"> index：%d"</span><span class="p">,</span><span class="n">text</span><span class="p">,</span><span class="n">index</span><span class="p">]</span> <span class="n">delegate</span><span class="o">:</span><span class="nb">nil</span> <span class="n">cancelButtonTitle</span><span class="o">:</span><span class="s">@"OK"</span> <span class="n">otherButtonTitles</span><span class="o">:</span><span class="nb">nil</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+<span class="p">[</span><span class="n">alert</span> <span class="nf">show</span><span class="p">];</span>
+<span class="p">}</span>
 
--(void)didRichTextPressedFromText:(NSString *)text index:(NSInteger)index replyIndex:(NSInteger)replyIndex{
-UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"评论的富文本点击回调" message:[NSString stringWithFormat:@"点击的内容：%@\n index：%d \n replyIndex:%d",text,index,replyIndex] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-[alert show];
-}
+<span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">didRichTextPressedFromText</span><span class="p">:(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">text</span> <span class="nf">index</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">index</span> <span class="nf">replyIndex</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">replyIndex</span><span class="p">{</span>
+<span class="n">UIAlertView</span> <span class="o">*</span><span class="n">alert</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIAlertView</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithTitle</span><span class="p">:</span><span class="s">@"评论的富文本点击回调"</span> <span class="nf">message</span><span class="p">:[</span><span class="n">NSString</span> <span class="nf">stringWithFormat</span><span class="p">:</span><span class="s">@"点击的内容：%@</span><span class="se">\n</span><span class="s"> index：%d </span><span class="se">\n</span><span class="s"> replyIndex:%d"</span><span class="p">,</span><span class="n">text</span><span class="p">,</span><span class="n">index</span><span class="p">,</span><span class="n">replyIndex</span><span class="p">]</span> <span class="n">delegate</span><span class="o">:</span><span class="nb">nil</span> <span class="n">cancelButtonTitle</span><span class="o">:</span><span class="s">@"OK"</span> <span class="n">otherButtonTitles</span><span class="o">:</span><span class="nb">nil</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+<span class="p">[</span><span class="n">alert</span> <span class="nf">show</span><span class="p">];</span>
+<span class="p">}</span>
 
--(void)replyForIndex:(NSInteger)index replyText:(NSString*)text{
-UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"回复的回调" message:[NSString stringWithFormat:@"回复的内容：%@\n index：%d",text,index] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-[alert show];
-}
+<span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">replyForIndex</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">index</span> <span class="nf">replyText</span><span class="p">:(</span><span class="n">NSString</span><span class="o">*</span><span class="p">)</span><span class="nv">text</span><span class="p">{</span>
+<span class="n">UIAlertView</span> <span class="o">*</span><span class="n">alert</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIAlertView</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithTitle</span><span class="p">:</span><span class="s">@"回复的回调"</span> <span class="nf">message</span><span class="p">:[</span><span class="n">NSString</span> <span class="nf">stringWithFormat</span><span class="p">:</span><span class="s">@"回复的内容：%@</span><span class="se">\n</span><span class="s"> index：%d"</span><span class="p">,</span><span class="n">text</span><span class="p">,</span><span class="n">index</span><span class="p">]</span> <span class="n">delegate</span><span class="o">:</span><span class="nb">nil</span> <span class="n">cancelButtonTitle</span><span class="o">:</span><span class="s">@"OK"</span> <span class="n">otherButtonTitles</span><span class="o">:</span><span class="nb">nil</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+<span class="p">[</span><span class="n">alert</span> <span class="nf">show</span><span class="p">];</span>
+<span class="p">}</span>
 
-@end
+<span class="k">@end</span>
 
-</code></pre>
+</code></pre></div></div>
 
 <p>效果如下</p>
 
@@ -617,6 +655,82 @@ UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"回复的回调" messa
         				
                             
         				
+                            
+                				<a href="/tags/#新技术" title="新技术" rel="3">
+                                    新技术
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#千万不要研究" title="千万不要研究" rel="3">
+                                    千万不要研究
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#忘了自己是谁" title="忘了自己是谁" rel="3">
+                                    忘了自己是谁
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#用户体验" title="用户体验" rel="2">
+                                    用户体验
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#独立开发" title="独立开发" rel="5">
+                                    独立开发
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#iOS开发" title="iOS开发" rel="2">
+                                    iOS开发
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#技术" title="技术" rel="2">
+                                    技术
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#App Store" title="App Store" rel="2">
+                                    App Store
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
         			</div>
                 </section>
                 
@@ -626,26 +740,6 @@ UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"回复的回调" messa
                 <hr>
                 <h5>FRIENDS</h5>
                 <ul class="list-inline">
-                    
-                        <li><a href="http://mida.re/">乱序</a></li>
-                    
-                        <li><a href="http://qianduan.guru/">前端外刊评论</a></li>
-                    
-                        <li><a href="http://lingyu.wang/">天镶的博客</a></li>
-                    
-                        <li><a href="http://hmqk1995.github.io">Luke 的自留地</a></li>
-                    
-                        <li><a href="http://ebnbin.com/">Ebn's Blog</a></li>
-                    
-                        <li><a href="http://blog.smdcn.net">SmdCn's Blog</a></li>
-                    
-                        <li><a href="http://xieminis.me/">解旻的博客</a></li>
-                    
-                        <li><a href="http://dhong.co">DHong Say</a></li>
-                    
-                        <li><a href="http://ingf.github.io/">尹峰以为</a></li>
-                    
-                        <li><a href="http://wepiaofei.github.io/blog/">前端神盾局</a></li>
                     
                 </ul>
                 
@@ -720,20 +814,11 @@ UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"回复的回调" messa
                 <ul class="list-inline text-center">
                     
                     
-                    <li>
-                        <a href="https://twitter.com/northcity">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
 
                     <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
                     
                     <li>
-                        <a target="_blank" href="https://www.zhihu.com/people/chen-xi-18-69-64/activities">
+                        <a target="_blank" href="https://www.zhihu.com/people/北城">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa  fa-stack-1x fa-inverse">知</i>
@@ -743,7 +828,7 @@ UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"回复的回调" messa
                     
                     
                     <li>
-                        <a target="_blank" href="https://weibo.com/p/1005055227295178/home?from=page_100505&mod=TAB#place">
+                        <a target="_blank" href="http://weibo.com/陈年小城">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
@@ -767,15 +852,17 @@ UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"回复的回调" messa
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; NorthCity 2017
+                    Copyright &copy; 北城 2026
                     <br>
-                    Theme by <a href="www.northcity.top">Hux</a> |
+                    Theme by <a href="https://github.com/northcity">NorthCity</a> |
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                        src="https://ghbtns.com/github-btn.html?user=northcity&repo=northcity.github.io&type=star&count=true" >
                     </iframe>
+                    <a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备17036027号-1</a>
                 </p>
+                
             </div>
         </div>
     </div>

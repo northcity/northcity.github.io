@@ -1,0 +1,138 @@
+---
+layout: home
+title: 作品
+description: "我做过的产品 - 每一个都是真实的尝试与学习"
+---
+
+<div class="page-header">
+    <div class="page-header-content">
+        <h1 class="page-title">作品</h1>
+        <p class="page-description">
+            这里是我做过的所有产品。每一个都代表了某个阶段的思考、尝试与学习。
+        </p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">核心产品</h2>
+            <p class="section-subtitle">正在持续迭代的主力产品</p>
+        </div>
+        
+        <div class="products-grid">
+            {% for product in site.my_products %}
+            {% if product.featured %}
+            <div class="product-card" id="{{ product.name | slugify }}">
+                <div class="product-icon">
+                    {% if product.icon and product.icon != '' %}
+                    <img src="{{ product.icon }}" alt="{{ product.name }}">
+                    {% else %}
+                    <span style="font-size: 2.5rem;">📱</span>
+                    {% endif %}
+                </div>
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p class="product-tagline">{{ product.tagline }}</p>
+                <p style="color: var(--color-text-secondary); font-size: 0.875rem; margin-bottom: var(--space-md); line-height: 1.6;">
+                    {{ product.description }}
+                </p>
+                {% if product.rating %}
+                <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-md); color: var(--color-text-muted); font-size: 0.875rem;">
+                    <span style="color: #fbbf24;">★</span>
+                    <span>{{ product.rating }}</span>
+                    <span>·</span>
+                    <span>{{ product.ratings_count }} 个评分</span>
+                </div>
+                {% endif %}
+                <div class="product-meta">
+                    {% for platform in product.platforms %}
+                    <span class="product-badge">{{ platform }}</span>
+                    {% endfor %}
+                    <span class="product-badge {% if product.status == '新品' %}status-active{% elsif product.status == '持续更新' %}status-maintenance{% endif %}">
+                        {{ product.status }}
+                    </span>
+                </div>
+                <div style="display: flex; gap: var(--space-sm); margin-top: var(--space-md); flex-wrap: wrap;">
+                    <a href="{{ product.app_store }}" target="_blank" rel="noopener" class="btn btn-primary" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">
+                        <i class="fab fa-apple"></i> App Store
+                    </a>
+                    {% if product.website %}
+                    <a href="{{ product.website }}" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">
+                        <i class="fas fa-globe"></i> 网页版
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">更多作品</h2>
+            <p class="section-subtitle">同样值得一看的产品</p>
+        </div>
+        
+        <div class="products-grid">
+            {% for product in site.my_products %}
+            {% unless product.featured %}
+            <div class="product-card" id="{{ product.name | slugify }}">
+                <div class="product-icon">
+                    {% if product.icon and product.icon != '' %}
+                    <img src="{{ product.icon }}" alt="{{ product.name }}">
+                    {% else %}
+                    <span style="font-size: 2.5rem;">📱</span>
+                    {% endif %}
+                </div>
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p class="product-tagline">{{ product.tagline }}</p>
+                <p style="color: var(--color-text-secondary); font-size: 0.875rem; margin-bottom: var(--space-md); line-height: 1.6;">
+                    {{ product.description }}
+                </p>
+                {% if product.rating %}
+                <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-md); color: var(--color-text-muted); font-size: 0.875rem;">
+                    <span style="color: #fbbf24;">★</span>
+                    <span>{{ product.rating }}</span>
+                    <span>·</span>
+                    <span>{{ product.ratings_count }} 个评分</span>
+                </div>
+                {% endif %}
+                <div class="product-meta">
+                    {% for platform in product.platforms %}
+                    <span class="product-badge">{{ platform }}</span>
+                    {% endfor %}
+                    <span class="product-badge">{{ product.status }}</span>
+                </div>
+                <div style="display: flex; gap: var(--space-sm); margin-top: var(--space-md); flex-wrap: wrap;">
+                    <a href="{{ product.app_store }}" target="_blank" rel="noopener" class="btn btn-primary" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">
+                        <i class="fab fa-apple"></i> App Store
+                    </a>
+                    {% if product.website %}
+                    <a href="{{ product.website }}" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">
+                        <i class="fas fa-globe"></i> 网页版
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endunless %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="current-work" style="text-align: center;">
+            <h3 style="margin-bottom: var(--space-lg); font-size: 1.25rem;">🍎 在 App Store 查看全部</h3>
+            <p style="color: var(--color-text-secondary); margin-bottom: var(--space-xl);">
+                点击下方链接查看我在 App Store 上的所有应用
+            </p>
+            <a href="https://apps.apple.com/cn/developer/%E5%B8%8C-%E9%99%88/id1353019342" target="_blank" class="btn btn-primary">
+                App Store 开发者页面 <span class="arrow">→</span>
+            </a>
+        </div>
+    </div>
+</section>

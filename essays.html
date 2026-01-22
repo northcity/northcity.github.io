@@ -1,0 +1,83 @@
+---
+layout: home
+title: 文章
+description: "阶段性的思考与总结 - 少而深，每篇都是一个阶段的沉淀"
+---
+
+<div class="page-header">
+    <div class="page-header-content">
+        <h1 class="page-title">文章</h1>
+        <p class="page-description">
+            这里不追求频率，只追求深度。每篇文章都是一个阶段的思考与总结。
+        </p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container-narrow">
+        <div class="essays-grid">
+            {% assign essays = site.posts | where_exp: "post", "post.categories contains 'essay'" %}
+            {% for essay in essays %}
+            <a href="{{ essay.url }}" class="essay-card">
+                <div class="essay-meta">{{ essay.date | date: "%Y年%m月%d日" }}</div>
+                <h3 class="essay-title">{{ essay.title }}</h3>
+                <p class="essay-excerpt">{{ essay.excerpt | strip_html | truncate: 200 }}</p>
+            </a>
+            {% endfor %}
+            
+            {% if essays.size == 0 %}
+            <!-- Sample essays for preview -->
+            <div class="essay-card">
+                <div class="essay-meta">2025年12月</div>
+                <h3 class="essay-title">我为什么不再执着于日活</h3>
+                <p class="essay-excerpt">DAU 曾经是我最关心的指标。每天早上醒来第一件事就是打开后台看数据。但慢慢地，我发现这种执着让我迷失了方向...</p>
+            </div>
+            
+            <div class="essay-card">
+                <div class="essay-meta">2025年10月</div>
+                <h3 class="essay-title">一个没人下载的 App 对我的意义</h3>
+                <p class="essay-excerpt">极简天气上线半年了，总下载量不到 100。按商业标准，这是一个失败的产品。但对我来说，它意味着很多...</p>
+            </div>
+            
+            <div class="essay-card">
+                <div class="essay-meta">2025年8月</div>
+                <h3 class="essay-title">独立开发一年，我学会了什么</h3>
+                <p class="essay-excerpt">一年前的今天，我开始了全职独立开发之路。这一年，我做了5个App，赚了不到1万块，但学会的东西远比这些数字重要...</p>
+            </div>
+            {% endif %}
+        </div>
+        
+        {% if essays.size == 0 %}
+        <div class="empty-state" style="border-top: 1px solid var(--color-border-light); margin-top: var(--space-2xl); padding-top: var(--space-2xl);">
+            <p style="font-style: italic; color: var(--color-text-muted);">
+                以上是示例内容。在 <code>_posts</code> 文件夹中添加 <code>categories: essay</code> 的文章即可显示在这里。
+            </p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Archive of all posts -->
+<section class="section">
+    <div class="container-narrow">
+        <div class="section-header">
+            <h2 class="section-title">所有文章</h2>
+            <p class="section-subtitle">按时间排序的完整列表</p>
+        </div>
+        
+        <div class="posts-list">
+            {% for post in site.posts limit: 20 %}
+            <a href="{{ post.url }}" class="post-item">
+                <span class="post-title">{{ post.title }}</span>
+                <span class="post-date">{{ post.date | date: "%Y.%m.%d" }}</span>
+            </a>
+            {% endfor %}
+            
+            {% if site.posts.size == 0 %}
+            <div class="empty-state">
+                <p>暂无文章</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>

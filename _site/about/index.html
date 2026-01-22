@@ -1,638 +1,281 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="在这里探索iOS的一切。">
-    <meta name="keywords"  content="北城以北,北城的博客, beicheng,north city, northcity,陈希, 个人博客, 个人网站, 技术博客, iOS, Cocoa, Apple, WWDC, iPone, develop, 移动开发, APP, 设计模式, 最佳实践">
-    <meta name="theme-color" content="#000000">
+    <meta name="description" content="关于北城 - 不是简历，是一个在现实中挣扎的个体">
+    <meta name="keywords" content="北城, 独立开发者, indie developer, iOS开发, App开发, 闪念, 呼吸泡泡, Anpa, 数字遗产, 时间胶囊, 产品创作者, 独立开发, Swift, SwiftUI">
+    <meta name="theme-color" content="#1a1a1a">
+    <meta name="author" content="北城">
     
-    <title>About - 北城的博客|NorthCity</title>
+    <title>关于 - 北城 · 独立开发者 | NorthCity</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="关于">
+    <meta property="og:description" content="关于北城 - 不是简历，是一个在现实中挣扎的个体">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://localhost:4000/about/">
+    <meta property="og:image" content="http://localhost:4000/img/og-image.jpg">
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="http://localhost:4000/about/">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/hux-blog.min.css">
+    <link rel="stylesheet" href="/css/northcity.css">
+    <link rel="stylesheet" href="/css/custom-icons.css">
+    
+    <!-- Font Awesome -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Pygments Github CSS -->
+    <!-- Syntax Highlighting -->
     <link rel="stylesheet" href="/css/syntax.css">
-
-    <!-- Custom Fonts -->
-    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-    <!-- Hux Delete, sad but pending in China
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
-    css'>
-    -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- ga & ba script hoook -->
-    <script></script>
 </head>
-
-
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
-
+<body>
     <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+<nav class="nav">
+    <div class="nav-container">
+        <a href="/" class="nav-brand">
+            <span data-lang-show="zh">北城</span>
+            <span data-lang-show="en">NorthCity</span>
+        </a>
+        
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <ul class="nav-links">
+            <li>
+                <a href="/" >
+                    <span data-i18n="nav_home" data-zh="首页" data-en="Home">首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/products/" >
+                    <span data-i18n="nav_products" data-zh="作品" data-en="Products">作品</span>
+                </a>
+            </li>
+            <li>
+                <a href="/logs/" >
+                    <span data-i18n="nav_logs" data-zh="日志" data-en="Logs">日志</span>
+                </a>
+            </li>
+            <li>
+                <a href="/essays/" >
+                    <span data-i18n="nav_essays" data-zh="文章" data-en="Essays">文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/" class="active">
+                    <span data-i18n="nav_about" data-zh="关于" data-en="About">关于</span>
+                </a>
+            </li>
+            <li>
+                <a href="/connect/" >
+                    <span data-i18n="nav_connect" data-zh="联系" data-en="Connect">联系</span>
+                </a>
+            </li>
+        </ul>
+        
+        <div class="site-settings">
+            <button id="lang-toggle" class="settings-btn" aria-label="Toggle language">
+                <i class="fas fa-globe"></i>
+                <span>EN</span>
             </button>
-            <a class="navbar-brand" href="/">NorthCity</a>
+            <button id="theme-toggle" class="settings-btn" aria-label="Toggle theme" data-dark-text="暗色" data-light-text="亮色">
+                <i class="fas fa-moon"></i>
+                <span>暗色</span>
+            </button>
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/about/">About</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/portfolio/">Portfolio</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/tags/">Tags</a>
-                    </li>
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
     </div>
-    <!-- /.container -->
 </nav>
+
+<script src="/js/site-settings.js"></script>
 <script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
-
-    var __HuxNav__ = {
-        close: function(){
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        },
-        open: function(){
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
+document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    toggle.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.nav')) {
+            navLinks.classList.remove('active');
         }
-    }
-
-    // Bind Event
-    $toggle.addEventListener('click', function(e){
-        if ($navbar.className.indexOf('in') > 0) {
-            __HuxNav__.close()
-        }else{
-            __HuxNav__.open()
-        }
-    })
-
-    /**
-     * Since Fastclick is used to delegate 'touchstart' globally
-     * to hack 300ms delay in iOS by performing a fake 'click',
-     * Using 'e.stopPropagation' to stop 'touchstart' event from 
-     * $toggle/$collapse will break global delegation.
-     * 
-     * Instead, we use a 'e.target' filter to prevent handler
-     * added to document close HuxNav.  
-     *
-     * Also, we use 'click' instead of 'touchstart' as compromise
-     */
-    document.addEventListener('click', function(e){
-        if(e.target == $toggle) return;
-        if(e.target.className == 'icon-bar') return;
-        __HuxNav__.close();
-    })
+    });
+});
 </script>
 
 
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/about-bg.jpg')">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>About</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">Hey, this is Hux.</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Main Content -->
-<div class="container">
-	<div class="row">
-        
-
-<!-- USE SIDEBAR -->
-    <!-- PostList Container -->
-    		<div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                postlist-container
-            ">
-    			<!-- Language Selector -->
-<select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
-    <option value="0" selected> 中文 Chinese </option>
-    <option value="1"> 英文 English </option>
-</select>
-
-<!-- Chinese Version -->
-<div class="zh post-container">
-    
-    <blockquote>
-  <p>写写代码，做做设计，<br />
-离开世界之前，一切都是过程。</p>
-</blockquote>
-
-<p>Hey，我是黄玄，病毒种，进化程度不明，多出没于<a href="https://huangxuan.me">博客</a>、<a href="weibo.com/huxpro">微博</a>、<a href="https://www.zhihu.com/people/huxpro/pins/posts">知乎</a>、<a href="https://twitter.com/Huxpro/">Twitter</a>、<a href="http://github.com/huxpro">Github</a>、<a href="https://medium.com/@Huxpro">Medium</a> 等地带，绝招尚在开发中。</p>
-
-<p>职业是软件工程师，<a href="https://medium.com/ben-and-dion/team-web-3315aa447fb2#.359a9c6cl">Web 工会</a>活跃成员。曾被招募为淘宝网 · <a href="http://alitrip.com">阿里旅行</a>前端工程师、微影时代 · <a href="http://www.wepiao.com/?r=movie">微票儿</a>前端基础工程团队负责人、<a href="https://ele.me/">饿了么</a> · 大前端团队 · <a href="https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509">PWA 顾问</a>。</p>
-
-<p>一些作品和开源软件项目，👉 戳 <a href="/portfolio">Portfolio</a>、<a href="http://github.com/huxpro">Github</a>、<a href="http://https://zhuanlan.zhihu.com/p/21280918">演说.io</a>。</p>
-
-<h5 id="talks">Talks</h5>
-
-<ul>
-  <li><a href="//huangxuan.me/jsconfcn2017/">Upgrading to Progressive Web Apps</a> · <a href="http://2017.jsconf.cn/">JSConf CN 上海 2017</a></li>
-  <li>Building Progressive Web Apps · <a href="http://www.csdisummit.com/">CSDI 广州 2017</a></li>
-  <li>The State of Progressive Web App · GDG IO Redux 北京 2017</li>
-  <li>炒冷饭 · PWA 到底是个什么玩意？· Baidu HQ 北京 2017</li>
-  <li><a href="//huangxuan.me/2016/11/20/sw-101-gdgdf/">Service Worker 101</a> · GDG DevFest 北京 2016</li>
-  <li><a href="//huangxuan.me/2016/10/20/pwa-qcon2016/">Progressive Web App，复兴序章</a> · <a href="http://2016.qconshanghai.com/presentation/3111">QCon 上海 2016</a></li>
-  <li>Progressive Web App 之我见 · GDG IO Redux 北京 2016</li>
-  <li><a href="//huangxuan.me/2015/12/28/css-sucks-2015/">CSS Still Sucks 2015</a> · 2015</li>
-  <li><a href="//huangxuan.me/2015/07/09/js-module-7day/">JavaScript 模块化七日谈</a> · 2015</li>
-</ul>
-
-
-</div>
-
-<!-- English Version -->
-<div class="en post-container">
-    
-    
-<blockquote>
-  <p>Yet another man.</p>
-</blockquote>
-
-<p>Hi, I am <em>@huxpro</em> (Huang, Xuan), a software engineer &amp; a designer. I previously worked as Web Front-End Engineer at <a href="https://www.alitrip.com/">Alibaba Trip</a>; Web Front-End Infrastructure Team Lead at <a href="https://www.crunchbase.com/organization/wepiao#/entity">Wepiao.com</a>; And <a href="(https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509)">Invited Consultant on PWA</a> at <a href="https://github.com/elemefe/">Ele.me</a>.</p>
-
-<p>I studied Digital Media Art and graduated from <a href="https://en.wikipedia.org/wiki/Communication_University_of_China">Communication University of China</a> by 2016, and will study Computer Science at <a href="https://en.wikipedia.org/wiki/Rochester_Institute_of_Technology">Rochester Institute of Technology</a> in 2017.</p>
-
-<h5 id="talks">Talks</h5>
-
-<ul>
-  <li><a href="//huangxuan.me/jsconfcn2017/">Upgrading to Progressive Web Apps</a> · <a href="http://2017.jsconf.cn/">JSConf China Shanghai 2017</a></li>
-  <li>Building Progressive Web Apps · <a href="http://www.csdisummit.com/">CSDI Guangzhou 2017</a></li>
-  <li>The State of Progressive Web App · GDG IO Redux Beijing 2017</li>
-  <li>PWA Rehashing · Baidu HQ Beijing 2017</li>
-  <li><a href="//huangxuan.me/2016/11/20/sw-101-gdgdf/">Service Worker 101</a> · GDG DevFest Beijing 2016</li>
-  <li><a href="//huangxuan.me/2016/10/20/pwa-qcon2016/">Progressive Web Apps</a> · QCon Shanghai 2016</li>
-  <li>Progressive Web App in my POV · GDG IO Redux Beijing 2016</li>
-  <li><a href="//huangxuan.me/2015/12/28/css-sucks-2015/">CSS Still Sucks 2015</a> · 2015</li>
-  <li><a href="//huangxuan.me/2015/07/09/js-module-7day/">JavaScript Modularization Journey</a> · 2015</li>
-</ul>
-
-
-</div>
-
-<!-- Handle Language Change -->
-<script type="text/javascript">
-    // get nodes
-    var $zh = document.querySelector(".zh");
-    var $en = document.querySelector(".en");
-    var $select = document.querySelector("select");
-
-    // bind hashchange event
-    window.addEventListener('hashchange', _render);
-
-    // handle render
-    function _render(){
-        var _hash = window.location.hash;
-        // en
-        if(_hash == "#en"){
-            $select.selectedIndex = 1;
-            $en.style.display = "block";
-            $zh.style.display = "none";
-        // zh by default
-        }else{
-            // not trigger onChange, otherwise cause a loop call.
-            $select.selectedIndex = 0;
-            $zh.style.display = "block";
-            $en.style.display = "none";
-        }
-    }
-
-    // handle select change
-    function onLanChange(index){
-        if(index == 0){
-            window.location.hash = "#zh"
-        }else{
-            window.location.hash = "#en"
-        }
-    }
-
-    // init
-    _render();
-</script>
-
-
-
-<!-- disqus 评论框 start -->
-<div class="comment">
-    <div id="disqus_thread" class="disqus-thread">
-
+    <div class="page-header">
+    <div class="page-header-content">
+        <h1 class="page-title">关于我</h1>
+        <p class="page-description">
+            这不是简历，这是一个在现实中挣扎的个体的自述。
+        </p>
     </div>
 </div>
-<!-- disqus 评论框 end -->
 
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "northcity";
-    var disqus_identifier = "northcity//about/";
-    var disqus_url = "http://localhost:4000/about/";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus 公共JS代码 end -->
-
-
-    		</div>
-    <!-- Sidebar Container -->
-            <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
-                <!-- Featured Tags -->
-                
-                <section>
-                    <hr class="hidden-sm hidden-xs">
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                        
-                            
-                                <a href="/tags/#基础整理" title="基础整理" rel="4">
-                                    基础整理
-                                </a>
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                    </div>
-                </section>
-                
-
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
-                    <div class="short-about">
-                        
-                            <img src="/img/avatar-cx.jpg" />
-                        
-                        
-                            <p>正在努力探索iOS开发的最佳实践。</p>
-                        
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                            
-                            <li>
-                                <a href="https://twitter.com/northcity">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            
-                            
-                            <li>
-                                <a target="_blank" href="https://www.zhihu.com/people/chen-xi-18-69-64/activities">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa  fa-stack-1x fa-inverse">知</i>
-                                    </span>
-                                </a>
-                            </li>
-                            
-                            
-                            <li>
-                                <a target="_blank" href="https://weibo.com/p/1005055227295178/home?from=page_100505&mod=TAB#place">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            
-                            
-                            
-                            <li>
-                                <a target="_blank" href="https://github.com/northcity">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            
-                            
-                        </ul>
-                    </div>
-                </section>
-                <!-- Friends Blog -->
-                
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-                    
-                        <li><a href="http://mida.re/">乱序</a></li>
-                    
-                        <li><a href="http://qianduan.guru/">前端外刊评论</a></li>
-                    
-                        <li><a href="http://lingyu.wang/">天镶的博客</a></li>
-                    
-                        <li><a href="http://hmqk1995.github.io">Luke 的自留地</a></li>
-                    
-                        <li><a href="http://ebnbin.com/">Ebn's Blog</a></li>
-                    
-                        <li><a href="http://blog.smdcn.net">SmdCn's Blog</a></li>
-                    
-                        <li><a href="http://xieminis.me/">解旻的博客</a></li>
-                    
-                        <li><a href="http://dhong.co">DHong Say</a></li>
-                    
-                        <li><a href="http://ingf.github.io/">尹峰以为</a></li>
-                    
-                        <li><a href="http://wepiaofei.github.io/blog/">前端神盾局</a></li>
-                    
-                </ul>
-                
-    		</div>
+<div class="about-content">
+    <h2>我是谁</h2>
+    <p>
+        你好，我是北城，一个独立开发者。
+    </p>
+    <p>
+        我不是「全栈工程师」，也不是某个大厂的前员工。我只是一个想要用自己的方式做产品的人。
+        iOS 开发是我的主要技能，但我更关心的是：如何做出真正有人用的东西。
+    </p>
+    <p>
+        独立开发对我来说，不只是一份工作，而是一种选择——选择自己掌控时间，选择做自己相信的事，
+        选择承担不确定性带来的焦虑与自由。
+    </p>
+    
+    <h2>我在意什么</h2>
+    <ul>
+        <li><strong>长期主义</strong> —— 不追求爆款，追求能持续维护、持续改进的产品</li>
+        <li><strong>真实用户</strong> —— 10个真正在用的用户，比10000个下载了就删的用户更有意义</li>
+        <li><strong>心理状态</strong> —— 独立开发很容易陷入焦虑和自我怀疑，保持健康的心态是最重要的能力</li>
+        <li><strong>自我掌控感</strong> —— 能决定自己每天做什么、怎么做，这本身就是一种奢侈</li>
+    </ul>
+    
+    <h2>我的产品</h2>
+    <p>
+        目前我已经发布了 9 款 App，包括：
+    </p>
+    <ul>
         
-	</div>
+        
+        <li><strong>闪念</strong> —— AI 语音笔记，记录你一闪而过的灵感（4.6★）</li>
+        
+        
+        
+        <li><strong>Anpa</strong> —— AI 自动识别并安排你的每一件事（5.0★）</li>
+        
+        
+        
+        <li><strong>呼吸泡泡</strong> —— 让呼吸可见，让压力可控（4.5★）</li>
+        
+        
+        
+        <li><strong>数字遗产</strong> —— 当你没回应时，替你把重要的事交代清楚（5.0★）</li>
+        
+        
+        
+        <li><strong>时间胶囊</strong> —— 寄往未来的信（4.8★）</li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </ul>
+    <p>
+        闪念获得了 App Store 编辑推荐，这是对独立开发者最大的认可。
+        但对我来说，最有意义的不是推荐本身，而是看到用户真的在用这些产品解决问题。
+    </p>
+    <p>
+        <a href="/products/" style="color: var(--color-primary);">查看全部作品 →</a>
+    </p>
+    
+    <h2>我现在在做什么</h2>
+    <ul>
+        
+        <li>持续迭代闪念 AI 语音笔记功能</li>
+        
+        <li>Anpa 智能 GTD 新功能开发</li>
+        
+        <li>记录独立开发的思考与成长</li>
+        
+    </ul>
+    <p>
+        坦白说，我还有很多不确定：下一个产品做什么、如何获得更多用户、如何平衡收入与热情...
+        但或许，这种不确定性本身就是独立开发的一部分。
+    </p>
+    
+    <h2>这个网站</h2>
+    <p>
+        这个网站是我所有内容与产品的「中枢」。
+    </p>
+    <p>
+        它不是为了炫技术，不是为了堆博客数量，也不是为了像公司官网。
+        它是为了记录——记录我真实走到了哪一步，而不是展示我有多厉害。
+    </p>
+    
+    <h2>联系我</h2>
+    <p>
+        如果你对我做的事情感兴趣，或者只是想聊聊独立开发，欢迎联系我：
+    </p>
+    <div style="display: flex; flex-wrap: wrap; gap: var(--space-md); margin-top: var(--space-md);">
+        
+        <a href="https://x.com/chenxi44779232?s=21" target="_blank" class="btn btn-ghost" style="display: inline-flex; align-items: center; gap: var(--space-sm);">
+            <i class="fab fa-x-twitter"></i> X / Twitter
+        </a>
+        
+        
+        <a href="https://xhslink.com/m/7ELB1JL5RId" target="_blank" class="btn btn-ghost" style="display: inline-flex; align-items: center; gap: var(--space-sm);">
+            <i class="fas fa-book-open"></i> 小红书
+        </a>
+        
+        
+        <span class="btn btn-ghost" style="display: inline-flex; align-items: center; gap: var(--space-sm); cursor: default;">
+            <i class="fab fa-weixin"></i> 微信: shine5211314
+        </span>
+        
+        <a href="mailto:506343891@qq.com" class="btn btn-ghost" style="display: inline-flex; align-items: center; gap: var(--space-sm);">
+            <i class="fas fa-envelope"></i> 邮箱
+        </a>
+        <a href="https://github.com/northcity" target="_blank" class="btn btn-ghost" style="display: inline-flex; align-items: center; gap: var(--space-sm);">
+            <i class="fab fa-github"></i> GitHub
+        </a>
+    </div>
+    <p style="margin-top: var(--space-lg);">
+        <a href="/connect/" style="color: var(--color-primary);">查看所有联系方式 →</a>
+    </p>
 </div>
 
 
     <!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
-                    
-                    
-                    <li>
-                        <a href="https://twitter.com/northcity">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-
-                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
-                    
-                    <li>
-                        <a target="_blank" href="https://www.zhihu.com/people/chen-xi-18-69-64/activities">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa  fa-stack-1x fa-inverse">知</i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li>
-                        <a target="_blank" href="https://weibo.com/p/1005055227295178/home?from=page_100505&mod=TAB#place">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-
-
-                    
-                    
-                    <li>
-                        <a target="_blank" href="https://github.com/northcity">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; NorthCity 2017
-                    <br>
-                    Theme by <a href="www.northcity.top">Hux</a> |
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="100px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
-                    </iframe>
-                </p>
-            </div>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-text">
+            © 2026 北城 · 用产品和文字记录真实的独立开发之路
+        </div>
+        <div class="footer-links">
+            
+            <a href="https://github.com/northcity" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            
+            
+            
+            <a href="https://weibo.com/陈年小城" target="_blank" rel="noopener">
+                <i class="fab fa-weibo"></i> 微博
+            </a>
+            
+            <a href="/feed.xml">
+                <i class="fas fa-rss"></i> RSS
+            </a>
         </div>
     </div>
 </footer>
 
-<!-- jQuery -->
-<script src="/js/jquery.min.js "></script>
 
-<!-- Bootstrap Core JavaScript -->
-<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
-<script src="/js/bootstrap.min.js "></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js "></script>
-
-<!-- Service Worker -->
-
-<script src="/js/snackbar.js "></script>
-<script src="/js/sw-registration.js "></script>
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-
-<!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-<!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
-
-<!-- jquery.tagcloud.js -->
-<script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async('/js/jquery.tagcloud.js',function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-<!--fastClick.js -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-
-<!-- Google Analytics -->
-
-<script>
-    // dynamic User by Hux
-    var _gaId = 'UA-49627206-1';
-    var _gaDomain = 'northcity.top';
-
-    // Originial
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', _gaId, _gaDomain);
-    ga('send', 'pageview');
-</script>
-
-
-
-<!-- Baidu Tongji -->
-
-
-
-
-<!-- Side Catalog -->
-
-
-
-
-<!-- Image to hack wechat -->
-<img src="/img/icon_wechat.png" width="0" height="0" />
-<!-- Migrate from head to bottom, no longer block render and still work -->
-
+    <script src="/js/main.js"></script>
 </body>
-
 </html>

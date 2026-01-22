@@ -1,0 +1,78 @@
+<!-- Navigation -->
+<nav class="nav">
+    <div class="nav-container">
+        <a href="{{ site.baseurl }}/" class="nav-brand">
+            <span data-lang-show="zh">{{ site.title }}</span>
+            <span data-lang-show="en">{{ site.author_en }}</span>
+        </a>
+        
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <ul class="nav-links">
+            <li>
+                <a href="{{ site.baseurl }}/" {% if page.url == '/' %}class="active"{% endif %}>
+                    <span data-i18n="nav_home" data-zh="首页" data-en="Home">首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ site.baseurl }}/products/" {% if page.url contains 'products' %}class="active"{% endif %}>
+                    <span data-i18n="nav_products" data-zh="作品" data-en="Products">作品</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ site.baseurl }}/logs/" {% if page.url contains 'logs' %}class="active"{% endif %}>
+                    <span data-i18n="nav_logs" data-zh="日志" data-en="Logs">日志</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ site.baseurl }}/essays/" {% if page.url contains 'essays' %}class="active"{% endif %}>
+                    <span data-i18n="nav_essays" data-zh="文章" data-en="Essays">文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ site.baseurl }}/about/" {% if page.url contains 'about' %}class="active"{% endif %}>
+                    <span data-i18n="nav_about" data-zh="关于" data-en="About">关于</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ site.baseurl }}/connect/" {% if page.url contains 'connect' %}class="active"{% endif %}>
+                    <span data-i18n="nav_connect" data-zh="联系" data-en="Connect">联系</span>
+                </a>
+            </li>
+        </ul>
+        
+        <div class="site-settings">
+            <button id="lang-toggle" class="settings-btn" aria-label="Toggle language">
+                <i class="fas fa-globe"></i>
+                <span>EN</span>
+            </button>
+            <button id="theme-toggle" class="settings-btn" aria-label="Toggle theme" data-dark-text="暗色" data-light-text="亮色">
+                <i class="fas fa-moon"></i>
+                <span>暗色</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<script src="{{ site.baseurl }}/js/site-settings.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    toggle.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.nav')) {
+            navLinks.classList.remove('active');
+        }
+    });
+});
+</script>
