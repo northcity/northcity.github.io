@@ -156,12 +156,13 @@ my_products:
     tagline: "AI 自动识别并安排你的每一件事"
     description: "全新一代智能 GTD 工具，一句话快速记录，AI 自动分类待办与日程。"
     icon: "/img/chanpinicon/Anpa图标最终版.png"
-    platforms: ["iOS", "watchOS"]
+    platforms: ["iOS", "watchOS", "Android"]
     status: "新品"
     featured: true
     rating: "5.0"
     ratings_count: "10"
     app_store: "https://apps.apple.com/cn/app/anpa/id6757229797"
+    android_link: "https://www.pgyer.com/anpa-android-7"
 
   - name: "OneCost"
     tagline: "全新一代AI极简记账App"
@@ -174,6 +175,15 @@ my_products:
     ratings_count: "3"
     app_store: "https://apps.apple.com/cn/app/onecost/id6759001348"
     
+  - name: "Pixnora"
+    tagline: "像素风独立游戏，探索未知的冒险世界"
+    description: "Pixnora 是一款像素风格独立游戏，目前网页版已上线，App 即将推出。"
+    icon: "/img/chanpinicon/pixnoraicon.png"
+    platforms: ["Web"]
+    status: "新品"
+    featured: true
+    website: "https://www.pixnora.fun"
+
   - name: "呼吸泡泡"
     tagline: "让呼吸可见，让压力可控"
     description: "HRV 压力监测、AI 健康数据分析、引导式呼吸训练，Apple Watch 专属的压力管理工具。"
