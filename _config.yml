@@ -148,7 +148,7 @@ my_products:
     status: "持续更新"
     featured: true
     rating: "4.6"
-    ratings_count: "593"
+    ratings_count: "595"
     app_store: "https://apps.apple.com/cn/app/%E9%97%AA%E5%BF%B5-ai%E8%AF%AD%E9%9F%B3%E7%AC%94%E8%AE%B0/id1397149726"
     website: "https://ideasnap.xyz"
     
@@ -160,7 +160,7 @@ my_products:
     status: "新品"
     featured: true
     rating: "5.0"
-    ratings_count: "6"
+    ratings_count: "10"
     app_store: "https://apps.apple.com/cn/app/anpa/id6757229797"
 
   - name: "OneCost"
@@ -170,6 +170,8 @@ my_products:
     platforms: ["iOS"]
     status: "新品"
     featured: true
+    rating: "5.0"
+    ratings_count: "3"
     app_store: "https://apps.apple.com/cn/app/onecost/id6759001348"
     
   - name: "呼吸泡泡"
@@ -180,7 +182,7 @@ my_products:
     status: "持续更新"
     featured: true
     rating: "4.5"
-    ratings_count: "49"
+    ratings_count: "50"
     app_store: "https://apps.apple.com/cn/app/%E5%91%BC%E5%90%B8%E6%B3%A1%E6%B3%A1/id6743337849"
     website: "https://www.breathebubbles.com/"
     
@@ -192,7 +194,7 @@ my_products:
     status: "新品"
     featured: true
     rating: "5.0"
-    ratings_count: "3"
+    ratings_count: "4"
     app_store: "https://apps.apple.com/cn/app/%E6%95%B0%E5%AD%97%E9%81%97%E4%BA%A7-%E6%AD%A3%E7%89%88/id6757603587"
 
   - name: "时间胶囊"
@@ -203,7 +205,7 @@ my_products:
     status: "持续更新"
     featured: true
     rating: "4.8"
-    ratings_count: "4053"
+    ratings_count: "4052"
     app_store: "https://apps.apple.com/cn/app/%E6%97%B6%E9%97%B4%E8%83%B6%E5%9B%8A-%E5%AF%84%E5%BE%80%E6%9C%AA%E6%9D%A5%E7%9A%84%E4%BF%A1/id1358237203"
     website: "https://weiaifeijinxin.github.io"
     
@@ -237,7 +239,7 @@ my_products:
     status: "稳定"
     featured: false
     rating: "4.7"
-    ratings_count: "1211"
+    ratings_count: "1213"
     app_store: "https://apps.apple.com/cn/app/%E4%B9%9D%E5%AE%AB%E6%A0%BC%E5%88%87%E5%9B%BE-%E6%9E%81%E7%AE%80%E6%93%8D%E4%BD%9C/id1383797480"
 
   - name: "舔狗日记"
