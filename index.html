@@ -52,25 +52,50 @@ description: "北城 · 独立开发者 | 我用产品、代码和文字，记�
                     <span style="font-size: 2.5rem;">📱</span>
                     {% endif %}
                 </div>
-                <h3 class="product-name">{{ product.name }}</h3>
-                <p class="product-tagline">{{ product.tagline }}</p>
-                <div class="product-meta">
-                    {% for platform in product.platforms %}
-                    <span class="product-badge">{{ platform }}</span>
-                    {% endfor %}
+                <div class="product-info">
+                    <h3 class="product-name">
+                        <span data-lang-show="zh">{{ product.name }}</span>
+                        <span data-lang-show="en">{% if product.name_en %}{{ product.name_en }}{% else %}{{ product.name }}{% endif %}</span>
+                    </h3>
+                    <p class="product-tagline">
+                        <span data-lang-show="zh">{{ product.tagline }}</span>
+                        <span data-lang-show="en">{% if product.tagline_en %}{{ product.tagline_en }}{% else %}{{ product.tagline }}{% endif %}</span>
+                    </p>
+                    <p class="product-desc" style="color: var(--color-text-secondary); font-size: 0.8rem; line-height: 1.5; margin-bottom: 0.5rem;">
+                        <span data-lang-show="zh">{{ product.description }}</span>
+                        <span data-lang-show="en">{% if product.description_en %}{{ product.description_en }}{% else %}{{ product.description }}{% endif %}</span>
+                    </p>
+                    <div class="product-meta" style="margin-bottom: 0.4rem;">
+                        {% for platform in product.platforms %}
+                        <span class="product-badge">
+                            {% if platform == 'iOS' or platform == 'iPadOS' or platform == 'Mac' or platform == 'watchOS' %}<i class="fab fa-apple" style="font-size: 0.65rem;"></i> {% endif %}
+                            {% if platform == 'Android' %}<i class="fab fa-android" style="font-size: 0.65rem;"></i> {% endif %}
+                            {% if platform == 'Web' %}<i class="fas fa-globe" style="font-size: 0.65rem;"></i> {% endif %}
+                            {{ platform }}
+                        </span>
+                        {% endfor %}
+                        {% if product.status %}
+                        <span class="product-badge {% if product.status == '新品' %}status-active{% elsif product.status == '持续更新' %}status-maintenance{% endif %}">
+                            {{ product.status }}
+                        </span>
+                        {% endif %}
+                    </div>
                     {% if product.rating %}
-                    <span class="product-badge" style="background: #fef3c7; color: #92400e;">
-                        ★ {{ product.rating }}
-                    </span>
+                    <div style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--color-text-muted);">
+                        <span style="color: #fbbf24;">★</span>
+                        <span>{{ product.rating }}</span>
+                        <span style="opacity: 0.5;">·</span>
+                        <span>{{ product.ratings_count }} <span data-lang-show="zh">个评分</span><span data-lang-show="en">ratings</span></span>
+                    </div>
+                    {% endif %}
+                    {% if product.android_link %}
+                    <div style="margin-top: 0.5rem;">
+                        <object><a href="{{ product.android_link }}" target="_blank" rel="noopener" class="product-badge" style="background: #d1fae5; color: #065f46; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                            <i class="fab fa-android"></i> Android <span data-lang-show="zh">下载</span><span data-lang-show="en">Download</span>
+                        </a></object>
+                    </div>
                     {% endif %}
                 </div>
-                {% if product.android_link %}
-                <div style="margin-top: 0.5rem;">
-                    <object><a href="{{ product.android_link }}" target="_blank" rel="noopener" class="product-badge" style="background: #d1fae5; color: #065f46; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
-                        <i class="fab fa-android"></i> Android 下载
-                    </a></object>
-                </div>
-                {% endif %}
             </a>
             {% endif %}
             {% endfor %}

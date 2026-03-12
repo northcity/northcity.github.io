@@ -141,8 +141,11 @@ wechat_mp:
 # Products - 作品列表 (使用 my_products 避免与 collections 冲突)
 my_products:
   - name: "闪念"
+    name_en: "IdeaSnap"
     tagline: "AI 语音笔记，记录你一闪而过的灵感"
+    tagline_en: "AI voice notes — capture fleeting ideas instantly"
     description: "开口即可记录，AI 自动整理。App Store 编辑推荐，效率工具前5名。"
+    description_en: "Speak to record, AI organizes automatically. App Store Editor's Choice."
     icon: "/img/chanpinicon/闪念-AI语音笔记.png"
     platforms: ["iOS", "iPadOS", "watchOS", "Mac"]
     status: "持续更新"
@@ -154,7 +157,9 @@ my_products:
     
   - name: "Anpa"
     tagline: "AI 自动识别并安排你的每一件事"
+    tagline_en: "AI auto-recognizes and schedules everything for you"
     description: "全新一代智能 GTD 工具，一句话快速记录，AI 自动分类待办与日程。"
+    description_en: "Next-gen smart GTD — quick capture, AI auto-sorts todos & calendar."
     icon: "/img/chanpinicon/Anpa图标最终版.png"
     platforms: ["iOS", "watchOS", "Android"]
     status: "新品"
@@ -166,7 +171,9 @@ my_products:
 
   - name: "OneCost"
     tagline: "全新一代AI极简记账App"
+    tagline_en: "Next-gen AI minimalist expense tracker"
     description: "全新一代AI极简记账App"
+    description_en: "AI-powered minimalist expense tracking, effortlessly simple."
     icon: "/img/chanpinicon/onecosticon.png"
     platforms: ["iOS"]
     status: "新品"
@@ -177,7 +184,9 @@ my_products:
     
   - name: "Pixnora"
     tagline: "像素风独立游戏，探索未知的冒险世界"
+    tagline_en: "Pixel-art indie game — explore an unknown adventure world"
     description: "Pixnora 是一款像素风格独立游戏，目前网页版已上线，App 即将推出。"
+    description_en: "A pixel-art indie game. Web version live, app coming soon."
     icon: "/img/chanpinicon/pixnoraicon.png"
     platforms: ["Web"]
     status: "新品"
@@ -185,8 +194,11 @@ my_products:
     website: "https://www.pixnora.fun"
 
   - name: "呼吸泡泡"
+    name_en: "Breathe Bubbles"
     tagline: "让呼吸可见，让压力可控"
+    tagline_en: "See your breath, control your stress"
     description: "HRV 压力监测、AI 健康数据分析、引导式呼吸训练，Apple Watch 专属的压力管理工具。"
+    description_en: "HRV stress monitoring, AI health analytics & guided breathing for Apple Watch."
     icon: "/img/chanpinicon/呼吸泡泡icon.png"
     platforms: ["iOS", "iPadOS", "watchOS", "Mac"]
     status: "持续更新"
@@ -197,8 +209,11 @@ my_products:
     website: "https://www.breathebubbles.com/"
     
   - name: "数字遗产"
+    name_en: "Digital Legacy"
     tagline: "当你没回应时，替你把重要的事交代清楚"
+    tagline_en: "When you don't respond, it delivers what matters"
     description: "生命确认与数字遗产管理工具，帮你在充满不确定的生活里把重要的事安排妥当。"
+    description_en: "Life confirmation & digital legacy tool for managing what matters when uncertainty strikes."
     icon: "/img/chanpinicon/数字遗产icon.png"
     platforms: ["iOS", "Mac"]
     status: "新品"
@@ -208,8 +223,11 @@ my_products:
     app_store: "https://apps.apple.com/cn/app/%E6%95%B0%E5%AD%97%E9%81%97%E4%BA%A7-%E6%AD%A3%E7%89%88/id6757603587"
 
   - name: "时间胶囊"
+    name_en: "Time Capsule"
     tagline: "寄往未来的信"
+    tagline_en: "Letters to the future"
     description: "给未来的自己或他人写一封信，在指定的日期送达。余生漫漫，未来可期。"
+    description_en: "Write a letter to your future self or loved ones, delivered on a chosen date."
     icon: "/img/chanpinicon/shijianjiaonangicon.png"
     platforms: ["iOS", "iPadOS", "Mac", "Web"]
     status: "持续更新"
