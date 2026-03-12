@@ -162,6 +162,15 @@ my_products:
     rating: "5.0"
     ratings_count: "6"
     app_store: "https://apps.apple.com/cn/app/anpa/id6757229797"
+
+  - name: "OneCost"
+    tagline: "全新一代AI极简记账App"
+    description: "全新一代AI极简记账App"
+    icon: "/img/chanpinicon/onecosticon.png"
+    platforms: ["iOS"]
+    status: "新品"
+    featured: true
+    app_store: "https://apps.apple.com/cn/app/onecost/id6759001348"
     
   - name: "呼吸泡泡"
     tagline: "让呼吸可见，让压力可控"
