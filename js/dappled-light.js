@@ -1,193 +1,198 @@
 /*!
- * Dappled Light Effect — combined approach
+ * Homepage dappled light overlay
  *
- * Inspired by:
- *   jackyzha0/sunlit  — CSS venetian blind structure + perspective matrix3d
- *   farayan.me        — warm afternoon-light quality, organic softness
- *   dany.works        — diffuse blur so edges are never perfectly crisp
- *   cozy-window-shade — subtle neutral-warm colour warmth overlay
- *
- * Architecture (no canvas, no mix-blend-mode over content):
- *   Layer A (#dl-glow)   — warm radial-gradient overlay, z-index 9
- *                          gives light between slats a golden quality
- *   Layer B (#dl-persp)  — the slat shadows, blurred so edges diffuse
- *                          z-index 10
- *
- * Text readability: neither layer uses a blend mode, so all page
- * colours remain as-authored.
+ * Adapted from jackyzha0/sunlit:
+ * - venetian blinds geometry + perspective transform
+ * - original leaves.png silhouette layer
+ * - wind displacement filter + billow animation
+ * - progressive blur + bounce glow
+ * - theme-driven sunrise / sunset feel on light / dark changes
  */
 (function () {
   'use strict';
 
-  /* sunlit easing + duration */
+  if (!document.querySelector('.hero')) {
+    return;
+  }
+
+  var existing = document.getElementById('dappled-light');
+  if (existing) {
+    existing.remove();
+  }
+
+  var oldStyle = document.getElementById('dappled-light-style');
+  if (oldStyle) {
+    oldStyle.remove();
+  }
+
   var EASE = 'cubic-bezier(0.455, 0.190, 0.000, 0.985)';
-  var DUR  = '1.4s';
+  var media = window.matchMedia('(prefers-color-scheme: dark)');
+  var timer = null;
+  var lastDark = null;
 
-  /* micro height variation pool — breaks up perfect uniformity
-     values cycle: slightly thinner / thicker alternating slats      */
-  var HEIGHTS = [33, 38, 31, 40, 34, 36, 30, 39, 35, 37];
-
-  /* ── CSS ── */
   var style = document.createElement('style');
-  style.textContent =
-
-    /* ── outer wrapper ── */
-    '#dl-wrap{' +
-      'pointer-events:none;position:fixed;' +
-      'top:0;left:0;width:100vw;height:100vh;' +
-      'z-index:9;overflow:hidden;' +
-    '}' +
-
-    /* ── Layer A: warm light glow (fills gaps between slats) ──
-       Light mode: gentle warm cream; Dark mode: fades to 0          */
-    '#dl-glow{' +
-      'position:absolute;inset:0;' +
-      /* diagonal beam geometry — references farayan / dany */
-      'background:' +
-        'linear-gradient(' +
-          '108deg,' +
-          'rgba(255,248,225,0.055) 0%,' +
-          'rgba(255,242,195,0.040) 35%,' +
-          'rgba(255,235,170,0.022) 60%,' +
-          'transparent 78%' +
-        ');' +
-      'opacity:1;' +
-      'transition:opacity 1.2s ease;' +
-    '}' +
-    '#dl-wrap.is-dark #dl-glow{opacity:0;}' +
-
-    /* ── Layer B: slat shadows (blurred, perspective-skewed) ── */
-    '#dl-persp{' +
-      'position:absolute;' +
-      'top:-30vh;right:0;' +
-      'width:90vw;height:140vh;' +
-      /* light opacity — dark mode raises it */
-      'opacity:0.09;' +
-      'transform-origin:top right;' +
-      /* sunlit light-mode matrix — slight perspective lean */
-      'transform:matrix3d(' +
-        '0.7500,-0.0625,0,0.0008,' +
-        '0,1,0,0,' +
-        '0,0,1,0,' +
-        '0,0,0,1' +
-      ');' +
-      /* KEY: blur diffuses the hard slat edges — the single biggest
-         difference between "CSS stripes" and "actual sunlight"       */
-      'filter:blur(5px);' +
-      'transition:' +
-        'transform ' + DUR + ' ' + EASE + ',' +
-        'opacity 1.2s ease,' +
-        'filter 1.2s ease;' +
-    '}' +
-    '#dl-wrap.is-dark #dl-persp{' +
-      'opacity:0.50;' +
-      /* dark: steeper angle (sun lower / blinds more closed) */
-      'transform:matrix3d(' +
-        '0.8333,0.0833,0,0.0003,' +
-        '0,1,0,0,' +
-        '0,0,1,0,' +
-        '0,0,0,1' +
-      ');' +
-      /* tighter blur in dark — shadows sharper when blinds nearly shut */
-      'filter:blur(3px);' +
-    '}' +
-
-    /* ── slat container ── */
-    '#dl-shutters{' +
-      'display:flex;flex-direction:column;align-items:flex-end;' +
-      'width:100%;' +
-      'gap:56px;' +
-      'transition:gap ' + DUR + ' ' + EASE + ';' +
-    '}' +
-    '#dl-wrap.is-dark #dl-shutters{gap:14px;}' +
-
-    /* ── individual slat ──
-       base colour: warm dark brown (not pure neutral black/gray)
-       references the #1a1917 from sunlit but slightly warmer        */
-    '.dl-shutter{' +
-      'width:100%;height:35px;' +
-      'background:#211d19;' +
-      'transition:height ' + DUR + ' ' + EASE + ';' +
-    '}' +
-    '#dl-wrap.is-dark .dl-shutter{height:80px;}' +
-
-    /* ── nth-child micro-variations — organic irregularity ──
-       Real venetian slats are never perfectly identical             */
-    '.dl-shutter:nth-child(3n){height:32px;}' +
-    '.dl-shutter:nth-child(3n+1){height:38px;}' +
-    '.dl-shutter:nth-child(5n){height:30px;}' +
-    '.dl-shutter:nth-child(7n){height:41px;}' +
-    '#dl-wrap.is-dark .dl-shutter:nth-child(3n){height:76px;}' +
-    '#dl-wrap.is-dark .dl-shutter:nth-child(3n+1){height:84px;}' +
-    '#dl-wrap.is-dark .dl-shutter:nth-child(5n){height:74px;}' +
-    '#dl-wrap.is-dark .dl-shutter:nth-child(7n){height:86px;}' +
-
-    /* ── vertical window-frame bars ── */
-    '#dl-verticals{' +
-      'position:absolute;top:0;' +
-      'width:100%;height:100%;' +
-      'display:flex;justify-content:space-around;' +
-      'pointer-events:none;' +
-    '}' +
-    '.dl-bar{' +
-      'width:5px;height:100%;' +
-      'background:#1e1a16;' +
-    '}';
-
+  style.id = 'dappled-light-style';
+  style.textContent = [
+    'body{position:relative;}',
+    'body>:not(#dappled-light):not(script){position:relative;z-index:1;}',
+    '#dappled-light{--dl-shadow:#1a1917;--dl-bounce-light:#f5d7a6;pointer-events:none;position:fixed;inset:0;z-index:0;overflow:hidden;}',
+    '#dappled-light *{box-sizing:border-box;}',
+    '#dappled-light .dl-atmosphere{position:absolute;inset:0;background:linear-gradient(180deg,#fffdfa 0%,#fcf7ef 62%,#f6ecdd 100%);transition:background 1s ' + EASE + ';}',
+    '#dappled-light.is-dark{--dl-shadow:#030307;--dl-bounce-light:#1b293f;}',
+    '#dappled-light.is-dark .dl-atmosphere{background:linear-gradient(180deg,#0f131c 0%,#16132b 58%,#101722 100%);}',
+    '#dappled-light.to-dark .dl-atmosphere{animation:dl-sunset 1.7s linear forwards;}',
+    '#dappled-light.to-light .dl-atmosphere{animation:dl-sunrise 1s linear forwards;}',
+    '@keyframes dl-sunrise{0%{background:#0f131c;}10%{background:#16132b;}35%{background:#9fb3bf;}100%{background:#fffdfa;}}',
+    '@keyframes dl-sunset{0%{background:#fffdfa;}30%{background:#fccc83;}60%{background:#db7a2a;}90%{background:#16132b;}100%{background:#0f131c;}}',
+    '#dappled-light .dl-glow{position:absolute;inset:0;background:linear-gradient(309deg,var(--dl-bounce-light),var(--dl-bounce-light) 20%,transparent);transition:background 1s ' + EASE + ';height:100%;width:100%;opacity:.5;}',
+    '#dappled-light .dl-glow-bounce{position:absolute;inset:0;background:linear-gradient(355deg,var(--dl-bounce-light) 0%,transparent 30%,transparent 100%);transition:background 1s ' + EASE + ';opacity:.5;height:100%;width:100%;bottom:0;}',
+    '#dappled-light .perspective{position:absolute;top:-30vh;right:0;width:80vw;height:130vh;opacity:.07;transform-origin:top right;transform-style:preserve-3d;transform:matrix3d(0.7500,-0.0625,0,0.0008,0,1,0,0,0,0,1,0,0,0,0,1);transition:transform 1.7s ' + EASE + ',opacity 4s ease;}',
+    '#dappled-light.is-dark .perspective{opacity:.3;transform:matrix3d(0.8333,0.0833,0,0.0003,0,1,0,0,0,0,1,0,0,0,0,1);}',
+    '#dappled-light #leaves{position:absolute;background-size:cover;background-repeat:no-repeat;bottom:-20px;right:-700px;width:1600px;height:1400px;background-image:url("/img/home/sunlit-leaves.png");filter:url(#dl-wind);animation:dl-billow 8s ease-in-out infinite;opacity:.94;}',
+    '#dappled-light.is-dark #leaves{opacity:.66;}',
+    '#dappled-light #blinds{position:relative;width:100%;}',
+    '#dappled-light #blinds .shutter,#dappled-light #blinds .bar{background-color:var(--dl-shadow);}',
+    '#dappled-light #blinds>.shutters{display:flex;flex-direction:column;align-items:end;gap:60px;transition:gap 1s ' + EASE + ';}',
+    '#dappled-light.is-dark #blinds>.shutters{gap:20px;}',
+    '#dappled-light #blinds>.vertical{top:0;position:absolute;height:100%;width:100%;display:flex;justify-content:space-around;}',
+    '#dappled-light .vertical>.bar{width:5px;height:100%;}',
+    '#dappled-light .shutter{width:100%;height:40px;transition:height 1s ' + EASE + ';}',
+    '#dappled-light.is-dark .shutter{height:80px;}',
+    '#dappled-light .dl-progressive-blur{position:absolute;inset:0;}',
+    '#dappled-light .dl-progressive-blur>div{position:absolute;inset:0;backdrop-filter:blur(var(--blur-amount));-webkit-backdrop-filter:blur(var(--blur-amount));mask-image:linear-gradient(252deg,transparent,transparent var(--stop1),black var(--stop2),black);-webkit-mask-image:linear-gradient(252deg,transparent,transparent var(--stop1),black var(--stop2),black);}',
+    '#dappled-light .dl-progressive-blur>div:nth-child(1){--blur-amount:6px;--stop1:0%;--stop2:0%;}',
+    '#dappled-light .dl-progressive-blur>div:nth-child(2){--blur-amount:12px;--stop1:40%;--stop2:80%;}',
+    '#dappled-light .dl-progressive-blur>div:nth-child(3){--blur-amount:48px;--stop1:40%;--stop2:70%;}',
+    '#dappled-light .dl-progressive-blur>div:nth-child(4){--blur-amount:96px;--stop1:70%;--stop2:80%;}',
+    '@keyframes dl-billow{0%{transform:perspective(400px) rotateX(0deg) rotateY(0deg) scale(1);}25%{transform:perspective(400px) rotateX(1deg) rotateY(2deg) scale(1.02);}50%{transform:perspective(400px) rotateX(-4deg) rotateY(-2deg) scale(0.97);}75%{transform:perspective(400px) rotateX(1deg) rotateY(-1deg) scale(1.04);}100%{transform:perspective(400px) rotateX(0deg) rotateY(0deg) scale(1);}}'
+  ].join('');
   document.head.appendChild(style);
 
-  /* ── DOM ── */
-  var wrap = document.createElement('div');
-  wrap.id = 'dl-wrap';
+  var root = document.createElement('div');
+  root.id = 'dappled-light';
 
-  /* Layer A: warm glow */
+  var atmosphere = document.createElement('div');
+  atmosphere.className = 'dl-atmosphere';
+  root.appendChild(atmosphere);
+
   var glow = document.createElement('div');
-  glow.id = 'dl-glow';
-  wrap.appendChild(glow);
+  glow.className = 'dl-glow';
+  root.appendChild(glow);
 
-  /* Layer B: blind shadows */
-  var persp = document.createElement('div');
-  persp.id = 'dl-persp';
+  var glowBounce = document.createElement('div');
+  glowBounce.className = 'dl-glow-bounce';
+  root.appendChild(glowBounce);
+
+  var perspective = document.createElement('div');
+  perspective.className = 'perspective';
+
+  var leaves = document.createElement('div');
+  leaves.id = 'leaves';
+  leaves.innerHTML = [
+    '<svg aria-hidden="true" style="width:0;height:0;position:absolute;">',
+    '<defs>',
+    '<filter id="dl-wind" x="-20%" y="-20%" width="140%" height="140%">',
+    '<feTurbulence type="fractalNoise" numOctaves="2" seed="1">',
+    '<animate attributeName="baseFrequency" dur="16s" keyTimes="0;0.33;0.66;1" values="0.005 0.003;0.01 0.009;0.008 0.004;0.005 0.003" repeatCount="indefinite"></animate>',
+    '</feTurbulence>',
+    '<feDisplacementMap in="SourceGraphic">',
+    '<animate attributeName="scale" dur="20s" keyTimes="0;0.25;0.5;0.75;1" values="45;55;75;55;45" repeatCount="indefinite"></animate>',
+    '</feDisplacementMap>',
+    '</filter>',
+    '</defs>',
+    '</svg>'
+  ].join('');
+  perspective.appendChild(leaves);
 
   var blinds = document.createElement('div');
-  blinds.id = 'dl-blinds';
+  blinds.id = 'blinds';
 
   var shutters = document.createElement('div');
-  shutters.id = 'dl-shutters';
-
-  for (var i = 0; i < 28; i++) {
-    var s = document.createElement('div');
-    s.className = 'dl-shutter';
-    shutters.appendChild(s);
+  shutters.className = 'shutters';
+  for (var i = 0; i < 24; i++) {
+    var shutter = document.createElement('div');
+    shutter.className = 'shutter';
+    shutters.appendChild(shutter);
   }
-
-  var verts = document.createElement('div');
-  verts.id = 'dl-verticals';
-  var bar1 = document.createElement('div'); bar1.className = 'dl-bar';
-  var bar2 = document.createElement('div'); bar2.className = 'dl-bar';
-  verts.appendChild(bar1);
-  verts.appendChild(bar2);
-
   blinds.appendChild(shutters);
-  blinds.appendChild(verts);
-  persp.appendChild(blinds);
-  wrap.appendChild(persp);
-  document.body.appendChild(wrap);
 
-  /* ── dark-mode detection ── */
-  function checkDark() {
-    var dark =
-      window.matchMedia('(prefers-color-scheme: dark)').matches ||
-      document.documentElement.classList.contains('dark')       ||
-      document.documentElement.classList.contains('dark-mode')  ||
-      document.body.classList.contains('dark')                  ||
+  var vertical = document.createElement('div');
+  vertical.className = 'vertical';
+  for (var j = 0; j < 2; j++) {
+    var bar = document.createElement('div');
+    bar.className = 'bar';
+    vertical.appendChild(bar);
+  }
+  blinds.appendChild(vertical);
+  perspective.appendChild(blinds);
+  root.appendChild(perspective);
+
+  var progressiveBlur = document.createElement('div');
+  progressiveBlur.className = 'dl-progressive-blur';
+  for (var k = 0; k < 4; k++) {
+    progressiveBlur.appendChild(document.createElement('div'));
+  }
+  root.appendChild(progressiveBlur);
+
+  document.body.insertBefore(root, document.body.firstChild);
+
+  function detectDark() {
+    var theme = document.documentElement.getAttribute('data-theme');
+    if (theme === 'dark') {
+      return true;
+    }
+    if (theme === 'light') {
+      return false;
+    }
+    return media.matches ||
+      document.documentElement.classList.contains('dark') ||
+      document.documentElement.classList.contains('dark-mode') ||
+      document.body.classList.contains('dark') ||
       document.body.classList.contains('dark-mode');
-    wrap.classList.toggle('is-dark', dark);
   }
 
-  checkDark();
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', checkDark);
-  new MutationObserver(checkDark).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-  new MutationObserver(checkDark).observe(document.body,            { attributes: true, attributeFilter: ['class'] });
+  function playTransition(isDark) {
+    root.classList.remove('to-dark', 'to-light');
+    void root.offsetWidth;
+    root.classList.add(isDark ? 'to-dark' : 'to-light');
+    clearTimeout(timer);
+    timer = window.setTimeout(function () {
+      root.classList.remove('to-dark', 'to-light');
+    }, isDark ? 1750 : 1050);
+  }
 
+  function applyTheme(animate) {
+    var isDark = detectDark();
+    root.classList.toggle('is-dark', isDark);
+    if (animate && lastDark !== null && lastDark !== isDark) {
+      playTransition(isDark);
+    }
+    lastDark = isDark;
+  }
+
+  applyTheme(false);
+
+  if (typeof media.addEventListener === 'function') {
+    media.addEventListener('change', function () {
+      applyTheme(true);
+    });
+  } else if (typeof media.addListener === 'function') {
+    media.addListener(function () {
+      applyTheme(true);
+    });
+  }
+
+  var observer = new MutationObserver(function () {
+    applyTheme(true);
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class', 'data-theme']
+  });
+
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ['class', 'data-theme']
+  });
 })();
