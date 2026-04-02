@@ -4,6 +4,11 @@
         <div class="footer-text">
             © {{ site.time | date: '%Y' }} {{ site.author }} · 用作品和文字记录真实的独立开发之路 · 
             <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener">豫ICP备17036027号-1</a>
+            <div class="footer-visit-count">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                <span id="northcityVisitCount">0</span>
+                <span>次到访</span>
+            </div>
         </div>
         <div class="footer-links">
             {% if site.github_username %}

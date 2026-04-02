@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // 访客计数 - 北城首页
 // =====================
 
-const NORTHCITY_STATS_API = 'https://timepill.api.northcity.top/1/classes/NorthcityStats';
+const NORTHCITY_STATS_API = 'https://timepill.api.northcity.top/1/classes/Statistics';
 const NORTHCITY_API_HEADERS = {
     'X-Bmob-Application-Id': '075c9e426a01a48a81aa12305924e532',
     'X-Bmob-REST-API-Key': 'a92fd1416101a7ee4de0ee0850572b91',
@@ -94,32 +94,24 @@ const NORTHCITY_API_HEADERS = {
 
 async function getNorthcityVisitCount() {
     try {
-        let total = 0;
-        let skip = 0;
-        const limit = 100;
-        let hasMore = true;
+        const response = await fetch(`${NORTHCITY_STATS_API}?count=1&limit=1&where=${encodeURIComponent(JSON.stringify({ type: 'visit' }))}`, {
+            method: 'GET',
+            headers: NORTHCITY_API_HEADERS
+        });
 
-        while (hasMore) {
-            const response = await fetch(`${NORTHCITY_STATS_API}?limit=${limit}&skip=${skip}&where=${encodeURIComponent(JSON.stringify({ type: 'visit' }))}`, {
-                method: 'GET',
-                headers: NORTHCITY_API_HEADERS
-            });
-            if (!response.ok) break;
-            const data = await response.json();
-            total += data.results.length;
-            if (data.results.length < limit) {
-                hasMore = false;
-            } else {
-                skip += limit;
-            }
+        if (!response.ok) {
+            throw new Error('获取访客数失败');
         }
+
+        const data = await response.json();
+        const total = typeof data.count === 'number' ? data.count : (data.results || []).length;
 
         const el = document.getElementById('northcityVisitCount');
         if (el) el.textContent = total.toLocaleString();
     } catch (error) {
         console.error('获取访客数失败:', error);
         const el = document.getElementById('northcityVisitCount');
-        if (el) el.textContent = '--';
+        if (el) el.textContent = '0';
     }
 }
 
