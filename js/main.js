@@ -81,6 +81,69 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// =====================
+// 访客计数 - 北城首页
+// =====================
+
+const NORTHCITY_STATS_API = 'https://timepill.api.northcity.top/1/classes/NorthcityStats';
+const NORTHCITY_API_HEADERS = {
+    'X-Bmob-Application-Id': '075c9e426a01a48a81aa12305924e532',
+    'X-Bmob-REST-API-Key': 'a92fd1416101a7ee4de0ee0850572b91',
+    'Content-Type': 'application/json'
+};
+
+async function getNorthcityVisitCount() {
+    try {
+        let total = 0;
+        let skip = 0;
+        const limit = 100;
+        let hasMore = true;
+
+        while (hasMore) {
+            const response = await fetch(`${NORTHCITY_STATS_API}?limit=${limit}&skip=${skip}&where=${encodeURIComponent(JSON.stringify({ type: 'visit' }))}`, {
+                method: 'GET',
+                headers: NORTHCITY_API_HEADERS
+            });
+            if (!response.ok) break;
+            const data = await response.json();
+            total += data.results.length;
+            if (data.results.length < limit) {
+                hasMore = false;
+            } else {
+                skip += limit;
+            }
+        }
+
+        const el = document.getElementById('northcityVisitCount');
+        if (el) el.textContent = total.toLocaleString();
+    } catch (error) {
+        console.error('获取访客数失败:', error);
+        const el = document.getElementById('northcityVisitCount');
+        if (el) el.textContent = '--';
+    }
+}
+
+async function recordNorthcityVisit() {
+    try {
+        const now = new Date();
+        const timestamp = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+        await fetch(NORTHCITY_STATS_API, {
+            method: 'POST',
+            headers: NORTHCITY_API_HEADERS,
+            body: JSON.stringify({ type: 'visit', timestamp })
+        });
+        await getNorthcityVisitCount();
+    } catch (error) {
+        console.error('记录访问失败:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('northcityVisitCount')) {
+        recordNorthcityVisit();
+    }
+});
+
 // Console Easter Egg
 console.log('%c👋 你好！', 'font-size: 24px; font-weight: bold;');
 console.log('%c欢迎来到北城的个人网站。', 'font-size: 14px;');

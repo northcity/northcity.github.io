@@ -285,6 +285,27 @@ a:hover {
   gap: var(--space-md);
 }
 
+.hero-visitor-count {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: var(--space-lg);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  user-select: none;
+}
+
+.hero-visitor-count svg {
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+#northcityVisitCount {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
 /* Buttons */
 .btn {
   display: inline-flex;
