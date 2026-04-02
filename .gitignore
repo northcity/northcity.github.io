@@ -1,0 +1,24 @@
+# Jekyll build output — never commit this
+_site/
+
+# Jekyll cache & metadata
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+
+# Bundler
+vendor/
+.bundle/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Editor
+.vscode/
+*.swp
+*.swo
