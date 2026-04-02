@@ -531,13 +531,13 @@ a:hover {
    Values Section
    =================================== */
 .values-section {
-  background: var(--color-bg-dark);
-  color: var(--color-text-light);
+  background: transparent;
+  color: var(--color-text-primary);
   padding: var(--space-4xl) 0;
 }
 
 .values-section .section-title {
-  color: var(--color-text-light);
+  color: var(--color-text-primary);
 }
 
 .values-grid {
@@ -553,11 +553,11 @@ a:hover {
 .value-item h4 {
   font-size: 1.125rem;
   margin-bottom: var(--space-sm);
-  color: var(--color-text-light);
+  color: var(--color-text-primary);
 }
 
 .value-item p {
-  color: #a1a1aa;
+  color: var(--color-text-secondary);
   font-size: 0.9375rem;
   margin: 0;
 }
