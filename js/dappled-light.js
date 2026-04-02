@@ -99,24 +99,26 @@
     });
   })();
 
-  /* CSS: leaf div gets SVG wind filter + 3D billow animation (jackyzha0/sunlit) */
+  /* CSS: leaf div — SVG wind distortion + subtle sway only (no page-blur) */
   var cssEl = document.createElement('style');
   cssEl.textContent = [
     '#dl-leaves{',
       'position:fixed;pointer-events:none;z-index:8;',
-      'top:-18vh;right:-22vw;width:78vw;height:92vh;',
+      /* upper-right corner only, smaller footprint */
+      'top:-8vh;right:-8vw;width:42vw;height:55vh;',
       'background-size:cover;background-repeat:no-repeat;',
-      'opacity:0.14;filter:url(#dl-wind);',
-      'animation:dl-billow 9s ease-in-out infinite;',
+      /* blur the leaf image itself (not backdrop), opacity reduced */
+      'opacity:0.10;filter:url(#dl-wind) blur(6px);',
+      'animation:dl-billow 14s ease-in-out infinite;',
       'transform-origin:top right;',
-      'transform:matrix3d(0.82,-0.05,0,0.0006,0,1,0,0,0,0,1,0,0,0,0,1);',
     '}',
     '@keyframes dl-billow{',
-      '0%{transform:perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)}',
-      '25%{transform:perspective(600px) rotateX(1deg) rotateY(2deg) scale(1.02)}',
-      '50%{transform:perspective(600px) rotateX(-3.5deg) rotateY(-2deg) scale(0.97)}',
-      '75%{transform:perspective(600px) rotateX(1.5deg) rotateY(-1deg) scale(1.03)}',
-      '100%{transform:perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)}',
+      /* very gentle sway — no scale pump, tiny rotations */
+      '0%  {transform:perspective(800px) rotateX(0deg)    rotateY(0deg)   }',
+      '30% {transform:perspective(800px) rotateX(0.4deg)  rotateY(0.8deg) }',
+      '55% {transform:perspective(800px) rotateX(-0.6deg) rotateY(-0.5deg)}',
+      '80% {transform:perspective(800px) rotateX(0.3deg)  rotateY(-0.4deg)}',
+      '100%{transform:perspective(800px) rotateX(0deg)    rotateY(0deg)   }',
     '}'
   ].join('');
   document.head.appendChild(cssEl);
@@ -126,34 +128,11 @@
   leafDiv.style.backgroundImage = 'url(' + LC.toDataURL() + ')';
   document.body.appendChild(leafDiv);
 
-  /* ── 3. Progressive blur — 4 backdrop-filter layers (jackyzha0/sunlit) ── */
-  var blurWrap = document.createElement('div');
-  blurWrap.id = 'dl-blur';
-  Object.assign(blurWrap.style, {
-    position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
-    pointerEvents: 'none', zIndex: '11'
-  });
-  [
-    { px: '3px',  s1: '0%',  s2: '0%'  },
-    { px: '9px',  s1: '30%', s2: '58%' },
-    { px: '25px', s1: '48%', s2: '68%' },
-    { px: '60px', s1: '65%', s2: '78%' }
-  ].forEach(function(def) {
-    var d = document.createElement('div');
-    var mask = 'linear-gradient(248deg,transparent,transparent ' + def.s1 + ',black ' + def.s2 + ',black)';
-    Object.assign(d.style, {
-      position: 'absolute', inset: '0',
-      backdropFilter: 'blur(' + def.px + ')',
-      WebkitBackdropFilter: 'blur(' + def.px + ')',
-      maskImage: mask, WebkitMaskImage: mask
-    });
-    blurWrap.appendChild(d);
-  });
-  document.body.appendChild(blurWrap);
-
-  /* ── 4. Shadow canvas  mix-blend-mode:multiply ── */
+  /* ── 3. Shadow canvas  mix-blend-mode:multiply ── */
+  /* (progressive blur removed — backdrop-filter would blur page text) */
   var SC = document.createElement('canvas');
   SC.id = 'dl-shadow';
+  SC.setAttribute('aria-hidden', 'true');
   Object.assign(SC.style, {
     position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
     pointerEvents: 'none', zIndex: '9', mixBlendMode: 'multiply'
@@ -233,11 +212,11 @@
     var px       = lerp(w * 0.004, w * 0.048, n) + bx;
     var py       = lerp(h * 0.004, h * 0.024, n) + by;
 
-    /* shadow tone warm linen */
+    /* shadow tone warm linen — lighter so text stays readable */
     var sR = Math.round(lerp(210, 218, n));
     var sG = Math.round(lerp(196, 206, n));
     var sB = Math.round(lerp(176, 188, n));
-    var sA = lerp(0.56, 0.46, n);
+    var sA = lerp(0.36, 0.28, n);
 
     /* slat geometry */
     var numSlats  = 16;
