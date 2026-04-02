@@ -1,0 +1,1786 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>北城</title>
+    <description>我用产品、代码和文字，记录真实的独立开发之路。</description>
+    <link>https://www.northcity.top/</link>
+    <atom:link href="https://www.northcity.top/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Thu, 02 Apr 2026 16:14:15 +0800</pubDate>
+    <lastBuildDate>Thu, 02 Apr 2026 16:14:15 +0800</lastBuildDate>
+    <generator>Jekyll v3.10.0</generator>
+    
+      <item>
+        <title>独立开发者如何设计可持续的商业模式</title>
+        <description>&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+
+&lt;p&gt;做独立开发最现实的问题：如何赚钱？&lt;/p&gt;
+
+&lt;p&gt;这篇文章我会分享我尝试过的几种商业模式，以及每种模式的优缺点。&lt;/p&gt;
+
+&lt;h2 id=&quot;常见的商业模式&quot;&gt;常见的商业模式&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-一次性买断&quot;&gt;1. 一次性买断&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;用户决策成本低&lt;/li&gt;
+  &lt;li&gt;现金流相对集中&lt;/li&gt;
+  &lt;li&gt;简单直接&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;收入不可持续&lt;/li&gt;
+  &lt;li&gt;需要不断获取新用户&lt;/li&gt;
+  &lt;li&gt;老用户没有持续付费的理由&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;适合：&lt;/strong&gt;工具类 App，功能明确且不需要持续更新的产品。&lt;/p&gt;
+
+&lt;h3 id=&quot;2-订阅制&quot;&gt;2. 订阅制&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;收入可预测&lt;/li&gt;
+  &lt;li&gt;鼓励持续迭代&lt;/li&gt;
+  &lt;li&gt;LTV（用户生命周期价值）高&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;用户决策成本高&lt;/li&gt;
+  &lt;li&gt;需要持续提供价值&lt;/li&gt;
+  &lt;li&gt;流失率是核心指标&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;适合：&lt;/strong&gt;内容类、服务类产品，需要持续运营的产品。&lt;/p&gt;
+
+&lt;h3 id=&quot;3-免费--内购&quot;&gt;3. 免费 + 内购&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;降低获客门槛&lt;/li&gt;
+  &lt;li&gt;可以通过高级功能变现&lt;/li&gt;
+  &lt;li&gt;灵活性高&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;需要精心设计付费点&lt;/li&gt;
+  &lt;li&gt;可能影响用户体验&lt;/li&gt;
+  &lt;li&gt;转化率通常较低&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;适合：&lt;/strong&gt;大众化产品，需要快速积累用户的产品。&lt;/p&gt;
+
+&lt;h3 id=&quot;4-广告&quot;&gt;4. 广告&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;用户无需付费&lt;/li&gt;
+  &lt;li&gt;实现简单&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;收入较低（尤其是小众 App）&lt;/li&gt;
+  &lt;li&gt;影响用户体验&lt;/li&gt;
+  &lt;li&gt;依赖用户量&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;个人观点：&lt;/strong&gt;除非你有百万级用户，否则不建议依赖广告。&lt;/p&gt;
+
+&lt;h2 id=&quot;我的实践&quot;&gt;我的实践&lt;/h2&gt;
+
+&lt;h3 id=&quot;闪念订阅制&quot;&gt;闪念：订阅制&lt;/h3&gt;
+
+&lt;p&gt;闪念采用年订阅模式，原因是：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;AI 功能有持续成本&lt;/li&gt;
+  &lt;li&gt;用户需要持续记录和整理&lt;/li&gt;
+  &lt;li&gt;符合效率工具的使用场景&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;数据：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;付费转化率：约 3%&lt;/li&gt;
+  &lt;li&gt;续费率：约 65%&lt;/li&gt;
+  &lt;li&gt;平均订阅时长：18 个月&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;时间胶囊买断制&quot;&gt;时间胶囊：买断制&lt;/h3&gt;
+
+&lt;p&gt;时间胶囊是买断模式，因为：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;功能相对固定&lt;/li&gt;
+  &lt;li&gt;用户场景是”写一封信然后等待”&lt;/li&gt;
+  &lt;li&gt;不需要频繁使用&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;极简天气免费--pro&quot;&gt;极简天气：免费 + Pro&lt;/h3&gt;
+
+&lt;p&gt;基础功能免费，高级功能（如 Widget、Apple Watch）需要一次性购买。&lt;/p&gt;
+
+&lt;p&gt;这种模式效果不错，让更多人能使用基础功能，愿意付费的用户也能得到更好的体验。&lt;/p&gt;
+
+&lt;h2 id=&quot;定价策略&quot;&gt;定价策略&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-不要太便宜&quot;&gt;1. 不要太便宜&lt;/h3&gt;
+
+&lt;p&gt;独立开发者常犯的错误是定价太低。&lt;/p&gt;
+
+&lt;p&gt;你的时间很宝贵，你的产品也有价值。6 元的定价和 68 元的定价，对用户来说其实差别不大，但对你来说可能是 10 倍的收入差距。&lt;/p&gt;
+
+&lt;h3 id=&quot;2-考虑不同市场&quot;&gt;2. 考虑不同市场&lt;/h3&gt;
+
+&lt;p&gt;我的 App 在不同地区有不同定价：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;中国区相对便宜&lt;/li&gt;
+  &lt;li&gt;美国区按当地购买力定价&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3-提供试用&quot;&gt;3. 提供试用&lt;/h3&gt;
+
+&lt;p&gt;让用户先体验再付费，转化率会更高。&lt;/p&gt;
+
+&lt;h2 id=&quot;总结&quot;&gt;总结&lt;/h2&gt;
+
+&lt;p&gt;没有完美的商业模式，只有适合你产品的模式。&lt;/p&gt;
+
+&lt;p&gt;关键是：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;理解你的用户&lt;/li&gt;
+  &lt;li&gt;持续提供价值&lt;/li&gt;
+  &lt;li&gt;不断试验和优化&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;独立开发的好处是，你可以随时调整。不要害怕尝试。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 08 Jan 2026 00:00:00 +0800</pubDate>
+        <link>https://www.northcity.top/2026/01/08/indie-dev-business-model/</link>
+        <guid isPermaLink="true">https://www.northcity.top/2026/01/08/indie-dev-business-model/</guid>
+        
+        <category>独立开发</category>
+        
+        <category>商业模式</category>
+        
+        <category>变现</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>App Store 优化实战指南：从 0 到 10 万下载</title>
+        <description>&lt;h2 id=&quot;什么是-aso&quot;&gt;什么是 ASO&lt;/h2&gt;
+
+&lt;p&gt;ASO（App Store Optimization）是指通过优化 App 在应用商店的各项元素，提高搜索排名和下载转化率。&lt;/p&gt;
+
+&lt;p&gt;简单说：让更多人找到你的 App，并愿意下载。&lt;/p&gt;
+
+&lt;h2 id=&quot;关键元素&quot;&gt;关键元素&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-应用名称&quot;&gt;1. 应用名称&lt;/h3&gt;
+
+&lt;p&gt;应用名称是权重最高的元素。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;建议：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;包含核心关键词&lt;/li&gt;
+  &lt;li&gt;简洁易记&lt;/li&gt;
+  &lt;li&gt;体现产品价值&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;示例：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;❌ “NoteApp”&lt;/li&gt;
+  &lt;li&gt;✅ “闪念 - AI 语音笔记”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2-副标题&quot;&gt;2. 副标题&lt;/h3&gt;
+
+&lt;p&gt;30 个字符，用来补充说明。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;示例：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;“开口即可记录，AI 自动整理”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3-关键词&quot;&gt;3. 关键词&lt;/h3&gt;
+
+&lt;p&gt;100 个字符，用户看不到，但会影响搜索排名。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;技巧：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;不要重复应用名称中的词&lt;/li&gt;
+  &lt;li&gt;用逗号分隔，不要用空格&lt;/li&gt;
+  &lt;li&gt;包含竞品名称（有争议，谨慎使用）&lt;/li&gt;
+  &lt;li&gt;定期更新，跟踪效果&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;4-应用描述&quot;&gt;4. 应用描述&lt;/h3&gt;
+
+&lt;p&gt;虽然对搜索排名影响不大，但直接影响下载转化率。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;结构建议：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;第一段：核心价值主张&lt;/li&gt;
+  &lt;li&gt;功能列表（用 emoji 增加可读性）&lt;/li&gt;
+  &lt;li&gt;用户评价或媒体背书&lt;/li&gt;
+  &lt;li&gt;联系方式&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;5-截图和视频&quot;&gt;5. 截图和视频&lt;/h3&gt;
+
+&lt;p&gt;这是转化率的关键。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;设计原则：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;突出核心功能&lt;/li&gt;
+  &lt;li&gt;使用真实界面&lt;/li&gt;
+  &lt;li&gt;添加文字说明&lt;/li&gt;
+  &lt;li&gt;第一张图最重要&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;我的实践数据&quot;&gt;我的实践数据&lt;/h2&gt;
+
+&lt;p&gt;以闪念为例，优化前后对比：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;指标&lt;/th&gt;
+      &lt;th&gt;优化前&lt;/th&gt;
+      &lt;th&gt;优化后&lt;/th&gt;
+      &lt;th&gt;变化&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;日下载&lt;/td&gt;
+      &lt;td&gt;50&lt;/td&gt;
+      &lt;td&gt;200&lt;/td&gt;
+      &lt;td&gt;+300%&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;搜索可见度&lt;/td&gt;
+      &lt;td&gt;23&lt;/td&gt;
+      &lt;td&gt;67&lt;/td&gt;
+      &lt;td&gt;+191%&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;转化率&lt;/td&gt;
+      &lt;td&gt;28%&lt;/td&gt;
+      &lt;td&gt;41%&lt;/td&gt;
+      &lt;td&gt;+46%&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;工具推荐&quot;&gt;工具推荐&lt;/h2&gt;
+
+&lt;h3 id=&quot;免费工具&quot;&gt;免费工具&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;App Annie（基础版）&lt;/li&gt;
+  &lt;li&gt;Sensor Tower（基础版）&lt;/li&gt;
+  &lt;li&gt;AppFollow&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;付费工具&quot;&gt;付费工具&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;AppTweak&lt;/li&gt;
+  &lt;li&gt;Mobile Action&lt;/li&gt;
+  &lt;li&gt;蝉大师（中国区）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;常见误区&quot;&gt;常见误区&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-关键词堆砌&quot;&gt;1. 关键词堆砌&lt;/h3&gt;
+
+&lt;p&gt;过度堆砌关键词会降低可读性，影响转化率。&lt;/p&gt;
+
+&lt;h3 id=&quot;2-忽视评分管理&quot;&gt;2. 忽视评分管理&lt;/h3&gt;
+
+&lt;p&gt;评分低于 4.0 会严重影响下载。主动引导满意用户评分。&lt;/p&gt;
+
+&lt;h3 id=&quot;3-不做-ab-测试&quot;&gt;3. 不做 A/B 测试&lt;/h3&gt;
+
+&lt;p&gt;App Store Connect 提供了产品页优化功能，要善用。&lt;/p&gt;
+
+&lt;h3 id=&quot;4-一劳永逸&quot;&gt;4. 一劳永逸&lt;/h3&gt;
+
+&lt;p&gt;ASO 是持续的工作，需要定期更新和优化。&lt;/p&gt;
+
+&lt;h2 id=&quot;一些反常识的发现&quot;&gt;一些反常识的发现&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;长名称不一定好&lt;/strong&gt;：太长反而影响展示&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;5 星不一定最好&lt;/strong&gt;：4.7-4.9 看起来更真实&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;周末发布可能更好&lt;/strong&gt;：用户有更多时间浏览&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;总结&quot;&gt;总结&lt;/h2&gt;
+
+&lt;p&gt;ASO 是一个需要持续投入的工作，但回报是值得的。&lt;/p&gt;
+
+&lt;p&gt;核心原则：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;理解用户搜索意图&lt;/li&gt;
+  &lt;li&gt;持续测试和优化&lt;/li&gt;
+  &lt;li&gt;产品质量才是根本&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;没有产品力的支撑，再好的 ASO 也是空中楼阁。&lt;/p&gt;
+</description>
+        <pubDate>Sat, 20 Sep 2025 00:00:00 +0800</pubDate>
+        <link>https://www.northcity.top/2025/09/20/aso-guide/</link>
+        <guid isPermaLink="true">https://www.northcity.top/2025/09/20/aso-guide/</guid>
+        
+        <category>ASO</category>
+        
+        <category>App Store</category>
+        
+        <category>增长</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>独立开发一年，我学会了什么</title>
+        <description>&lt;p&gt;一年前的今天，我开始了全职独立开发之路。&lt;/p&gt;
+
+&lt;p&gt;这一年，我做了5个App，赚了不到1万块。按商业标准，这不算成功。但我学会的东西，远比这些数字重要。&lt;/p&gt;
+
+&lt;h2 id=&quot;学会了接受不完美&quot;&gt;学会了接受不完美&lt;/h2&gt;
+
+&lt;p&gt;刚开始做独立开发时，我总想把每个功能做到完美才发布。结果就是，很多项目拖了很久才上线，甚至有些永远没有上线。&lt;/p&gt;
+
+&lt;p&gt;后来我学会了：&lt;strong&gt;先发布，再迭代&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;一个60分的产品在用户手里，比一个100分的产品在你硬盘里，更有价值。用户会告诉你什么是真正重要的。&lt;/p&gt;
+
+&lt;h2 id=&quot;学会了说不&quot;&gt;学会了说不&lt;/h2&gt;
+
+&lt;p&gt;独立开发者最大的敌人之一，是无限膨胀的功能列表。&lt;/p&gt;
+
+&lt;p&gt;每当有用户提需求，我就想加进去。每当看到竞品有什么功能，我就想学过来。结果产品越来越臃肿，越来越难维护。&lt;/p&gt;
+
+&lt;p&gt;现在我学会了问自己：&lt;strong&gt;这个功能真的必要吗？&lt;/strong&gt; 大部分时候，答案是不。&lt;/p&gt;
+
+&lt;h2 id=&quot;学会了与焦虑共处&quot;&gt;学会了与焦虑共处&lt;/h2&gt;
+
+&lt;p&gt;独立开发的焦虑是常态。&lt;/p&gt;
+
+&lt;p&gt;收入不稳定的焦虑，用户增长缓慢的焦虑，看到别人成功的焦虑，怀疑自己选择的焦虑…这些焦虑不会消失，只能学会共处。&lt;/p&gt;
+
+&lt;p&gt;我的方法是：&lt;strong&gt;专注于过程，而不是结果&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;每天做一点点，不管结果如何，我都在进步。这个认知让我平静了很多。&lt;/p&gt;
+
+&lt;h2 id=&quot;学会了长期思考&quot;&gt;学会了长期思考&lt;/h2&gt;
+
+&lt;p&gt;刚开始我总想做爆款，想快速变现。后来发现，这种心态反而让我做不出好东西。&lt;/p&gt;
+
+&lt;p&gt;现在我更关心：&lt;strong&gt;这个产品五年后还会存在吗？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;不是说每个产品都要做五年，而是这个问题会帮我过滤掉那些短视的决策。&lt;/p&gt;
+
+&lt;h2 id=&quot;学会了记录&quot;&gt;学会了记录&lt;/h2&gt;
+
+&lt;p&gt;写日志、写博客、写公众号，这些记录看起来是额外的工作，但其实是最有价值的投资。&lt;/p&gt;
+
+&lt;p&gt;记录帮我理清思路，也让我和同路人建立了连接。有些读者后来成了朋友，有些给我提了非常有价值的建议。&lt;/p&gt;
+
+&lt;h2 id=&quot;下一年&quot;&gt;下一年&lt;/h2&gt;
+
+&lt;p&gt;这一年我学会了很多，但还有更多要学。&lt;/p&gt;
+
+&lt;p&gt;下一年，我想：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;深耕一两个产品，而不是做更多新的&lt;/li&gt;
+  &lt;li&gt;尝试新的平台和技术&lt;/li&gt;
+  &lt;li&gt;更多地分享和连接&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;感谢你读到这里。如果你也在独立开发的路上，欢迎联系我，我们可以聊聊。&lt;/p&gt;
+</description>
+        <pubDate>Fri, 15 Aug 2025 00:00:00 +0800</pubDate>
+        <link>https://www.northcity.top/essay/2025/08/15/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91%E4%B8%80%E5%B9%B4%E5%AD%A6%E4%BC%9A%E4%BA%86%E4%BB%80%E4%B9%88/</link>
+        <guid isPermaLink="true">https://www.northcity.top/essay/2025/08/15/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91%E4%B8%80%E5%B9%B4%E5%AD%A6%E4%BC%9A%E4%BA%86%E4%BB%80%E4%B9%88/</guid>
+        
+        <category>独立开发</category>
+        
+        <category>反思</category>
+        
+        <category>年度总结</category>
+        
+        
+        <category>essay</category>
+        
+      </item>
+    
+      <item>
+        <title>SwiftUI 实战：从入门到独立开发</title>
+        <description>&lt;h2 id=&quot;为什么选择-swiftui&quot;&gt;为什么选择 SwiftUI&lt;/h2&gt;
+
+&lt;p&gt;2019 年 SwiftUI 发布时，我还在观望。2021 年开始在新项目中使用，现在所有新功能都用 SwiftUI 开发。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;选择 SwiftUI 的理由：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;开发效率高&lt;/strong&gt;：声明式 UI 让布局代码减少 50% 以上&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;预览功能强大&lt;/strong&gt;：实时预览节省大量调试时间&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;跨平台&lt;/strong&gt;：iOS、iPadOS、macOS、watchOS 一套代码&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;未来趋势&lt;/strong&gt;：苹果明确的战略方向&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;适合-swiftui-的场景&quot;&gt;适合 SwiftUI 的场景&lt;/h2&gt;
+
+&lt;h3 id=&quot;-推荐使用&quot;&gt;✅ 推荐使用&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;新项目、新功能&lt;/li&gt;
+  &lt;li&gt;设置页面、表单&lt;/li&gt;
+  &lt;li&gt;简单的列表和详情&lt;/li&gt;
+  &lt;li&gt;watchOS 应用&lt;/li&gt;
+  &lt;li&gt;Widget&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;️-谨慎使用&quot;&gt;⚠️ 谨慎使用&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;复杂的自定义手势&lt;/li&gt;
+  &lt;li&gt;需要精确控制动画的场景&lt;/li&gt;
+  &lt;li&gt;老系统兼容（iOS 13-14）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;核心概念&quot;&gt;核心概念&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-状态管理&quot;&gt;1. 状态管理&lt;/h3&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// @State - 视图内部状态&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;@State&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;isLoading&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// @Binding - 父子视图传递&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;@Binding&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;selectedTab&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// @StateObject - 可观察对象（创建）&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;@StateObject&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;viewModel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ViewModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// @ObservedObject - 可观察对象（传入）&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;@ObservedObject&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;viewModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ViewModel&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// @EnvironmentObject - 全局状态&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;@EnvironmentObject&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;appState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AppState&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-视图组合&quot;&gt;2. 视图组合&lt;/h3&gt;
+
+&lt;p&gt;SwiftUI 的核心思想是组合而非继承：&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ContentView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;some&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;VStack&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;HeaderView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;ContentList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;FooterView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-修饰符链&quot;&gt;3. 修饰符链&lt;/h3&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;Text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;font&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;foregroundColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;primary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;opacity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;cornerRadius&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;实战技巧&quot;&gt;实战技巧&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-合理拆分视图&quot;&gt;1. 合理拆分视图&lt;/h3&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// ❌ 不好：一个巨大的 body&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;some&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 200 行代码...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// ✅ 好：拆分成小组件&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;some&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;VStack&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;headerSection&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;contentSection&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;footerSection&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;headerSection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;some&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-善用-viewbuilder&quot;&gt;2. 善用 ViewBuilder&lt;/h3&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;@ViewBuilder&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;makeContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;State&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;some&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;state&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;loading&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;ProgressView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;loaded&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;DataView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;ErrorView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-自定义修饰符&quot;&gt;3. 自定义修饰符&lt;/h3&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CardModifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ViewModifier&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;some&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;cornerRadius&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;shadow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;radius&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;cardStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;some&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;CardModifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 使用&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;cardStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;性能优化&quot;&gt;性能优化&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-避免不必要的重绘&quot;&gt;1. 避免不必要的重绘&lt;/h3&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// ❌ 整个视图重绘&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ParentView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;@State&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;some&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;VStack&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;Text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Count: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;ExpensiveView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 每次都重绘&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// ✅ 使用 EquatableView&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ExpensiveView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Equatable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;lhs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;rhs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-懒加载列表&quot;&gt;2. 懒加载列表&lt;/h3&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// ❌ 一次性加载所有&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;ItemView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// ✅ 懒加载&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;LazyVStack&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;ForEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;ItemView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;与-uikit-混合使用&quot;&gt;与 UIKit 混合使用&lt;/h2&gt;
+
+&lt;p&gt;实际项目中，经常需要混合使用：&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 在 SwiftUI 中使用 UIKit&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;MapView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIViewRepresentable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;makeUIView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;MKMapView&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;MKMapView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;updateUIView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;uiView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;MKMapView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 更新逻辑&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 在 UIKit 中使用 SwiftUI&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;hostingController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIHostingController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;rootView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;SwiftUIView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;我的项目结构&quot;&gt;我的项目结构&lt;/h2&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;App/
+├── App.swift
+├── Features/
+│   ├── Home/
+│   │   ├── HomeView.swift
+│   │   ├── HomeViewModel.swift
+│   │   └── Components/
+│   ├── Settings/
+│   └── ...
+├── Core/
+│   ├── Models/
+│   ├── Services/
+│   └── Extensions/
+└── Resources/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;推荐资源&quot;&gt;推荐资源&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/documentation/swiftui&quot;&gt;官方文档&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.hackingwithswift.com/quick-start/swiftui&quot;&gt;Hacking with Swift&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://swiftui-lab.com&quot;&gt;SwiftUI Lab&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/videos/&quot;&gt;WWDC 视频&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;总结&quot;&gt;总结&lt;/h2&gt;
+
+&lt;p&gt;SwiftUI 已经足够成熟，可以用于生产环境。&lt;/p&gt;
+
+&lt;p&gt;关键是：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;理解其声明式的思想&lt;/li&gt;
+  &lt;li&gt;知道什么时候该用 UIKit&lt;/li&gt;
+  &lt;li&gt;持续关注新版本的改进&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;作为独立开发者，SwiftUI 能显著提高开发效率，值得投入学习。&lt;/p&gt;
+</description>
+        <pubDate>Sun, 15 Jun 2025 00:00:00 +0800</pubDate>
+        <link>https://www.northcity.top/2025/06/15/swiftui-in-production/</link>
+        <guid isPermaLink="true">https://www.northcity.top/2025/06/15/swiftui-in-production/</guid>
+        
+        <category>SwiftUI</category>
+        
+        <category>iOS开发</category>
+        
+        <category>技术</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>独立开发者的时间管理：如何一个人做多个产品</title>
+        <description>&lt;h2 id=&quot;问题&quot;&gt;问题&lt;/h2&gt;
+
+&lt;p&gt;作为独立开发者，我同时维护着 9 个 App。&lt;/p&gt;
+
+&lt;p&gt;经常有人问：你是怎么做到的？&lt;/p&gt;
+
+&lt;p&gt;答案是：时间管理。&lt;/p&gt;
+
+&lt;h2 id=&quot;我的时间分配&quot;&gt;我的时间分配&lt;/h2&gt;
+
+&lt;h3 id=&quot;每周时间预算&quot;&gt;每周时间预算&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;类别&lt;/th&gt;
+      &lt;th&gt;时间&lt;/th&gt;
+      &lt;th&gt;占比&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;核心产品开发&lt;/td&gt;
+      &lt;td&gt;20h&lt;/td&gt;
+      &lt;td&gt;40%&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;维护和 Bug 修复&lt;/td&gt;
+      &lt;td&gt;10h&lt;/td&gt;
+      &lt;td&gt;20%&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;用户支持&lt;/td&gt;
+      &lt;td&gt;5h&lt;/td&gt;
+      &lt;td&gt;10%&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;学习和探索&lt;/td&gt;
+      &lt;td&gt;5h&lt;/td&gt;
+      &lt;td&gt;10%&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;运营和营销&lt;/td&gt;
+      &lt;td&gt;5h&lt;/td&gt;
+      &lt;td&gt;10%&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;行政杂事&lt;/td&gt;
+      &lt;td&gt;5h&lt;/td&gt;
+      &lt;td&gt;10%&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;每日时间块&quot;&gt;每日时间块&lt;/h3&gt;
+
+&lt;p&gt;我把每天分成几个时间块：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;9:00-12:00&lt;/strong&gt;：深度工作（开发新功能）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;12:00-14:00&lt;/strong&gt;：午休 + 处理邮件&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;14:00-17:00&lt;/strong&gt;：一般工作（Bug 修复、维护）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;17:00-18:00&lt;/strong&gt;：用户反馈、社交媒体&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;晚上&lt;/strong&gt;：学习或休息（不工作）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;核心原则&quot;&gt;核心原则&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-二八法则&quot;&gt;1. 二八法则&lt;/h3&gt;
+
+&lt;p&gt;80% 的收入来自 20% 的产品。&lt;/p&gt;
+
+&lt;p&gt;我会把最多的精力放在核心产品上（闪念、时间胶囊），其他产品只做必要的维护。&lt;/p&gt;
+
+&lt;h3 id=&quot;2-批量处理&quot;&gt;2. 批量处理&lt;/h3&gt;
+
+&lt;p&gt;把同类任务放在一起处理：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;周一集中回复用户邮件&lt;/li&gt;
+  &lt;li&gt;周三集中处理 Bug&lt;/li&gt;
+  &lt;li&gt;周五集中写文档&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3-最小可行维护&quot;&gt;3. 最小可行维护&lt;/h3&gt;
+
+&lt;p&gt;对于非核心产品，只做”最小可行维护”：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;系统适配（必须）&lt;/li&gt;
+  &lt;li&gt;崩溃修复（必须）&lt;/li&gt;
+  &lt;li&gt;功能更新（可选）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;4-说不的艺术&quot;&gt;4. 说”不”的艺术&lt;/h3&gt;
+
+&lt;p&gt;学会拒绝：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;不是每个用户建议都要实现&lt;/li&gt;
+  &lt;li&gt;不是每个合作邀请都要接受&lt;/li&gt;
+  &lt;li&gt;不是每个技术都要学习&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;工具推荐&quot;&gt;工具推荐&lt;/h2&gt;
+
+&lt;h3 id=&quot;任务管理&quot;&gt;任务管理&lt;/h3&gt;
+
+&lt;p&gt;我用自己的 App（Anpa）管理任务，但其他选择也很好：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Things（我之前用的）&lt;/li&gt;
+  &lt;li&gt;Todoist&lt;/li&gt;
+  &lt;li&gt;Linear（如果你喜欢看板）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;时间追踪&quot;&gt;时间追踪&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Toggl Track（免费版够用）&lt;/li&gt;
+  &lt;li&gt;RescueTime（自动追踪）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;专注&quot;&gt;专注&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Forest（种树 App）&lt;/li&gt;
+  &lt;li&gt;Focus（Mac）&lt;/li&gt;
+  &lt;li&gt;手机的专注模式&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;一些反直觉的做法&quot;&gt;一些反直觉的做法&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-不要过度计划&quot;&gt;1. 不要过度计划&lt;/h3&gt;
+
+&lt;p&gt;花太多时间计划，反而没时间执行。&lt;/p&gt;
+
+&lt;p&gt;我只做周计划，不做日计划。&lt;/p&gt;
+
+&lt;h3 id=&quot;2-允许浪费时间&quot;&gt;2. 允许浪费时间&lt;/h3&gt;
+
+&lt;p&gt;每周留出一些”浪费”时间，用来：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;随便逛逛技术博客&lt;/li&gt;
+  &lt;li&gt;试用其他人的 App&lt;/li&gt;
+  &lt;li&gt;什么都不做&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这些”浪费”往往带来意想不到的灵感。&lt;/p&gt;
+
+&lt;h3 id=&quot;3-接受不完美&quot;&gt;3. 接受不完美&lt;/h3&gt;
+
+&lt;p&gt;不可能每件事都做到 100 分。&lt;/p&gt;
+
+&lt;p&gt;80 分的东西发出去，比 100 分的东西永远在打磨要有价值。&lt;/p&gt;
+
+&lt;h2 id=&quot;常见问题&quot;&gt;常见问题&lt;/h2&gt;
+
+&lt;h3 id=&quot;q-如何处理紧急-bug&quot;&gt;Q: 如何处理紧急 Bug？&lt;/h3&gt;
+
+&lt;p&gt;我会设置监控（崩溃率、用户反馈），只有达到阈值才会中断当前工作。&lt;/p&gt;
+
+&lt;h3 id=&quot;q-如何平衡开发和运营&quot;&gt;Q: 如何平衡开发和运营？&lt;/h3&gt;
+
+&lt;p&gt;目前的比例是 7:3。如果有一天运营成为瓶颈，我会考虑外包或招人。&lt;/p&gt;
+
+&lt;h3 id=&quot;q-感到疲惫怎么办&quot;&gt;Q: 感到疲惫怎么办？&lt;/h3&gt;
+
+&lt;p&gt;强制休息。每工作 6 周，休息 1 周。&lt;/p&gt;
+
+&lt;h2 id=&quot;总结&quot;&gt;总结&lt;/h2&gt;
+
+&lt;p&gt;时间管理的本质不是”做更多的事”，而是”做更重要的事”。&lt;/p&gt;
+
+&lt;p&gt;作为独立开发者，你的时间就是你最宝贵的资源。&lt;/p&gt;
+
+&lt;p&gt;保护好它。&lt;/p&gt;
+</description>
+        <pubDate>Mon, 10 Mar 2025 00:00:00 +0800</pubDate>
+        <link>https://www.northcity.top/2025/03/10/indie-dev-time-management/</link>
+        <guid isPermaLink="true">https://www.northcity.top/2025/03/10/indie-dev-time-management/</guid>
+        
+        <category>独立开发</category>
+        
+        <category>时间管理</category>
+        
+        <category>效率</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>                                  </title>
+        <description>&lt;h1 id=&quot;闪念-ai语音笔记-隐私政策&quot;&gt;闪念-AI语音笔记 隐私政策&lt;/h1&gt;
+
+&lt;p&gt;隐私政策
+生效日期：2018年10月21日
+闪念（“我们”，“我们”或“我们的”）是一款简单的效率记事应用程序（“服务”）。&lt;/p&gt;
+
+&lt;p&gt;当您使用我们的服务以及您与该数据相关的选择时，本页面会告知您有关个人数据的收集，使用和披露的政策。&lt;/p&gt;
+
+&lt;p&gt;我们使用您的数据来提供和改进服务。使用本服务即表示您同意按照本政策收集和使用信息。除非本隐私政策另有规定，否则本隐私政策中使用的术语与我们的条款和条件具有相同的含义。&lt;/p&gt;
+
+&lt;p&gt;信息收集和使用
+我们为各种目的收集了几种不同类型的信息，以便为您提供和改进我们的服务。&lt;/p&gt;
+
+&lt;p&gt;收集的数据类型
+使用数据
+我们可能通过移动设备收集您的信息（“使用数据”）用于App Store Connect。&lt;/p&gt;
+
+&lt;p&gt;当您通过移动设备访问时，此使用数据可能包含您使用的移动设备类型，移动操作系统和其他诊断数据等信息。&lt;/p&gt;
+
+&lt;p&gt;使用数据
+闪念将收集的数据用于各种目的：&lt;/p&gt;
+
+&lt;p&gt;提供分析信息，以便我们改进服务
+监控服务的使用情况
+数据安全
+数据的安全性对我们很重要，但请记住，没有通过Internet传输的方法或电子存储方法是100％安全的。虽然我们努力使用商业上可接受的方式来保护您的个人数据，但我们无法保证其绝对的安全性。&lt;/p&gt;
+
+&lt;p&gt;本隐私政策的变更
+我们可能会不时更新我们的隐私政策。我们将通过在此页面上发布新的隐私政策来通知您任何更改。&lt;/p&gt;
+
+&lt;p&gt;在更改生效之前，我们将通过电子邮件和/或关于我们服务的明显通知通知您，并更新本隐私政策顶部的“生效日期”。&lt;/p&gt;
+
+&lt;p&gt;建议您定期查看本隐私政策以了解任何变更。本隐私政策的更改在此页面上发布时生效。&lt;/p&gt;
+
+&lt;p&gt;联系我们
+如果您对本隐私政策有任何疑问，请联系我们：&lt;/p&gt;
+
+&lt;p&gt;访问我们网站上的这个页面：http://www.northcity.top&lt;/p&gt;
+</description>
+        <pubDate>Thu, 09 Jan 2025 20:00:00 +0800</pubDate>
+        <link>https://www.northcity.top/2025/01/09/ShanNianSuiPianPrivacyPolicy/</link>
+        <guid isPermaLink="true">https://www.northcity.top/2025/01/09/ShanNianSuiPianPrivacyPolicy/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>如何在 App Store 获得好评：从 3.5 到 4.8 星的历程</title>
+        <description>&lt;h2 id=&quot;起点&quot;&gt;起点&lt;/h2&gt;
+
+&lt;p&gt;2020 年，时间胶囊的评分一度跌到 3.5 星。&lt;/p&gt;
+
+&lt;p&gt;那是一段很痛苦的时期。每次打开 App Store Connect，看到差评都觉得心凉。&lt;/p&gt;
+
+&lt;p&gt;现在，时间胶囊的评分是 4.8 星，超过 4000 个评分。&lt;/p&gt;
+
+&lt;p&gt;这篇文章分享我是怎么做到的。&lt;/p&gt;
+
+&lt;h2 id=&quot;差评的根源&quot;&gt;差评的根源&lt;/h2&gt;
+
+&lt;p&gt;首先要理解：为什么用户会给差评？&lt;/p&gt;
+
+&lt;p&gt;分析了上百条差评后，我发现主要原因是：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Bug 和崩溃&lt;/strong&gt;（40%）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;功能不符合预期&lt;/strong&gt;（30%）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;使用困难&lt;/strong&gt;（20%）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;其他&lt;/strong&gt;（10%）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;解决方案&quot;&gt;解决方案&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-零容忍的稳定性&quot;&gt;1. 零容忍的稳定性&lt;/h3&gt;
+
+&lt;p&gt;我设定了一个目标：&lt;strong&gt;崩溃率 &amp;lt; 0.1%&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;做法：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;使用 Firebase Crashlytics 监控&lt;/li&gt;
+  &lt;li&gt;每天检查崩溃报告&lt;/li&gt;
+  &lt;li&gt;优先级最高的修复&lt;/li&gt;
+  &lt;li&gt;发版前充分测试&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2-精准的用户预期&quot;&gt;2. 精准的用户预期&lt;/h3&gt;
+
+&lt;p&gt;很多差评源于”预期不符”。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;改进措施：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;App Store 截图清晰展示功能&lt;/li&gt;
+  &lt;li&gt;应用描述实事求是&lt;/li&gt;
+  &lt;li&gt;首次使用引导&lt;/li&gt;
+  &lt;li&gt;功能限制提前说明&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3-降低使用门槛&quot;&gt;3. 降低使用门槛&lt;/h3&gt;
+
+&lt;p&gt;用户不会花时间学习你的 App。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;优化方向：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;简化核心流程&lt;/li&gt;
+  &lt;li&gt;添加新手引导&lt;/li&gt;
+  &lt;li&gt;提供默认值&lt;/li&gt;
+  &lt;li&gt;错误信息要友好&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;4-主动响应反馈&quot;&gt;4. 主动响应反馈&lt;/h3&gt;
+
+&lt;p&gt;每一条 App Store 评论我都会回复。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;效果：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;用户感觉被重视&lt;/li&gt;
+  &lt;li&gt;有机会挽回差评用户&lt;/li&gt;
+  &lt;li&gt;获取真实的产品反馈&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;引导好评的技巧&quot;&gt;引导好评的技巧&lt;/h2&gt;
+
+&lt;h3 id=&quot;正确的时机&quot;&gt;正确的时机&lt;/h3&gt;
+
+&lt;p&gt;不要在用户刚打开 App 时弹出评分请求。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;好的时机：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;用户完成核心操作后&lt;/li&gt;
+  &lt;li&gt;使用了一段时间后&lt;/li&gt;
+  &lt;li&gt;解决了用户问题后&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;使用系统-api&quot;&gt;使用系统 API&lt;/h3&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 使用 SKStoreReviewController&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;scene&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shared&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;connectedScenes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;first&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as?&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIWindowScene&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;SKStoreReviewController&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;requestReview&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scene&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;系统 API 的好处：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;用户体验一致&lt;/li&gt;
+  &lt;li&gt;有次数限制（苹果控制）&lt;/li&gt;
+  &lt;li&gt;不会打扰用户&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;不要过度请求&quot;&gt;不要过度请求&lt;/h3&gt;
+
+&lt;p&gt;我的策略是：每个用户最多请求 3 次，间隔至少 4 个月。&lt;/p&gt;
+
+&lt;h2 id=&quot;处理差评&quot;&gt;处理差评&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-不要急于回复&quot;&gt;1. 不要急于回复&lt;/h3&gt;
+
+&lt;p&gt;看到差评先冷静，不要带情绪回复。&lt;/p&gt;
+
+&lt;h3 id=&quot;2-理解用户立场&quot;&gt;2. 理解用户立场&lt;/h3&gt;
+
+&lt;p&gt;即使用户说的不对，也要理解他们的感受。&lt;/p&gt;
+
+&lt;h3 id=&quot;3-提供解决方案&quot;&gt;3. 提供解决方案&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;感谢您的反馈！抱歉给您带来不好的体验。
+关于您提到的问题，我们会在下个版本修复。
+如果方便的话，可以发邮件到 xxx@xxx.com 联系我们，
+我们可以提供临时解决方案。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;4-跟进更新&quot;&gt;4. 跟进更新&lt;/h3&gt;
+
+&lt;p&gt;问题修复后，可以再次回复告知用户。&lt;/p&gt;
+
+&lt;p&gt;有些用户会修改评分。&lt;/p&gt;
+
+&lt;h2 id=&quot;数据变化&quot;&gt;数据变化&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;时间&lt;/th&gt;
+      &lt;th&gt;评分&lt;/th&gt;
+      &lt;th&gt;评分数&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2020-01&lt;/td&gt;
+      &lt;td&gt;3.5&lt;/td&gt;
+      &lt;td&gt;500&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2021-01&lt;/td&gt;
+      &lt;td&gt;4.0&lt;/td&gt;
+      &lt;td&gt;1200&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2022-01&lt;/td&gt;
+      &lt;td&gt;4.5&lt;/td&gt;
+      &lt;td&gt;2400&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2024-01&lt;/td&gt;
+      &lt;td&gt;4.8&lt;/td&gt;
+      &lt;td&gt;4000+&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;核心心得&quot;&gt;核心心得&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;产品质量是根本&lt;/strong&gt;：再好的策略也救不了烂产品&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;重视每一个用户&lt;/strong&gt;：差评用户可能变成最忠实的用户&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;持续改进&lt;/strong&gt;：评分是结果，过程是不断优化&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;保持耐心&lt;/strong&gt;：评分改变需要时间&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;最后&quot;&gt;最后&lt;/h2&gt;
+
+&lt;p&gt;高评分不是目的，让用户满意才是。&lt;/p&gt;
+
+&lt;p&gt;当你真正帮用户解决问题时，好评自然会来。&lt;/p&gt;
+</description>
+        <pubDate>Fri, 08 Nov 2024 00:00:00 +0800</pubDate>
+        <link>https://www.northcity.top/2024/11/08/improve-app-store-rating/</link>
+        <guid isPermaLink="true">https://www.northcity.top/2024/11/08/improve-app-store-rating/</guid>
+        
+        <category>App Store</category>
+        
+        <category>用户体验</category>
+        
+        <category>产品</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>独立开发者的第一年：从辞职到月入过万</title>
+        <description>&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+
+&lt;p&gt;经常有人问我：想做独立开发，应该怎么开始？&lt;/p&gt;
+
+&lt;p&gt;这篇文章是我的真实经历和建议，希望对你有帮助。&lt;/p&gt;
+
+&lt;h2 id=&quot;我的起点&quot;&gt;我的起点&lt;/h2&gt;
+
+&lt;p&gt;2019 年，我还在一家互联网公司做 iOS 开发。&lt;/p&gt;
+
+&lt;p&gt;工资还可以，但每天重复着差不多的工作，感觉失去了对编程的热情。&lt;/p&gt;
+
+&lt;p&gt;下班后，我开始做自己的 App。&lt;/p&gt;
+
+&lt;h2 id=&quot;第一个产品&quot;&gt;第一个产品&lt;/h2&gt;
+
+&lt;p&gt;我的第一个 App 是一个简单的天气应用——极简天气。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;为什么选择天气应用？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;功能明确，scope 可控&lt;/li&gt;
+  &lt;li&gt;有成熟的 API&lt;/li&gt;
+  &lt;li&gt;市场大，容易验证&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;开发过程：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;每天晚上 2-3 小时&lt;/li&gt;
+  &lt;li&gt;周末全天开发&lt;/li&gt;
+  &lt;li&gt;总共花了 2 个月&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;上线第一周&quot;&gt;上线第一周&lt;/h2&gt;
+
+&lt;p&gt;上线后的第一周，数据惨淡：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;下载量：47&lt;/li&gt;
+  &lt;li&gt;收入：0&lt;/li&gt;
+  &lt;li&gt;日活：5&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;但我收到了第一条用户反馈：”很喜欢这个 App 的简洁设计！”&lt;/p&gt;
+
+&lt;p&gt;那一刻我意识到：真的有人在用我做的东西。&lt;/p&gt;
+
+&lt;h2 id=&quot;逐渐增长&quot;&gt;逐渐增长&lt;/h2&gt;
+
+&lt;p&gt;接下来的几个月，我做了这些事：&lt;/p&gt;
+
+&lt;h3 id=&quot;1-持续迭代&quot;&gt;1. 持续迭代&lt;/h3&gt;
+
+&lt;p&gt;根据用户反馈不断改进：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;增加 Widget&lt;/li&gt;
+  &lt;li&gt;优化启动速度&lt;/li&gt;
+  &lt;li&gt;添加 Apple Watch 版本&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2-aso-优化&quot;&gt;2. ASO 优化&lt;/h3&gt;
+
+&lt;p&gt;学习 App Store 优化：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;优化关键词&lt;/li&gt;
+  &lt;li&gt;改进截图&lt;/li&gt;
+  &lt;li&gt;A/B 测试&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3-内容营销&quot;&gt;3. 内容营销&lt;/h3&gt;
+
+&lt;p&gt;在技术社区分享：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;写开发博客&lt;/li&gt;
+  &lt;li&gt;在 V2EX 分享经验&lt;/li&gt;
+  &lt;li&gt;参与开发者社群&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;辞职&quot;&gt;辞职&lt;/h2&gt;
+
+&lt;p&gt;2020 年初，时间胶囊上线后获得了不错的反响。&lt;/p&gt;
+
+&lt;p&gt;月收入第一次超过了我的工资。&lt;/p&gt;
+
+&lt;p&gt;我决定辞职，全职做独立开发。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;辞职时的储备：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;6 个月生活费&lt;/li&gt;
+  &lt;li&gt;2 个有收入的产品&lt;/li&gt;
+  &lt;li&gt;明确的产品规划&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;全职第一年&quot;&gt;全职第一年&lt;/h2&gt;
+
+&lt;h3 id=&quot;收入曲线&quot;&gt;收入曲线&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;月份&lt;/th&gt;
+      &lt;th&gt;收入&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;¥8,000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;¥12,000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;¥18,000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;12&lt;/td&gt;
+      &lt;td&gt;¥25,000&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;主要挑战&quot;&gt;主要挑战&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;焦虑&lt;/strong&gt;：没有固定工资的不安全感&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;孤独&lt;/strong&gt;：一个人工作，缺少交流&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;自律&lt;/strong&gt;：没人管你，容易放松&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;方向&lt;/strong&gt;：做什么产品的困惑&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;解决方法&quot;&gt;解决方法&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;建立规律&lt;/strong&gt;：固定的工作时间&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;加入社群&lt;/strong&gt;：和其他独立开发者交流&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;小步快跑&lt;/strong&gt;：快速验证想法&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;记录复盘&lt;/strong&gt;：定期总结反思&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;给新人的建议&quot;&gt;给新人的建议&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-从副业开始&quot;&gt;1. 从副业开始&lt;/h3&gt;
+
+&lt;p&gt;不要一开始就辞职。先用业余时间做，验证可行性。&lt;/p&gt;
+
+&lt;h3 id=&quot;2-做小产品&quot;&gt;2. 做小产品&lt;/h3&gt;
+
+&lt;p&gt;第一个产品不要太复杂。能在 1-2 个月内完成的最好。&lt;/p&gt;
+
+&lt;h3 id=&quot;3-解决真实问题&quot;&gt;3. 解决真实问题&lt;/h3&gt;
+
+&lt;p&gt;自己遇到的问题，往往别人也会遇到。&lt;/p&gt;
+
+&lt;h3 id=&quot;4-学会营销&quot;&gt;4. 学会营销&lt;/h3&gt;
+
+&lt;p&gt;酒香也怕巷子深。产品做完只是开始。&lt;/p&gt;
+
+&lt;h3 id=&quot;5-保持耐心&quot;&gt;5. 保持耐心&lt;/h3&gt;
+
+&lt;p&gt;独立开发不是快速致富的途径。需要长期坚持。&lt;/p&gt;
+
+&lt;h2 id=&quot;适合独立开发的人&quot;&gt;适合独立开发的人&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;自驱力强&lt;/li&gt;
+  &lt;li&gt;能接受不确定性&lt;/li&gt;
+  &lt;li&gt;喜欢独立解决问题&lt;/li&gt;
+  &lt;li&gt;有一定的储蓄&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;不适合的情况&quot;&gt;不适合的情况&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;需要稳定收入（如有房贷）&lt;/li&gt;
+  &lt;li&gt;不喜欢独处&lt;/li&gt;
+  &lt;li&gt;追求快速财富&lt;/li&gt;
+  &lt;li&gt;无法自我管理&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;最后&quot;&gt;最后&lt;/h2&gt;
+
+&lt;p&gt;独立开发不是最好的路，但可能是最适合某些人的路。&lt;/p&gt;
+
+&lt;p&gt;如果你真的想做，就开始吧。&lt;/p&gt;
+
+&lt;p&gt;最大的风险是一直想而不行动。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 20 Jun 2024 00:00:00 +0800</pubDate>
+        <link>https://www.northcity.top/2024/06/20/first-year-indie-dev/</link>
+        <guid isPermaLink="true">https://www.northcity.top/2024/06/20/first-year-indie-dev/</guid>
+        
+        <category>独立开发</category>
+        
+        <category>经验分享</category>
+        
+        <category>入门</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>iOS 内购（IAP）完整指南：从接入到上线</title>
+        <description>&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+
+&lt;p&gt;内购（In-App Purchase）是 iOS 应用变现的核心方式。&lt;/p&gt;
+
+&lt;p&gt;这篇文章整理了我做内购的经验，希望帮你少踩坑。&lt;/p&gt;
+
+&lt;h2 id=&quot;内购类型&quot;&gt;内购类型&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-消耗型consumable&quot;&gt;1. 消耗型（Consumable）&lt;/h3&gt;
+
+&lt;p&gt;用户可以多次购买，用完即消耗。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;适合场景：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;游戏金币&lt;/li&gt;
+  &lt;li&gt;虚拟礼物&lt;/li&gt;
+  &lt;li&gt;次数包&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2-非消耗型non-consumable&quot;&gt;2. 非消耗型（Non-Consumable）&lt;/h3&gt;
+
+&lt;p&gt;用户只需购买一次，永久拥有。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;适合场景：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;解锁高级功能&lt;/li&gt;
+  &lt;li&gt;去广告&lt;/li&gt;
+  &lt;li&gt;主题包&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3-自动续期订阅auto-renewable-subscription&quot;&gt;3. 自动续期订阅（Auto-Renewable Subscription）&lt;/h3&gt;
+
+&lt;p&gt;定期自动续费，苹果抽成逐年降低。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;适合场景：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;会员服务&lt;/li&gt;
+  &lt;li&gt;持续更新的内容&lt;/li&gt;
+  &lt;li&gt;云服务&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;4-非自动续期订阅non-renewing-subscription&quot;&gt;4. 非自动续期订阅（Non-Renewing Subscription）&lt;/h3&gt;
+
+&lt;p&gt;有期限但不自动续费。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;适合场景：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;赛季通行证&lt;/li&gt;
+  &lt;li&gt;限时服务&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;接入流程&quot;&gt;接入流程&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-app-store-connect-配置&quot;&gt;1. App Store Connect 配置&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;App Store Connect -&amp;gt; App -&amp;gt; 功能 -&amp;gt; App 内购买项目
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;创建内购项目需要：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;产品 ID（唯一标识）&lt;/li&gt;
+  &lt;li&gt;显示名称&lt;/li&gt;
+  &lt;li&gt;描述&lt;/li&gt;
+  &lt;li&gt;价格等级&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2-代码实现&quot;&gt;2. 代码实现&lt;/h3&gt;
+
+&lt;p&gt;使用 StoreKit 2（推荐 iOS 15+）：&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;StoreKit&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;StoreManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ObservableObject&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;@Published&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;products&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Product&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loadProducts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;products&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;products&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                &lt;span class=&quot;s&quot;&gt;&quot;com.app.premium.monthly&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;s&quot;&gt;&quot;com.app.premium.yearly&quot;&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Failed to load products: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;purchase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;product&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Product&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Transaction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;purchase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        
+        &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;success&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;verification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;transaction&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;checkVerified&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;verification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;transaction&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;finish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;transaction&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userCancelled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pending&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;@unknown&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;checkVerified&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;VerificationResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;unverified&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;StoreError&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;failedVerification&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;verified&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;safe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;safe&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-恢复购买&quot;&gt;3. 恢复购买&lt;/h3&gt;
+
+&lt;p&gt;必须提供恢复购买功能：&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;restorePurchases&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Transaction&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;currentEntitlements&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;verified&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;transaction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// 恢复用户权益&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;updatePurchasedState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transaction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;4-服务端验证可选但推荐&quot;&gt;4. 服务端验证（可选但推荐）&lt;/h3&gt;
+
+&lt;p&gt;对于重要的购买，建议在服务端验证：&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 获取收据数据&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;receiptURL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bundle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;appStoreReceiptURL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;receiptData&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;contentsOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;receiptURL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;receiptString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;receiptData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;base64EncodedString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 发送到你的服务器验证&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;审核注意事项&quot;&gt;审核注意事项&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-必须提供恢复购买&quot;&gt;1. 必须提供恢复购买&lt;/h3&gt;
+
+&lt;p&gt;设置页面要有”恢复购买”按钮。&lt;/p&gt;
+
+&lt;h3 id=&quot;2-订阅要说明清楚&quot;&gt;2. 订阅要说明清楚&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;订阅周期&lt;/li&gt;
+  &lt;li&gt;价格&lt;/li&gt;
+  &lt;li&gt;取消方式&lt;/li&gt;
+  &lt;li&gt;自动续费说明&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3-不能引导外部支付&quot;&gt;3. 不能引导外部支付&lt;/h3&gt;
+
+&lt;p&gt;不能在 App 内引导用户通过其他方式支付。&lt;/p&gt;
+
+&lt;h3 id=&quot;4-沙盒测试&quot;&gt;4. 沙盒测试&lt;/h3&gt;
+
+&lt;p&gt;提交审核前要在沙盒环境充分测试。&lt;/p&gt;
+
+&lt;h2 id=&quot;常见问题&quot;&gt;常见问题&lt;/h2&gt;
+
+&lt;h3 id=&quot;q-苹果抽成多少&quot;&gt;Q: 苹果抽成多少？&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;第一年：30%&lt;/li&gt;
+  &lt;li&gt;订阅第二年起：15%&lt;/li&gt;
+  &lt;li&gt;小企业计划（年收入 &amp;lt; 100 万美元）：15%&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;q-用户取消订阅怎么办&quot;&gt;Q: 用户取消订阅怎么办？&lt;/h3&gt;
+
+&lt;p&gt;取消后，用户仍可使用到当前订阅期结束。&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 检查订阅状态&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Transaction&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;currentEntitlements&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;verified&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;transaction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;transaction&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;expirationDate&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;??&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// 订阅有效&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;q-如何处理退款&quot;&gt;Q: 如何处理退款？&lt;/h3&gt;
+
+&lt;p&gt;苹果会通过 App Store Server Notifications 通知你。&lt;/p&gt;
+
+&lt;h2 id=&quot;提高转化率的技巧&quot;&gt;提高转化率的技巧&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-提供试用期&quot;&gt;1. 提供试用期&lt;/h3&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// StoreKit 2 自动处理试用期&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;subscription&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscription&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subscription&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;introductoryOffer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 显示试用期信息&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-在合适的时机展示&quot;&gt;2. 在合适的时机展示&lt;/h3&gt;
+
+&lt;p&gt;用户体验到价值后再引导付费。&lt;/p&gt;
+
+&lt;h3 id=&quot;3-清晰展示价值&quot;&gt;3. 清晰展示价值&lt;/h3&gt;
+
+&lt;p&gt;对比免费版和付费版的差异。&lt;/p&gt;
+
+&lt;h3 id=&quot;4-提供多个选项&quot;&gt;4. 提供多个选项&lt;/h3&gt;
+
+&lt;p&gt;年付通常比月付转化率高（因为更划算）。&lt;/p&gt;
+
+&lt;h2 id=&quot;我的数据参考&quot;&gt;我的数据参考&lt;/h2&gt;
+
+&lt;p&gt;以闪念为例：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;指标&lt;/th&gt;
+      &lt;th&gt;数值&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;付费转化率&lt;/td&gt;
+      &lt;td&gt;3%&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;年付 vs 月付&lt;/td&gt;
+      &lt;td&gt;7:3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;续费率&lt;/td&gt;
+      &lt;td&gt;65%&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ARPU&lt;/td&gt;
+      &lt;td&gt;¥45&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;总结&quot;&gt;总结&lt;/h2&gt;
+
+&lt;p&gt;内购接入不复杂，但细节很多。&lt;/p&gt;
+
+&lt;p&gt;核心原则：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;给用户真正的价值&lt;/li&gt;
+  &lt;li&gt;充分测试&lt;/li&gt;
+  &lt;li&gt;遵守苹果的规则&lt;/li&gt;
+  &lt;li&gt;持续优化转化率&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;祝你变现顺利！&lt;/p&gt;
+</description>
+        <pubDate>Fri, 15 Mar 2024 00:00:00 +0800</pubDate>
+        <link>https://www.northcity.top/2024/03/15/ios-iap-guide/</link>
+        <guid isPermaLink="true">https://www.northcity.top/2024/03/15/ios-iap-guide/</guid>
+        
+        <category>iOS开发</category>
+        
+        <category>内购</category>
+        
+        <category>技术</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>产品设计原则：做减法的艺术</title>
+        <description>&lt;h2 id=&quot;加法的诱惑&quot;&gt;加法的诱惑&lt;/h2&gt;
+
+&lt;p&gt;每个开发者都经历过这种时刻：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;用户说想要 A 功能&lt;/li&gt;
+  &lt;li&gt;竞品有 B 功能&lt;/li&gt;
+  &lt;li&gt;自己觉得 C 功能很酷&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;于是你不断往产品里加东西。&lt;/p&gt;
+
+&lt;p&gt;直到有一天，你的”极简”App 变得臃肿不堪。&lt;/p&gt;
+
+&lt;h2 id=&quot;我的教训&quot;&gt;我的教训&lt;/h2&gt;
+
+&lt;p&gt;极简天气曾经是真的极简：一个页面，当前天气，未来几天预报。&lt;/p&gt;
+
+&lt;p&gt;然后我加了：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;空气质量详情&lt;/li&gt;
+  &lt;li&gt;生活指数&lt;/li&gt;
+  &lt;li&gt;天气资讯&lt;/li&gt;
+  &lt;li&gt;分享功能&lt;/li&gt;
+  &lt;li&gt;主题商店&lt;/li&gt;
+  &lt;li&gt;…&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;用户反馈开始变了：”以前很喜欢，现在有点乱。”&lt;/p&gt;
+
+&lt;p&gt;我花了 3 个月重构，砍掉 60% 的功能。这次重构让日活提升了 23%。&lt;/p&gt;
+
+&lt;h2 id=&quot;减法的价值&quot;&gt;减法的价值&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-降低认知负担&quot;&gt;1. 降低认知负担&lt;/h3&gt;
+
+&lt;p&gt;每多一个功能，用户就多一份学习成本。&lt;/p&gt;
+
+&lt;p&gt;心理学研究表明：选择越多，决策越难（选择悖论）。&lt;/p&gt;
+
+&lt;h3 id=&quot;2-提高核心体验&quot;&gt;2. 提高核心体验&lt;/h3&gt;
+
+&lt;p&gt;资源有限时，功能越少，每个功能的质量越高。&lt;/p&gt;
+
+&lt;p&gt;与其做 10 个 60 分的功能，不如做 3 个 90 分的功能。&lt;/p&gt;
+
+&lt;h3 id=&quot;3-降低维护成本&quot;&gt;3. 降低维护成本&lt;/h3&gt;
+
+&lt;p&gt;代码越少，Bug 越少，维护越轻松。&lt;/p&gt;
+
+&lt;p&gt;这对独立开发者尤其重要。&lt;/p&gt;
+
+&lt;h2 id=&quot;如何做减法&quot;&gt;如何做减法&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-明确核心价值&quot;&gt;1. 明确核心价值&lt;/h3&gt;
+
+&lt;p&gt;问自己：用户打开这个 App 的核心目的是什么？&lt;/p&gt;
+
+&lt;p&gt;一切与核心目的无关的功能，都可以考虑去掉。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;例：闪念的核心价值&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;✅ 快速记录想法&lt;/li&gt;
+  &lt;li&gt;❌ 社交分享&lt;/li&gt;
+  &lt;li&gt;❌ 美化笔记&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2-数据驱动&quot;&gt;2. 数据驱动&lt;/h3&gt;
+
+&lt;p&gt;用数据说话：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使用率低于 5% 的功能，考虑删除&lt;/li&gt;
+  &lt;li&gt;用户流失点，可能是功能太复杂&lt;/li&gt;
+  &lt;li&gt;A/B 测试验证假设&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3-8020-法则&quot;&gt;3. 80/20 法则&lt;/h3&gt;
+
+&lt;p&gt;80% 的用户只用 20% 的功能。&lt;/p&gt;
+
+&lt;p&gt;把 80% 的精力放在那 20% 的核心功能上。&lt;/p&gt;
+
+&lt;h3 id=&quot;4-问为什么要加而不是为什么要删&quot;&gt;4. 问”为什么要加”而不是”为什么要删”&lt;/h3&gt;
+
+&lt;p&gt;默认不加功能，除非有充分理由。&lt;/p&gt;
+
+&lt;p&gt;每次想加功能时问自己：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;这解决了什么核心问题？&lt;/li&gt;
+  &lt;li&gt;没有这个功能用户会流失吗？&lt;/li&gt;
+  &lt;li&gt;有更简单的方案吗？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;隐藏而非删除&quot;&gt;隐藏而非删除&lt;/h2&gt;
+
+&lt;p&gt;有些功能不常用但必要，可以隐藏而非删除：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;放到设置里&lt;/li&gt;
+  &lt;li&gt;高级选项&lt;/li&gt;
+  &lt;li&gt;长按触发&lt;/li&gt;
+  &lt;li&gt;渐进式披露&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;案例研究&quot;&gt;案例研究&lt;/h2&gt;
+
+&lt;h3 id=&quot;good-notes&quot;&gt;Good Notes&lt;/h3&gt;
+
+&lt;p&gt;笔记应用，功能很多但不觉得臃肿。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;做法：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;默认界面极简&lt;/li&gt;
+  &lt;li&gt;工具栏可定制&lt;/li&gt;
+  &lt;li&gt;高级功能隐藏&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;things-3&quot;&gt;Things 3&lt;/h3&gt;
+
+&lt;p&gt;待办应用的标杆。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;做法：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;只保留核心：收集、组织、执行&lt;/li&gt;
+  &lt;li&gt;没有标签颜色、优先级等复杂功能&lt;/li&gt;
+  &lt;li&gt;专注于体验细节&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;bear&quot;&gt;Bear&lt;/h3&gt;
+
+&lt;p&gt;轻量级笔记。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;做法：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;纯文本为主&lt;/li&gt;
+  &lt;li&gt;没有文件夹，只有标签&lt;/li&gt;
+  &lt;li&gt;没有协作功能&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;何时该加功能&quot;&gt;何时该加功能&lt;/h2&gt;
+
+&lt;p&gt;减法不是目的，用户满意才是。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;应该加功能的情况：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;核心场景有明显缺失&lt;/li&gt;
+  &lt;li&gt;大量用户反复请求&lt;/li&gt;
+  &lt;li&gt;竞品必备的差异化功能&lt;/li&gt;
+  &lt;li&gt;能带来显著商业价值&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;心态转变&quot;&gt;心态转变&lt;/h2&gt;
+
+&lt;p&gt;从”我能加什么”转变为”我能删什么”。&lt;/p&gt;
+
+&lt;p&gt;每次发版，问自己：这个版本能删点什么吗？&lt;/p&gt;
+
+&lt;p&gt;最好的功能是用户感觉不到的功能——一切都刚刚好。&lt;/p&gt;
+
+&lt;h2 id=&quot;引用&quot;&gt;引用&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.” 
+— Antoine de Saint-Exupéry&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“Less, but better.” 
+— Dieter Rams&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;总结&quot;&gt;总结&lt;/h2&gt;
+
+&lt;p&gt;做减法比做加法难。&lt;/p&gt;
+
+&lt;p&gt;它需要：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;对产品的深刻理解&lt;/li&gt;
+  &lt;li&gt;对用户的真正同理心&lt;/li&gt;
+  &lt;li&gt;说”不”的勇气&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;但回报是值得的：更简单的产品，更满意的用户，更轻松的维护。&lt;/p&gt;
+
+&lt;p&gt;这是我追求的方向。&lt;/p&gt;
+</description>
+        <pubDate>Tue, 22 Aug 2023 00:00:00 +0800</pubDate>
+        <link>https://www.northcity.top/2023/08/22/art-of-subtraction/</link>
+        <guid isPermaLink="true">https://www.northcity.top/2023/08/22/art-of-subtraction/</guid>
+        
+        <category>产品设计</category>
+        
+        <category>用户体验</category>
+        
+        <category>独立开发</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>

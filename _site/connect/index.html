@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="联系北城 - 无论是合作、交流还是只是想聊聊">
+    <meta name="keywords" content="北城, 独立开发者, indie developer, iOS开发, App开发, 闪念, 呼吸泡泡, Anpa, 数字遗产, 时间胶囊, 产品创作者, 独立开发, Swift, SwiftUI">
+    <meta name="theme-color" content="#1a1a1a">
+    <meta name="author" content="北城">
+    
+    <title>联系 - 北城 · 独立开发者 | NorthCity</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="联系">
+    <meta property="og:description" content="联系北城 - 无论是合作、交流还是只是想聊聊">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.northcity.top/connect/">
+    <meta property="og:image" content="https://www.northcity.top/img/og-image.jpg">
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.northcity.top/connect/">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/northcity.css">
+    <link rel="stylesheet" href="/css/custom-icons.css">
+    
+    <!-- Font Awesome -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+<body>
+    <!-- Navigation -->
+<nav class="nav">
+    <div class="nav-container">
+        <a href="/" class="nav-brand">
+            <span data-lang-show="zh">北城</span>
+            <span data-lang-show="en">NorthCity</span>
+        </a>
+        
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <ul class="nav-links">
+            <li>
+                <a href="/" >
+                    <span data-i18n="nav_home" data-zh="首页" data-en="Home">首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/products/" >
+                    <span data-i18n="nav_products" data-zh="作品" data-en="Products">作品</span>
+                </a>
+            </li>
+            <li>
+                <a href="/logs/" >
+                    <span data-i18n="nav_logs" data-zh="日志" data-en="Logs">日志</span>
+                </a>
+            </li>
+            <li>
+                <a href="/essays/" >
+                    <span data-i18n="nav_essays" data-zh="文章" data-en="Essays">文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/" >
+                    <span data-i18n="nav_about" data-zh="关于" data-en="About">关于</span>
+                </a>
+            </li>
+            <li>
+                <a href="/connect/" class="active">
+                    <span data-i18n="nav_connect" data-zh="联系" data-en="Connect">联系</span>
+                </a>
+            </li>
+        </ul>
+        
+        <div class="site-settings">
+            <button id="lang-toggle" class="settings-btn" aria-label="Toggle language">
+                <i class="fas fa-globe"></i>
+                <span>EN</span>
+            </button>
+            <button id="theme-toggle" class="settings-btn" aria-label="Toggle theme" data-dark-text="暗色" data-light-text="亮色">
+                <i class="fas fa-moon"></i>
+                <span>暗色</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<script src="/js/site-settings.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    toggle.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.nav')) {
+            navLinks.classList.remove('active');
+        }
+    });
+});
+</script>
+
+
+    <div class="page-header">
+    <div class="page-header-content">
+        <h1 class="page-title">联系我</h1>
+        <p class="page-description">
+            无论是合作、交流，还是只是想聊聊独立开发的事，欢迎联系我。
+        </p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container-narrow">
+        <div class="connect-links">
+            <a href="mailto:506343891@qq.com" class="connect-item">
+                <div class="connect-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="connect-info">
+                    <h4>邮箱</h4>
+                    <p>506343891@qq.com</p>
+                </div>
+            </a>
+            
+            
+            <a href="https://x.com/chenxi44779232?s=21" target="_blank" rel="noopener" class="connect-item">
+                <div class="connect-icon">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </div>
+                <div class="connect-info">
+                    <h4>X (Twitter)</h4>
+                    <p>@chenxi44779232</p>
+                </div>
+            </a>
+            
+            
+            
+            <a href="https://xhslink.com/m/7ELB1JL5RId" target="_blank" rel="noopener" class="connect-item">
+                <div class="connect-icon" style="background: transparent; padding: 0;">
+                    <img src="/img/chanpinicon/redbook.png" alt="小红书" style="width: 100%; height: 100%; border-radius: 8px; object-fit: contain;">
+                </div>
+                <div class="connect-info">
+                    <h4>小红书</h4>
+                    <p>独立开发者北城</p>
+                </div>
+            </a>
+            
+            
+            
+            <div class="connect-item" style="cursor: default;">
+                <div class="connect-icon">
+                    <i class="fab fa-weixin"></i>
+                </div>
+                <div class="connect-info">
+                    <h4>微信</h4>
+                    <p>shine5211314</p>
+                </div>
+            </div>
+            
+            
+            
+            <a href="https://github.com/northcity" target="_blank" rel="noopener" class="connect-item">
+                <div class="connect-icon">
+                    <i class="fab fa-github"></i>
+                </div>
+                <div class="connect-info">
+                    <h4>GitHub</h4>
+                    <p>@northcity</p>
+                </div>
+            </a>
+            
+            
+            
+            <a href="https://weibo.com/陈年小城" target="_blank" rel="noopener" class="connect-item">
+                <div class="connect-icon">
+                    <i class="fab fa-weibo"></i>
+                </div>
+                <div class="connect-info">
+                    <h4>微博</h4>
+                    <p>@陈年小城</p>
+                </div>
+            </a>
+            
+            
+            
+            <a href="https://www.zhihu.com/people/北城" target="_blank" rel="noopener" class="connect-item">
+                <div class="connect-icon">
+                    <i class="fab fa-zhihu"></i>
+                </div>
+                <div class="connect-info">
+                    <h4>知乎</h4>
+                    <p>@北城</p>
+                </div>
+            </a>
+            
+            
+            <a href="/feed.xml" class="connect-item">
+                <div class="connect-icon">
+                    <i class="fas fa-rss"></i>
+                </div>
+                <div class="connect-info">
+                    <h4>RSS 订阅</h4>
+                    <p>获取最新内容更新</p>
+                </div>
+            </a>
+        </div>
+        
+        <!-- 微信公众号 -->
+        <div style="margin-top: var(--space-2xl);">
+            <h3 style="margin-bottom: var(--space-lg); font-size: 1.1rem; color: var(--color-text-secondary);">📱 微信公众号</h3>
+            <div style="display: grid; gap: var(--space-md);">
+                
+                <div class="connect-item" style="cursor: default;">
+                    <div class="connect-icon">
+                        <i class="fab fa-weixin"></i>
+                    </div>
+                    <div class="connect-info">
+                        <h4>时间胶囊-寄往未来的信</h4>
+                        <p>时间胶囊产品官方公众号</p>
+                    </div>
+                </div>
+                
+                <div class="connect-item" style="cursor: default;">
+                    <div class="connect-icon">
+                        <i class="fab fa-weixin"></i>
+                    </div>
+                    <div class="connect-info">
+                        <h4>北城的独立开发分享</h4>
+                        <p>独立开发经验与思考分享</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container-narrow">
+        <div class="current-work" style="text-align: center;">
+            <h3 style="margin-bottom: var(--space-lg); font-size: 1.25rem;">💌 写给我</h3>
+            <p style="color: var(--color-text-secondary); margin-bottom: var(--space-xl);">
+                如果你有任何想法、建议，或者只是想打个招呼，<br>
+                欢迎直接发邮件给我，我会尽快回复。
+            </p>
+            <a href="mailto:506343891@qq.com" class="btn btn-primary">
+                发送邮件 <span class="arrow">→</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container-narrow">
+        <h2 class="section-title" style="text-align: center;">常见问题</h2>
+        
+        <div style="margin-top: var(--space-2xl);">
+            <div style="margin-bottom: var(--space-xl); padding-bottom: var(--space-xl); border-bottom: 1px solid var(--color-border-light);">
+                <h4 style="margin-bottom: var(--space-sm);">可以合作吗？</h4>
+                <p style="color: var(--color-text-secondary); margin: 0;">
+                    如果是有意义的项目，我很乐意交流。请邮件说明项目背景和合作方式。
+                </p>
+            </div>
+            
+            <div style="margin-bottom: var(--space-xl); padding-bottom: var(--space-xl); border-bottom: 1px solid var(--color-border-light);">
+                <h4 style="margin-bottom: var(--space-sm);">可以约咖啡聊聊吗？</h4>
+                <p style="color: var(--color-text-secondary); margin: 0;">
+                    如果你也是独立开发者，或者对独立开发感兴趣，我很愿意交流。不过时间有限，请先邮件沟通。
+                </p>
+            </div>
+            
+            <div>
+                <h4 style="margin-bottom: var(--space-sm);">你的 App 有问题 / 有建议怎么反馈？</h4>
+                <p style="color: var(--color-text-secondary); margin: 0;">
+                    非常感谢反馈！请直接发邮件，或者在 App Store 评论区留言。每一条反馈我都会认真看。
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-text">
+            © 2026 北城 · 用作品和文字记录真实的独立开发之路 · 
+            <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener">豫ICP备17036027号-1</a>
+        </div>
+        <div class="footer-links">
+            
+            <a href="https://github.com/northcity" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            
+            
+            
+            <a href="https://weibo.com/陈年小城" target="_blank" rel="noopener">
+                <i class="fab fa-weibo"></i> 微博
+            </a>
+            
+            <a href="/feed.xml">
+                <i class="fas fa-rss"></i> RSS
+            </a>
+        </div>
+    </div>
+</footer>
+
+
+    <script src="/js/main.js"></script>
+    <!-- Dappled light / shadow overlay (homepage only) -->
+    <script src="/js/dappled-light.js"></script>
+</body>
+</html>

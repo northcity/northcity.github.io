@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="我用产品、代码和文字，记录真实的独立开发之路。">
+    <meta name="keywords"  content="北城, 独立开发者, indie developer, iOS开发, App开发, 闪念, 呼吸泡泡, Anpa, 数字遗产, 时间胶囊, 产品创作者, 独立开发, Swift, SwiftUI">
+    <meta name="theme-color" content="#1a1a1a">
+    
+    <title>独立开发者的第一年：从辞职到月入过万 - 北城 · 独立开发者 | NorthCity</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.northcity.top/2024/06/20/first-year-indie-dev/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- Font Awesome 6 for modern icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- Custom Icons (X, 小红书, etc.) -->
+    <link rel="stylesheet" href="/css/icons.css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">北城</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">关于</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/connect/">联系</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/essays/">文章</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/portfolio/">Portfolio</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/logs/">开发日志</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/products/">作品</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/send/">Send Letter</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/write/">Write</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page2/">首页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page3/">首页</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/common/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/common/home-bg.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#独立开发" title="独立开发">独立开发</a>
+                        
+                        <a class="tag" href="/tags/#经验分享" title="经验分享">经验分享</a>
+                        
+                        <a class="tag" href="/tags/#入门" title="入门">入门</a>
+                        
+                    </div>
+                    <h1>独立开发者的第一年：从辞职到月入过万</h1>
+                    
+                    
+                    <h2 class="subheading">真实的独立开发入门指南</h2>
+                    
+                    <span class="meta">Posted by 北城 on June 20, 2024</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h2 id="前言">前言</h2>
+
+<p>经常有人问我：想做独立开发，应该怎么开始？</p>
+
+<p>这篇文章是我的真实经历和建议，希望对你有帮助。</p>
+
+<h2 id="我的起点">我的起点</h2>
+
+<p>2019 年，我还在一家互联网公司做 iOS 开发。</p>
+
+<p>工资还可以，但每天重复着差不多的工作，感觉失去了对编程的热情。</p>
+
+<p>下班后，我开始做自己的 App。</p>
+
+<h2 id="第一个产品">第一个产品</h2>
+
+<p>我的第一个 App 是一个简单的天气应用——极简天气。</p>
+
+<p><strong>为什么选择天气应用？</strong></p>
+<ul>
+  <li>功能明确，scope 可控</li>
+  <li>有成熟的 API</li>
+  <li>市场大，容易验证</li>
+</ul>
+
+<p><strong>开发过程：</strong></p>
+<ul>
+  <li>每天晚上 2-3 小时</li>
+  <li>周末全天开发</li>
+  <li>总共花了 2 个月</li>
+</ul>
+
+<h2 id="上线第一周">上线第一周</h2>
+
+<p>上线后的第一周，数据惨淡：</p>
+
+<ul>
+  <li>下载量：47</li>
+  <li>收入：0</li>
+  <li>日活：5</li>
+</ul>
+
+<p>但我收到了第一条用户反馈：”很喜欢这个 App 的简洁设计！”</p>
+
+<p>那一刻我意识到：真的有人在用我做的东西。</p>
+
+<h2 id="逐渐增长">逐渐增长</h2>
+
+<p>接下来的几个月，我做了这些事：</p>
+
+<h3 id="1-持续迭代">1. 持续迭代</h3>
+
+<p>根据用户反馈不断改进：</p>
+<ul>
+  <li>增加 Widget</li>
+  <li>优化启动速度</li>
+  <li>添加 Apple Watch 版本</li>
+</ul>
+
+<h3 id="2-aso-优化">2. ASO 优化</h3>
+
+<p>学习 App Store 优化：</p>
+<ul>
+  <li>优化关键词</li>
+  <li>改进截图</li>
+  <li>A/B 测试</li>
+</ul>
+
+<h3 id="3-内容营销">3. 内容营销</h3>
+
+<p>在技术社区分享：</p>
+<ul>
+  <li>写开发博客</li>
+  <li>在 V2EX 分享经验</li>
+  <li>参与开发者社群</li>
+</ul>
+
+<h2 id="辞职">辞职</h2>
+
+<p>2020 年初，时间胶囊上线后获得了不错的反响。</p>
+
+<p>月收入第一次超过了我的工资。</p>
+
+<p>我决定辞职，全职做独立开发。</p>
+
+<p><strong>辞职时的储备：</strong></p>
+<ul>
+  <li>6 个月生活费</li>
+  <li>2 个有收入的产品</li>
+  <li>明确的产品规划</li>
+</ul>
+
+<h2 id="全职第一年">全职第一年</h2>
+
+<h3 id="收入曲线">收入曲线</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>月份</th>
+      <th>收入</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>¥8,000</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>¥12,000</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>¥18,000</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>¥25,000</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="主要挑战">主要挑战</h3>
+
+<ol>
+  <li><strong>焦虑</strong>：没有固定工资的不安全感</li>
+  <li><strong>孤独</strong>：一个人工作，缺少交流</li>
+  <li><strong>自律</strong>：没人管你，容易放松</li>
+  <li><strong>方向</strong>：做什么产品的困惑</li>
+</ol>
+
+<h3 id="解决方法">解决方法</h3>
+
+<ol>
+  <li><strong>建立规律</strong>：固定的工作时间</li>
+  <li><strong>加入社群</strong>：和其他独立开发者交流</li>
+  <li><strong>小步快跑</strong>：快速验证想法</li>
+  <li><strong>记录复盘</strong>：定期总结反思</li>
+</ol>
+
+<h2 id="给新人的建议">给新人的建议</h2>
+
+<h3 id="1-从副业开始">1. 从副业开始</h3>
+
+<p>不要一开始就辞职。先用业余时间做，验证可行性。</p>
+
+<h3 id="2-做小产品">2. 做小产品</h3>
+
+<p>第一个产品不要太复杂。能在 1-2 个月内完成的最好。</p>
+
+<h3 id="3-解决真实问题">3. 解决真实问题</h3>
+
+<p>自己遇到的问题，往往别人也会遇到。</p>
+
+<h3 id="4-学会营销">4. 学会营销</h3>
+
+<p>酒香也怕巷子深。产品做完只是开始。</p>
+
+<h3 id="5-保持耐心">5. 保持耐心</h3>
+
+<p>独立开发不是快速致富的途径。需要长期坚持。</p>
+
+<h2 id="适合独立开发的人">适合独立开发的人</h2>
+
+<ul>
+  <li>自驱力强</li>
+  <li>能接受不确定性</li>
+  <li>喜欢独立解决问题</li>
+  <li>有一定的储蓄</li>
+</ul>
+
+<h2 id="不适合的情况">不适合的情况</h2>
+
+<ul>
+  <li>需要稳定收入（如有房贷）</li>
+  <li>不喜欢独处</li>
+  <li>追求快速财富</li>
+  <li>无法自我管理</li>
+</ul>
+
+<h2 id="最后">最后</h2>
+
+<p>独立开发不是最好的路，但可能是最适合某些人的路。</p>
+
+<p>如果你真的想做，就开始吧。</p>
+
+<p>最大的风险是一直想而不行动。</p>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2024/03/15/ios-iap-guide/" data-toggle="tooltip" data-placement="top" title="iOS 内购（IAP）完整指南：从接入到上线">
+                        Previous<br>
+                        <span>iOS 内购（IAP）完整指南：从接入到上线</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2024/11/08/improve-app-store-rating/" data-toggle="tooltip" data-placement="top" title="如何在 App Store 获得好评：从 3.5 到 4.8 星的历程">
+                        Next<br>
+                        <span>如何在 App Store 获得好评：从 3.5 到 4.8 星的历程</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#基础整理" title="基础整理" rel="4">
+                                    基础整理
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#新技术" title="新技术" rel="3">
+                                    新技术
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#千万不要研究" title="千万不要研究" rel="3">
+                                    千万不要研究
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#忘了自己是谁" title="忘了自己是谁" rel="3">
+                                    忘了自己是谁
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#用户体验" title="用户体验" rel="2">
+                                    用户体验
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#独立开发" title="独立开发" rel="5">
+                                    独立开发
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#iOS开发" title="iOS开发" rel="2">
+                                    iOS开发
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#技术" title="技术" rel="2">
+                                    技术
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#App Store" title="App Store" rel="2">
+                                    App Store
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "northcity";
+    var disqus_identifier = "/2024/06/20/first-year-indie-dev";
+    var disqus_url = "https://www.northcity.top/2024/06/20/first-year-indie-dev/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/北城">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/陈年小城">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/northcity">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 北城 2026
+                    <br>
+                    Theme by <a href="https://github.com/northcity">NorthCity</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=northcity&repo=northcity.github.io&type=star&count=true" >
+                    </iframe>
+                    <a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备17036027号-1</a>
+                </p>
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'northcity.top';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

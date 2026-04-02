@@ -1,0 +1,19 @@
+{
+  "name": "北城 · 独立开发者",
+  "short_name": "北城",
+  "description": "我用产品、代码和文字，记录真实的独立开发之路。",
+  "icons": [{
+    "src": "icons/128.png",
+    "sizes": "128x128",
+    "type": "image/png"
+  }, {
+    "src": "icons/512.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }],
+  "background_color": "#fafafa",
+  "theme_color": "#1a1a1a",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
+}

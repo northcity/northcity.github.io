@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="我用产品、代码和文字，记录真实的独立开发之路。">
+    <meta name="keywords"  content="北城, 独立开发者, indie developer, iOS开发, App开发, 闪念, 呼吸泡泡, Anpa, 数字遗产, 时间胶囊, 产品创作者, 独立开发, Swift, SwiftUI">
+    <meta name="theme-color" content="#1a1a1a">
+    
+    <title>ARKit 从入门到放弃（三）— ARkit 官网文档翻译 - 北城 · 独立开发者 | NorthCity</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.northcity.top/2018/06/20/ARKit%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83-%E4%B8%89/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- Font Awesome 6 for modern icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- Custom Icons (X, 小红书, etc.) -->
+    <link rel="stylesheet" href="/css/icons.css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">北城</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">关于</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/connect/">联系</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/essays/">文章</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/portfolio/">Portfolio</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/logs/">开发日志</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/products/">作品</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/send/">Send Letter</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/write/">Write</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page2/">首页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page3/">首页</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/postNew/20171206/timg.jpeg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/postNew/20171206/timg.jpeg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#新技术" title="新技术">新技术</a>
+                        
+                        <a class="tag" href="/tags/#千万不要研究" title="千万不要研究">千万不要研究</a>
+                        
+                        <a class="tag" href="/tags/#忘了自己是谁" title="忘了自己是谁">忘了自己是谁</a>
+                        
+                    </div>
+                    <h1>ARKit 从入门到放弃（三）— ARkit 官网文档翻译</h1>
+                    
+                    
+                    <h2 class="subheading">欢迎来到苹果的AR世界</h2>
+                    
+                    <span class="meta">Posted by NorthCity on June 20, 2018</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h1 id="arkit-从入门到放弃三-arkit-官网文档翻译">ARKit 从入门到放弃（三）— ARkit 官网文档翻译</h1>
+
+<h2 id="arkit">ARKit</h2>
+
+<p>​	整合iOS设备摄像头和运动功能，在你的应用或游戏中产生增强现实体验。</p>
+
+<h2 id="概述">概述</h2>
+
+<p>​	增强现实(AR)描述了用户体验，即通过设备的摄像头将2D或3D元素添加到实时视图中，使这些元素看上去似乎驻留在真实世界中。ARKit结合了设备运动跟踪、相机场景捕捉、高级场景处理和显示方便，简化了构建AR体验的任务。您可以使用这些技术创建多种AR体验，使用iOS设备的后置摄像头或前置摄像头。</p>
+
+<h2 id="用后置摄像头增强现实">用后置摄像头增强现实</h2>
+
+<p>​	最常见的AR体验是通过iOS设备的背向摄像头显示视图，并通过其他视觉内容进行增强，使用户有了一种新的方式来观察和与周围的世界互动。</p>
+
+<p>​	<a href="">ARWorldTrackingConfiguration</a>提供了这种体验:ARKit映射并跟踪用户所居住的真实空间，并将其与一个坐标空间相匹配，以便您放置虚拟内容。World tracking还提供了使AR体验更加身临其境的特性，例如识别用户环境中的对象和图像以及响应真实世界的灯光条件。</p>
+
+<p><strong>注意:</strong></p>
+
+<p>​	您可以在用户的真实环境中显示3D对象，而无需构建自定义的AR体验。在ios12中，当你在app中使用带有USDZ文件的<a href="">QLPreviewController</a>，或者在web内容中使用带有USDZ文件的Safari或WebKit时，系统为3D对象提供AR视图。</p>
+
+<h2 id="增强现实与前置摄像头">增强现实与前置摄像头</h2>
+
+<p>​	在iPhone X上，<a href="">ARFaceTrackingConfiguration</a>使用面向前端的TrueDepth摄像头提供有关用户面部的姿势和表情的实时信息，供您在呈现虚拟内容时使用。例如，您可以在摄像头视图中显示用户的脸，并提供真实的虚拟面具。您还可以省略摄像头视图，使用ARKit面部表情数据来动画虚拟角色，就像在iMessage的Animoji应用程序中看到的那样。</p>
+
+<h2 id="主题">主题</h2>
+
+<h2 id="第一步">第一步</h2>
+
+<p><a href="">验证设备支持和用户权限</a></p>
+
+<p>​	确保你的应用可以使用ARKit并且尊重用户的隐私。</p>
+
+<p><a href="">ARSession</a></p>
+
+<p>​	一种共享对象，用于管理设备摄像机和增强现实体验所需的运动处理。</p>
+
+<p><a href="">ARConfiguration</a></p>
+
+<p>​	AR会话配置的抽象基类。</p>
+
+<h2 id="显示">显示</h2>
+
+<p><a href="">ARSCNView</a></p>
+
+<p>​	一种显示AR体验的视图，它通过3D SceneKit内容增强相机视图。</p>
+
+<p><a href="">ARSKView</a></p>
+
+<p>​	一个显示增强现实体验的视图，用2D SpriteKit内容增强相机视图。</p>
+
+<p><a href="">展示的AR体验的材质</a>。</p>
+
+<p>​	通过绘制相机图像和使用位置跟踪信息显示覆盖内容来构建自定义AR视图。</p>
+
+<h2 id="世界跟踪">世界跟踪</h2>
+
+<p>​	创建AR体验，让用户使用设备的背向摄像头探索周围世界的虚拟内容。</p>
+
+<p><a href="">建立你的第一次AR体验</a></p>
+
+<p>​	创建一个运行AR会话的应用程序，使用SceneKit使用平面检测来放置3D内容。</p>
+
+<p><a href="">理解ARKit中的世界跟踪</a></p>
+
+<p>​	发现支持概念、特性和最佳实践来构建优秀的AR体验。</p>
+
+<p><a href="">ARWorldTrackingConfiguration</a></p>
+
+<p>​	一种配置，使用背向摄像头，跟踪设备的方向和位置，并检测真实世界的表面，以及已知的图像或对象。</p>
+
+<p><a href="">ARPlaneAnchor</a></p>
+
+<p>​	关于在世界跟踪AR会话中检测到的真实平面的位置和方向的信息。</p>
+
+<p><a href="">AREnvironmentProbeAnchor</a></p>
+
+<p>​	在世界跟踪AR会话中为特定区域提供环境照明信息的对象。</p>
+
+<h2 id="用户体验">用户体验</h2>
+
+<p>​	通过遵循这些示例和<a href="">人类界面指南&gt;增强现实构建</a>引人注目、直观的增强现实体验。</p>
+
+<p><a href="">管理会话生命周期和跟踪质量</a></p>
+
+<p>​	通过提供清晰的反馈、从中断中恢复、恢复以前的会话，使你的AR体验更加健壮。</p>
+
+<p><a href="">在增强现实中处理3D交互和UI控件。</a></p>
+
+<p>​	在AR体验中，遵循视觉反馈、手势交互和真实渲染的最佳实践。</p>
+
+<h2 id="ar世界共享与坚持">AR世界共享与坚持</h2>
+
+<p><a href="">创建多用户AR体验</a></p>
+
+<p>​	使用MultipeerConnectivity framework在附近设备之间传输ARKit世界地图数据，以创建AR体验的共享基础。</p>
+
+<p><a href="">ARWorldMap</a></p>
+
+<p>​	空间映射状态和来自世界跟踪AR会话的锚集。</p>
+
+<h2 id="图像检测和跟踪">图像检测和跟踪</h2>
+
+<p>在用户的环境中使用已知的2D图像来增强一个跟踪世界的AR会话。</p>
+
+<p><a href="">在AR体验中识别图像</a></p>
+
+<p>​	在用户的环境中检测已知的2D图像，并利用它们的位置放置AR内容。</p>
+
+<p><a href="">ARReferenceImage</a></p>
+
+<p>​	在世界跟踪AR会话期间在真实环境中识别的映像。</p>
+
+<p><a href="">ARImageAnchor</a></p>
+
+<p>​	关于在世界跟踪AR会话中检测到的图像的位置和方向的信息。</p>
+
+<h2 id="对象检测">对象检测</h2>
+
+<p>在用户的环境中使用已知的3D对象，以增强对世界的跟踪。</p>
+
+<p><a href="">扫描和检测3D物体</a></p>
+
+<p>​	记录真实对象的空间特性，然后使用结果在用户环境中查找这些对象并触发AR内容。</p>
+
+<p><a href="">ARReferenceObject</a></p>
+
+<p>​	在世界跟踪AR会话期间在真实环境中识别的3D对象。</p>
+
+<p><a href="">ARObjectAnchor</a></p>
+
+<p>​	关于在世界跟踪AR会话中检测到的真实3D对象的位置和方向的信息。</p>
+
+<p><a href="">ARObjectScanningConfiguration</a></p>
+
+<p>​	一种配置，使用后置摄像头收集高保真的空间数据，用于扫描3D对象以便以后进行检测。</p>
+
+<h2 id="点击测试和真实的位置">点击测试和真实的位置</h2>
+
+<p><a href="">ARHitTestResult</a></p>
+
+<p>​	通过检查AR会话的设备摄像头视图中的一个点找到的真实曲面的信息。</p>
+
+<p><a href="">ARAnchor</a></p>
+
+<p>​	一个真实的位置和方向，可以用来放置物体在一个AR场景。</p>
+
+<p><a href="">ARTrackable</a></p>
+
+<p>​	ARKit跟踪位置和方向变化的场景中的真实对象。</p>
+
+<h2 id="镜头和场景的细节">镜头和场景的细节</h2>
+
+<p><a href="">ARFrame</a></p>
+
+<p>​	一个带有位置跟踪信息的视频图像，作为AR会话的一部分被捕获。</p>
+
+<p><a href="">ARCamera</a></p>
+
+<p>​	关于在AR会话中捕获的视频帧的摄像机位置和成像特性的信息。</p>
+
+<p><a href="">ARLightEstimate</a></p>
+
+<p>​	在AR会话中与捕获的视频帧相关联的场景照明信息的估计。</p>
+
+<h2 id="面部跟踪">面部跟踪</h2>
+
+<p>使用iPhone X上的TrueDepth摄像头来创建AR体验，以响应用户的面部表情和面部表情。</p>
+
+<p><a href="">创建Face-Based基于“增大化现实”技术的经验</a></p>
+
+<p>​	使用面部跟踪AR会话提供的信息放置和动画3D内容。</p>
+
+<p><a href="">ARFaceTrackingConfiguration</a></p>
+
+<p>​	使用TrueDepth相机跟踪用户面部移动和表情的配置。</p>
+
+<p><a href="">ARFaceAnchor</a></p>
+
+<p>​	面部跟踪AR会话中检测到的面部的姿态、拓扑和表情的信息。</p>
+
+<p><a href="">ARDirectionalLightEstimate</a></p>
+
+<p>​	在面部跟踪AR会话中与捕获的视频帧相关的环境照明信息的估计。</p>
+
+<h2 id="专业配置">专业配置</h2>
+
+<p><a href="">AROrientationTrackingConfiguration</a></p>
+
+<p>​	一种配置，使用背向摄像头，只跟踪设备的方向。</p>
+
+<p><a href="">ARImageTrackingConfiguration</a></p>
+
+<p>​	一种配置，使用后置摄像头来检测和跟踪已知的图像。</p>
+
+<h2 id="相关技术">相关技术</h2>
+
+<p><a href="">用音频创造沉浸式的AR体验</a></p>
+
+<p>​	使用声音效果和环境声音层创造一个迷人的AR体验。</p>
+
+<p><a href="">用ARKit实时使用视觉</a></p>
+
+<p>​	管理视觉资源，有效地执行核心ML图像分类器，并使用SpriteKit在AR中显示图像分类器输出。</p>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/12/02/ARKit%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83-%E4%BA%8C/" data-toggle="tooltip" data-placement="top" title="ARKit 从入门到放弃（二）-ARKit工作原理及流程介绍">
+                        Previous<br>
+                        <span>ARKit 从入门到放弃（二）-ARKit工作原理及流程介绍</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/10/16/Rainbow-TimerPrivacyPolicy/" data-toggle="tooltip" data-placement="top" title="Rainbow Timer Privacy Policy">
+                        Next<br>
+                        <span>Rainbow Timer Privacy Policy</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#基础整理" title="基础整理" rel="4">
+                                    基础整理
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#新技术" title="新技术" rel="3">
+                                    新技术
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#千万不要研究" title="千万不要研究" rel="3">
+                                    千万不要研究
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#忘了自己是谁" title="忘了自己是谁" rel="3">
+                                    忘了自己是谁
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#用户体验" title="用户体验" rel="2">
+                                    用户体验
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#独立开发" title="独立开发" rel="5">
+                                    独立开发
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#iOS开发" title="iOS开发" rel="2">
+                                    iOS开发
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#技术" title="技术" rel="2">
+                                    技术
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#App Store" title="App Store" rel="2">
+                                    App Store
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "northcity";
+    var disqus_identifier = "/2018/06/20/ARKit从入门到放弃（三）";
+    var disqus_url = "https://www.northcity.top/2018/06/20/ARKit%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83-%E4%B8%89/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/北城">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/陈年小城">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/northcity">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 北城 2026
+                    <br>
+                    Theme by <a href="https://github.com/northcity">NorthCity</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=northcity&repo=northcity.github.io&type=star&count=true" >
+                    </iframe>
+                    <a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备17036027号-1</a>
+                </p>
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'northcity.top';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
