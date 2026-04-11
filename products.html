@@ -69,6 +69,14 @@ description: "我做过的产品 - 每一个都是真实的尝试与学习"
                     </a>
                     {% endif %}
                 </div>
+                {% if product.name_en == 'IdeaSnap' %}
+                <div style="margin-top: var(--space-md); font-size: 0.8rem; color: var(--color-text-secondary); line-height: 1.7;">
+                    <span>英文法务页：</span>
+                    <a href="{{ site.baseurl }}/ideasnap-privacy-policy/" style="color: var(--color-primary);">Privacy Policy</a>
+                    <span> · </span>
+                    <a href="{{ site.baseurl }}/ideasnap-subscription-agreement/" style="color: var(--color-primary);">Subscription Agreement</a>
+                </div>
+                {% endif %}
             </div>
             {% endif %}
             {% endfor %}
