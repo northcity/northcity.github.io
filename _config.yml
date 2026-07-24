@@ -147,12 +147,13 @@ my_products:
     description: "开口即可记录，AI 自动整理。App Store 编辑推荐，效率工具前5名。"
     description_en: "Speak to record, AI organizes automatically. App Store Editor's Choice."
     icon: "/img/chanpinicon/闪念-AI语音笔记.png"
-    platforms: ["iOS", "iPadOS", "watchOS", "Mac"]
+    platforms: ["iOS", "iPadOS", "watchOS", "macOS", "Android", "Windows", "Linux"]
     status: "持续更新"
     featured: true
     rating: "4.6"
     ratings_count: "595"
     app_store: "https://apps.apple.com/cn/app/%E9%97%AA%E5%BF%B5-ai%E8%AF%AD%E9%9F%B3%E7%AC%94%E8%AE%B0/id1397149726"
+    android_link: "https://dl.northcity.top/1.0.18/%E9%97%AA%E5%BF%B5%E7%AC%94%E8%AE%B0_v1.0.18_release.apk"
     website: "https://ideasnap.xyz"
     
   - name: "Anpa"
@@ -167,7 +168,8 @@ my_products:
     rating: "5.0"
     ratings_count: "10"
     app_store: "https://apps.apple.com/cn/app/anpa/id6757229797"
-    android_link: "https://www.pgyer.com/anpa-android-7"
+    android_link: "https://dl.northcity.top/anpa/releases/v1.0.1/Anpa-v1.0.1-release-universal.apk"
+    website: "https://www.northcity.top/anpa-website/"
 
   - name: "OneCost"
     tagline: "全新一代AI极简记账App"
