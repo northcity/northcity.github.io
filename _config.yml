@@ -168,7 +168,7 @@ my_products:
     rating: "5.0"
     ratings_count: "10"
     app_store: "https://apps.apple.com/cn/app/anpa/id6757229797"
-    android_link: "https://dl.northcity.top/anpa/releases/v1.0.1/Anpa-v1.0.1-release-universal.apk"
+    android_link: "https://dl.northcity.top/anpa/releases/v1.0.2/Anpa-v1.0.2-release-vc10002.apk"
     website: "https://www.northcity.top/anpa-website/"
 
   - name: "OneCost"
