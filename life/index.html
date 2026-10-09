@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f7f8f2">
+  <title>高性价比人生指南 · 把日子过好，从一件小事开始</title>
+  <meta name="description" content="探索高性价比人生指南的完整内容。按生活主题、章节、证据与投入筛选，阅读全文、查看来源，收藏此刻对你有用的建议。">
+  <meta property="og:title" content="高性价比人生指南 · 好好生活，有据可查">
+  <meta property="og:description" content="健康、金钱、时间与人生选择。把需要的生活知识，放在触手可及的地方。">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到正文</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#/" aria-label="高性价比人生指南首页">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 27V14M16 18C6 19 4 12 5 6c7-1 12 4 11 12Zm0 4C16 12 24 9 28 10c1 7-4 12-12 12Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="brand-name">高性价比人生指南<small>HOW TO LIVE BETTER</small></span>
+      </a>
+      <nav class="main-nav" aria-label="主导航">
+        <a href="#/" data-nav="explore">探索指南</a>
+        <a href="#/topics" data-nav="topics">主题目录</a>
+        <a href="#/saved" data-nav="saved">我的收藏<span id="saved-count" class="nav-count" hidden>0</span></a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="切换深色模式" title="切换深色模式"></button>
+        <a class="source-button" href="https://github.com/eternity4719/HowToLiveBetter" target="_blank" rel="noopener noreferrer"><span data-icon="github"></span><span>原项目</span><span data-icon="external"></span></a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section id="home-intro" class="home-intro shell" aria-labelledby="hero-title">
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="status-dot"></span>好好生活，有据可查</div>
+          <h1 id="hero-title">少一点消耗，<br>多一点<span class="hero-accent">好好生活。</span></h1>
+          <p class="hero-description">健康、金钱、时间与人生选择。<br class="mobile-break">把需要的生活知识，放在触手可及的地方。</p>
+          <form id="hero-search-form" class="search-box" role="search">
+            <span data-icon="search"></span>
+            <input id="hero-search" name="q" type="search" aria-label="搜索全部指南" autocomplete="off" placeholder="你想改善生活的哪一部分？">
+            <kbd aria-hidden="true">/</kbd>
+            <button type="submit" aria-label="搜索指南"><span data-icon="arrow-right"></span></button>
+          </form>
+          <div class="popular-searches"><span>试着搜</span><button type="button" data-query="睡眠">睡眠</button><button type="button" data-query="医保">医保</button><button type="button" data-query="自动续费">自动续费</button><button type="button" data-query="劳动仲裁">劳动仲裁</button></div>
+        </div>
+        <aside class="hero-note" aria-label="阅读寄语">
+          <div class="note-top"><span>A LITTLE BETTER, EVERY DAY</span><span class="tiny-star">✳</span></div>
+          <div class="plant-art" aria-hidden="true">
+            <svg viewBox="0 0 360 250" fill="none">
+              <circle cx="195" cy="121" r="91" fill="#E0E8D7"/>
+              <circle cx="195" cy="121" r="70" stroke="#C4D0B9" stroke-dasharray="2 6"/>
+              <path d="M83 213H280" stroke="#53634B" stroke-width="1.5"/>
+              <path d="M185 214C180 176 189 136 174 93" stroke="#435E3C" stroke-width="3" stroke-linecap="round"/>
+              <path d="M182 170C145 177 123 157 120 127c37-3 58 11 62 43Z" fill="#729268"/>
+              <path d="M180 140C213 143 240 120 241 91c-33 0-58 17-61 49Z" fill="#8EA57C"/>
+              <path d="M174 108C144 103 137 82 141 61c27 7 39 23 33 47Z" fill="#486A42"/>
+              <path d="m143 148 39 25m-1-33 36-27m-61-33 17 26" stroke="#F0F4EA" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M161 190h46l-6 24h-34l-6-24Z" fill="#F4F0DD" stroke="#758669" stroke-width="1.5"/>
+              <path d="M267 69v16m-8-8h16M97 100v10m-5-5h10" stroke="#657B54" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="275" cy="155" r="3" fill="#A8BA92"/>
+            </svg>
+          </div>
+          <p class="note-quote">不用一次改变人生。<br>找到一两条用得上的，<br><em>就已经很好。</em></p>
+          <div class="note-bottom"><span>写给认真生活的每个人</span><span>01 — ∞</span></div>
+        </aside>
+      </div>
+      <div class="overview-line"><span><strong data-stat="entries">675</strong> 条生活建议</span><i></i><span><strong data-stat="chapters">34</strong> 个原文章节</span><i></i><span>每条保留证据与来源</span><a href="#/about">了解这份指南 <span data-icon="arrow-right"></span></a></div>
+      <section class="themes-section" aria-labelledby="themes-heading">
+        <div class="section-heading compact"><div><span class="section-kicker">EXPLORE BY TOPIC</span><h2 id="themes-heading">从你关心的事开始</h2></div><a href="#/topics" class="text-link">查看全部章节 <span data-icon="arrow-up-right"></span></a></div>
+        <div id="theme-grid" class="theme-grid"></div>
+      </section>
+      <div class="scenario-strip"><span><span data-icon="compass"></span>正在经历一些变化？</span><div id="scenario-links"></div></div>
+    </section>
+
+    <section id="explorer" class="explorer shell" aria-labelledby="explorer-title">
+      <div class="section-heading explorer-heading"><div><span class="section-kicker" id="explorer-kicker">THE GUIDE</span><h2 id="explorer-title">把有用的，慢慢装进生活</h2></div><p id="explorer-description">不用全部做到。先看看，此刻哪一条适合你。</p></div>
+      <div class="explorer-layout">
+        <aside class="filter-panel" id="filter-panel" aria-label="筛选指南">
+          <div class="filter-title"><h3><span data-icon="sliders"></span>筛选指南</h3><button type="button" data-action="reset" class="reset-button">重置</button><button type="button" id="close-filters" class="icon-button" aria-label="关闭筛选"><span data-icon="close"></span></button></div>
+          <label class="filter-label" for="chapter-select">按章节阅读</label>
+          <div class="select-wrap"><select id="chapter-select" aria-label="选择章节"><option value="all">全部章节</option></select><span data-icon="chevron-down"></span></div>
+          <div class="filter-group" data-group="ratio"><div class="filter-label">性价比 <button type="button" class="info-button" data-action="guide" aria-label="了解性价比的含义">?</button></div><div class="filter-options"><button type="button" data-filter="ratio" data-value="极高">极高</button><button type="button" data-filter="ratio" data-value="高">高</button><button type="button" data-filter="ratio" data-value="一般">一般</button></div><p class="filter-help">原作者判断，同一收益口径内比较</p></div>
+          <div class="filter-group"><div class="filter-label">证据等级 <button type="button" class="info-button" data-action="guide" aria-label="了解证据分级">?</button></div><div class="filter-options"><button type="button" data-filter="evidence" data-value="A">A 级</button><button type="button" data-filter="evidence" data-value="B">B 级</button><button type="button" data-filter="evidence" data-value="C">C 级</button></div></div>
+          <div class="filter-group"><div class="filter-label"><span data-icon="wallet"></span>需要花钱吗</div><div class="filter-options"><button type="button" data-filter="money" data-value="0">不花钱</button><button type="button" data-filter="money" data-value="少">花一点</button><button type="button" data-filter="money" data-value="多">花较多</button></div></div>
+          <div class="filter-group"><div class="filter-label"><span data-icon="clock"></span>需要多少时间</div><div class="filter-options"><button type="button" data-filter="time" data-value="少">顺手做</button><button type="button" data-filter="time" data-value="中">花些时间</button><button type="button" data-filter="time" data-value="多">持续投入</button></div></div>
+          <div class="filter-group"><div class="filter-label"><span data-icon="spark"></span>需要多少毅力</div><div class="filter-options"><button type="button" data-filter="will" data-value="否">不用</button><button type="button" data-filter="will" data-value="些">一点</button><button type="button" data-filter="will" data-value="是">较多</button></div></div>
+          <div class="filter-note"><span data-icon="leaf"></span><p>适合自己的，<br>才是好的生活方式。</p></div>
+        </aside>
+        <div class="results-panel">
+          <div class="results-tools"><div class="quick-tabs" role="group" aria-label="快速筛选"><button type="button" data-quick="all" class="active">全部指南</button><button type="button" data-quick="easy">低成本开始 <span class="small-dot"></span></button><button type="button" data-quick="unread">还没读过</button></div><button id="open-filters" type="button" class="filter-mobile-button"><span data-icon="sliders"></span>筛选<span id="filter-count"></span></button><div class="view-buttons" role="group" aria-label="显示方式"><button type="button" class="icon-button active" data-layout="grid" aria-label="卡片视图" aria-pressed="true"><span data-icon="grid"></span></button><button type="button" class="icon-button" data-layout="list" aria-label="列表视图" aria-pressed="false"><span data-icon="list"></span></button></div></div>
+          <div class="results-search-wrap"><label class="results-search"><span data-icon="search"></span><input id="results-search" type="search" aria-label="在指南中搜索" placeholder="搜索标题、正文、来源…" autocomplete="off"><button type="button" id="clear-search" class="icon-button" aria-label="清空搜索" hidden><span data-icon="close"></span></button></label><button id="export-saved" class="secondary-button" type="button" hidden><span data-icon="download"></span>导出收藏</button></div>
+          <div id="active-filters" class="active-filters" aria-label="已选筛选"></div>
+          <div class="results-meta"><p id="results-count" role="status" aria-live="polite"></p><span id="results-order">按原文章节顺序</span></div>
+          <div id="chapter-intro" class="chapter-intro" hidden></div>
+          <div id="entry-grid" class="entry-grid"></div>
+          <div id="empty-state" class="empty-state" hidden></div>
+          <div id="load-more-wrap" class="load-more-wrap"><button id="load-more" type="button" class="load-more">再看看更多建议 <span data-icon="arrow-down"></span></button><span id="loaded-count"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="topics-page" class="topics-page shell" hidden aria-labelledby="topics-title"><div class="page-heading"><span class="section-kicker">A MAP FOR EVERYDAY LIFE</span><h1 id="topics-title">给生活，一张清楚的地图。</h1><p>六个主题，串起 <span data-stat="chapters">34</span> 个原文章节。你可以顺着读，也可以直接去需要的地方。</p></div><div id="directory-grid" class="directory-grid"></div><div class="section-heading"><div><span class="section-kicker">READ A LITTLE DEEPER</span><h2>有些时刻，需要一份完整指南</h2></div></div><div id="documents-grid" class="documents-grid"></div></section>
+
+    <section id="closing-note" class="closing-note shell"><span class="closing-mark" data-icon="leaf"></span><h2>生活没有标准答案，<br>但可以多一些有据可查的选择。</h2><p>这是一份备选单。需要的时候，回来看看。</p><a href="#/about" class="text-link">关于这次重新设计 <span data-icon="arrow-up-right"></span></a></section>
+  </main>
+
+  <footer class="site-footer shell"><div class="footer-top"><span class="footer-brand">高性价比人生指南<small>HOW TO LIVE BETTER</small></span><div><a href="#/about">关于与许可</a><a href="https://github.com/eternity4719/HowToLiveBetter" target="_blank" rel="noopener noreferrer">原作者 · eternity4719 <span data-icon="external"></span></a></div></div><div class="footer-bottom"><p>内容来自开源项目 HowToLiveBetter，按 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a> 使用。本站重新设计了分类与阅读界面，正文保留原文。</p><span id="snapshot-label">内容快照 · 2026.10.09</span></div></footer>
+
+  <dialog id="reader" class="reader-dialog" aria-labelledby="reader-title"><div class="reader-toolbar"><button type="button" id="reader-close" class="reader-back"><span data-icon="arrow-left"></span>返回指南</button><div class="reader-tools"><button type="button" id="font-smaller" class="icon-button text-icon" aria-label="缩小字号">A−</button><button type="button" id="font-larger" class="icon-button text-icon" aria-label="放大字号">A+</button><span class="tool-divider"></span><button type="button" id="reader-share" class="icon-button" aria-label="复制本页链接" title="复制本页链接"><span data-icon="share"></span></button><button type="button" id="reader-save" class="icon-button" aria-label="收藏这条建议"><span data-icon="bookmark"></span></button></div></div><div class="reader-scroll" id="reader-scroll"><div id="reader-content" class="reader-content"></div></div><div class="reader-progress" aria-hidden="true"><span id="reader-progress-bar"></span></div></dialog>
+  <div id="mobile-filter-backdrop" class="mobile-filter-backdrop" hidden></div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <button id="back-to-top" type="button" class="back-to-top icon-button" aria-label="回到顶部" hidden><span data-icon="arrow-up"></span></button>
+  <noscript><div class="noscript-message">请开启 JavaScript 以使用本地搜索与阅读功能。你也可以<a href="https://github.com/eternity4719/HowToLiveBetter">直接阅读原仓库</a>。</div></noscript>
+  <script src="./data.js"></script>
+  <script src="./core.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

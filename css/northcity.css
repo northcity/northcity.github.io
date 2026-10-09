@@ -1406,3 +1406,138 @@ a:hover {
   }
 }
 
+/* ===================================
+   Life Guide Entry (高性价比人生指南入口)
+   =================================== */
+.life-guide-entry {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  background: linear-gradient(135deg, #f7f9f2 0%, #edf2e3 100%);
+  border: 1px solid #dce4d0;
+  border-radius: var(--border-radius);
+  padding: var(--space-2xl);
+  transition: all var(--transition-normal);
+}
+
+.life-guide-entry:hover {
+  border-color: #c3d2b2;
+  box-shadow: 0 12px 40px rgba(67, 94, 60, 0.1);
+}
+
+.life-guide-mark {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #435e3c;
+  color: #f7f9f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.life-guide-mark svg {
+  width: 34px;
+  height: 34px;
+}
+
+.life-guide-copy {
+  flex: 1;
+}
+
+.life-guide-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #53634b;
+  margin-bottom: var(--space-sm);
+}
+
+.life-guide-title {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.life-guide-desc {
+  color: var(--color-text-secondary);
+  font-size: 0.9375rem;
+  margin-bottom: var(--space-sm);
+}
+
+.life-guide-note {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  margin-bottom: 0;
+}
+
+.life-guide-cta {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-xl);
+  background: #435e3c;
+  color: #ffffff;
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.life-guide-cta:hover {
+  background: #365030;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.life-guide-cta .arrow {
+  transition: transform var(--transition-fast);
+}
+
+.life-guide-cta:hover .arrow {
+  transform: translateX(4px);
+}
+
+[data-theme="dark"] .life-guide-entry {
+  background: linear-gradient(135deg, #141b13 0%, #0f140e 100%);
+  border-color: #2b382a;
+}
+
+[data-theme="dark"] .life-guide-entry:hover {
+  border-color: #3c5238;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .life-guide-eyebrow {
+  color: #9cb28d;
+}
+
+[data-theme="dark"] .life-guide-mark {
+  background: #7d9a6b;
+  color: #0f140e;
+}
+
+[data-theme="dark"] .life-guide-cta {
+  background: #7d9a6b;
+  color: #0f140e;
+}
+
+[data-theme="dark"] .life-guide-cta:hover {
+  background: #8fac7c;
+  color: #0f140e;
+}
+
+@media (max-width: 768px) {
+  .life-guide-entry {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--space-xl);
+  }
+
+  .life-guide-cta {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
