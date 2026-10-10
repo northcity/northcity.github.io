@@ -1,0 +1,201 @@
+## 中文版本 {#zh-cn}
+
+### 1. 适用范围
+
+本政策适用于 NorthCity 提供的「时间胶囊-寄往未来的信」（Time Capsule，下称“本应用”）iOS 应用及其支持页面，说明我们如何在你使用日记、写信投递、公开信箱、实体信件及会员服务时处理相关信息。
+
+本应用无需注册账号即可使用。与许多应用不同，你的日记内容默认只保存在你自己的设备上。
+
+### 2. 我们处理的信息
+
+#### 2.1 日记、草稿与本地内容
+
+你在日记、草稿、标签、时间徽章中记录的文字、图片等内容默认保存在你的设备本地（应用私有数据库），仅用于为你提供记录、回顾、小组件与提醒功能。这些本地数据不会自动上传到我们的服务器，我们无法看到。
+
+你可以选择开启 iCloud 同步：开启后，上述私人数据会存储在你 Apple ID 对应的 iCloud 私有数据库（CloudKit Private Database）中，仅你本人及其设备可以访问。开发者无法查看或导出你的日记内容。你可以随时关闭同步。
+
+#### 2.2 寄往未来的信（定时投递）
+
+为了让信件能在指定日期寄出，当你写信并确认寄出时，信件内容、指定投递日期、收信邮箱（及可选备用邮箱）、信件形式（文字 / 图片 / 是否公开）会上传并保存在我们的服务器中，用于到期时自动发送邮件到收信邮箱。若信件包含图片，图片会存储在我们的云对象存储服务中。
+
+#### 2.3 公开信箱
+
+写信时你可以主动选择将信件放入公开信箱。只有在你主动选择公开并确认后，信件内容（及图片）才会公开展示给其他用户浏览。公开内容是自发行为，可能被他人浏览、复制、截图或转发，请勿在公开信件中填写你或他人的隐私信息。
+
+#### 2.4 纸短情长（实体信件）
+
+若你订购实体信件投递服务，需要提供寄信人与收件人的姓名、联系电话和收件地址。这些信息仅用于制作、寄送实体信件及必要的物流联系。
+
+#### 2.5 匿名设备标识
+
+本应用没有账号体系。为了识别内购权益、关联信件投递记录，服务器会保存由应用生成的匿名设备标识（推送服务生成的 Client ID），不包含你的姓名、手机号或邮箱账号。你可以随时通过 App 内的“恢复购买”恢复已有权益。
+
+#### 2.6 通知与提醒
+
+在你授权通知后，我们会通过 Apple 推送服务（APNs）与第三方推送服务（个推）向你的设备发送信件到期提醒、胶囊解锁提醒等服务通知。你可以在系统设置中随时关闭通知。
+
+#### 2.7 广告与追踪（App Tracking Transparency）
+
+本应用的部分功能会展示 Google AdMob 广告。首次启动后，我们会通过 App Tracking Transparency（ATT）向你请求追踪授权：
+
+- 允许追踪：我们与广告合作方可能使用广告标识符（IDFA）向你展示更相关的广告，并用于广告效果统计；
+- 不允许：你仍可正常使用全部功能，只会看到非个性化广告。
+
+你可以随时在系统“设置 → 隐私与安全性 → 跟踪”中更改授权。未获得授权时，我们不会为跨 App 追踪的目的访问 IDFA。
+
+#### 2.8 统计分析
+
+我们使用 Firebase Analytics 了解功能的整体使用情况（如启动、版本分布、功能使用频率），用于改进产品。在获得追踪授权的情况下，统计信息中可能包含广告标识符；未授权时不包含。
+
+### 3. 权限使用
+
+- 相机：拍摄日记或信件配图（可选）；
+- 照片：选择图片用于日记或信件（可选）；
+- 通知：信件到期与胶囊解锁提醒（可选）；
+- 面容 ID / 设备密码：应用内锁，仅在你的设备本机验证（可选）；
+- 追踪：广告个性化（可选）。
+
+拒绝任一权限只影响对应功能，不影响其他功能使用。本应用当前不请求定位权限。
+
+### 4. 使用目的
+
+我们仅将上述信息用于：提供日记、写信投递、公开信箱、实体信件与会员功能；在约定日期完成投递；发送你开启的提醒；展示广告并衡量广告效果（仅在获得授权时用于个性化）；排查你主动反馈的问题；以及履行法律义务。
+
+### 5. 第三方服务
+
+- Apple：iCloud 同步、App 内购买、APNs 推送；
+- Google：AdMob 广告、Firebase Analytics；
+- 个推（每日互动）：消息推送通道；
+- 阿里云：图片对象存储；
+- 自建服务端与邮件发送通道：信件存储与定时投递。
+
+上述第三方在其自身隐私政策约束下处理相关数据。
+
+### 6. 数据保留与删除
+
+- 本地日记数据：保留至你删除内容、清除数据或卸载 App；
+- iCloud 私人数据：保留至你关闭并清理同步数据或删除相关内容；
+- 服务器上的信件与公开信箱内容：保留至投递完成并超过必要的记录期限，或依你的请求删除；已公开的信件在你的删除请求处理前可能持续公开展示；
+- 你可以通过文末邮箱申请查询、更正或删除你的相关数据。为定位记录，我们可能需要你提供设备标识等信息。
+
+### 7. 你的选择与权利
+
+你可以：不开通、随时关闭 iCloud 同步；选择信件是否公开；在系统设置中更改通知与追踪授权；在 App 内恢复购买；以及通过文末邮箱提出隐私相关请求。删除 App 不会删除已投递的记录和已公开的信件。
+
+### 8. 未成年人
+
+本应用并非专门面向儿童设计。未成年人应在父母或监护人的指导下使用，请勿在公开信件中填写个人身份、住址、学校等敏感信息。
+
+### 9. 安全
+
+我们采取数据最小化、传输加密（HTTPS/TLS）、权限隔离与访问控制等措施保护你的信息。但任何存储或传输方式都无法保证绝对安全。
+
+### 10. 政策更新
+
+当产品功能、数据处理方式或法律要求发生变化时，我们会更新本政策及“最后更新”日期，并通过 App 更新说明、应用内提示或本页面告知。
+
+### 11. 联系我们
+
+- 电子邮箱：[506343891@qq.com](mailto:506343891@qq.com)
+- 用户协议：[时间胶囊用户协议](https://www.northcity.top/timepill-terms/)
+
+## English Version {#en}
+
+### 1. Scope
+
+This policy applies to the Time Capsule (时间胶囊-寄往未来的信) iOS app provided by NorthCity and its support pages. It explains how information is handled when you use the journal, scheduled letter delivery, the public letterbox, physical letter orders, and membership features.
+
+No account is required. Unlike many apps, your journal entries are stored on your own device by default.
+
+### 2. Information We Process
+
+#### 2.1 Journal, drafts, and local content
+
+Text, photos, tags, and badges you create in the journal are stored locally on your device (in the app's private database) by default and are used only to provide journaling, review, widget, and reminder features. This local data is not automatically uploaded to our servers, and we cannot see it.
+
+You may optionally enable iCloud sync. When enabled, this private data is stored in the iCloud Private Database (CloudKit) associated with your Apple ID, accessible only to you and your devices. The developer cannot view or export your journal. You can turn sync off at any time.
+
+#### 2.2 Letters to the future (scheduled delivery)
+
+To deliver a letter on the date you choose, the letter content, delivery date, recipient email (and optional backup email), and letter type (text / photo / public status) are uploaded to and stored on our servers so the letter can be emailed to the recipient on the due date. Photos attached to letters are stored in our cloud object storage.
+
+#### 2.3 Public letterbox
+
+When writing, you may voluntarily choose to publish a letter to the public letterbox. Only after you actively opt in and confirm is the letter content (and image) shown publicly to other users. Public posting is voluntary, and content may be viewed, copied, screenshotted, or forwarded by others. Do not include sensitive personal information about yourself or others in public letters.
+
+#### 2.4 Physical letter service
+
+If you order a physical letter, we collect the sender's and recipient's names, phone numbers, and mailing address. This information is used only to produce and deliver the physical letter and for necessary logistics contact.
+
+#### 2.5 Anonymous device identifier
+
+The app has no account system. To recognise purchases and associate delivery records, our servers store an anonymous device identifier generated by the app (the Client ID issued by our push service). It does not include your name, phone number, or email account. You can restore purchases in the app at any time.
+
+#### 2.6 Notifications
+
+With your permission, we use Apple Push Notification service (APNs) and a third-party push service (GeTui) to send delivery reminders and capsule unlock notifications. You can disable notifications in iOS Settings at any time.
+
+#### 2.7 Advertising and tracking (App Tracking Transparency)
+
+Some features display Google AdMob ads. After first launch, we request tracking permission through App Tracking Transparency (ATT):
+
+- If you allow: we and our advertising partners may use the advertising identifier (IDFA) to show more relevant ads and measure ad performance;
+- If you do not allow: all features remain available, and you will only see non-personalised ads.
+
+You can change this at any time in Settings → Privacy & Security → Tracking. Without authorisation, we do not access the IDFA for cross-app tracking.
+
+#### 2.8 Analytics
+
+We use Firebase Analytics to understand overall feature usage (such as launches, version distribution, and feature frequency) to improve the product. With tracking authorisation, analytics may include the advertising identifier; without it, they do not.
+
+### 3. Permissions
+
+- Camera: taking photos for journal or letters (optional);
+- Photos: selecting images for journal or letters (optional);
+- Notifications: delivery and unlock reminders (optional);
+- Face ID / device passcode: app lock, verified only on your device (optional);
+- Tracking: ad personalisation (optional).
+
+Declining any permission only affects the corresponding feature. The app does not request location access.
+
+### 4. Purposes
+
+We use the information above only to provide the journal, letter delivery, public letterbox, physical letter, and membership features; to deliver letters on the appointed date; to send reminders you enable; to display ads and measure ad performance (personalised only with authorisation); to respond to support requests you initiate; and to comply with legal obligations.
+
+### 5. Service Providers
+
+- Apple: iCloud sync, in-app purchases, APNs;
+- Google: AdMob advertising, Firebase Analytics;
+- GeTui: push notification delivery;
+- Alibaba Cloud: image object storage;
+- Our own servers and email delivery channel: letter storage and scheduled delivery.
+
+These providers process data under their own privacy policies.
+
+### 6. Retention and Deletion
+
+- Local journal data remains until you delete it, clear app data, or remove the app;
+- Private iCloud data remains until you disable and clear sync or delete the content;
+- Letters and public letterbox content on our servers remain until delivery is complete and record-keeping needs lapse, or until you request deletion. Published letters may remain publicly visible until your deletion request is processed;
+- You may request access, correction, or deletion via the email below. We may need your device identifier to locate the records.
+
+### 7. Your Choices and Rights
+
+You can keep iCloud sync off; choose whether a letter is public; change notification and tracking permissions in iOS Settings; restore purchases in the app; and contact us with privacy requests. Deleting the app does not delete delivered records or published letters.
+
+### 8. Children
+
+The app is not specifically directed to children. Minors should use it with guidance from a parent or guardian and should not include personal identity, home address, school, or other sensitive information in public letters.
+
+### 9. Security
+
+We apply data minimisation, encrypted transport (HTTPS/TLS), permission isolation, and access controls to protect your information. No storage or transmission method can guarantee absolute security.
+
+### 10. Changes
+
+We may update this policy and its "Last Updated" date when features, data practices, or legal requirements change, and will provide notice through release notes, in-app messaging, or this page.
+
+### 11. Contact
+
+- Email: [506343891@qq.com](mailto:506343891@qq.com)
+- Terms of Use: [Time Capsule Terms of Use](https://www.northcity.top/timepill-terms/)
