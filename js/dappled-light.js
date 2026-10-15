@@ -27,24 +27,17 @@
 
   var EASE = 'cubic-bezier(0.455, 0.190, 0.000, 0.985)';
   var media = window.matchMedia('(prefers-color-scheme: dark)');
-  var timer = null;
-  var lastDark = null;
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   var style = document.createElement('style');
   style.id = 'dappled-light-style';
   style.textContent = [
-    'body{position:relative;}',
-    'body>:not(#dappled-light):not(script){position:relative;z-index:1;}',
-    '#dappled-light{--dl-shadow:#1a1917;--dl-bounce-light:#f5d7a6;pointer-events:none;position:fixed;inset:0;z-index:0;overflow:hidden;}',
+    '#dappled-light{--dl-shadow:#1a1917;--dl-bounce-light:#f5d7a6;pointer-events:none;position:absolute;inset:0;z-index:-1;overflow:hidden;}',
     '#dappled-light *{box-sizing:border-box;}',
     '#dappled-light .dl-atmosphere{position:absolute;inset:0;background:linear-gradient(180deg,#fffdfa 0%,#fcf7ef 62%,#f6ecdd 100%);transition:background 1s ' + EASE + ';}',
     '#dappled-light.is-dark{--dl-shadow:#030307;--dl-bounce-light:#1b293f;}',
     '#dappled-light.is-dark .dl-atmosphere{background:linear-gradient(180deg,#0f131c 0%,#16132b 58%,#101722 100%);}',
-    '#dappled-light.to-dark .dl-atmosphere{animation:dl-sunset 1.7s linear forwards;}',
-    '#dappled-light.to-light .dl-atmosphere{animation:dl-sunrise 1s linear forwards;}',
-    '@keyframes dl-sunrise{0%{background:#0f131c;}10%{background:#16132b;}35%{background:#9fb3bf;}100%{background:#fffdfa;}}',
-    '@keyframes dl-sunset{0%{background:#fffdfa;}30%{background:#fccc83;}60%{background:#db7a2a;}90%{background:#16132b;}100%{background:#0f131c;}}',
-    '#dappled-light .dl-glow{position:absolute;inset:0;background:linear-gradient(309deg,var(--dl-bounce-light),var(--dl-bounce-light) 20%,transparent);transition:background 1s ' + EASE + ';height:100%;width:100%;opacity:.5;}',
+    '#dappled-light .dl-glow{position:absolute;inset:0;background:linear-gradient(309deg,var(--dl-bounce-light),var(--dl-bounce-light) 20%,transparent);transition:background 1s ' + EASE + ';height:100%;width:100%;opacity:.28;}',
     '#dappled-light .dl-glow-bounce{position:absolute;inset:0;background:linear-gradient(355deg,var(--dl-bounce-light) 0%,transparent 30%,transparent 100%);transition:background 1s ' + EASE + ';opacity:.5;height:100%;width:100%;bottom:0;}',
     '#dappled-light .perspective{position:absolute;top:-30vh;right:0;width:80vw;height:130vh;opacity:.07;transform-origin:top right;transform-style:preserve-3d;transform:matrix3d(0.7500,-0.0625,0,0.0008,0,1,0,0,0,0,1,0,0,0,0,1);transition:transform 1.7s ' + EASE + ',opacity 4s ease;}',
     '#dappled-light.is-dark .perspective{opacity:.3;transform:matrix3d(0.8333,0.0833,0,0.0003,0,1,0,0,0,0,1,0,0,0,0,1);}',
@@ -102,6 +95,9 @@
     '</defs>',
     '</svg>'
   ].join('');
+  if (reducedMotion.matches) {
+    leaves.querySelectorAll('animate').forEach(function (animation) { animation.remove(); });
+  }
   perspective.appendChild(leaves);
 
   var blinds = document.createElement('div');
@@ -134,7 +130,7 @@
   }
   root.appendChild(progressiveBlur);
 
-  document.body.insertBefore(root, document.body.firstChild);
+  document.querySelector('.hero').prepend(root);
 
   function detectDark() {
     var theme = document.documentElement.getAttribute('data-theme');
@@ -151,23 +147,9 @@
       document.body.classList.contains('dark-mode');
   }
 
-  function playTransition(isDark) {
-    root.classList.remove('to-dark', 'to-light');
-    void root.offsetWidth;
-    root.classList.add(isDark ? 'to-dark' : 'to-light');
-    clearTimeout(timer);
-    timer = window.setTimeout(function () {
-      root.classList.remove('to-dark', 'to-light');
-    }, isDark ? 1750 : 1050);
-  }
-
   function applyTheme(animate) {
     var isDark = detectDark();
     root.classList.toggle('is-dark', isDark);
-    if (animate && lastDark !== null && lastDark !== isDark) {
-      playTransition(isDark);
-    }
-    lastDark = isDark;
   }
 
   applyTheme(false);

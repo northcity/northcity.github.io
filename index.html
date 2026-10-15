@@ -5,13 +5,15 @@ description: "北城 · 独立开发者 | 我用产品、代码和文字，记�
 ---
 
 <!-- Hero Section -->
-<section class="hero">
+<section class="hero" aria-labelledby="hero-title">
+    <div class="hero-layout">
     <div class="hero-content">
+        <div class="hero-kicker"><span class="status-dot" aria-hidden="true"></span><span data-lang-show="zh">独立开发者</span><span data-lang-show="en">Independent developer</span><span class="hero-kicker-separator" aria-hidden="true">/</span><span class="mono">NorthCity</span></div>
         <span class="hero-label">
             <span data-lang-show="zh">{{ site.tagline }}</span>
             <span data-lang-show="en">{{ site.tagline_en }}</span>
         </span>
-        <h1 class="hero-title">
+        <h1 class="hero-title" id="hero-title">
             <span data-lang-show="zh">{{ site.author }}</span>
             <span data-lang-show="en">{{ site.author_en }}</span>
         </h1>
@@ -31,73 +33,38 @@ description: "北城 · 独立开发者 | 我用产品、代码和文字，记�
             </a>
         </div>
     </div>
+    <aside class="hero-workbench" aria-label="作品一览 / A few of my apps">
+        <div class="workbench-header"><span class="mono">NORTHCITY / WORKSPACE</span><span class="workbench-symbol" aria-hidden="true">⌘</span></div>
+        <p class="workbench-intro"><span data-lang-show="zh">一些想法，慢慢变成了 App。</span><span data-lang-show="en">Small ideas, made into real apps.</span></p>
+        <div class="workbench-apps">
+        {% for product in site.my_products %}
+        {% if product.name == '闪念' or product.name == 'Anpa' or product.name == '时间胶囊' %}
+            <a href="{{ site.baseurl }}/products/#{{ product.name | slugify }}" class="workbench-app">
+                <img src="{{ product.icon | replace: "/chanpinicon/", "/chanpinicon/web/" | relative_url }}" width="44" height="44" alt="" decoding="async">
+                <span class="workbench-app-copy"><strong><span data-lang-show="zh">{{ product.name }}</span><span data-lang-show="en">{{ product.name_en | default: product.name }}</span></strong><span class="workbench-app-type">{% if product.name == '闪念' %}<span data-lang-show="zh">留住一闪而过的灵感</span><span data-lang-show="en">Capture a passing thought</span>{% elsif product.name == 'Anpa' %}<span data-lang-show="zh">把每一件事安排妥当</span><span data-lang-show="en">Make room for what matters</span>{% else %}<span data-lang-show="zh">给未来，留一封信</span><span data-lang-show="en">A letter to your future self</span>{% endif %}</span></span>
+                <span class="workbench-arrow" aria-hidden="true">↗</span>
+            </a>
+        {% endif %}
+        {% endfor %}
+        </div>
+        <div class="workbench-footer"><span class="status-dot" aria-hidden="true"></span><span data-lang-show="zh">持续打磨，慢慢生长。</span><span data-lang-show="en">Always a work in progress.</span></div>
+    </aside>
+    </div>
+    <div class="hero-footnote"><span class="mono">CODE / PRODUCTS / WORDS</span><a href="#selected-work"><span data-lang-show="zh">往下看看</span><span data-lang-show="en">Explore my work</span><span aria-hidden="true">↓</span></a></div>
 </section>
 
 <!-- Featured Products Section -->
-<section class="section">
+<section class="section selected-work" id="selected-work">
     <div class="container">
         <div class="section-header">
             <h2 class="section-title" data-i18n="section_featured" data-zh="做过的东西" data-en="Things I Made">做过的东西</h2>
             <p class="section-subtitle" data-i18n="section_featured_sub" data-zh="挑了几个还不错的" data-en="A few I'm proud of">挑了几个还不错的</p>
         </div>
         
-        <div class="products-grid">
-            {% for product in site.my_products %}
-            {% if product.featured %}
-            <a href="{% if product.app_store %}{{ product.app_store }}{% elsif product.website %}{{ product.website }}{% else %}#{% endif %}" target="_blank" rel="noopener" class="product-card">
-                <div class="product-icon">
-                    {% if product.icon and product.icon != '' %}
-                    <img src="{{ product.icon }}" alt="{{ product.name }}">
-                    {% else %}
-                    <span style="font-size: 2.5rem;">📱</span>
-                    {% endif %}
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">
-                        <span data-lang-show="zh">{{ product.name }}</span>
-                        <span data-lang-show="en">{% if product.name_en %}{{ product.name_en }}{% else %}{{ product.name }}{% endif %}</span>
-                    </h3>
-                    <p class="product-tagline">
-                        <span data-lang-show="zh">{{ product.tagline }}</span>
-                        <span data-lang-show="en">{% if product.tagline_en %}{{ product.tagline_en }}{% else %}{{ product.tagline }}{% endif %}</span>
-                    </p>
-                    <p class="product-desc" style="color: var(--color-text-secondary); font-size: 0.8rem; line-height: 1.5; margin-bottom: 0.5rem;">
-                        <span data-lang-show="zh">{{ product.description }}</span>
-                        <span data-lang-show="en">{% if product.description_en %}{{ product.description_en }}{% else %}{{ product.description }}{% endif %}</span>
-                    </p>
-                    <div class="product-meta" style="margin-bottom: 0.4rem;">
-                        {% for platform in product.platforms %}
-                        <span class="product-badge">
-                            {% if platform == 'iOS' or platform == 'iPadOS' or platform == 'Mac' or platform == 'watchOS' %}<i class="fab fa-apple" style="font-size: 0.65rem;"></i> {% endif %}
-                            {% if platform == 'Android' %}<i class="fab fa-android" style="font-size: 0.65rem;"></i> {% endif %}
-                            {% if platform == 'Web' %}<i class="fas fa-globe" style="font-size: 0.65rem;"></i> {% endif %}
-                            {{ platform }}
-                        </span>
-                        {% endfor %}
-                        {% if product.status %}
-                        <span class="product-badge {% if product.status == '新品' %}status-active{% elsif product.status == '持续更新' %}status-maintenance{% endif %}">
-                            {{ product.status }}
-                        </span>
-                        {% endif %}
-                    </div>
-                    {% if product.rating %}
-                    <div style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--color-text-muted);">
-                        <span style="color: #fbbf24;">★</span>
-                        <span>{{ product.rating }}</span>
-                        <span style="opacity: 0.5;">·</span>
-                        <span>{{ product.ratings_count }} <span data-lang-show="zh">个评分</span><span data-lang-show="en">ratings</span></span>
-                    </div>
-                    {% endif %}
-                    {% if product.android_link %}
-                    <div style="margin-top: 0.5rem;">
-                        <object><a href="{{ product.android_link }}" target="_blank" rel="noopener" class="product-badge" style="background: #d1fae5; color: #065f46; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
-                            <i class="fab fa-android"></i> Android <span data-lang-show="zh">下载</span><span data-lang-show="en">Download</span>
-                        </a></object>
-                    </div>
-                    {% endif %}
-                </div>
-            </a>
-            {% endif %}
+        <div class="products-grid home-products">
+            {% assign featured_products = site.my_products | where: 'featured', true %}
+            {% for product in featured_products %}
+                {% if forloop.first %}{% include product-card.html product=product spotlight=true %}{% else %}{% include product-card.html product=product %}{% endif %}
             {% endfor %}
         </div>
         
@@ -217,9 +184,9 @@ description: "北城 · 独立开发者 | 我用产品、代码和文字，记�
 <!-- Connect Section -->
 <section class="section">
     <div class="container">
-        <div class="current-work" style="text-align: center;">
+        <div class="current-work contact-note">
             <h3 style="margin-bottom: var(--space-md); font-size: 1.25rem;">
-                👋 <span data-i18n="contact_me" data-zh="联系我" data-en="Contact Me">联系我</span>
+                <span data-i18n="contact_me" data-zh="联系我" data-en="Contact Me">联系我</span>
             </h3>
             <p style="color: var(--color-text-secondary); margin-bottom: var(--space-lg);">
                 <span data-i18n="contact_desc" data-zh="有事说事，没事也可以聊" data-en="Got something? Or just want to chat">有事说事，没事也可以聊</span>

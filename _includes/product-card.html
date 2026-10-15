@@ -1,0 +1,35 @@
+{% assign product = include.product %}
+{% assign product_url = product.app_store | default: product.website %}
+<article class="product-card{% if include.spotlight %} product-spotlight{% endif %}" id="{{ product.name | slugify }}">
+    <a class="product-entry" href="{{ product_url }}" target="_blank" rel="noopener noreferrer">
+        <div class="product-icon">
+            {% if product.icon and product.icon != '' %}
+            <img src="{{ product.icon | replace: "/chanpinicon/", "/chanpinicon/web/" | relative_url }}" alt="" width="64" height="64" loading="lazy" decoding="async">
+            {% else %}
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M10 18h4" stroke="currentColor" stroke-width="1.5"/></svg>
+            {% endif %}
+        </div>
+        <div class="product-heading">
+            <h3 class="product-name"><span data-lang-show="zh">{{ product.name }}</span><span data-lang-show="en">{{ product.name_en | default: product.name }}</span></h3>
+            <p class="product-tagline"><span data-lang-show="zh">{{ product.tagline }}</span><span data-lang-show="en">{{ product.tagline_en | default: product.tagline }}</span></p>
+        </div>
+        <span class="product-open" aria-hidden="true">↗</span>
+    </a>
+    <p class="product-description"><span data-lang-show="zh">{{ product.description }}</span><span data-lang-show="en">{{ product.description_en | default: product.description }}</span></p>
+    <div class="product-meta">
+        {% for platform in product.platforms %}<span class="product-badge">{{ platform }}</span>{% endfor %}
+    </div>
+    <div class="product-bottom">
+        <div class="product-signals">
+            {% if product.status == '新品' %}<span class="product-status"><span data-lang-show="zh">新品</span><span data-lang-show="en">New</span></span>
+            {% elsif product.status == '持续更新' %}<span class="product-status"><span data-lang-show="zh">持续更新</span><span data-lang-show="en">Updating</span></span>
+            {% elsif product.status %}<span class="product-status">{{ product.status }}</span>{% endif %}
+            {% if product.rating %}<span class="product-rating"><span aria-hidden="true">☆</span> {{ product.rating }} <span class="rating-count">/ {{ product.ratings_count }} <span data-lang-show="zh">个评分</span><span data-lang-show="en">ratings</span></span></span>{% endif %}
+        </div>
+        <div class="product-actions">
+            {% if product.app_store %}<a href="{{ product.app_store }}" target="_blank" rel="noopener noreferrer" aria-label="{{ product.name }} App Store">App Store <span aria-hidden="true">↗</span></a>{% endif %}
+            {% if product.android_link %}<a href="{{ product.android_link }}" target="_blank" rel="noopener noreferrer" aria-label="{{ product.name }} Android 下载">Android <span aria-hidden="true">↗</span></a>{% endif %}
+            {% if product.website and product.app_store %}<a href="{{ product.website }}" target="_blank" rel="noopener noreferrer"><span data-lang-show="zh">官网</span><span data-lang-show="en">Website</span> <span aria-hidden="true">↗</span></a>{% endif %}
+        </div>
+    </div>
+</article>

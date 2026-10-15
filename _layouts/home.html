@@ -31,6 +31,8 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ site.baseurl }}/css/northcity.css">
     <link rel="stylesheet" href="{{ site.baseurl }}/css/custom-icons.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/refinements.css">
+    <script src="{{ site.baseurl }}/js/site-settings.js"></script>
     
     <!-- Font Awesome -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" type="text/css">
@@ -38,10 +40,13 @@
     <!-- Syntax Highlighting -->
     <link rel="stylesheet" href="{{ site.baseurl }}/css/syntax.css">
 </head>
-<body>
+<body class="{% if page.url == '/' %}home-page{% else %}inner-page{% endif %}">
+    <a class="skip-link" href="#main-content">跳到正文 / Skip to content</a>
     {% include nav-new.html %}
 
+    <main id="main-content" tabindex="-1">
     {{ content }}
+    </main>
 
     {% include footer-new.html %}
 

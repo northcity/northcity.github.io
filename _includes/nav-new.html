@@ -1,18 +1,18 @@
 <!-- Navigation -->
-<nav class="nav">
+<nav class="nav" aria-label="主导航 / Main navigation">
     <div class="nav-container">
         <a href="{{ site.baseurl }}/" class="nav-brand">
             <span data-lang-show="zh">{{ site.title }}</span>
             <span data-lang-show="en">{{ site.author_en }}</span>
         </a>
         
-        <button class="nav-toggle" aria-label="Toggle navigation">
+        <button class="nav-toggle" aria-label="打开导航 / Toggle navigation" aria-expanded="false" aria-controls="nav-links">
             <span></span>
             <span></span>
             <span></span>
         </button>
         
-        <ul class="nav-links">
+        <ul class="nav-links" id="nav-links">
             <li>
                 <a href="{{ site.baseurl }}/" {% if page.url == '/' %}class="active"{% endif %}>
                     <span data-i18n="nav_home" data-zh="首页" data-en="Home">首页</span>
@@ -63,20 +63,39 @@
     </div>
 </nav>
 
-<script src="{{ site.baseurl }}/js/site-settings.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const toggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
     
+    function closeMenu() {
+        navLinks.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+    }
+
     toggle.addEventListener('click', function() {
-        navLinks.classList.toggle('active');
+        const isOpen = navLinks.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', String(isOpen));
     });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+        if (link.classList.contains('active')) link.setAttribute('aria-current', 'page');
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+            closeMenu();
+            toggle.focus();
+        }
+    });
+
+    window.matchMedia('(min-width: 961px)').addEventListener('change', closeMenu);
     
     // Close menu when clicking outside
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.nav')) {
-            navLinks.classList.remove('active');
+            closeMenu();
         }
     });
 });

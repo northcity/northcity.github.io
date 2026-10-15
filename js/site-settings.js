@@ -6,13 +6,17 @@
     'use strict';
 
     // ==================== Theme (Dark Mode) ====================
+    const storage = {
+        getItem(key) { try { return localStorage.getItem(key); } catch (_) { return null; } },
+        setItem(key, value) { try { localStorage.setItem(key, value); } catch (_) {} }
+    };
     const THEME_KEY = 'nc-theme';
     const THEME_DARK = 'dark';
     const THEME_LIGHT = 'light';
 
     function getPreferredTheme() {
-        const stored = localStorage.getItem(THEME_KEY);
-        if (stored) return stored;
+        const stored = storage.getItem(THEME_KEY);
+        if (stored === THEME_DARK || stored === THEME_LIGHT) return stored;
         
         // Check system preference
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -21,9 +25,9 @@
         return THEME_LIGHT;
     }
 
-    function setTheme(theme) {
+    function setTheme(theme, persist = true) {
         document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem(THEME_KEY, theme);
+        if (persist) storage.setItem(THEME_KEY, theme);
         updateThemeButton(theme);
     }
 
@@ -33,13 +37,15 @@
         
         const icon = btn.querySelector('i');
         const text = btn.querySelector('span');
+        const english = document.documentElement.getAttribute('data-lang') === 'en';
+        btn.setAttribute('aria-label', theme === THEME_DARK ? (english ? 'Switch to light mode' : '切换亮色模式') : (english ? 'Switch to dark mode' : '切换暗色模式'));
         
         if (theme === THEME_DARK) {
             if (icon) icon.className = 'fas fa-sun';
-            if (text) text.textContent = btn.dataset.lightText || 'Light';
+            if (text) text.textContent = english ? 'Light' : '亮色';
         } else {
             if (icon) icon.className = 'fas fa-moon';
-            if (text) text.textContent = btn.dataset.darkText || 'Dark';
+            if (text) text.textContent = english ? 'Dark' : '暗色';
         }
     }
 
@@ -55,8 +61,8 @@
     const LANG_EN = 'en';
 
     function getPreferredLanguage() {
-        const stored = localStorage.getItem(LANG_KEY);
-        if (stored) return stored;
+        const stored = storage.getItem(LANG_KEY);
+        if (stored === LANG_EN || stored === LANG_ZH) return stored;
         
         // Check browser language
         const browserLang = navigator.language || navigator.userLanguage;
@@ -68,15 +74,18 @@
 
     function setLanguage(lang) {
         document.documentElement.setAttribute('data-lang', lang);
-        localStorage.setItem(LANG_KEY, lang);
+        document.documentElement.lang = lang === LANG_EN ? 'en' : 'zh-CN';
+        storage.setItem(LANG_KEY, lang);
         updateLanguageContent(lang);
         updateLanguageButton(lang);
+        updateThemeButton(document.documentElement.getAttribute('data-theme'));
     }
 
     function updateLanguageButton(lang) {
         const btn = document.getElementById('lang-toggle');
         if (!btn) return;
         
+        btn.setAttribute('aria-label', lang === LANG_ZH ? 'Switch to English' : '切换中文');
         const text = btn.querySelector('span');
         if (text) {
             text.textContent = lang === LANG_ZH ? 'EN' : '中文';
@@ -113,7 +122,7 @@
     // ==================== Initialize ====================
     function init() {
         // Apply saved preferences
-        setTheme(getPreferredTheme());
+        setTheme(getPreferredTheme(), false);
         setLanguage(getPreferredLanguage());
 
         // Bind toggle buttons
@@ -130,12 +139,15 @@
         // Listen for system theme changes
         if (window.matchMedia) {
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-                if (!localStorage.getItem(THEME_KEY)) {
-                    setTheme(e.matches ? THEME_DARK : THEME_LIGHT);
+                if (!storage.getItem(THEME_KEY)) {
+                    setTheme(e.matches ? THEME_DARK : THEME_LIGHT, false);
                 }
             });
         }
     }
+
+    document.documentElement.setAttribute('data-theme', getPreferredTheme());
+    document.documentElement.setAttribute('data-lang', getPreferredLanguage());
 
     // Run on DOM ready
     if (document.readyState === 'loading') {

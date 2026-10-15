@@ -13,30 +13,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const target = document.querySelector(href);
             if (target) {
                 target.scrollIntoView({
-                    behavior: 'smooth',
+                    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
                     block: 'start'
                 });
+                if (href === '#main-content') target.focus({ preventScroll: true });
             }
         });
     });
-    
-    // Add scroll effect to navigation
-    const nav = document.querySelector('.nav');
-    if (nav) {
-        let lastScroll = 0;
-        
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 100) {
-                nav.style.boxShadow = '0 1px 0 rgba(0, 0, 0, 0.05)';
-            } else {
-                nav.style.boxShadow = 'none';
-            }
-            
-            lastScroll = currentScroll;
-        });
-    }
     
     // Lazy load images
     if ('IntersectionObserver' in window) {
@@ -58,27 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Add animation to elements on scroll
-    if ('IntersectionObserver' in window) {
-        const animateObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-        
-        document.querySelectorAll('.product-card, .essay-card, .connect-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            animateObserver.observe(el);
-        });
-    }
+
 });
 
 // =====================
@@ -131,6 +94,12 @@ async function recordNorthcityVisit() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    const isLocalPreview = ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname);
+    if (isLocalPreview) {
+        const count = document.getElementById('northcityVisitCount');
+        if (count) count.closest('.footer-visit-count').hidden = true;
+        return;
+    }
     if (document.getElementById('northcityVisitCount')) {
         recordNorthcityVisit();
     }
