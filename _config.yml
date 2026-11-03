@@ -129,7 +129,7 @@ featured-condition-size: 1
 
 # Progressive Web Apps
 chrome-tab-theme-color: "#1a1a1a"
-service-worker: true
+service-worker: false
 
 # 微信公众号
 wechat_mp:
