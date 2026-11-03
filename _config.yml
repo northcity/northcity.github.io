@@ -143,10 +143,10 @@ my_products:
   - name: "闪念"
     slug: "ideasnap"
     tint: "#EAF2FB"
-    hero_image: "/img/products/ideasnap/desktop-light-device-v2.webp"
-    hero_image_en: "/img/products/ideasnap/desktop-light-device-v2-en.webp"
-    screens: ["/img/products/ideasnap/mobile-device-ios.webp"]
-    screens_en: ["/img/products/ideasnap/mobile-device-ios-v2-en.webp"]
+    hero_image: "/img/products/ideasnap/desktop-ui-v3.webp"
+    hero_image_en: "/img/products/ideasnap/desktop-ui-v3-en.webp"
+    screens: ["/img/products/ideasnap/mobile-ui-v3.webp"]
+    screens_en: ["/img/products/ideasnap/mobile-ui-v3-en.webp"]
     bullets: ["开口就记，AI 自动整理成笔记、摘要与待办", "内置 AI Agent，支持 MCP，让 Claude / Cursor 读取你的笔记", "iPhone、Watch、Mac、Android、Windows、Linux 数据互通"]
     bullets_en: ["Speak and it's captured — AI turns it into notes, summaries and todos", "Built-in AI Agent with MCP, so Claude / Cursor can read your notes", "Synced across iPhone, Watch, Mac, Android, Windows and Linux"]
     name_en: "IdeaSnap"

@@ -18,7 +18,7 @@
     <div class="stage">
         {%- assign sc_n = 0 -%}
         {%- for p in sc_shown -%}{%- if p.hero_image or p.screens -%}
-        <div class="slide{% if sc_n == 0 %} is-active{% endif %}" data-slide="{{ sc_n }}"{% if sc_n > 0 %} aria-hidden="true"{% endif %}>
+        <div class="slide slide-{{ p.slug }}{% if sc_n == 0 %} is-active{% endif %}" data-slide="{{ sc_n }}"{% if sc_n > 0 %} aria-hidden="true"{% endif %}>
             {%- if p.hero_image -%}
             <div class="slide-desktop">
                 <img src="{{ p.hero_image | relative_url }}" alt="{{ p.name }}" width="1448" height="1086" data-lang-show="zh"{% if sc_n > 0 %} loading="lazy"{% endif %}>
@@ -27,8 +27,10 @@
                 <img class="slide-phone" src="{{ p.screens[0] | relative_url }}" alt="" width="1122" height="1402" data-lang-show="zh">
                 <img class="slide-phone" src="{{ p.screens_en[0] | default: p.screens[0] | relative_url }}" alt="" width="1122" height="1402" data-lang-show="en" loading="lazy">
                 {%- endif -%}
+                {%- unless p.slug == 'ideasnap' -%}
                 <span class="float-chip c1">{% include icon.html name="star" %}<span><b><span data-lang-show="zh">AI 摘要</span><span data-lang-show="en">AI summary</span></b> · <span data-lang-show="zh">3 条要点</span><span data-lang-show="en">3 key points</span></span></span>
                 <span class="float-chip c2"><span class="dot-live" aria-hidden="true"></span><span><b><span data-lang-show="zh">待办</span><span data-lang-show="en">Todo</span></b> · <span data-lang-show="zh">周五前团队试用</span><span data-lang-show="en">Team trial by Fri</span></span></span>
+                {%- endunless -%}
             </div>
             {%- else -%}
             <div class="posters">
