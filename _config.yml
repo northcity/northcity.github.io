@@ -143,8 +143,8 @@ my_products:
   - name: "闪念"
     slug: "ideasnap"
     tint: "#EAF2FB"
-    hero_image: "/img/products/ideasnap/desktop-ui-v3.webp"
-    hero_image_en: "/img/products/ideasnap/desktop-ui-v3-en.webp"
+    hero_image: "/img/products/ideasnap/platform-campaign-v1.webp"
+    hero_image_en: "/img/products/ideasnap/platform-campaign-v1-en.webp"
     screens: ["/img/products/ideasnap/mobile-ui-v3.webp"]
     screens_en: ["/img/products/ideasnap/mobile-ui-v3-en.webp"]
     bullets: ["开口就记，AI 自动整理成笔记、摘要与待办", "内置 AI Agent，支持 MCP，让 Claude / Cursor 读取你的笔记", "iPhone、Watch、Mac、Android、Windows、Linux 数据互通"]

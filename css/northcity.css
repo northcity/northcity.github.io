@@ -327,9 +327,8 @@ main { padding-top: 60px; }
 .slide.is-active { opacity: 1; transform: none; pointer-events: auto; }
 .slide-desktop { position: relative; width: min(860px, 92%); }
 .slide-desktop > img:not(.slide-phone) { width: 100%; height: auto; filter: drop-shadow(0 30px 40px rgba(17, 17, 19, 0.18)); }
-.slide-ideasnap .slide-desktop > img:not(.slide-phone) { filter: none; }
+.slide-ideasnap .slide-desktop > img:not(.slide-phone) { filter: none; border-radius: 18px; }
 .slide-phone { position: absolute; right: -2%; bottom: 0; width: 24%; height: auto; filter: drop-shadow(0 24px 30px rgba(17, 17, 19, 0.22)); }
-.slide-ideasnap .slide-phone { width: 36%; right: -7%; bottom: -2%; }
 .posters { display: flex; justify-content: center; align-items: flex-end; gap: clamp(10px, 2vw, 24px); height: 100%; }
 .poster {
   height: 92%; width: auto; aspect-ratio: 600 / 1300; border-radius: clamp(14px, 2vw, 24px); object-fit: cover;

@@ -21,9 +21,9 @@
         <div class="slide slide-{{ p.slug }}{% if sc_n == 0 %} is-active{% endif %}" data-slide="{{ sc_n }}"{% if sc_n > 0 %} aria-hidden="true"{% endif %}>
             {%- if p.hero_image -%}
             <div class="slide-desktop">
-                <img src="{{ p.hero_image | relative_url }}" alt="{{ p.name }}" width="1448" height="1086" data-lang-show="zh"{% if sc_n > 0 %} loading="lazy"{% endif %}>
-                <img src="{{ p.hero_image_en | default: p.hero_image | relative_url }}" alt="{{ p.name_en | default: p.name }}" width="1448" height="1086" data-lang-show="en" loading="lazy">
-                {%- if p.screens -%}
+                <img src="{{ p.hero_image | relative_url }}" alt="{{ p.name }}" width="{% if p.slug == 'ideasnap' %}1600{% else %}1448{% endif %}" height="{% if p.slug == 'ideasnap' %}1000{% else %}1086{% endif %}" data-lang-show="zh"{% if sc_n > 0 %} loading="lazy"{% endif %}>
+                <img src="{{ p.hero_image_en | default: p.hero_image | relative_url }}" alt="{{ p.name_en | default: p.name }}" width="{% if p.slug == 'ideasnap' %}1600{% else %}1448{% endif %}" height="{% if p.slug == 'ideasnap' %}1000{% else %}1086{% endif %}" data-lang-show="en" loading="lazy">
+                {%- if p.screens and p.slug != 'ideasnap' -%}
                 <img class="slide-phone" src="{{ p.screens[0] | relative_url }}" alt="" width="1122" height="1402" data-lang-show="zh">
                 <img class="slide-phone" src="{{ p.screens_en[0] | default: p.screens[0] | relative_url }}" alt="" width="1122" height="1402" data-lang-show="en" loading="lazy">
                 {%- endif -%}

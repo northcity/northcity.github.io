@@ -18,8 +18,8 @@
     <div class="prow-media" style="--tint: {{ product.tint | default: '#F0F0EE' }}">
         {%- if product.hero_image -%}
         <div class="slide-desktop">
-            <img src="{{ product.hero_image | relative_url }}" alt="{{ product.name }}" width="1448" height="1086" loading="lazy" data-lang-show="zh">
-            <img src="{{ product.hero_image_en | default: product.hero_image | relative_url }}" alt="{{ product.name_en | default: product.name }}" width="1448" height="1086" loading="lazy" data-lang-show="en">
+            <img src="{{ product.hero_image | relative_url }}" alt="{{ product.name }}" width="{% if product.slug == 'ideasnap' %}1600{% else %}1448{% endif %}" height="{% if product.slug == 'ideasnap' %}1000{% else %}1086{% endif %}" loading="lazy" data-lang-show="zh">
+            <img src="{{ product.hero_image_en | default: product.hero_image | relative_url }}" alt="{{ product.name_en | default: product.name }}" width="{% if product.slug == 'ideasnap' %}1600{% else %}1448{% endif %}" height="{% if product.slug == 'ideasnap' %}1000{% else %}1086{% endif %}" loading="lazy" data-lang-show="en">
         </div>
         {%- else -%}
         <div class="posters">
