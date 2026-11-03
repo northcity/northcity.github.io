@@ -1,62 +1,68 @@
 ---
 layout: home
 title: 作品
-description: "我做过的产品 - 每一个都是真实的尝试与学习"
+description: "北城的作品：闪念 AI 语音笔记、Anpa、OneCost、呼吸泡泡、时间胶囊、Mewmi。"
 ---
+{%- assign ai_products = site.my_products | where: 'ai', true | sort: 'order' -%}
+{%- assign legacy = site.my_products | where: 'flagship_legacy', true | first -%}
 
-<div class="page-header">
-    <div class="page-header-content">
-        <h1 class="page-title" data-i18n="products_title" data-zh="作品" data-en="Products">作品</h1>
-        <p class="page-description" data-i18n="products_desc" data-zh="这里是我做过的所有产品。每一个都代表了某个阶段的思考、尝试与学习。" data-en="Every product here represents a real attempt to build something useful.">
-            这里是我做过的所有产品。每一个都代表了某个阶段的思考、尝试与学习。
+<section class="page-hero">
+    <div class="container">
+        <p class="kicker"><span data-lang-show="zh">作品</span><span data-lang-show="en">Work</span></p>
+        <h1 class="page-title"><span data-lang-show="zh">在线上、<span class="hl">有人在用</span>的 App</span><span data-lang-show="en">Apps that are live and <span class="hl">in use</span></span></h1>
+        <p class="page-description">
+            <span data-lang-show="zh">从语音笔记、日程、记账到压力管理，用 AI 把每天的小事做得顺手一点。</span>
+            <span data-lang-show="en">From voice notes and calendars to expenses and stress — using AI to make everyday things a little easier.</span>
         </p>
     </div>
-</div>
-
-<section class="section">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title" data-i18n="products_featured" data-zh="核心产品" data-en="Featured">核心产品</h2>
-            <p class="section-subtitle" data-i18n="products_featured_sub" data-zh="正在持续迭代的主力产品" data-en="Actively maintained core products">正在持续迭代的主力产品</p>
-        </div>
-        
-        <div class="products-grid catalog-products">
-            {% for product in site.my_products %}
-            {% if product.featured %}
-                {% include product-card.html product=product %}
-            {% endif %}
-            {% endfor %}
-        </div>
-    </div>
 </section>
 
 <section class="section">
     <div class="container">
-        <div class="section-header">
-            <h2 class="section-title" data-i18n="products_more" data-zh="更多作品" data-en="More Projects">更多作品</h2>
-            <p class="section-subtitle" data-i18n="products_more_sub" data-zh="同样值得一看的产品" data-en="Worth a look too">同样值得一看的产品</p>
+        <div class="prows">
+            {% for p in ai_products %}{% if p.screens or p.hero_image %}
+            {% include product-card.html product=p %}
+            {% endif %}{% endfor %}
+            {% if legacy %}{% include product-card.html product=legacy variant="legacy" %}{% endif %}
         </div>
-        
-        <div class="products-grid catalog-products">
-            {% for product in site.my_products %}
-            {% unless product.featured %}
-                {% include product-card.html product=product %}
-            {% endunless %}
-            {% endfor %}
+        <div class="compacts mt-3">
+            {% for p in ai_products %}{% unless p.screens or p.hero_image %}
+            {% include product-card.html product=p variant="compact" %}
+            {% endunless %}{% endfor %}
         </div>
     </div>
 </section>
 
-<section class="section">
+<section class="section" id="archive">
     <div class="container">
-        <div class="current-work" style="text-align: center;">
-            <h3 style="margin-bottom: var(--space-lg); font-size: 1.25rem;" data-i18n="products_see_all" data-zh="在 App Store 查看全部" data-en="See All on the App Store">在 App Store 查看全部</h3>
-            <p style="color: var(--color-text-secondary); margin-bottom: var(--space-xl);" data-i18n="products_see_all_desc" data-zh="点击下方链接查看我在 App Store 上的所有应用" data-en="Click below to see all my apps on the App Store">
-                点击下方链接查看我在 App Store 上的所有应用
+        <details class="archive-box">
+            <summary>
+                <span><span data-lang-show="zh">早期作品</span><span data-lang-show="en">Earlier apps</span> <span class="mono">· {{ site.my_products | size | minus: ai_products.size | minus: 1 }}</span></span>
+                <span class="chev">{% include icon.html name="arrow-right" %}</span>
+            </summary>
+            <div class="app-list">
+                {% for product in site.my_products %}{% unless product.ai or product.flagship_legacy %}
+                {% include product-card.html product=product variant="row" %}
+                {% endunless %}{% endfor %}
+            </div>
+        </details>
+
+        <div class="dev-page">
+            <p>
+                <strong><span data-lang-show="zh">在 App Store 查看全部</span><span data-lang-show="en">See everything on the App Store</span></strong>
+                <span><span data-lang-show="zh">开发者主页上有我所有上架的 App。</span><span data-lang-show="en">My developer page lists every app I've shipped.</span></span>
             </p>
-            <a href="https://apps.apple.com/cn/developer/%E5%B8%8C-%E9%99%88/id1353019342" target="_blank" class="btn btn-primary">
-                <span data-i18n="products_app_store" data-zh="App Store 开发者页面" data-en="App Store Developer Page">App Store 开发者页面</span> <span class="arrow">→</span>
-            </a>
+            <a href="https://apps.apple.com/cn/developer/%E5%B8%8C-%E9%99%88/id1353019342" target="_blank" rel="noopener" class="btn btn-secondary">{% include icon.html name="apple" %}<span data-lang-show="zh">开发者页面</span><span data-lang-show="en">Developer page</span></a>
         </div>
     </div>
 </section>
+
+<script>
+// Open the archive when someone lands on /products/#archive or an archived app's anchor
+(function () {
+    var box = document.querySelector('.archive-box');
+    if (!box || !location.hash) return;
+    var target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (target && (target === box.parentElement.parentElement || box.contains(target))) box.open = true;
+})();
+</script>

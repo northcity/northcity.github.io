@@ -1,90 +1,27 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ page.tagline }} - {{ page.description }}">
-    <meta name="keywords" content="{{ page.name }}, {{ site.keyword }}">
-    <meta name="theme-color" content="{{ site.chrome-tab-theme-color }}">
-    
-    <title>{{ page.name }} - {{ site.SEOTitle }}</title>
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="{{ page.name }} - {{ site.author }}">
-    <meta property="og:description" content="{{ page.tagline }}">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ page.url | absolute_url }}">
-    <meta property="og:image" content="{{ site.url }}{{ page.icon }}">
-
-    <!-- Web App Manifest -->
-    <link rel="manifest" href="{{ site.baseurl }}/pwa/manifest.json">
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ site.baseurl }}/img/favicon.ico">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/northcity.css">
-    
-    <!-- Font Awesome -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/refinements.css">
-    <script src="{{ site.baseurl }}/js/site-settings.js"></script>
-</head>
-<body>
-    {% include nav-new.html %}
-
-    <div class="page-header">
-        <div class="page-header-content">
-            <a href="{{ site.baseurl }}/products/" style="color: var(--color-text-muted); font-size: 0.875rem; text-decoration: none; margin-bottom: var(--space-lg); display: inline-block;">
-                ← 返回作品列表
-            </a>
-        </div>
-    </div>
-
-    <section class="product-detail">
-        <div class="container">
-            <header class="product-header">
-                <div class="product-icon" style="width: 96px; height: 96px;">
-                    {% if page.icon %}
-                    <img src="{{ page.icon }}" alt="{{ page.name }}">
-                    {% else %}
-                    📱
-                    {% endif %}
-                </div>
-                <div class="product-info">
-                    <h1>{{ page.name }}</h1>
-                    <p class="tagline">{{ page.tagline }}</p>
-                    <div class="product-meta">
-                        {% for platform in page.platforms %}
-                        <span class="product-badge">{{ platform }}</span>
-                        {% endfor %}
-                        <span class="product-badge {% if page.status == '维护中' %}status-maintenance{% elsif page.status == '上线中' %}status-active{% endif %}">
-                            {{ page.status }}
-                        </span>
-                    </div>
-                </div>
-            </header>
-            
-            <div class="product-content">
-                {{ content }}
-                
-                {% if page.app_store != "" and page.app_store %}
-                <div style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 1px solid var(--color-border-light);">
-                    <a href="{{ page.app_store }}" target="_blank" class="btn btn-primary">
-                        <i class="fab fa-app-store"></i> 在 App Store 下载
-                    </a>
-                </div>
-                {% endif %}
+---
+layout: home
+---
+<section class="page-hero">
+    <div class="container-narrow">
+        <a class="back-link" href="{{ site.baseurl }}/products/">{% include icon.html name="arrow-left" %}<span data-lang-show="zh">全部作品</span><span data-lang-show="en">All apps</span></a>
+        <div class="product-hero">
+            <span class="app-icon app-icon-lg">{% if page.icon %}<img src="{{ page.icon | relative_url }}" alt="" width="96" height="96">{% endif %}</span>
+            <div>
+                <h1 class="page-title display">{{ page.name }}</h1>
+                <p class="page-description">{{ page.tagline }}</p>
+                <p class="platforms mono">{{ page.platforms | join: " · " }}{% if page.status %} · {{ page.status }}{% endif %}</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    {% include footer-new.html %}
-
-    <script src="{{ site.baseurl }}/js/main.js"></script>
-</body>
-</html>
+<section class="section">
+    <div class="container-narrow">
+        <div class="prose product-content">
+            {{ content }}
+        </div>
+        {% if page.app_store and page.app_store != "" %}
+        <p class="mt-3"><a href="{{ page.app_store }}" target="_blank" rel="noopener" class="btn btn-primary">{% include icon.html name="apple" %}<span data-lang-show="zh">在 App Store 下载</span><span data-lang-show="en">Get it on the App Store</span></a></p>
+        {% endif %}
+    </div>
+</section>

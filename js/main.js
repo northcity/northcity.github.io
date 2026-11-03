@@ -9,9 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const href = this.getAttribute('href');
             if (href === '#') return;
             
-            e.preventDefault();
-            const target = document.querySelector(href);
+            // getElementById: kramdown ids can start with a digit, which querySelector rejects
+            const target = document.getElementById(decodeURIComponent(href.slice(1)));
             if (target) {
+                e.preventDefault();
                 target.scrollIntoView({
                     behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
                     block: 'start'
@@ -40,8 +41,80 @@ document.addEventListener('DOMContentLoaded', function() {
             imageObserver.observe(img);
         });
     }
-    
 
+    // Navigation: hairline on scroll + mobile menu
+    const nav = document.getElementById('site-nav');
+    const navToggle = nav && nav.querySelector('.nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    if (nav) {
+        const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 8);
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+    }
+    if (navToggle && navLinks) {
+        const setMenu = (open) => {
+            navLinks.classList.toggle('is-open', open);
+            navToggle.setAttribute('aria-expanded', String(open));
+        };
+        navToggle.addEventListener('click', () => setMenu(!navLinks.classList.contains('is-open')));
+        navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+        document.addEventListener('click', e => { if (!e.target.closest('#site-nav')) setMenu(false); });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && navLinks.classList.contains('is-open')) { setMenu(false); navToggle.focus(); }
+        });
+        window.matchMedia('(min-width: 961px)').addEventListener('change', () => setMenu(false));
+    }
+
+    // Copy-to-clipboard buttons (WeChat ID)
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    const showToast = (text) => {
+        if (!toast) return;
+        toast.textContent = text;
+        toast.classList.add('is-visible');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 1800);
+    };
+    document.querySelectorAll('[data-copy]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const english = document.documentElement.getAttribute('data-lang') === 'en';
+            try {
+                await navigator.clipboard.writeText(btn.dataset.copy);
+                showToast(english ? btn.dataset.copiedEn : btn.dataset.copiedZh);
+            } catch (_) {
+                showToast(btn.dataset.copy);
+            }
+        });
+    });
+
+    // Article table of contents (posts with `catalog: true`)
+    const tocList = document.getElementById('toc-list');
+    const articleContent = document.getElementById('article-content');
+    if (tocList && articleContent) {
+        const headings = Array.from(articleContent.querySelectorAll('h2, h3'));
+        const links = headings.map((h, i) => {
+            if (!h.id) h.id = 'section-' + (i + 1);
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = '#' + h.id;
+            a.textContent = h.textContent.replace(/^#\s*/, '');
+            if (h.tagName === 'H3') a.className = 'is-sub';
+            li.appendChild(a);
+            tocList.appendChild(li);
+            return a;
+        });
+        if (!headings.length) {
+            tocList.closest('.toc').remove();
+        } else if ('IntersectionObserver' in window) {
+            const spy = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    links.forEach(a => a.classList.toggle('is-active', a.hash === '#' + entry.target.id));
+                });
+            }, { rootMargin: '-80px 0px -70% 0px' });
+            headings.forEach(h => spy.observe(h));
+        }
+    }
 });
 
 // =====================

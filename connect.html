@@ -1,174 +1,51 @@
 ---
 layout: home
 title: 联系
-description: "联系北城 - 无论是合作、交流还是只是想聊聊"
+description: "联系北城 —— 无论是合作、交流还是只是想聊聊"
 ---
 
-<div class="page-header">
-    <div class="page-header-content">
-        <h1 class="page-title">联系我</h1>
-        <p class="page-description">
-            无论是合作、交流，还是只是想聊聊独立开发的事，欢迎联系我。
-        </p>
-    </div>
-</div>
-
-<section class="section">
+<section class="page-hero">
     <div class="container-narrow">
-        <div class="connect-links">
-            <a href="mailto:{{ site.email }}" class="connect-item">
-                <div class="connect-icon">
-                    <i class="fas fa-envelope"></i>
-                </div>
-                <div class="connect-info">
-                    <h4>邮箱</h4>
-                    <p>{{ site.email }}</p>
-                </div>
-            </a>
-            
-            {% if site.x_url %}
-            <a href="{{ site.x_url }}" target="_blank" rel="noopener" class="connect-item">
-                <div class="connect-icon">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                </div>
-                <div class="connect-info">
-                    <h4>X (Twitter)</h4>
-                    <p>@chenxi44779232</p>
-                </div>
-            </a>
-            {% endif %}
-            
-            {% if site.xiaohongshu_url %}
-            <a href="{{ site.xiaohongshu_url }}" target="_blank" rel="noopener" class="connect-item">
-                <div class="connect-icon" style="background: transparent; padding: 0;">
-                    <img src="/img/chanpinicon/redbook.png" alt="小红书" style="width: 100%; height: 100%; border-radius: 8px; object-fit: contain;">
-                </div>
-                <div class="connect-info">
-                    <h4>小红书</h4>
-                    <p>独立开发者北城</p>
-                </div>
-            </a>
-            {% endif %}
-            
-            {% if site.wechat_id %}
-            <div class="connect-item" style="cursor: default;">
-                <div class="connect-icon">
-                    <i class="fab fa-weixin"></i>
-                </div>
-                <div class="connect-info">
-                    <h4>微信</h4>
-                    <p>{{ site.wechat_id }}</p>
-                </div>
-            </div>
-            {% endif %}
-            
-            {% if site.github_username %}
-            <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener" class="connect-item">
-                <div class="connect-icon">
-                    <i class="fab fa-github"></i>
-                </div>
-                <div class="connect-info">
-                    <h4>GitHub</h4>
-                    <p>@{{ site.github_username }}</p>
-                </div>
-            </a>
-            {% endif %}
-            
-            {% if site.weibo_username %}
-            <a href="https://weibo.com/{{ site.weibo_username }}" target="_blank" rel="noopener" class="connect-item">
-                <div class="connect-icon">
-                    <i class="fab fa-weibo"></i>
-                </div>
-                <div class="connect-info">
-                    <h4>微博</h4>
-                    <p>@{{ site.weibo_username }}</p>
-                </div>
-            </a>
-            {% endif %}
-            
-            {% if site.zhihu_username %}
-            <a href="https://www.zhihu.com/people/{{ site.zhihu_username }}" target="_blank" rel="noopener" class="connect-item">
-                <div class="connect-icon">
-                    <i class="fab fa-zhihu"></i>
-                </div>
-                <div class="connect-info">
-                    <h4>知乎</h4>
-                    <p>@{{ site.zhihu_username }}</p>
-                </div>
-            </a>
-            {% endif %}
-            
-            <a href="{{ site.baseurl }}/feed.xml" class="connect-item">
-                <div class="connect-icon">
-                    <i class="fas fa-rss"></i>
-                </div>
-                <div class="connect-info">
-                    <h4>RSS 订阅</h4>
-                    <p>获取最新内容更新</p>
-                </div>
-            </a>
-        </div>
-        
-        <!-- 微信公众号 -->
-        <div style="margin-top: var(--space-2xl);">
-            <h3 style="margin-bottom: var(--space-lg); font-size: 1.1rem; color: var(--color-text-secondary);">📱 微信公众号</h3>
-            <div style="display: grid; gap: var(--space-md);">
-                {% for mp in site.wechat_mp %}
-                <div class="connect-item" style="cursor: default;">
-                    <div class="connect-icon">
-                        <i class="fab fa-weixin"></i>
-                    </div>
-                    <div class="connect-info">
-                        <h4>{{ mp.name }}</h4>
-                        <p>{{ mp.description }}</p>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
+        <p class="kicker"><span data-lang-show="zh">联系</span><span data-lang-show="en">Contact</span></p>
+        <h1 class="page-title"><span data-lang-show="zh">找到我</span><span data-lang-show="en">Find me</span></h1>
+        <p class="page-description"><span data-lang-show="zh">无论是合作、交流，还是只是想聊聊独立开发的事，都欢迎。邮件回得最快。</span><span data-lang-show="en">Collaboration, questions, or just talking indie dev — all welcome. Email is the fastest way.</span></p>
     </div>
 </section>
 
 <section class="section">
     <div class="container-narrow">
-        <div class="current-work" style="text-align: center;">
-            <h3 style="margin-bottom: var(--space-lg); font-size: 1.25rem;">💌 写给我</h3>
-            <p style="color: var(--color-text-secondary); margin-bottom: var(--space-xl);">
-                如果你有任何想法、建议，或者只是想打个招呼，<br>
-                欢迎直接发邮件给我，我会尽快回复。
-            </p>
-            <a href="mailto:{{ site.email }}" class="btn btn-primary">
-                发送邮件 <span class="arrow">→</span>
-            </a>
-        </div>
+        <ul class="link-list">
+            <li><a class="link-item" href="mailto:{{ site.email }}"><span class="link-icon">{% include icon.html name="mail" %}</span><span class="link-copy"><strong><span data-lang-show="zh">邮箱</span><span data-lang-show="en">Email</span></strong><span>{{ site.email }}</span></span>{% include icon.html name="arrow" %}</a></li>
+            {% if site.x_url %}<li><a class="link-item" href="{{ site.x_url }}" target="_blank" rel="noopener"><span class="link-icon">{% include icon.html name="x" %}</span><span class="link-copy"><strong>X (Twitter)</strong><span>@chenxi44779232</span></span>{% include icon.html name="arrow" %}</a></li>{% endif %}
+            {% if site.xiaohongshu_url %}<li><a class="link-item" href="{{ site.xiaohongshu_url }}" target="_blank" rel="noopener"><span class="link-icon"><img src="{{ site.baseurl }}/img/chanpinicon/web/redbook.png" alt=""></span><span class="link-copy"><strong><span data-lang-show="zh">小红书</span><span data-lang-show="en">RED (Xiaohongshu)</span></strong><span>独立开发者北城</span></span>{% include icon.html name="arrow" %}</a></li>{% endif %}
+            {% if site.wechat_id %}<li><button class="link-item" type="button" data-copy="{{ site.wechat_id }}" data-copied-zh="已复制微信号" data-copied-en="WeChat ID copied"><span class="link-icon">{% include icon.html name="chat" %}</span><span class="link-copy"><strong><span data-lang-show="zh">微信</span><span data-lang-show="en">WeChat</span></strong><span>{{ site.wechat_id }} · <span data-lang-show="zh">点击复制</span><span data-lang-show="en">tap to copy</span></span></span>{% include icon.html name="copy" %}</button></li>{% endif %}
+            {% if site.github_username %}<li><a class="link-item" href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener"><span class="link-icon">{% include icon.html name="github" %}</span><span class="link-copy"><strong>GitHub</strong><span>@{{ site.github_username }}</span></span>{% include icon.html name="arrow" %}</a></li>{% endif %}
+            {% if site.weibo_username %}<li><a class="link-item" href="https://weibo.com/{{ site.weibo_username }}" target="_blank" rel="noopener"><span class="link-icon"><img src="{{ site.baseurl }}/img/chanpinicon/web/weiboicon.png" alt=""></span><span class="link-copy"><strong><span data-lang-show="zh">微博</span><span data-lang-show="en">Weibo</span></strong><span>@{{ site.weibo_username }}</span></span>{% include icon.html name="arrow" %}</a></li>{% endif %}
+            <li><a class="link-item" href="{{ site.baseurl }}/feed.xml"><span class="link-icon">{% include icon.html name="rss" %}</span><span class="link-copy"><strong><span data-lang-show="zh">RSS 订阅</span><span data-lang-show="en">RSS</span></strong><span><span data-lang-show="zh">获取最新内容更新</span><span data-lang-show="en">Follow new posts</span></span></span>{% include icon.html name="arrow" %}</a></li>
+        </ul>
     </div>
 </section>
 
+{% if site.wechat_mp.size > 0 %}
 <section class="section">
     <div class="container-narrow">
-        <h2 class="section-title" style="text-align: center;">常见问题</h2>
-        
-        <div style="margin-top: var(--space-2xl);">
-            <div style="margin-bottom: var(--space-xl); padding-bottom: var(--space-xl); border-bottom: 1px solid var(--color-border-light);">
-                <h4 style="margin-bottom: var(--space-sm);">可以合作吗？</h4>
-                <p style="color: var(--color-text-secondary); margin: 0;">
-                    如果是有意义的项目，我很乐意交流。请邮件说明项目背景和合作方式。
-                </p>
-            </div>
-            
-            <div style="margin-bottom: var(--space-xl); padding-bottom: var(--space-xl); border-bottom: 1px solid var(--color-border-light);">
-                <h4 style="margin-bottom: var(--space-sm);">可以约咖啡聊聊吗？</h4>
-                <p style="color: var(--color-text-secondary); margin: 0;">
-                    如果你也是独立开发者，或者对独立开发感兴趣，我很愿意交流。不过时间有限，请先邮件沟通。
-                </p>
-            </div>
-            
-            <div>
-                <h4 style="margin-bottom: var(--space-sm);">你的 App 有问题 / 有建议怎么反馈？</h4>
-                <p style="color: var(--color-text-secondary); margin: 0;">
-                    非常感谢反馈！请直接发邮件，或者在 App Store 评论区留言。每一条反馈我都会认真看。
-                </p>
-            </div>
-        </div>
+        <div class="section-head"><div><p class="kicker"><span data-lang-show="zh">微信公众号</span><span data-lang-show="en">WeChat Official Accounts</span></p></div></div>
+        <ul class="link-list">
+            {% for mp in site.wechat_mp %}
+            <li><div class="link-item"><span class="link-icon">{% include icon.html name="chat" %}</span><span class="link-copy"><strong>{{ mp.name }}</strong><span>{{ mp.description }}</span></span><span></span></div></li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{% endif %}
+
+<section class="section">
+    <div class="container-narrow">
+        <div class="section-head"><div><p class="kicker">FAQ</p><h2><span data-lang-show="zh">常见问题</span><span data-lang-show="en">Questions</span></h2></div></div>
+        <dl class="faq">
+            <div><dt><span data-lang-show="zh">可以合作吗？</span><span data-lang-show="en">Can we work together?</span></dt><dd><span data-lang-show="zh">如果是有意义的项目，我很乐意交流。请邮件说明项目背景和合作方式。</span><span data-lang-show="en">If the project is meaningful, I'm happy to talk. Email me the background and what you have in mind.</span></dd></div>
+            <div><dt><span data-lang-show="zh">可以约咖啡聊聊吗？</span><span data-lang-show="en">Coffee chat?</span></dt><dd><span data-lang-show="zh">如果你也是独立开发者，或者对独立开发感兴趣，我很愿意交流。不过时间有限，请先邮件沟通。</span><span data-lang-show="en">If you're an indie developer or curious about it, I'd love to. Time is limited, so please email first.</span></dd></div>
+            <div><dt><span data-lang-show="zh">App 有问题 / 有建议怎么反馈？</span><span data-lang-show="en">Found a bug or have feedback on an app?</span></dt><dd><span data-lang-show="zh">非常感谢！请直接发邮件，或者在 App Store 评论区留言。每一条反馈我都会认真看。</span><span data-lang-show="en">Thank you! Email me directly or leave an App Store review. I read every single one.</span></dd></div>
+        </dl>
     </div>
 </section>

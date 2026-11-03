@@ -1,46 +1,35 @@
-<!-- Footer -->
 <footer class="footer">
-    <div class="footer-content">
-        <div class="footer-text">
-            © {{ site.time | date: '%Y' }} {{ site.author }} · 用作品和文字记录真实的独立开发之路 · 
-            <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener">豫ICP备17036027号-1</a>
-            <div class="footer-visit-count">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                <span id="northcityVisitCount">0</span>
-                <span>次到访</span>
+    <div class="container">
+        <div class="footer-signoff">
+            <p class="footer-kicker mono"><span data-lang-show="zh">联系</span><span data-lang-show="en">Say hi</span></p>
+            <h2 class="footer-title display">
+                <span data-lang-show="zh">有想法，或者只是想聊聊？</span>
+                <span data-lang-show="en">Got an idea, or just want to chat?</span>
+            </h2>
+            <div class="contact-chips">
+                <a class="chip" href="mailto:{{ site.email }}">{% include icon.html name="mail" %}<span>{{ site.email }}</span></a>
+                {% if site.x_url %}<a class="chip" href="{{ site.x_url }}" target="_blank" rel="noopener">{% include icon.html name="x" %}<span>X</span></a>{% endif %}
+                {% if site.xiaohongshu_url %}<a class="chip" href="{{ site.xiaohongshu_url }}" target="_blank" rel="noopener"><img src="{{ site.baseurl }}/img/chanpinicon/web/redbook.png" alt="" width="16" height="16"><span data-lang-show="zh">小红书</span><span data-lang-show="en">RED</span></a>{% endif %}
+                {% if site.wechat_id %}<button class="chip" type="button" data-copy="{{ site.wechat_id }}" data-copied-zh="已复制微信号" data-copied-en="WeChat ID copied">{% include icon.html name="chat" %}<span><span data-lang-show="zh">微信</span><span data-lang-show="en">WeChat</span> · {{ site.wechat_id }}</span><span class="chip-hint">{% include icon.html name="copy" %}</span></button>{% endif %}
+                {% if site.github_username %}<a class="chip" href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener">{% include icon.html name="github" %}<span>GitHub</span></a>{% endif %}
             </div>
         </div>
-        <div class="footer-links">
-            {% if site.github_username %}
-            <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener">
-                <i class="fab fa-github"></i> GitHub
-            </a>
-            {% endif %}
-            {% if site.twitter_username %}
-            <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank" rel="noopener">
-                <i class="fab fa-twitter"></i> Twitter
-            </a>
-            {% endif %}
-            {% if site.weibo_username %}
-            <a href="https://weibo.com/{{ site.weibo_username }}" target="_blank" rel="noopener">
-                <i class="fab fa-weibo"></i> 微博
-            </a>
-            {% endif %}
-            <a href="{{ site.baseurl }}/feed.xml">
-                <i class="fas fa-rss"></i> RSS
-            </a>
-            <a href="{{ site.baseurl }}/ideasnap-privacy-policy/">
-                IdeaSnap Privacy
-            </a>
-            <a href="{{ site.baseurl }}/ideasnap-subscription-agreement/">
-                IdeaSnap Subscription
-            </a>
-            <a href="{{ site.baseurl }}/timepill-privacy/">
-                Time Capsule Privacy
-            </a>
-            <a href="{{ site.baseurl }}/timepill-terms/">
-                Time Capsule Terms
-            </a>
+
+        <div class="footer-bottom">
+            <div class="footer-meta">
+                <span>© {{ site.time | date: '%Y' }} {{ site.author }} · {{ site.author_en }}</span>
+                <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener">豫ICP备17036027号-1</a>
+                <span class="footer-visit-count"><span id="northcityVisitCount">0</span> <span data-lang-show="zh">次到访</span><span data-lang-show="en">visits</span></span>
+            </div>
+            <nav class="footer-links" aria-label="Footer">
+                <a href="{{ site.baseurl }}/connect/"><span data-lang-show="zh">全部联系方式</span><span data-lang-show="en">All contacts</span></a>
+                <a href="{{ site.baseurl }}/logs/"><span data-lang-show="zh">开发日志</span><span data-lang-show="en">Dev log</span></a>
+                <a href="{{ site.baseurl }}/life/"><span data-lang-show="zh">生活指南</span><span data-lang-show="en">Life Guide</span></a>
+                <a href="{{ site.baseurl }}/feed.xml">{% include icon.html name="rss" %} RSS</a>
+                <a href="{{ site.baseurl }}/ideasnap-privacy-policy/">IdeaSnap Privacy</a>
+                <a href="{{ site.baseurl }}/ideasnap-subscription-agreement/">IdeaSnap Subscription</a>
+            </nav>
         </div>
     </div>
 </footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>

@@ -1,0 +1,44 @@
+{%- comment -%} Hero product switcher: real UI per product, crossfaded by js/showcase.js {%- endcomment -%}
+{%- comment -%} Includes share the page's variable scope, hence the sc_ prefix {%- endcomment -%}
+{%- assign sc_ai = site.my_products | where: 'ai', true | sort: 'order' -%}
+{%- assign sc_legacy = site.my_products | where: 'flagship_legacy', true -%}
+{%- assign sc_shown = sc_ai | concat: sc_legacy -%}
+<div class="showcase" data-showcase>
+    <div class="switcher" role="tablist" aria-label="作品 / Apps">
+        {%- assign sc_n = 0 -%}
+        {%- for p in sc_shown -%}{%- if p.hero_image or p.screens -%}
+        <button class="switch" type="button" role="tab" data-switch="{{ sc_n }}" aria-selected="{% if sc_n == 0 %}true{% else %}false{% endif %}">
+            <img src="{{ p.icon | replace: '/chanpinicon/', '/chanpinicon/web/' | relative_url }}" alt="" width="26" height="26">
+            <span class="label"><span data-lang-show="zh">{{ p.name }}</span><span data-lang-show="en">{{ p.name_en | default: p.name }}</span></span>
+        </button>
+        {%- assign sc_n = sc_n | plus: 1 -%}
+        {%- endif -%}{%- endfor -%}
+    </div>
+
+    <div class="stage">
+        {%- assign sc_n = 0 -%}
+        {%- for p in sc_shown -%}{%- if p.hero_image or p.screens -%}
+        <div class="slide{% if sc_n == 0 %} is-active{% endif %}" data-slide="{{ sc_n }}"{% if sc_n > 0 %} aria-hidden="true"{% endif %}>
+            {%- if p.hero_image -%}
+            <div class="slide-desktop">
+                <img src="{{ p.hero_image | relative_url }}" alt="{{ p.name }}" width="1448" height="1086" data-lang-show="zh"{% if sc_n > 0 %} loading="lazy"{% endif %}>
+                <img src="{{ p.hero_image_en | default: p.hero_image | relative_url }}" alt="{{ p.name_en | default: p.name }}" width="1448" height="1086" data-lang-show="en" loading="lazy">
+                {%- if p.screens -%}
+                <img class="slide-phone" src="{{ p.screens[0] | relative_url }}" alt="" width="1122" height="1402" data-lang-show="zh">
+                <img class="slide-phone" src="{{ p.screens_en[0] | default: p.screens[0] | relative_url }}" alt="" width="1122" height="1402" data-lang-show="en" loading="lazy">
+                {%- endif -%}
+                <span class="float-chip c1">{% include icon.html name="star" %}<span><b><span data-lang-show="zh">AI 摘要</span><span data-lang-show="en">AI summary</span></b> · <span data-lang-show="zh">3 条要点</span><span data-lang-show="en">3 key points</span></span></span>
+                <span class="float-chip c2"><span class="dot-live" aria-hidden="true"></span><span><b><span data-lang-show="zh">待办</span><span data-lang-show="en">Todo</span></b> · <span data-lang-show="zh">周五前团队试用</span><span data-lang-show="en">Team trial by Fri</span></span></span>
+            </div>
+            {%- else -%}
+            <div class="posters">
+                {%- for s in p.screens limit: 3 -%}
+                <img class="poster" src="{{ s | relative_url }}" alt="{% if forloop.first %}{{ p.name }}{% endif %}" width="600" height="1300" loading="lazy" decoding="async">
+                {%- endfor -%}
+            </div>
+            {%- endif -%}
+        </div>
+        {%- assign sc_n = sc_n | plus: 1 -%}
+        {%- endif -%}{%- endfor -%}
+    </div>
+</div>

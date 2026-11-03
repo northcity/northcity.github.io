@@ -1,0 +1,27 @@
+/* Rouge syntax colours for the new article layout — follows the light (default) / dark tokens */
+:root, [data-theme="light"] {
+  --code-comment: #8F887B;
+  --code-keyword: #B5361F;
+  --code-string: #3F7A4E;
+  --code-number: #9A5B12;
+  --code-type: #2F5E8C;
+  --code-func: #6B4C9A;
+}
+[data-theme="dark"] {
+  --code-comment: #7D776B;
+  --code-keyword: #F28B73;
+  --code-string: #9FCB92;
+  --code-number: #E6B673;
+  --code-type: #8DB8E8;
+  --code-func: #C7A6F0;
+}
+.highlight { color: var(--ink); }
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .cs, .highlight .cp, .highlight .cd { color: var(--code-comment); font-style: italic; }
+.highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kc, .highlight .ow { color: var(--code-keyword); }
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx, .highlight .sr, .highlight .ss { color: var(--code-string); }
+.highlight .m, .highlight .mi, .highlight .mf, .highlight .mh, .highlight .mo, .highlight .il { color: var(--code-number); }
+.highlight .kt, .highlight .nc, .highlight .nn, .highlight .nb, .highlight .bp { color: var(--code-type); }
+.highlight .nf, .highlight .fm, .highlight .na, .highlight .nd { color: var(--code-func); }
+.highlight .err { color: inherit; background: none; }
+.highlight .gd { color: var(--code-keyword); }
+.highlight .gi { color: var(--code-string); }

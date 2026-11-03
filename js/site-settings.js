@@ -17,11 +17,7 @@
     function getPreferredTheme() {
         const stored = storage.getItem(THEME_KEY);
         if (stored === THEME_DARK || stored === THEME_LIGHT) return stored;
-        
-        // Check system preference
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            return THEME_DARK;
-        }
+        // Light by default; dark is an explicit choice via the toggle
         return THEME_LIGHT;
     }
 
@@ -35,18 +31,9 @@
         const btn = document.getElementById('theme-toggle');
         if (!btn) return;
         
-        const icon = btn.querySelector('i');
-        const text = btn.querySelector('span');
+        // Sun / moon icons are swapped by CSS on [data-theme]
         const english = document.documentElement.getAttribute('data-lang') === 'en';
         btn.setAttribute('aria-label', theme === THEME_DARK ? (english ? 'Switch to light mode' : '切换亮色模式') : (english ? 'Switch to dark mode' : '切换暗色模式'));
-        
-        if (theme === THEME_DARK) {
-            if (icon) icon.className = 'fas fa-sun';
-            if (text) text.textContent = english ? 'Light' : '亮色';
-        } else {
-            if (icon) icon.className = 'fas fa-moon';
-            if (text) text.textContent = english ? 'Dark' : '暗色';
-        }
     }
 
     function toggleTheme() {
@@ -88,7 +75,7 @@
         btn.setAttribute('aria-label', lang === LANG_ZH ? 'Switch to English' : '切换中文');
         const text = btn.querySelector('span');
         if (text) {
-            text.textContent = lang === LANG_ZH ? 'EN' : '中文';
+            text.textContent = lang === LANG_ZH ? 'EN' : '中';
         }
     }
 
@@ -136,14 +123,6 @@
             langBtn.addEventListener('click', toggleLanguage);
         }
 
-        // Listen for system theme changes
-        if (window.matchMedia) {
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-                if (!storage.getItem(THEME_KEY)) {
-                    setTheme(e.matches ? THEME_DARK : THEME_LIGHT, false);
-                }
-            });
-        }
     }
 
     document.documentElement.setAttribute('data-theme', getPreferredTheme());

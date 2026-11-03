@@ -3,7 +3,7 @@ title: 北城
 SEOTitle: 北城 · 独立开发者 | NorthCity
 header-img: img/common/home-bg.jpg
 email: 506343891@qq.com
-description: "我用产品、代码和文字，记录真实的独立开发之路。"
+description: "北城 · 独立开发者，用 AI 做好用的产品：闪念 AI 语音笔记（App Store 编辑推荐）、Anpa、OneCost、呼吸泡泡。"
 description_en: "I build real apps that people use. Documenting the struggles, failures, and small wins of indie development."
 keyword: "北城, 独立开发者, indie developer, iOS开发, App开发, 闪念, 呼吸泡泡, Anpa, 数字遗产, 时间胶囊, 产品创作者, 独立开发, Swift, SwiftUI"
 url: "https://www.northcity.top"
@@ -141,6 +141,14 @@ wechat_mp:
 # Products - 作品列表 (使用 my_products 避免与 collections 冲突)
 my_products:
   - name: "闪念"
+    slug: "ideasnap"
+    tint: "#EAF2FB"
+    hero_image: "/img/products/ideasnap/desktop-light-device-v2.webp"
+    hero_image_en: "/img/products/ideasnap/desktop-light-device-v2-en.webp"
+    screens: ["/img/products/ideasnap/mobile-device-ios.webp"]
+    screens_en: ["/img/products/ideasnap/mobile-device-ios-v2-en.webp"]
+    bullets: ["开口就记，AI 自动整理成笔记、摘要与待办", "内置 AI Agent，支持 MCP，让 Claude / Cursor 读取你的笔记", "iPhone、Watch、Mac、Android、Windows、Linux 数据互通"]
+    bullets_en: ["Speak and it's captured — AI turns it into notes, summaries and todos", "Built-in AI Agent with MCP, so Claude / Cursor can read your notes", "Synced across iPhone, Watch, Mac, Android, Windows and Linux"]
     name_en: "IdeaSnap"
     tagline: "AI 语音笔记，记录你一闪而过的灵感"
     tagline_en: "AI voice notes — capture fleeting ideas instantly"
@@ -150,6 +158,12 @@ my_products:
     platforms: ["iOS", "iPadOS", "watchOS", "macOS", "Android", "Windows", "Linux"]
     status: "持续更新"
     featured: true
+    ai: true
+    order: 1
+    ai_inside: "开口说 → Paraformer 转写 → 大模型整理成笔记 → Agent 帮你检索、归类、动手"
+    ai_inside_en: "Speak → Paraformer ASR → an LLM structures it → an Agent retrieves, files and acts"
+    ai_stack: ["Agent", "MCP Server", "MCP Client", "RAG", "GPT-5", "Qwen", "Doubao Seed", "Paraformer"]
+    editors_choice: true
     rating: "4.6"
     ratings_count: "595"
     app_store: "https://apps.apple.com/cn/app/%E9%97%AA%E5%BF%B5-ai%E8%AF%AD%E9%9F%B3%E7%AC%94%E8%AE%B0/id1397149726"
@@ -157,6 +171,11 @@ my_products:
     website: "https://ideasnap.xyz"
     
   - name: "Anpa"
+    slug: "anpa"
+    tint: "#EEF0F6"
+    screens: ["/img/products/anpa/1.jpg", "/img/products/anpa/2.jpg", "/img/products/anpa/3.jpg"]
+    bullets: ["一句话或一张截图，自动识别成待办与日程", "说一句就能记，Apple Watch 上也能用", "AI 帮你分类、排期、到点提醒"]
+    bullets_en: ["One sentence or one screenshot becomes todos and events", "Capture by voice, right from your Apple Watch", "AI sorts, schedules and reminds you on time"]
     tagline: "AI 自动识别并安排你的每一件事"
     tagline_en: "AI auto-recognizes and schedules everything for you"
     description: "全新一代智能 GTD 工具，一句话快速记录，AI 自动分类待办与日程。"
@@ -165,6 +184,11 @@ my_products:
     platforms: ["iOS", "watchOS", "Android"]
     status: "新品"
     featured: true
+    ai: true
+    order: 2
+    ai_inside: "一句话或一张截图 → 豆包 Seed 理解意图 → 自动拆成待办与日程"
+    ai_inside_en: "A sentence or a screenshot → Doubao Seed parses intent → todos and calendar events"
+    ai_stack: ["Doubao Seed 2.0", "Speech", "Screenshot → Event"]
     rating: "5.0"
     ratings_count: "10"
     app_store: "https://apps.apple.com/cn/app/anpa/id6757229797"
@@ -172,6 +196,11 @@ my_products:
     website: "https://www.northcity.top/anpa-website/"
 
   - name: "OneCost"
+    slug: "onecost"
+    tint: "#F1F1EE"
+    screens: ["/img/products/onecost/1.jpg", "/img/products/onecost/2.jpg", "/img/products/onecost/3.jpg"]
+    bullets: ["说句话就记好一笔，一句话也能拆成多笔", "账单截图批量导入，AI 自动识别与分类", "看懂钱花在哪儿，而不只是记账"]
+    bullets_en: ["Say it and it's logged — even several entries in one sentence", "Batch-import bill screenshots; AI reads and categorizes them", "Understand where money goes, not just record it"]
     tagline: "全新一代AI极简记账App"
     tagline_en: "Next-gen AI minimalist expense tracker"
     description: "全新一代AI极简记账App"
@@ -180,6 +209,11 @@ my_products:
     platforms: ["iOS"]
     status: "新品"
     featured: true
+    ai: true
+    order: 3
+    ai_inside: "说一句、拍一张、批量导入账单截图 → 视觉模型 + OCR 解析 → 自动分类记账"
+    ai_inside_en: "Say it, snap it, or batch-import bill screenshots → vision model + OCR → categorized entries"
+    ai_stack: ["Doubao Seed Vision", "Apple Vision OCR", "Speech"]
     rating: "5.0"
     ratings_count: "3"
     app_store: "https://apps.apple.com/cn/app/onecost/id6759001348"
@@ -192,10 +226,15 @@ my_products:
     icon: "/img/chanpinicon/pixnoraicon.png"
     platforms: ["Web"]
     status: "新品"
-    featured: true
+    featured: false
     website: "https://www.pixnora.fun"
 
   - name: "呼吸泡泡"
+    slug: "breathe"
+    tint: "#E9F1FA"
+    screens: ["/img/products/breathe/1.jpg", "/img/products/breathe/2.jpg", "/img/products/breathe/3.jpg"]
+    bullets: ["Apple Watch 实时 HRV 压力监测", "AI 读懂你的压力趋势，给出建议", "引导式呼吸训练，让压力可见、可控"]
+    bullets_en: ["Real-time HRV stress tracking on Apple Watch", "AI reads your stress trend and suggests what to do", "Guided breathing that makes stress visible and manageable"]
     name_en: "Breathe Bubbles"
     tagline: "让呼吸可见，让压力可控"
     tagline_en: "See your breath, control your stress"
@@ -205,11 +244,35 @@ my_products:
     platforms: ["iOS", "iPadOS", "watchOS", "Mac"]
     status: "持续更新"
     featured: true
+    ai: true
+    order: 4
+    ai_inside: "Apple Watch 的 HRV 数据 → 大模型读懂压力趋势 → 给出呼吸训练建议"
+    ai_inside_en: "Apple Watch HRV → an LLM reads your stress trend → guided breathing advice"
+    ai_stack: ["HealthKit · HRV", "DeepSeek", "watchOS"]
     rating: "4.5"
     ratings_count: "50"
     app_store: "https://apps.apple.com/cn/app/%E5%91%BC%E5%90%B8%E6%B3%A1%E6%B3%A1/id6743337849"
     website: "https://www.breathebubbles.com/"
     
+  - name: "Mewmi"
+    slug: "mewmi"
+    tint: "#F7EFE6"
+    name_en: "Mewmi"
+    tagline: "猫猫收集器：把每一次遇见猫猫，变成一张专属猫卡"
+    tagline_en: "Cat collector — turn every cat you meet into a card"
+    description: "拍下路上遇到的猫，端侧视觉自动识别并抠出猫咪主体，生成干净统一的专属猫卡。"
+    description_en: "Snap a cat on the street; on-device vision detects and cuts it out into a personal cat card."
+    icon: "/img/chanpinicon/mewmiicon.png"
+    platforms: ["iOS"]
+    status: "新品"
+    featured: true
+    ai: true
+    order: 5
+    ai_inside: "拍一张猫 → 端侧视觉识别猫咪并抠出主体 → 生成专属猫卡"
+    ai_inside_en: "Snap a cat → on-device Vision detects and cuts it out → a personal cat card"
+    ai_stack: ["On-device Vision", "Animal Detection", "Instance Mask"]
+    website: "/mewmi/"
+
   - name: "数字遗产"
     name_en: "Digital Legacy"
     tagline: "当你没回应时，替你把重要的事交代清楚"
@@ -219,12 +282,15 @@ my_products:
     icon: "/img/chanpinicon/数字遗产icon.png"
     platforms: ["iOS", "Mac"]
     status: "新品"
-    featured: true
+    featured: false
     rating: "5.0"
     ratings_count: "4"
     app_store: "https://apps.apple.com/cn/app/%E6%95%B0%E5%AD%97%E9%81%97%E4%BA%A7-%E6%AD%A3%E7%89%88/id6757603587"
 
   - name: "时间胶囊"
+    slug: "timecapsule"
+    tint: "#F6F0E6"
+    screens: ["/img/products/timecapsule/1.jpg", "/img/products/timecapsule/2.jpg", "/img/products/timecapsule/3.jpg"]
     name_en: "Time Capsule"
     tagline: "寄往未来的信"
     tagline_en: "Letters to the future"
@@ -232,8 +298,13 @@ my_products:
     description_en: "Write a letter to your future self or loved ones, delivered on a chosen date."
     icon: "/img/chanpinicon/shijianjiaonangicon.png"
     platforms: ["iOS", "iPadOS", "Mac", "Web"]
-    status: "持续更新"
-    featured: true
+    status: "正在重做"
+    status_en: "Rebuilding"
+    featured: false
+    flagship_legacy: true
+    since: 2018
+    rebuild_note: "从 2018 年陪伴至今的老产品，正在用新的技术栈从头重做。"
+    rebuild_note_en: "Running since 2018 — now being rebuilt from the ground up on a new stack."
     rating: "4.8"
     ratings_count: "4052"
     app_store: "https://apps.apple.com/cn/app/%E6%97%B6%E9%97%B4%E8%83%B6%E5%9B%8A-%E5%AF%84%E5%BE%80%E6%9C%AA%E6%9D%A5%E7%9A%84%E4%BF%A1/id1358237203"
@@ -283,11 +354,18 @@ my_products:
     ratings_count: "328"
     app_store: "https://apps.apple.com/cn/app/%E8%88%94%E7%8B%97%E6%97%A5%E8%AE%B0-%E8%BF%98%E5%8E%9F%E7%9C%9F%E5%AE%9E%E8%88%94%E7%8B%97%E7%8E%B0%E5%9C%BA/id1516478419"
 
-# Currently Working On - 最近在做什么
+# 第一款 App 上架的年份（首页 "since"）
+since: 2018
+
+# Currently Working On - 最近在做什么（改完记得更新日期）
+current_work_updated: 2026-11-02
 current_work:
-  - "持续迭代闪念 AI 语音笔记功能"
-  - "Anpa 智能 GTD 新功能开发"
-  - "记录独立开发的思考与成长"
+  - zh: "给闪念的 AI Agent 接更多工具：双向 MCP、笔记检索与自动整理"
+    en: "Giving IdeaSnap's AI Agent more tools: two-way MCP, note retrieval, auto-organizing"
+  - zh: "Anpa：一句话、一张截图，自动排进日程"
+    en: "Anpa: one sentence or one screenshot, straight into your calendar"
+  - zh: "从头重做时间胶囊"
+    en: "Rebuilding Time Capsule from scratch"
 
 # Values - 我的价值观
 values:

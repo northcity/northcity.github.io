@@ -1,35 +1,85 @@
-{% assign product = include.product %}
-{% assign product_url = product.app_store | default: product.website %}
-<article class="product-card{% if include.spotlight %} product-spotlight{% endif %}" id="{{ product.name | slugify }}">
-    <a class="product-entry" href="{{ product_url }}" target="_blank" rel="noopener noreferrer">
-        <div class="product-icon">
-            {% if product.icon and product.icon != '' %}
-            <img src="{{ product.icon | replace: "/chanpinicon/", "/chanpinicon/web/" | relative_url }}" alt="" width="64" height="64" loading="lazy" decoding="async">
-            {% else %}
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M10 18h4" stroke="currentColor" stroke-width="1.5"/></svg>
-            {% endif %}
+{%- comment -%}
+  One product, four presentations.
+  Params: product (a site.my_products entry), variant: row-showcase (default) / legacy / compact / row.
+{%- endcomment -%}
+{%- assign product = include.product -%}
+{%- assign variant = include.variant | default: "row-showcase" -%}
+{%- assign product_url = product.app_store | default: product.website | default: product.android_link -%}
+{%- assign icon_web = product.icon | replace: "/chanpinicon/", "/chanpinicon/web/" | relative_url -%}
+{%- capture p_name -%}<span data-lang-show="zh">{{ product.name }}</span><span data-lang-show="en">{{ product.name_en | default: product.name }}</span>{%- endcapture -%}
+{%- capture p_tagline -%}<span data-lang-show="zh">{{ product.tagline }}</span><span data-lang-show="en">{{ product.tagline_en | default: product.tagline }}</span>{%- endcapture -%}
+{%- capture p_rating -%}{% if product.rating %}<span class="rating" title="App Store">{% include icon.html name="star" %}{{ product.rating }}<span class="rating-count">· {{ product.ratings_count }}</span></span>{% endif %}{%- endcapture -%}
+{%- capture p_actions -%}
+    {% if product.app_store %}<a class="action" href="{{ product.app_store }}" target="_blank" rel="noopener">{% include icon.html name="apple" %}App Store</a>{% endif %}
+    {% if product.android_link %}<a class="action" href="{{ product.android_link }}" target="_blank" rel="noopener">{% include icon.html name="android" %}Android</a>{% endif %}
+    {% if product.website %}<a class="action" href="{{ product.website }}"{% if product.website contains '://' %} target="_blank" rel="noopener"{% endif %}><span data-lang-show="zh">官网</span><span data-lang-show="en">Website</span></a>{% endif %}
+{%- endcapture -%}
+{%- capture p_media -%}
+    <div class="prow-media" style="--tint: {{ product.tint | default: '#F0F0EE' }}">
+        {%- if product.hero_image -%}
+        <div class="slide-desktop">
+            <img src="{{ product.hero_image | relative_url }}" alt="{{ product.name }}" width="1448" height="1086" loading="lazy" data-lang-show="zh">
+            <img src="{{ product.hero_image_en | default: product.hero_image | relative_url }}" alt="{{ product.name_en | default: product.name }}" width="1448" height="1086" loading="lazy" data-lang-show="en">
         </div>
-        <div class="product-heading">
-            <h3 class="product-name"><span data-lang-show="zh">{{ product.name }}</span><span data-lang-show="en">{{ product.name_en | default: product.name }}</span></h3>
-            <p class="product-tagline"><span data-lang-show="zh">{{ product.tagline }}</span><span data-lang-show="en">{{ product.tagline_en | default: product.tagline }}</span></p>
+        {%- else -%}
+        <div class="posters">
+            {%- for s in product.screens limit: 3 -%}
+            <img class="poster" src="{{ s | relative_url }}" alt="" width="600" height="1300" loading="lazy" decoding="async">
+            {%- endfor -%}
         </div>
-        <span class="product-open" aria-hidden="true">↗</span>
-    </a>
-    <p class="product-description"><span data-lang-show="zh">{{ product.description }}</span><span data-lang-show="en">{{ product.description_en | default: product.description }}</span></p>
-    <div class="product-meta">
-        {% for platform in product.platforms %}<span class="product-badge">{{ platform }}</span>{% endfor %}
+        {%- endif -%}
     </div>
-    <div class="product-bottom">
-        <div class="product-signals">
-            {% if product.status == '新品' %}<span class="product-status"><span data-lang-show="zh">新品</span><span data-lang-show="en">New</span></span>
-            {% elsif product.status == '持续更新' %}<span class="product-status"><span data-lang-show="zh">持续更新</span><span data-lang-show="en">Updating</span></span>
-            {% elsif product.status %}<span class="product-status">{{ product.status }}</span>{% endif %}
-            {% if product.rating %}<span class="product-rating"><span aria-hidden="true">☆</span> {{ product.rating }} <span class="rating-count">/ {{ product.ratings_count }} <span data-lang-show="zh">个评分</span><span data-lang-show="en">ratings</span></span></span>{% endif %}
-        </div>
-        <div class="product-actions">
-            {% if product.app_store %}<a href="{{ product.app_store }}" target="_blank" rel="noopener noreferrer" aria-label="{{ product.name }} App Store">App Store <span aria-hidden="true">↗</span></a>{% endif %}
-            {% if product.android_link %}<a href="{{ product.android_link }}" target="_blank" rel="noopener noreferrer" aria-label="{{ product.name }} Android 下载">Android <span aria-hidden="true">↗</span></a>{% endif %}
-            {% if product.website and product.app_store %}<a href="{{ product.website }}" target="_blank" rel="noopener noreferrer"><span data-lang-show="zh">官网</span><span data-lang-show="en">Website</span> <span aria-hidden="true">↗</span></a>{% endif %}
-        </div>
+{%- endcapture -%}
+
+{%- if variant == "legacy" -%}
+{%- assign rc = product.ratings_count | append: '' -%}
+<article class="prow" id="{{ product.name | slugify }}">
+    {{ p_media }}
+    <div class="prow-copy">
+        <span class="app-icon"><img src="{{ icon_web }}" alt="" width="56" height="56" loading="lazy"></span>
+        <p class="prow-name">{{ p_name }} · since {{ product.since }}{% if product.status_en %}<span class="status-chip"><span data-lang-show="zh">{{ product.status }}</span><span data-lang-show="en">{{ product.status_en }}</span></span>{% endif %}</p>
+        <h3 class="prow-tagline">{{ p_tagline }}</h3>
+        <div class="big-stat"><strong>{% if rc.size == 4 %}{{ rc | slice: 0, 1 }},{{ rc | slice: 1, 3 }}{% else %}{{ rc }}{% endif %}</strong><span><span data-lang-show="zh">个 App Store 评分</span><span data-lang-show="en">App Store ratings</span> · ★ {{ product.rating }}</span></div>
+        <p class="prow-bullets-note" style="color: var(--ink-2); margin: 0 0 24px;"><span data-lang-show="zh">{{ product.rebuild_note }}</span><span data-lang-show="en">{{ product.rebuild_note_en | default: product.rebuild_note }}</span></p>
+        <div class="actions">{{ p_actions }}</div>
     </div>
 </article>
+
+{%- elsif variant == "compact" -%}
+<a class="compact" href="{{ product_url | relative_url }}" id="{{ product.name | slugify }}">
+    <span class="app-icon"><img src="{{ icon_web }}" alt="" width="48" height="48" loading="lazy"></span>
+    <span><strong>{{ p_name }}</strong><span>{{ p_tagline }}</span></span>
+    {% include icon.html name="arrow" %}
+</a>
+
+{%- elsif variant == "row" -%}
+<a class="app-row" href="{{ product_url }}" target="_blank" rel="noopener" id="{{ product.name | slugify }}">
+    <span class="app-icon"><img src="{{ icon_web }}" alt="" width="40" height="40" loading="lazy" decoding="async"></span>
+    <span class="app-row-copy">
+        <strong>{{ p_name }}</strong>
+        <span>{{ p_tagline }}</span>
+    </span>
+    {{ p_rating }}
+    <span class="app-row-arrow">{% include icon.html name="arrow" %}</span>
+</a>
+
+{%- else -%}
+<article class="prow" id="{{ product.name | slugify }}">
+    {{ p_media }}
+    <div class="prow-copy">
+        <span class="app-icon"><img src="{{ icon_web }}" alt="" width="56" height="56" loading="lazy"></span>
+        <p class="prow-name">{{ p_name }}</p>
+        <h3 class="prow-tagline">{{ p_tagline }}</h3>
+        {% if product.bullets %}
+        <ul class="prow-bullets" data-lang-show="zh">{% for b in product.bullets %}<li>{{ b }}</li>{% endfor %}</ul>
+        <ul class="prow-bullets" data-lang-show="en">{% for b in product.bullets_en %}<li>{{ b }}</li>{% endfor %}</ul>
+        {% endif %}
+        <div class="prow-meta">
+            {% if product.editors_choice %}<span class="badge-ec">{% include icon.html name="apple" %}<span data-lang-show="zh">App Store 编辑推荐</span><span data-lang-show="en">Editors' Choice</span></span>{% endif %}
+            {{ p_rating }}
+            <span>{{ product.platforms | join: " · " }}</span>
+        </div>
+        <div class="actions">{{ p_actions }}</div>
+    </div>
+</article>
+{%- endif -%}

@@ -1,25 +1,17 @@
 ---
-layout: default
-description: "你来到了没有知识的荒原 :("
-header-img: "img/404-bg.jpg"
+layout: home
+seo_title: "404"
+description: "这个页面不存在"
 permalink: /404.html
 ---
-
-
-<!-- Page Header -->
-<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-				<div class="site-heading" id="tag-heading">
-					<h1>404</h1>
-					<span class="subheading">{{ page.description }}</span>
-				</div>
-			</div>
-		</div>
-	</div>
-</header>
-
-<script>
-	document.body.classList.add('page-fullscreen');
-</script>
+<section class="lost">
+    <div class="container-narrow">
+        <p class="lost-code">404</p>
+        <h1 class="page-title"><span data-lang-show="zh">这里什么都没有。</span><span data-lang-show="en">Nothing here.</span></h1>
+        <p class="page-description" style="margin: 0 auto 32px;"><span data-lang-show="zh">链接可能已经失效，或者这个页面搬家了。</span><span data-lang-show="en">The link may be broken, or the page has moved.</span></p>
+        <div class="hero-actions" style="justify-content: center;">
+            <a class="btn btn-primary" href="{{ site.baseurl }}/"><span data-lang-show="zh">回到首页</span><span data-lang-show="en">Back home</span>{% include icon.html name="arrow-right" %}</a>
+            <a class="link-arrow" href="{{ site.baseurl }}/products/"><span data-lang-show="zh">看看作品</span><span data-lang-show="en">See the apps</span>{% include icon.html name="arrow-right" %}</a>
+        </div>
+    </div>
+</section>

@@ -3,7 +3,7 @@ layout: product
 name: 闪念
 tagline: AI 语音笔记，让灵感不再流失
 description: 闪念诞生于我无法快速记录灵感的焦虑。通过语音转文字，让每一个想法都能被捕捉。
-icon: /img/products/shannian.png
+icon: "/img/chanpinicon/闪念-AI语音笔记.png"
 platforms: [iOS, watchOS]
 status: 维护中
 featured: true

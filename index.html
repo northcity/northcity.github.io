@@ -1,219 +1,187 @@
 ---
 layout: home
 title: 首页
-description: "北城 · 独立开发者 | 我用产品、代码和文字，记录真实的独立开发之路。"
+description: "北城 · 独立开发者，用 AI 做好用的产品：闪念 AI 语音笔记（App Store 编辑推荐）、Anpa、OneCost、呼吸泡泡。"
 ---
+{%- assign app_count = site.my_products | size -%}
+{%- assign ai_products = site.my_products | where: 'ai', true | sort: 'order' -%}
+{%- assign legacy = site.my_products | where: 'flagship_legacy', true | first -%}
+{%- assign total_ratings = 0 -%}
+{%- for p in site.my_products -%}{%- if p.ratings_count -%}{%- assign total_ratings = total_ratings | plus: p.ratings_count -%}{%- endif -%}{%- endfor -%}
+{%- assign ratings_floor = total_ratings | divided_by: 100 | times: 100 -%}
+{%- assign ratings_k = ratings_floor | divided_by: 1000 -%}
+{%- assign ratings_rest = ratings_floor | modulo: 1000 | plus: 1000 | append: '' | slice: 1, 3 -%}
+{%- capture ratings_label -%}{% if ratings_k > 0 %}{{ ratings_k }},{{ ratings_rest }}{% else %}{{ ratings_floor }}{% endif %}+{%- endcapture -%}
 
-<!-- Hero Section -->
 <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-layout">
-    <div class="hero-content">
-        <div class="hero-kicker"><span class="status-dot" aria-hidden="true"></span><span data-lang-show="zh">独立开发者</span><span data-lang-show="en">Independent developer</span><span class="hero-kicker-separator" aria-hidden="true">/</span><span class="mono">NorthCity</span></div>
-        <span class="hero-label">
-            <span data-lang-show="zh">{{ site.tagline }}</span>
-            <span data-lang-show="en">{{ site.tagline_en }}</span>
-        </span>
-        <h1 class="hero-title" id="hero-title">
-            <span data-lang-show="zh">{{ site.author }}</span>
-            <span data-lang-show="en">{{ site.author_en }}</span>
-        </h1>
-        <p class="hero-description">
-            <span data-lang-show="zh">{{ site.intro }}</span>
-            <span data-lang-show="en">{{ site.intro_en }}</span>
-        </p>
-        <div class="hero-buttons">
-            <a href="{{ site.baseurl }}/products/" class="btn btn-primary">
-                <span data-i18n="hero_cta_products" data-zh="查看我的作品" data-en="View My Work">查看我的作品</span> <span class="arrow">→</span>
-            </a>
-            <a href="{{ site.baseurl }}/logs/" class="btn btn-secondary">
-                <span data-i18n="hero_cta_logs" data-zh="我的开发日志" data-en="Dev Logs">我的开发日志</span>
-            </a>
-            <a href="{{ site.baseurl }}/about/" class="btn btn-ghost">
-                <span data-i18n="hero_cta_about" data-zh="关于我" data-en="About Me">关于我</span> <span class="arrow">→</span>
-            </a>
-        </div>
-    </div>
-    <aside class="hero-workbench" aria-label="作品一览 / A few of my apps">
-        <div class="workbench-header"><span class="mono">NORTHCITY / WORKSPACE</span><span class="workbench-symbol" aria-hidden="true">⌘</span></div>
-        <p class="workbench-intro"><span data-lang-show="zh">一些想法，慢慢变成了 App。</span><span data-lang-show="en">Small ideas, made into real apps.</span></p>
-        <div class="workbench-apps">
-        {% for product in site.my_products %}
-        {% if product.name == '闪念' or product.name == 'Anpa' or product.name == '时间胶囊' %}
-            <a href="{{ site.baseurl }}/products/#{{ product.name | slugify }}" class="workbench-app">
-                <img src="{{ product.icon | replace: "/chanpinicon/", "/chanpinicon/web/" | relative_url }}" width="44" height="44" alt="" decoding="async">
-                <span class="workbench-app-copy"><strong><span data-lang-show="zh">{{ product.name }}</span><span data-lang-show="en">{{ product.name_en | default: product.name }}</span></strong><span class="workbench-app-type">{% if product.name == '闪念' %}<span data-lang-show="zh">留住一闪而过的灵感</span><span data-lang-show="en">Capture a passing thought</span>{% elsif product.name == 'Anpa' %}<span data-lang-show="zh">把每一件事安排妥当</span><span data-lang-show="en">Make room for what matters</span>{% else %}<span data-lang-show="zh">给未来，留一封信</span><span data-lang-show="en">A letter to your future self</span>{% endif %}</span></span>
-                <span class="workbench-arrow" aria-hidden="true">↗</span>
-            </a>
-        {% endif %}
-        {% endfor %}
-        </div>
-        <div class="workbench-footer"><span class="status-dot" aria-hidden="true"></span><span data-lang-show="zh">持续打磨，慢慢生长。</span><span data-lang-show="en">Always a work in progress.</span></div>
-    </aside>
-    </div>
-    <div class="hero-footnote"><span class="mono">CODE / PRODUCTS / WORDS</span><a href="#selected-work"><span data-lang-show="zh">往下看看</span><span data-lang-show="en">Explore my work</span><span aria-hidden="true">↓</span></a></div>
-</section>
-
-<!-- Featured Products Section -->
-<section class="section selected-work" id="selected-work">
     <div class="container">
-        <div class="section-header">
-            <h2 class="section-title" data-i18n="section_featured" data-zh="做过的东西" data-en="Things I Made">做过的东西</h2>
-            <p class="section-subtitle" data-i18n="section_featured_sub" data-zh="挑了几个还不错的" data-en="A few I'm proud of">挑了几个还不错的</p>
-        </div>
-        
-        <div class="products-grid home-products">
-            {% assign featured_products = site.my_products | where: 'featured', true %}
-            {% for product in featured_products %}
-                {% if forloop.first %}{% include product-card.html product=product spotlight=true %}{% else %}{% include product-card.html product=product %}{% endif %}
-            {% endfor %}
-        </div>
-        
-        <div class="text-center mt-2">
-            <a href="{{ site.baseurl }}/products/" class="btn btn-ghost">
-                <span data-i18n="view_all_products" data-zh="查看全部作品" data-en="View All Products">查看全部作品</span> <span class="arrow">→</span>
-            </a>
+        <div class="hero-panel">
+            <p class="eyebrow"><span class="dot-live" aria-hidden="true"></span><span data-lang-show="zh">独立开发者 · since {{ site.since }}</span><span data-lang-show="en">Indie developer · since {{ site.since }}</span></p>
+            <h1 class="hero-title" id="hero-title">
+                <span data-lang-show="zh">一个人，做一些<span class="hl">每天都会打开</span>的 App。</span>
+                <span data-lang-show="en">One person, making apps you'll <span class="hl">open every day</span>.</span>
+            </h1>
+            <p class="hero-sub">
+                <span data-lang-show="zh">闪念、Anpa、OneCost、呼吸泡泡……用 AI 把记录、安排、记账这些每天的小事，做得顺手一点。</span>
+                <span data-lang-show="en">IdeaSnap, Anpa, OneCost, Breathe Bubbles — using AI to make everyday things like notes, plans and expenses feel effortless.</span>
+            </p>
+            <p class="hero-meta">
+                <span>{% include icon.html name="apple" %} <span data-lang-show="zh">App Store 编辑推荐</span><span data-lang-show="en">App Store Editors' Choice</span></span>
+                <span aria-hidden="true">·</span>
+                <span><span class="star">★</span> {{ ratings_label }} <span data-lang-show="zh">个评分</span><span data-lang-show="en">ratings</span></span>
+                <span aria-hidden="true">·</span>
+                <span><span data-lang-show="zh">iPhone · Watch · Mac · Android · 桌面端</span><span data-lang-show="en">iPhone · Watch · Mac · Android · Desktop</span></span>
+            </p>
+            {% include hero-showcase.html %}
         </div>
     </div>
 </section>
 
-<!-- Current Work Section -->
 <section class="section">
     <div class="container">
-        <div class="current-work">
-            <h3 class="current-work-title" data-i18n="section_current" data-zh="最近在做" data-en="Currently Working On">最近在做</h3>
-            <ul class="current-work-list">
+        <div class="section-head">
+            <p class="kicker"><span data-lang-show="zh">它们在做什么</span><span data-lang-show="en">What they do</span></p>
+            <h2><span data-lang-show="zh">说一句话，剩下的交给 App。</span><span data-lang-show="en">Say one sentence. The app does the rest.</span></h2>
+        </div>
+        <div class="examples">
+            {%- assign ex_ideasnap = site.my_products | where: 'slug', 'ideasnap' | first -%}
+            {%- assign ex_anpa = site.my_products | where: 'slug', 'anpa' | first -%}
+            {%- assign ex_onecost = site.my_products | where: 'slug', 'onecost' | first -%}
+            {%- assign ex_breathe = site.my_products | where: 'slug', 'breathe' | first -%}
+
+            <article class="ex" data-ex>
+                <div class="ex-head"><span class="app-icon"><img src="{{ ex_ideasnap.icon | replace: '/chanpinicon/', '/chanpinicon/web/' | relative_url }}" alt="" width="28" height="28"></span><span data-lang-show="zh">闪念</span><span data-lang-show="en">IdeaSnap</span><span class="note"><span data-lang-show="zh">界面示意</span><span data-lang-show="en">Interface example</span></span></div>
+                <div class="ex-stage">
+                    <div class="bubble"><span class="typed" data-zh="周报可以按项目自动分组，周五前拉团队试用一下" data-en="Auto-group the weekly report by project; team trial before Friday"></span></div>
+                    <div class="result">
+                        <p class="result-k"><span data-lang-show="zh">AI 整理成笔记</span><span data-lang-show="en">Organized by AI</span></p>
+                        <p class="result-t"><span data-lang-show="zh">周报按项目自动分组</span><span data-lang-show="en">Auto-grouped weekly report</span></p>
+                        <div class="mini-tags"><span><span data-lang-show="zh">#产品想法</span><span data-lang-show="en">#idea</span></span><span><span data-lang-show="zh">待办 · 周五前</span><span data-lang-show="en">Todo · by Fri</span></span><span><span data-lang-show="zh">关联 3 条笔记</span><span data-lang-show="en">3 linked notes</span></span></div>
+                    </div>
+                </div>
+                <div class="ex-foot"><div><strong><span data-lang-show="zh">随口一说，就是一条好笔记</span><span data-lang-show="en">Speak it, get a clean note</span></strong></div><a class="link-arrow" href="#{{ ex_ideasnap.name | slugify }}"><span data-lang-show="zh">看看</span><span data-lang-show="en">Look</span>{% include icon.html name="arrow-right" %}</a></div>
+            </article>
+
+            <article class="ex" data-ex>
+                <div class="ex-head"><span class="app-icon"><img src="{{ ex_anpa.icon | replace: '/chanpinicon/', '/chanpinicon/web/' | relative_url }}" alt="" width="28" height="28"></span>Anpa<span class="note"><span data-lang-show="zh">界面示意</span><span data-lang-show="en">Interface example</span></span></div>
+                <div class="ex-stage">
+                    <div class="bubble"><span class="typed" data-zh="明天下午三点和老张对方案，提前半小时提醒我" data-en="Plan review with Zhang tomorrow 3pm, remind me 30 min before"></span></div>
+                    <div class="result">
+                        <div class="cal">
+                            <span class="cal-date"><i><span data-lang-show="zh">明天</span><span data-lang-show="en">TMR</span></i><b>15</b></span>
+                            <div><p class="result-t" style="margin:0"><span data-lang-show="zh">和老张对方案</span><span data-lang-show="en">Plan review with Zhang</span></p><p class="result-row" style="padding:0"><span>15:00 – 16:00 · <span data-lang-show="zh">14:30 提醒</span><span data-lang-show="en">alert 14:30</span></span></p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ex-foot"><div><strong><span data-lang-show="zh">一句话，排进日程</span><span data-lang-show="en">One line, on your calendar</span></strong></div><a class="link-arrow" href="#{{ ex_anpa.name | slugify }}"><span data-lang-show="zh">看看</span><span data-lang-show="en">Look</span>{% include icon.html name="arrow-right" %}</a></div>
+            </article>
+
+            <article class="ex" data-ex>
+                <div class="ex-head"><span class="app-icon"><img src="{{ ex_onecost.icon | replace: '/chanpinicon/', '/chanpinicon/web/' | relative_url }}" alt="" width="28" height="28"></span>OneCost<span class="note"><span data-lang-show="zh">界面示意</span><span data-lang-show="en">Interface example</span></span></div>
+                <div class="ex-stage">
+                    <div class="bubble"><span class="typed" data-zh="午饭 36，打车回公司 23" data-en="Lunch 36, taxi back to the office 23"></span></div>
+                    <div class="result">
+                        <p class="result-k"><span data-lang-show="zh">已记 2 笔</span><span data-lang-show="en">2 entries logged</span></p>
+                        <p class="result-row"><span><span data-lang-show="zh">🍜 餐饮 · 午饭</span><span data-lang-show="en">🍜 Food · Lunch</span></span><b>−¥36</b></p>
+                        <p class="result-row"><span><span data-lang-show="zh">🚕 交通 · 打车</span><span data-lang-show="en">🚕 Transport · Taxi</span></span><b>−¥23</b></p>
+                    </div>
+                </div>
+                <div class="ex-foot"><div><strong><span data-lang-show="zh">说句话，账就记好了</span><span data-lang-show="en">Say it, and it's logged</span></strong></div><a class="link-arrow" href="#{{ ex_onecost.name | slugify }}"><span data-lang-show="zh">看看</span><span data-lang-show="en">Look</span>{% include icon.html name="arrow-right" %}</a></div>
+            </article>
+
+            <article class="ex" data-breath>
+                <div class="ex-head"><span class="app-icon"><img src="{{ ex_breathe.icon | replace: '/chanpinicon/', '/chanpinicon/web/' | relative_url }}" alt="" width="28" height="28"></span><span data-lang-show="zh">呼吸泡泡</span><span data-lang-show="en">Breathe Bubbles</span><span class="note"><span data-lang-show="zh">界面示意</span><span data-lang-show="en">Interface example</span></span></div>
+                <div class="ex-stage breath">
+                    <div class="breath-orb" aria-hidden="true"></div>
+                    <p class="breath-label"><span data-phase>吸气</span> · HRV <b data-hrv>48</b> ms</p>
+                </div>
+                <div class="ex-foot"><div><strong><span data-lang-show="zh">让压力看得见</span><span data-lang-show="en">Make stress visible</span></strong></div><a class="link-arrow" href="#{{ ex_breathe.name | slugify }}"><span data-lang-show="zh">看看</span><span data-lang-show="en">Look</span>{% include icon.html name="arrow-right" %}</a></div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="work">
+    <div class="container">
+        <div class="section-head">
+            <p class="kicker"><span data-lang-show="zh">作品</span><span data-lang-show="en">Work</span></p>
+            <h2><span data-lang-show="zh">正在认真做的几款 App</span><span data-lang-show="en">The apps I'm building now</span></h2>
+            <p><span data-lang-show="zh">都在线上，都有人在用。</span><span data-lang-show="en">All live, all in daily use.</span></p>
+        </div>
+        <div class="prows">
+            {% for p in ai_products %}{% if p.screens or p.hero_image %}
+            {% include product-card.html product=p %}
+            {% endif %}{% endfor %}
+            {% if legacy %}{% include product-card.html product=legacy variant="legacy" %}{% endif %}
+        </div>
+        <div class="compacts mt-3">
+            {% for p in ai_products %}{% unless p.screens or p.hero_image %}
+            {% include product-card.html product=p variant="compact" %}
+            {% endunless %}{% endfor %}
+            <a class="compact" href="{{ site.baseurl }}/products/#archive">
+                <span class="app-icon" style="display:grid;place-items:center;font-size:20px;color:var(--ink-2);background:var(--surface-2)">+{{ app_count | minus: ai_products.size | minus: 1 }}</span>
+                <span><strong><span data-lang-show="zh">早期作品</span><span data-lang-show="en">Earlier apps</span></strong><span><span data-lang-show="zh">从 {{ site.since }} 年开始做的那些</span><span data-lang-show="en">Everything since {{ site.since }}</span></span></span>
+                {% include icon.html name="arrow" %}
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container feeds">
+        <div>
+            <div class="feed-head">
+                <h3><span class="dot-live" aria-hidden="true"></span><span data-lang-show="zh">最近在做</span><span data-lang-show="en">Now</span></h3>
+                <time datetime="{{ site.current_work_updated | date: '%Y-%m-%d' }}">{{ site.current_work_updated | date: '%Y.%m' }}</time>
+            </div>
+            <ul class="now-list">
                 {% for work in site.current_work %}
-                <li>{{ work }}</li>
+                <li><span data-lang-show="zh">{{ work.zh }}</span><span data-lang-show="en">{{ work.en | default: work.zh }}</span></li>
+                {% endfor %}
+                <li><span data-lang-show="zh">新上线：<a href="{{ site.baseurl }}/life/">高性价比人生指南</a></span><span data-lang-show="en">New: <a href="{{ site.baseurl }}/life/">How to Live Better</a></span></li>
+            </ul>
+        </div>
+        <div>
+            <div class="feed-head">
+                <h3><span data-lang-show="zh">开发日志</span><span data-lang-show="en">Dev log</span></h3>
+                <a href="{{ site.baseurl }}/logs/"><span data-lang-show="zh">全部</span><span data-lang-show="en">All</span>{% include icon.html name="arrow-right" %}</a>
+            </div>
+            <ul class="entry-list">
+                {% assign logs = site.logs | sort: 'date' | reverse %}
+                {% for log in logs limit: 4 %}
+                <li><a class="entry" href="{{ log.url | relative_url }}"><span class="entry-title">{{ log.title }}</span><time datetime="{{ log.date | date_to_xmlschema }}">{{ log.date | date: "%m.%d" }}</time></a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <div class="feed-head">
+                <h3><span data-lang-show="zh">文章</span><span data-lang-show="en">Writing</span></h3>
+                <a href="{{ site.baseurl }}/essays/"><span data-lang-show="zh">全部</span><span data-lang-show="en">All</span>{% include icon.html name="arrow-right" %}</a>
+            </div>
+            <ul class="entry-list">
+                {% assign shown = 0 %}
+                {% for post in site.posts %}
+                {% assign t = post.title | strip %}
+                {% if shown < 4 and t != '' %}{% unless post.url contains 'PrivacyPolicy' %}
+                {% assign shown = shown | plus: 1 %}
+                <li><a class="entry" href="{{ post.url | relative_url }}"><span class="entry-title">{{ t }}</span><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y" }}</time></a></li>
+                {% endunless %}{% endif %}
                 {% endfor %}
             </ul>
         </div>
     </div>
 </section>
 
-<!-- Life Guide Section -->
 <section class="section">
     <div class="container">
-        <div class="life-guide-entry">
-            <div class="life-guide-mark" aria-hidden="true">
-                <svg viewBox="0 0 32 32"><path d="M16 27V14M16 18C6 19 4 12 5 6c7-1 12 4 11 12Zm0 4C16 12 24 9 28 10c1 7-4 12-12 12Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="life-guide-copy">
-                <span class="life-guide-eyebrow">
-                    <span data-lang-show="zh">新上线 · 生活指南</span>
-                    <span data-lang-show="en">NEW · LIFE GUIDE</span>
-                </span>
-                <h3 class="life-guide-title">
-                    <span data-lang-show="zh">高性价比人生指南</span>
-                    <span data-lang-show="en">How to Live Better</span>
-                </h3>
-                <p class="life-guide-desc">
-                    <span data-lang-show="zh">健康、金钱、时间、法律、关系与人生选择——675 条有出处的建议，全文可搜、按主题浏览、随手收藏。不催你自律，只帮你把日子过好一点。</span>
-                    <span data-lang-show="en">Health, money, time, law, relationships and life choices — 675 sourced tips you can search, browse by topic and save. Not about pushing yourself harder, just living a little better.</span>
-                </p>
-                <p class="life-guide-note">
-                    <span data-lang-show="zh">基于 eternity4719/HowToLiveBetter 完整内容重构 · CC BY 4.0 · 34 章 / 675 条建议 / 9 篇长文</span>
-                    <span data-lang-show="en">Rebuilt from eternity4719/HowToLiveBetter · CC BY 4.0 · 34 chapters / 675 tips / 9 essays</span>
-                </p>
-            </div>
-            <a href="{{ site.baseurl }}/life/" class="life-guide-cta">
-                <span data-lang-show="zh">打开指南</span><span data-lang-show="en">Open the Guide</span>
-                <span class="arrow">→</span>
-            </a>
+        <div class="record">
+            <dl class="record-stats">
+                <div><dt><span data-lang-show="zh">年持续上架</span><span data-lang-show="en">years shipping</span></dt><dd>{{ site.time | date: '%Y' | minus: site.since }}</dd></div>
+                <div><dt><span data-lang-show="zh">款 App</span><span data-lang-show="en">apps</span></dt><dd>{{ app_count }}</dd></div>
+                <div><dt><span data-lang-show="zh">App Store 评分</span><span data-lang-show="en">App Store ratings</span></dt><dd>{{ ratings_label }}</dd></div>
+            </dl>
         </div>
     </div>
 </section>
 
-<!-- Values Section -->
-<section class="values-section">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title" data-i18n="section_values" data-zh="我更关心" data-en="What I Care About">我更关心</h2>
-        </div>
-        
-        <div class="values-grid">
-            <div class="value-item">
-                <h4 data-i18n="value1_title" data-zh="有人用比下载量重要" data-en="Usage > Downloads">有人用比下载量重要</h4>
-                <p data-i18n="value1_desc" data-zh="做东西是想被用的，不是被下载完就删的。" data-en="I make things to be used, not just downloaded and forgotten.">做东西是想被用的，不是被下载完就删的。</p>
-            </div>
-            <div class="value-item">
-                <h4 data-i18n="value2_title" data-zh="上线才是开始" data-en="Launch is Just the Start">上线才是开始</h4>
-                <p data-i18n="value2_desc" data-zh="发布不是终点，后面还有一堆 bug 等着修。" data-en="Shipping is not the end. There's always bugs to fix.">发布不是终点，后面还有一堆 bug 等着修。</p>
-            </div>
-            <div class="value-item">
-                <h4 data-i18n="value3_title" data-zh="别把自己累死" data-en="Don't Burn Out">别把自己累死</h4>
-                <p data-i18n="value3_desc" data-zh="能赚点钱最好，赚不到也别太拼，身体要紧。" data-en="Making money is nice. Not burning out is nicer.">能赚点钱最好，赚不到也别太拼，身体要紧。</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Recent Logs Section -->
-<section class="section">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title" data-i18n="section_logs" data-zh="开发日志" data-en="Dev Logs">开发日志</h2>
-            <p class="section-subtitle" data-i18n="section_logs_sub" data-zh="碎碎念，也算是记录" data-en="Random notes and updates">碎碎念，也算是记录</p>
-        </div>
-        
-        <div class="posts-list">
-            {% assign logs = site.logs | sort: 'date' | reverse %}
-            {% for log in logs limit:5 %}
-            <a href="{{ log.url }}" class="post-item">
-                <span class="post-title">{{ log.title }}</span>
-                <span class="post-date">{{ log.date | date: "%Y.%m.%d" }}</span>
-            </a>
-            {% endfor %}
-            
-            {% if logs.size == 0 %}
-            <div class="empty-state">
-                <p data-i18n="logs_coming" data-zh="日志正在路上..." data-en="Logs coming soon...">日志正在路上...</p>
-            </div>
-            {% endif %}
-        </div>
-        
-        {% if logs.size > 0 %}
-        <div class="text-center mt-2">
-            <a href="{{ site.baseurl }}/logs/" class="btn btn-ghost">
-                <span data-i18n="view_all_logs" data-zh="查看全部日志" data-en="View All Logs">查看全部日志</span> <span class="arrow">→</span>
-            </a>
-        </div>
-        {% endif %}
-    </div>
-</section>
-
-<!-- Connect Section -->
-<section class="section">
-    <div class="container">
-        <div class="current-work contact-note">
-            <h3 style="margin-bottom: var(--space-md); font-size: 1.25rem;">
-                <span data-i18n="contact_me" data-zh="联系我" data-en="Contact Me">联系我</span>
-            </h3>
-            <p style="color: var(--color-text-secondary); margin-bottom: var(--space-lg);">
-                <span data-i18n="contact_desc" data-zh="有事说事，没事也可以聊" data-en="Got something? Or just want to chat">有事说事，没事也可以聊</span>
-            </p>
-            <div style="display: flex; justify-content: center; gap: var(--space-lg); flex-wrap: wrap; align-items: center;">
-                {% if site.x_url %}
-                <a href="{{ site.x_url }}" target="_blank" style="color: var(--color-text-secondary); text-decoration: none; display: flex; align-items: center; gap: var(--space-sm);">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> X
-                </a>
-                {% endif %}
-                {% if site.xiaohongshu_url %}
-                <a href="{{ site.xiaohongshu_url }}" target="_blank" style="color: var(--color-text-secondary); text-decoration: none; display: flex; align-items: center; gap: var(--space-sm);">
-                    <img src="/img/chanpinicon/redbook.png" alt="小红书" style="width: 18px; height: 18px; border-radius: 4px;">
-                    <span data-lang-show="zh">小红书</span><span data-lang-show="en">RED</span>
-                </a>
-                {% endif %}
-                {% if site.wechat_id %}
-                <span style="color: var(--color-text-secondary); display: flex; align-items: center; gap: var(--space-sm);">
-                    <i class="fab fa-weixin"></i> {{ site.wechat_id }}
-                </span>
-                {% endif %}
-            </div>
-            <div class="mt-2">
-                <a href="{{ site.baseurl }}/connect/" class="btn btn-ghost">
-                    <span data-i18n="view_all_contact" data-zh="查看所有联系方式" data-en="View All Contact Info">查看所有联系方式</span> <span class="arrow">→</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+<script src="{{ site.baseurl }}/js/showcase.js?v=1" defer></script>

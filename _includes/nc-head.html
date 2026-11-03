@@ -1,0 +1,38 @@
+{%- comment -%} seo_title: for pages that must stay out of the old Hux nav, which lists every page with a title {%- endcomment -%}
+{%- assign nc_title = page.seo_title | default: page.title -%}
+{%- if page.collection == 'products' -%}{%- assign nc_title = page.name -%}{%- endif -%}
+{%- assign nc_title = nc_title | strip -%}
+{%- assign nc_desc = page.description | default: page.excerpt | default: page.tagline | default: site.description | strip_html | strip_newlines | truncate: 160 -%}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="{{ nc_desc | escape }}">
+    <meta name="keywords" content="{% if page.tags.size > 0 %}{{ page.tags | join: ', ' }}{% else %}{{ site.keyword }}{% endif %}">
+    <meta name="author" content="{{ page.author | default: site.author }}">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#F4F4F2">
+
+    <title>{% if nc_title != '' and page.url != '/' %}{{ nc_title }} · {{ site.SEOTitle }}{% else %}{{ site.SEOTitle }}{% endif %}</title>
+
+    <meta property="og:site_name" content="{{ site.title }} · {{ site.author_en }}">
+    <meta property="og:title" content="{% if nc_title != '' %}{{ nc_title | escape }}{% else %}{{ site.SEOTitle }}{% endif %}">
+    <meta property="og:description" content="{{ nc_desc | escape }}">
+    <meta property="og:type" content="{% if page.date %}article{% else %}website{% endif %}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:image" content="{{ site.url }}{{ page.og_image | default: '/img/og-image.png' }}">
+    <meta name="twitter:card" content="summary_large_image">
+    {% if page.date %}<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">{% endif %}
+
+    <link rel="manifest" href="{{ site.baseurl }}/pwa/manifest.json">
+    <link rel="icon" href="{{ site.baseurl }}/img/favicon.ico">
+    <link rel="apple-touch-icon" href="{{ site.baseurl }}/pwa/icons/512.png">
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.baseurl }}/feed.xml">
+
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/northcity.css?v=5">
+    {% if include.article %}<link rel="stylesheet" href="{{ site.baseurl }}/css/code.css">{% endif %}
+    {% if page.fontawesome %}<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">{% endif %}
+
+    <!-- Sets data-theme / data-lang before first paint -->
+    <script src="{{ site.baseurl }}/js/site-settings.js?v=4"></script>
+</head>

@@ -1,102 +1,25 @@
-<!-- Navigation -->
-<nav class="nav" aria-label="主导航 / Main navigation">
-    <div class="nav-container">
-        <a href="{{ site.baseurl }}/" class="nav-brand">
-            <span data-lang-show="zh">{{ site.title }}</span>
-            <span data-lang-show="en">{{ site.author_en }}</span>
+{%- assign nav_url = page.url -%}
+<header class="nav" id="site-nav">
+    <div class="nav-inner">
+        <a href="{{ site.baseurl }}/" class="nav-brand" aria-label="{{ site.title }} · {{ site.author_en }}">
+            <img class="brand-logo brand-logo-light" src="{{ '/img/brand/northcity-logo.webp' | relative_url }}" alt="NorthCity" width="491" height="96">
+            <img class="brand-logo brand-logo-dark" src="{{ '/img/brand/northcity-logo-dark.webp' | relative_url }}" alt="NorthCity" width="517" height="96">
         </a>
-        
-        <button class="nav-toggle" aria-label="打开导航 / Toggle navigation" aria-expanded="false" aria-controls="nav-links">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        
-        <ul class="nav-links" id="nav-links">
-            <li>
-                <a href="{{ site.baseurl }}/" {% if page.url == '/' %}class="active"{% endif %}>
-                    <span data-i18n="nav_home" data-zh="首页" data-en="Home">首页</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ site.baseurl }}/products/" {% if page.url contains 'products' %}class="active"{% endif %}>
-                    <span data-i18n="nav_products" data-zh="作品" data-en="Products">作品</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ site.baseurl }}/logs/" {% if page.url contains 'logs' %}class="active"{% endif %}>
-                    <span data-i18n="nav_logs" data-zh="日志" data-en="Logs">日志</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ site.baseurl }}/essays/" {% if page.url contains 'essays' %}class="active"{% endif %}>
-                    <span data-i18n="nav_essays" data-zh="文章" data-en="Essays">文章</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ site.baseurl }}/life/">
-                    <span data-i18n="nav_life" data-zh="生活指南" data-en="Life Guide">生活指南</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ site.baseurl }}/about/" {% if page.url contains 'about' %}class="active"{% endif %}>
-                    <span data-i18n="nav_about" data-zh="关于" data-en="About">关于</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ site.baseurl }}/connect/" {% if page.url contains 'connect' %}class="active"{% endif %}>
-                    <span data-i18n="nav_connect" data-zh="联系" data-en="Connect">联系</span>
-                </a>
-            </li>
-        </ul>
-        
-        <div class="site-settings">
-            <button id="lang-toggle" class="settings-btn" aria-label="Toggle language">
-                <i class="fas fa-globe"></i>
-                <span>EN</span>
+
+        <nav class="nav-links" id="nav-links" aria-label="主导航 / Main">
+            <a href="{{ site.baseurl }}/products/" {% if nav_url contains '/products' %}aria-current="page"{% endif %}><span data-lang-show="zh">作品</span><span data-lang-show="en">Work</span></a>
+            <a href="{{ site.baseurl }}/essays/" {% if nav_url contains '/essays' or nav_url contains '/logs' or page.layout == 'post' or page.layout == 'article' %}aria-current="page"{% endif %}><span data-lang-show="zh">文章</span><span data-lang-show="en">Writing</span></a>
+            <a href="{{ site.baseurl }}/about/" {% if nav_url contains '/about' or nav_url contains '/connect' %}aria-current="page"{% endif %}><span data-lang-show="zh">关于</span><span data-lang-show="en">About</span></a>
+        </nav>
+
+        <div class="nav-tools">
+            <button id="lang-toggle" class="tool-btn tool-lang" type="button" aria-label="Switch to English"><span>EN</span></button>
+            <button id="theme-toggle" class="tool-btn" type="button" aria-label="切换暗色模式">
+                <span class="theme-icon theme-icon-moon">{% include icon.html name="moon" %}</span>
+                <span class="theme-icon theme-icon-sun">{% include icon.html name="sun" %}</span>
             </button>
-            <button id="theme-toggle" class="settings-btn" aria-label="Toggle theme" data-dark-text="暗色" data-light-text="亮色">
-                <i class="fas fa-moon"></i>
-                <span>暗色</span>
-            </button>
+            <a class="nav-cta" href="{{ site.baseurl }}/connect/"><span data-lang-show="zh">联系</span><span data-lang-show="en">Contact</span></a>
+            <button class="tool-btn nav-toggle" type="button" aria-label="打开导航 / Menu" aria-expanded="false" aria-controls="nav-links">{% include icon.html name="menu" %}</button>
         </div>
     </div>
-</nav>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const toggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    
-    function closeMenu() {
-        navLinks.classList.remove('active');
-        toggle.setAttribute('aria-expanded', 'false');
-    }
-
-    toggle.addEventListener('click', function() {
-        const isOpen = navLinks.classList.toggle('active');
-        toggle.setAttribute('aria-expanded', String(isOpen));
-    });
-
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', closeMenu);
-        if (link.classList.contains('active')) link.setAttribute('aria-current', 'page');
-    });
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
-            closeMenu();
-            toggle.focus();
-        }
-    });
-
-    window.matchMedia('(min-width: 961px)').addEventListener('change', closeMenu);
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.nav')) {
-            closeMenu();
-        }
-    });
-});
-</script>
+</header>
